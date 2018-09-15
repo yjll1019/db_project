@@ -34,9 +34,10 @@ tbody>tr {
 }
 
 #jb-content {
-	width: 80%;
-	padding: 40px;
-	margin: 20px;
+	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 1000px;
+    padding: 40px 40px;
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
