@@ -39,14 +39,14 @@
 	color: white;
 }
 
-#table1{
-	width:80%; 
-	height:200px; 
+#table1 {
+	width: 80%;
+	height: 200px;
 	text-align: center;
 	border-collapse: separate;
-  	border-spacing: 0 20px;
-  	table-layout: fixed;
-  	word-break:break-all;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
 }
 
 #th1 {
@@ -63,50 +63,50 @@
 	font-size: 25px;
 }
 
-#textright{
+#textright {
 	text-align: right;
 }
 
-#move01{
+#move01 {
 	cursor: pointer;
 	color: #4582EC;
 }
 
-#plain{
-		font-family: 'NanumSquareRound', sans-serif;
-		display: none
+#plain {
+	font-family: 'NanumSquareRound', sans-serif;
+	display: none
 }
 
-#blue{
+#blue {
 	color: #4582EC;
 }
 
-#stylenone{
+#stylenone {
 	list-style: none;
 }
 
-#table2{
+#table2 {
 	width: 250px;
-	height: 100px; 
+	height: 100px;
 	text-align: center;
 	border-collapse: separate;
-  	border-spacing: 0 20px;
-  	table-layout: fixed;
-  	word-break:break-all;
-  	border: 1px solid gray;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
+	border: 1px solid gray;
 }
 
-#top{
-	display:scroll;
-	position:fixed;
+#top {
+	display: scroll;
+	position: fixed;
 	bottom: 5%;
 	right: 5%;
 	color: black;
-	text-decoration:none;
+	text-decoration: none;
 	font-size: 15px;
 }
 
-#nodata{
+#nodata {
 	font-size: 22px;
 	font-weight: 600px;
 }
@@ -118,4 +118,8 @@
 	margin: 20px;
 	float: left;
 	font-family: 'NanumSquareRound', sans-serif;
+}
+
+#ulright {
+	text-align: right;
 }
