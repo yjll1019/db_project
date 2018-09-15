@@ -9,6 +9,12 @@ tbody>tr {
 	margin-top: 20px;
 }
 
+.notice{
+	background-color:#f8f8f8;
+}
+#word-color{
+	color: red;
+}
 #jb-footer {
 	clear: both;
 	width: 100%;
