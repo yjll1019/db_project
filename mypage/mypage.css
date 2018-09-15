@@ -27,7 +27,7 @@ label{
 
 input,
 input::-webkit-input-placeholder {
-    font-size: 11px;
+    font-size: 15px;
     padding-top: 3px;
 }
 
