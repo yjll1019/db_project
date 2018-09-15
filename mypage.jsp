@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
-    <head> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" href="headernFooter.css">
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="board.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 		
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -21,17 +29,40 @@
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-		<title>Mypage</title>
-	</head>
-	<body>
-		<div class="container">
+	<title>Mypage</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active"><a class="nav-link" href="#">
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및 문의</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<div id="jb-content justify-content-center">
+			<div class="container">
 			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h1 class="title">My Page</h1>
-	               		<hr />
-	               	</div>
-	            </div> 
+				
 				<div class="main-login main-center">
 					<form class="form-horizontal" method="post" action="#">
 						
@@ -142,12 +173,10 @@
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div id="jb-container">
-			<div id="jb-footer" style="position:absolute; bottom:0; width:100%;">
-				<p>ⓛⓞⓖⓞ</p>
-			</div>
-		</div>
-		 -->
-	</body>
+	</div>
+	<div id="jb-footer">
+		<p>ⓛⓞⓖⓞ</p>
+	</div>
+	</div>
+</body>
 </html>
