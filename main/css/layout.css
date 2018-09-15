@@ -105,3 +105,17 @@
 	text-decoration:none;
 	font-size: 15px;
 }
+
+#nodata{
+	font-size: 22px;
+	font-weight: 600px;
+}
+
+#jb-content-nodata {
+	background-color: #dee0e2;
+	width: 65%;
+	padding: 40px;
+	margin: 20px;
+	float: left;
+	font-family: 'NanumSquareRound', sans-serif;
+}
