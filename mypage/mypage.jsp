@@ -96,11 +96,14 @@
 							</div>
 						</div>
 						
+								
 						<div class="form-group">
-							<label for ="state" class="cls-sm-2 control-label">State</label>
+							<label for ="state">State</label>
 							<div class="cols-sm-10">
-								</br>
+							
 								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+									&nbsp&nbsp
 									<label><input type="radio" name="state" value="전공"> 전공</label>&nbsp&nbsp
 									<label><input type="radio" name="state" value="부전공"> 부전공</label>&nbsp&nbsp
 									<label><input type="radio" name="state" value="복수전공"> 복수전공</label>
