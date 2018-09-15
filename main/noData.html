@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/calender.css">
+<script src="js/calender.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<title>main page</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active"><a class="nav-link" href="#">
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
+								문의</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<div id="jb-content-nodata">
+			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png" width="40px" height="40px"></a>
+			<span id="nodata">
+				수강 목록 데이터가 없습니다. </br>
+				마이페이지에서 데이터 업로드가 가능합니다!
+			</span>
+		</div>
+		<div id="jb-sidebar">
+			<div id="kCalendar"></div>
+			<script>
+				window.onload = function() {
+					kCalendar('kCalendar');
+				};
+			</script>
+			<div id="sidemenu">
+				<table id="table2">
+					<tr>
+						<td>성공회</br>대학교</td>
+						<td>종합정보</br>시스템</td>
+						<td>e커리어</br>센터</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="jb-footer">
+			</br>
+			<span>ⓛⓞⓖⓞ</span>
+		</div>
+	</div>
+</body>
+</html>
