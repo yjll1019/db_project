@@ -9,45 +9,65 @@
 <script src="js/calender.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-	 <link rel="stylesheet" href="css/circle.css">
-	<link rel="stylesheet" href="css/Nwagon.css" type="text/css">  
-	<link rel="stylesheet" href="css/circle.css">
-	<script src="js/Nwagon.js"></script>  
- <style type="text/css">
-            body{
-                background-color: #ffffff;
-                margin: 0;
-                padding: 0;
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-            }
-            .page {
-                margin: 40px;
-            }
-            h1{
-                margin: 40px 0 60px 0;
-            }
-            .dark-area {
-                background-color: #666;
-                padding: 40px;
-                margin: 0 -40px 20px -40px;
-                clear: both;
-            }
-            .clearfix:before,.clearfix:after {content: " "; display: table;}
-            .clearfix:after {clear: both;}
-            .clearfix {*zoom: 1;}
-        
-        #jb-sidebar { position:absolute; top:100px; left:50%; margin-left:400px; width:100px; height:200px; }
-        
-        #scoreCalcul {
-        	width: 400px;
-        	height:100px;
-        	margin:auto;
-        	margin-left: 10%;
-        	margin-top: 20px;
-        	text-align:center;
-        	font-size: 15pt;
-        }
-  </style> 
+<link rel="stylesheet" href="css/circle.css">
+<link rel="stylesheet" href="css/Nwagon.css" type="text/css">
+<link rel="stylesheet" href="css/circle.css">
+<script src="js/Nwagon.js"></script>
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.page {
+	margin: 40px;
+}
+
+h1 {
+	margin: 40px 0 60px 0;
+}
+
+.dark-area {
+	background-color: #666;
+	padding: 40px;
+	margin: 0 -40px 20px -40px;
+	clear: both;
+}
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+#jb-sidebar {
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	width: 100px;
+	height: 200px;
+}
+
+#scoreCalcul {
+	width: 400px;
+	height: 100px;
+	margin: auto;
+	margin-left: 10%;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 15pt;
+}
+</style>
 <title>main page</title>
 </head>
 <body>
@@ -82,32 +102,39 @@
 			</nav>
 		</div>
 
-	 <div id="info-container" style="position:absolute; width:1000px; height:20px; left:20%; margin-top:10px;">
-      <button type="button" class="btn btn-outline-primary">김지혜</button> 님은 현재
-      <button type="button" class="btn btn-outline-primary">5학기</button>
-      <button type="button" class="btn btn-outline-primary">소프트웨어공학과 전공</button>
-      <button type="button" class="btn btn-outline-primary">신문방송학과 부전공</button> 재학 중입니다.
-      </div>
-      
-       <div class="circleGraph1" style="position:absolute; width: 500px; height:50px; left:25%; margin-top:105px;">
-            <!-- default -->
-            <div class="clearfix">
-                <div class="c100 p50">
-                    <span>50%</span>
-                    <div class="slice">
-                        <div class="bar"></div>
-                        <div class="fill"></div>
-                    </div>
-                </div>
-            </div>
-            <div style="position:absolute; margin-left:10px; margin-top:10px; font-size:15pt; font-weight:bold;">
-               &nbsp;&nbsp;&nbsp; 65/130
-            </div>
-            <!-- /default -->
-        </div>
+		<div id="info-container"
+			style="position: absolute; width: 1000px; height: 20px; left: 20%; margin-top: 10px;">
+			<button type="button" class="btn btn-outline-primary">김지혜</button>
+			님은 현재
+			<button type="button" class="btn btn-outline-primary">5학기</button>
+			<button type="button" class="btn btn-outline-primary">소프트웨어공학과
+				전공</button>
+			<button type="button" class="btn btn-outline-primary">신문방송학과
+				부전공</button>
+			재학 중입니다.
+		</div>
 
-	<div id="Nwagon" style="position:absolute; margin-top:50px; width: 150px; left:35%; ">
-	<script>
+		<div class="circleGraph1"
+			style="position: absolute; width: 500px; height: 50px; left: 25%; margin-top: 105px;">
+			<!-- default -->
+			<div class="clearfix">
+				<div class="c100 p50">
+					<span>50%</span>
+					<div class="slice">
+						<div class="bar"></div>
+						<div class="fill"></div>
+					</div>
+				</div>
+			</div>
+			<div
+				style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold;">
+				&nbsp;&nbsp;&nbsp; 65/130</div>
+			<!-- /default -->
+		</div>
+
+		<div id="Nwagon"
+			style="position: absolute; margin-top: 50px; width: 150px; left: 35%;">
+			<script>
 		var options = {
 			'dataset':{
 				title: 'Web accessibility status',
@@ -123,33 +150,45 @@
 		};
 		Nwagon.chart(options);
 	</script>
-</div>
+		</div>
 
-      <div id="goal-container" style="margin-top:350px; margin-left:20%;">
-        <label style="font-size:15pt;"><strong>목표 졸업학점</strong></label>
-        &nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width:30px;"> 남은학점 &nbsp;<input type="text" style="width:30px;"> 전체학점 &nbsp;<input type="text" style="width:30px;"> 목표학점 &nbsp;<input type="text" style="width:30px;">
-        &nbsp; &nbsp; <button type="button" class="btn btn-primary">조회</button>
-        <div style="margin-top:10px;">
-        	 <table id="scoreCalcul">
-				<tr style="color:#4582EC ">
-					<th>학기</th> <th>이수학점</th> <th>취득학점</th> <th>졸업학점</th>
-				</tr>
-				<tr>
-					<td>3-2학기</td><td>19</td><td>4.0</td><td rowspan="3" style="color:red">3.9</td>
-				</tr>
-				<tr>
-					<td>4-1학기</td><td>19</td><td>4.0</td>
-				</tr>
-				<tr>
-					<td>4-2학기</td><td>4</td><td>4.5</td>
-				</tr>
-        	 </table>
-        </div>
-     </div>	
-			
-			
-		<div id="jb-content" style="margin-top:40px;">
-			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png" width="40px" height="40px"></a>
+		<div id="goal-container" style="margin-top: 350px; margin-left: 20%;">
+			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
+			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
+			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
+			&nbsp;<input type="text" style="width: 30px;"> 목표학점 &nbsp;<input
+				type="text" style="width: 30px;"> &nbsp; &nbsp;
+			<button type="button" class="btn btn-primary">조회</button>
+			<div style="margin-top: 10px;">
+				<table id="scoreCalcul">
+					<tr style="color: #4582EC">
+						<th>학기</th>
+						<th>이수학점</th>
+						<th>취득학점</th>
+						<th>졸업학점</th>
+					</tr>
+					<tr>
+						<td>3-2학기</td>
+						<td>19</td>
+						<td>4.0</td>
+						<td rowspan="3" style="color: red">3.9</td>
+					</tr>
+					<tr>
+						<td>4-1학기</td>
+						<td>19</td>
+						<td>4.0</td>
+					</tr>
+					<tr>
+						<td>4-2학기</td>
+						<td>4</td>
+						<td>4.5</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="jb-content" style="margin-top: 40px;">
+			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png"
+				width="40px" height="40px"></a>
 			<div id="textright">
 				<span id="textright"><a href="#move01">수강한 강의목록</a></span>
 			</div>
@@ -232,7 +271,7 @@
 			</table>
 			</br>
 			<div>
-			<!-- 처음 화면 들어갔을 때 두번 클릭해야 펴짐 -->
+				<!-- 처음 화면 들어갔을 때 두번 클릭해야 펴짐 -->
 				<span id="move01"
 					onclick="
 					if(plain.style.display=='none'){
@@ -256,7 +295,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="jb-sidebar" >
+		<div id="jb-sidebar">
 			<div id="kCalendar"></div>
 			<script>
 				window.onload = function() {
@@ -266,16 +305,18 @@
 			<div id="sidemenu">
 				<table id="table2">
 					<tr>
-						<td>성공회</br>대학교</td>
-						<td>종합정보</br>시스템</td>
-						<td>e커리어</br>센터</td>
+						<td>성공회</br>대학교
+						</td>
+						<td>종합정보</br>시스템
+						</td>
+						<td>e커리어</br>센터
+						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 		<div id="jb-footer">
-			</br>
-			<span>ⓛⓞⓖⓞ</span>
+			</br> <span>ⓛⓞⓖⓞ</span>
 		</div>
 	</div>
 </body>

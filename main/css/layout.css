@@ -17,7 +17,7 @@
 #jb-content {
 	width: 65%;
 	padding: 40px;
-	margin: 20px;
+	margin-left: 15%;
 	float: left;
 	font-family: 'NanumSquareRound', sans-serif;
 }
@@ -120,6 +120,3 @@
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
-#ulright {
-	text-align: right;
-}
