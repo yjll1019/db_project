@@ -67,11 +67,6 @@
 	text-align: right;
 }
 
-#move01 {
-	cursor: pointer;
-	color: #4582EC;
-}
-
 #plain {
 	font-family: 'NanumSquareRound', sans-serif;
 	display: none
