@@ -27,6 +27,11 @@
 	padding: 20px;
 	margin: 25px;
 	float: right;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	height: 200px;
 }
 
 #jb-footer {
@@ -40,27 +45,34 @@
 }
 
 #table1 {
-	width: 80%;
-	height: 200px;
+	width: 100%;
+	height: 500px;
 	text-align: center;
-	border-collapse: separate;
-	border-spacing: 0 20px;
 	table-layout: fixed;
 	word-break: break-all;
 }
 
 #th1 {
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
+	height: 50px;
 	font-size: 25px;
+	background-color: #4582EC;
+	color: white;
 }
 
 #th2 {
-	font-size: 18px;
+	background-color: #8bbaf3;
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
 }
 
 #th3 {
+	height: 200px;
+	background-color: #4582EC;
 	font-size: 25px;
+	color: white;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
 }
 
 #textright {
@@ -116,3 +128,82 @@
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
+body {
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.page {
+	margin: 40px;
+}
+
+h1 {
+	margin: 40px 0 60px 0;
+}
+
+.dark-area {
+	background-color: #666;
+	padding: 40px;
+	margin: 0 -40px 20px -40px;
+	clear: both;
+}
+
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+#jb-sidebar {
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	width: 100px;
+	height: 200px;
+}
+
+#scoreCalcul {
+	width: 400px;
+	height: 100px;
+	margin: auto;
+	margin-left: 10%;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 15pt;
+}
+
+#table3 {
+	width: 330px;
+	height: 90px;
+	text-align: center;
+	table-layout: fixed;
+	word-break: break-all;
+}
+
+#td1{
+	height: 50px;
+	font-size: 18px;
+	border-bottom: 0.5px solid black;
+}
+
+#td2{
+	height: 150px;
+}
+
+#table4 {
+	width: 100%;
+	height: 500px;
+	text-align: center;
+	table-layout: fixed;
+	word-break: break-all;
+}
