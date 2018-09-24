@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css"><!-- 폰트 -->
+<link rel="stylesheet" href="headernFooter.css">
+<title>관리자학생리스트</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active"><a class="nav-link" href="#">
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">학생조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		
+		<div style="margin-left:10%; margin-top: 2%;">
+			<h4>학생 목록</h4>
+		</div>
+		
+		<div id="search" style="margin-top: 1%; font-size: 13pt;">
+         <div id="class1" style="display: inline; margin-left: 10%;">
+            <select id="classNumber">
+				<option>소프트웨어공학과</option>
+				<option>컴퓨터공학과</option>
+				<option>정보통신공학과</option>
+				<option>글로컬IT학과</option>
+				<option>디지털컨텐츠</option>
+				<option>신문방송학과</option>
+				<option>경영학부</option>
+				<option>사회과학부</option>
+				<option>사회복지학과</option>
+				<option>중어중국학과</option>
+				<option>일어일본학과</option>
+				<option>영어학과</option>
+				<option>신학과</option>
+            </select>
+         </div>
+         
+         <div id="class2" style="display: inline; margin-left: 50%;">
+            <select id="searchSelect">
+               <option>학번</option>
+               <option>이름</option>
+            </select>
+            
+            <input type="text" name="searchText" placeholder="검색"  style="margin-left:5px;">
+         
+         <button type="button" class="btn btn-primary">조회</button>
+         </div>
+      </div>
+      
+      <hr>
+      
+   <div class="table-responsive" style="margin-left: 10%; font-size:10pt;">
+     <table class="table" style="width: 1200px;">
+       <thead>
+         <tr>
+      <th>학번</th>
+      <th>이름</th>
+      <th>학과</th>
+      <th>휴대전화번호</th>
+         </tr>
+       </thead>
+       <tbody>
+       <tr>
+         <td>201632001</td>
+         <td>김지혜</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632002</td>
+         <td>명혜연</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>   
+      <tr>
+         <td>201632003</td>
+         <td>이예지</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632004</td>
+         <td>이혜지</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632005</td>
+         <td>명연혜</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632006</td>
+         <td>김혜지</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632007</td>
+         <td>이지예</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632008</td>
+         <td>이지혜</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632009</td>
+         <td>김지혜</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632010</td>
+         <td>이티버</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>      
+      <tr>
+         <td>201632011</td>
+         <td>김루비</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>      
+      <tr>
+         <td>201632012</td>
+         <td>이낑깡</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632013</td>
+         <td>명라이코스</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+      <tr>
+         <td>201632014</td>
+         <td>명설</td>
+         <td>소프트웨어공학과</td>
+         <td>010-1234-5678</td>
+      </tr>
+       </tbody>
+     </table>
+   </div>
+      
+		
+		<div id="jb-footer">
+			<p>ⓛⓞⓖⓞ</p>
+		</div>
+		</div>
+</div>
+</body>
+</html>
