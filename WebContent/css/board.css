@@ -12,6 +12,14 @@ tbody>tr {
 .notice{
 	background-color:#f8f8f8;
 }
+
+#boardWrite{
+	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 1000px;
+    padding: 40px 40px;
+	font-family: 'NanumSquareRound', sans-serif;
+}
 #word-color{
 	color: red;
 }
