@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" href="headernFooter.css">
+<link rel="stylesheet" href="css/calender.css">
+<link rel="stylesheet" href="css/applicationForm.css">
+<script src="js/calender.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<title>applicationForm page</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="applicationForm.html">신청서 작성</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
+								문의</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<div id="jb-content" style="text-align: center; margin-left: 13%;">
+			<h2>이 수 구 분 변 경 신 청</h2>
+			
+			<div style="margin-top: 60px">
+				<table id="table1">
+					<tr>
+						<td id="td1">학과(부)</td>
+						<td id="td2" colspan="2">소프트웨어공학과</td>
+						<td id="td1">학번</td>
+						<td id="td2" colspan="2">201632000</td>
+					</tr>
+					<tr>
+						<td id="td1">성명</td>
+						<td id="td2" colspan="2">김지혜</td>
+						<td id="td1">전화</td>
+						<td id="td2" colspan="2">010 1234 5678</td>
+					</tr>
+					<tr>
+						<td id="td1-2">복수전공</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td id="td1-2">부전공</td>
+						<td>신문방송학과</td>
+						<td id="td1-2">연계전공</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top: 40px">
+				<table id="table2">
+					<tr id="tr1" style="height: 25px">
+						<td id="td1-2" rowspan="2" style="width: 150px">이수년도 - 학기</td>
+						<td id="td1-2" rowspan="2">과목명</td>
+						<td id="td1-2" colspan="2" style="width: 200px">이수구분</td>
+					</tr>
+					<tr id="tr1" style="height: 25px">
+						<td style="font-weight: bold; border-right: 1px solid silver">
+							변경 전</td>
+						<td style="font-weight: bold">변경 후</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">2018 - 1</td>
+						<td id="td3">파이썬 프로그램</td>
+						<td id="td3">교양선택</td>
+						<td>전공선택</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td>&nbsp;&nbsp;</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td>&nbsp;&nbsp;</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td>&nbsp;&nbsp;</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td>&nbsp;&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top: 40px">
+				<table id="table3" style="border-collapse: collapse;">
+					<tr>
+						<th id="td1-2" style="width: 100px"> 변경사유 </th>
+						<td style="margin-left: 5px">
+							<textarea name="content" rows="3" style="width: 95%; height: 95%; margin-top:5px"></textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top: 40px">
+				<form>
+					<input type="submit" class="btn btn-outline-primary" value="신청하기" 
+						style="font-weight: bold; height: 40px; width: 120px"/>
+				</form>
+			</div>
+		</div>
+
+		<div id="jb-sidebar">
+			<div id="kCalendar"></div>
+			<script>
+				window.onload = function() {
+					kCalendar('kCalendar');
+				};
+			</script>
+			<div id="sidemenu">
+				<table id="side-school">
+					<tr>
+						<td>성공회<br/>대학교
+						</td>
+						<td>종합정보<br/>시스템
+						</td>
+						<td>e커리어<br/>센터
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="jb-footer">
+			<br/> <span>ⓛⓞⓖⓞ</span>
+		</div>
+	</div>
+</body>
+</html>
