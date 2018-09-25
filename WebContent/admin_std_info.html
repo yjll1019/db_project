@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<link rel="stylesheet" href="css/mypage.css">
+<!-- Website CSS style -->
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!-- Website Font style -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	crossorigin="anonymous">
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Passion+One'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oxygen'
+	rel='stylesheet' type='text/css'>
+<title>관리자 학생 정보</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="#">학생 조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
+								문의</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<div id="jb-content justify-content-center">
+			<div class="container">
+				<div class="row main">
+					<div class="main-login main-center">
+						<form class="form-horizontal" method="post" action="#">
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="name" class="cols-sm-2 control-label">학번</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; <input type="text" class="form-control"
+											name="studentNumber" id="studentNumber"
+											placeholder="201632000" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="name" class="cols-sm-2 control-label">이름</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-user fa" aria-hidden="true"></i></span> &nbsp;&nbsp; <input
+											type="text" class="form-control" name="name" id="name"
+											placeholder="김지혜" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="cols-sm-2 control-label">이메일</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-envelope fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; <input type="text" class="form-control"
+											name="email" id="email" placeholder="jihye@example.com" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="phone" class="cols-sm-2 control-label">전화번호</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-phone fa" aria-hidden="true"></i></span> &nbsp;&nbsp; <input
+											type="tel" class="form-control" name="phone" id="phone"
+											placeholder="010-1111-5389" />
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="major" class="cls-sm-2 control-label">학과(부)</label>
+								<div class="cols-sm-10" style="margin-bottom: 5px">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; <select name="major" class="form-control"
+											id="major" style="font-size: 16px">
+											<option value="notSelect">주전공</option>
+											<option value="소프트웨어 공학과">소프트웨어공학과</option>
+											<option value="컴퓨터공학과">컴퓨터공학과</option>
+											<option value="인문융합자율학부">인문융합 자율학부</option>
+											<option value="사회융합자율학부">사회융합 자율학부</option>
+											<option value="미디어컨텐츠융합자율학부">미디어컨텐츠융합 자율학부</option>
+											<option value="it융합자율학부">IT융합 자율학부</option>
+										</select>
+									</div>
+								</div>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; <select name="subMajor" class="form-control"
+											id="subMajor" style="font-size: 16px">
+											<option value="notSelect">부/복수전공</option>
+											<option value="소프트웨어 공학과">소프트웨어공학과</option>
+											<option value="컴퓨터공학과">컴퓨터공학과</option>
+											<option value="정보통신공학과">정보통신 공학과</option>
+											<option value="글로컬IT학과">글로컬IT학과</option>
+											<option value="디지털컨텐츠">디지털컨텐츠</option>
+											<option value="신문방송학과">신문방송학과</option>
+											<option value="경영학부">경영학부</option>
+											<option value="사회과학부">사회과학부</option>
+											<option value="사회복지학과">사회복지학과</option>
+											<option value="중어중국학과">중어중국학과</option>
+											<option value="일어일본학과">일어일본학과</option>
+											<option value="영어학과">영어학과</option>
+											<option value="신학과">신학과</option>
+											<option value="해외창">해외창</option>
+											<option value="문화기획전공">문화기획전공</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-bottom: 30px">
+								<label for="semester" class="cls-sm-2 control-label">학기</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon" style="margin-top: 10px"><i
+											class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; <select name="semester" class="form-control"
+											id="semester" style="font-size: 16px">
+											<option value="1학기">1학기</option>
+											<option value="2학기">2학기</option>
+											<option value="3학기">3학기</option>
+											<option value="4학기">4학기</option>
+											<option value="5학기">5학기</option>
+											<option value="6학기">6학기</option>
+											<option value="7학기">7학기</option>
+											<option value="8학기">8학기</option>
+											<option value="9학기">9학기</option>
+											<option value="10학기">10학기</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div id="textright">
+								<button type="button" class="btn btn-secondary"
+									style="width: 80%; margin-bottom: 40px; margin-left: 35px"
+									onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
+									수강한 강의목록</button>
+							</div>
+							<div class="form-group ">
+								<button type="button"
+									class="btn btn-primary btn-lg btn-block login-button"
+									style="font-weight: bold; font-size: 18px">수정하기</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="jb-footer">
+			<p>ⓛⓞⓖⓞ</p>
+		</div>
+	</div>
+</body>
+</html>

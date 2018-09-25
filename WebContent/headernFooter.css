@@ -35,7 +35,11 @@
 #jb-sidebar {
 	width: 260px;
 	padding: 20px;
-	margin: 20px;
+	margin: 25px;
 	float: right;
-	border: 1px solid #bcbcbc;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	height: 200px;
 }

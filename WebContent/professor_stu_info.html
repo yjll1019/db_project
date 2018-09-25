@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css"><!-- 폰트 -->
+<link rel="stylesheet" href="headernFooter.css">
+
+<title>(교수)학생정보페이지</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active"><a class="nav-link" href="#">
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">학생조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		
+	<button type="button" class="btn btn-outline-primary" style="font-size:10pt; margin-left: 80%; margin-top: 3%;"
+	 onclick="window.open('professor_memo.html','학생메모','width=500,height=650,location=no,status=no,scrollbars=yes');">상담내역</button>
+	
+	   <div class="table-responsive" style="margin-left: 10%; font-size:10pt; margin-top:2%; ">
+	     <table class="table" style="width: 1200px;">
+	       <tbody>
+	      <tr>
+	      	<th>이름</th>
+	      	<td>김지혜</td>
+	      	<th>학기</th>
+	      	<td>5</td>
+	      </tr>
+	      <tr>
+	      	<th>학번</th>
+	      	<td>201632004</td>
+	      	<th>전화번호</th>
+	      	<td>010-1234-5678</td>
+	      </tr>
+	      <tr>
+	      	<th>학과</th>
+	      	<td>소프트웨어공학과 <br/> 디지털컨텐츠학과(부전공)</td>
+	      	<th>이메일</th>
+	      	<td>rubizzang@naver.com</td>
+	       </tr>
+	       </tbody>
+	     </table>
+	   </div>
+
+		<div style="margin-left:10%; font-size:15pt;">
+		
+			<span id="more" style="CURSOR: hand" 
+			onclick="
+			if(story.style.display=='none'){
+				story.style.display='';more.innerText='수강내역'} 
+			else {
+				story.style.display='none';more.innerText='수강내역'}">
+			수강내역
+			</span>
+			<div id="story" style="display:none; font-size:10pt;">
+				<div style=" margin-top:1%; font-size: 11pt; margin-left: 35%;">
+					이수학점 <span style="color:red">80/130 </span>&nbsp;&nbsp;&nbsp;
+					총평점<span style="color:red"> 3.75</span>
+				</div>
+				<table class="table" style="width: 1200px; margin-top: 1%;">
+    		<thead>
+	    		<tr>
+	    			<th>년도</th>
+	    			<th>학기</th>
+	    			<th>과목코드</th>
+	    			<th>과목명</th>
+	    			<th>이수구분</th>
+	    			<th>학점</th>
+	    			<th>성적</th>
+	    		</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+    				<td>2012</td>
+    				<td>1학기</td>
+    				<td>AC00004</td>
+    				<td>영어I</td>
+    				<td>교선</td>
+    				<td>3</td>
+    				<td>BO</td>
+    			</tr>
+      			<tr>
+    				<td>2012</td>
+    				<td>1학기</td>
+    				<td>AF00011</td>
+    				<td>이산수학</td>
+    				<td>교선</td>
+    				<td>3</td>
+    				<td>BO</td>
+    			</tr>
+       			<tr>
+    				<td>2012</td>
+    				<td>1학기</td>
+    				<td>IB00001</td>
+    				<td>C프로그래밍</td>
+    				<td>전필</td>
+    				<td>3</td>
+    				<td>C+</td>
+    			</tr>
+        			<tr>
+    				<td>2012</td>
+    				<td>1학기</td>
+    				<td>IB00002</td>
+    				<td>과정지도1</td>
+    				<td>전필</td>
+    				<td>1</td>
+    				<td>P</td>
+    			</tr>
+      			<tr>
+    				<td>2012</td>
+    				<td>2학기</td>
+    				<td>AF00016</td>
+    				<td>대학물리와 실험II</td>
+    				<td>교선</td>
+    				<td>3</td>
+    				<td>A0</td>
+    			</tr>  						 			
+    		</tbody>
+      	</table>
+			</div>
+		</div>
+	
+	
+	
+		<div id="jb-footer">
+			<p>ⓛⓞⓖⓞ</p>
+		</div>
+		</div>
+</div>
+</body>
+</html>
