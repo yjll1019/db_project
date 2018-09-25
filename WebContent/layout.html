@@ -29,43 +29,39 @@
 
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active"><a class="nav-link" href="#">
-								<span class="sr-only">(current)</span>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
-								문의</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및 문의</a></li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
 						</ul>
 					</form>
 				</div>
 			</nav>
 		</div>
 
-	<div style="align:center">
-		<div id="info-container">
+		<div id="info-container"
+			style="position: absolute; width: 1000px; height: 30px; left: 20%; margin-top: 10px;">
 			<button type="button" class="btn btn-outline-primary">김지혜</button>
-			님은
-			<br/>
-			<br/>
-			<button type="button" class="btn btn-outline-primary">소프트웨어공학과전공</button>
-			<button type="button" class="btn btn-outline-primary">전공기초과정</button>
-			&amp; <!--  & 을 나타내는 특수문자 -->
+			님은 현재
+			<button type="button" class="btn btn-outline-primary">5학기</button>
+			<button type="button" class="btn btn-outline-primary">소프트웨어공학과
+				전공</button>
 			<button type="button" class="btn btn-outline-primary">신문방송학과
 				부전공</button>
-			이수 중입니다.
+			재학 중입니다.
 			<br/>
-			<br/>
+			<div style="margin-top: 5px; position: absolute; left:20%">
 			지도교수님은 &nbsp;
 			<button type="button" class="btn btn-outline-primary">홍은지</button>&nbsp; 교수님 입니다.
+			</div>
 		</div>
 
-		<div id="circleGraph1">
+		<div class="circleGraph1"
+			style="position: absolute; width: 500px; height: 60px; left: 25%; margin-top: 120px;">
 			<!-- default -->
 			<div class="clearfix">
 				<div class="c100 p50">
@@ -76,13 +72,14 @@
 					</div>
 				</div>
 			</div>
-			<div id="circleFont">
+			<div
+				style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold;">
 				&nbsp;&nbsp; 65/130</div>
 			<!-- /default -->
 		</div>
 
 		<div id="Nwagon"
-			style="position: absolute; margin-top: 11%; width: 200px; left: 40%; height: 40px;">
+			style="position: absolute; margin-top: 70px; width: 200px; left: 35%; height: 40px;">
 			<script>
 		var options = {
 			'dataset':{
@@ -100,16 +97,14 @@
 		Nwagon.chart(options);
 	</script>
 		</div>
-	</div>
-	
-		<div id="goal-container">
+
+		<div id="goal-container" style="margin-top: 350px; margin-left: 20%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
 			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
-			남은학점 &nbsp;<input type="text" style="width: 30px;">
-			 전체학점 &nbsp;<input type="text" style="width: 30px;"> 
-			 목표학점 &nbsp;<input type="text" style="width: 30px;"> &nbsp; &nbsp;
+			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
+			&nbsp;<input type="text" style="width: 30px;"> 목표학점 &nbsp;<input
+				type="text" style="width: 30px;"> &nbsp; &nbsp;
 			<button type="button" class="btn btn-primary">조회</button>
-			
 			<div style="margin-top: 10px;">
 				<table id="scoreCalcul">
 					<tr style="color: #4582EC">
@@ -137,7 +132,7 @@
 				</table>
 			</div>
 		</div>
-		<div id="jb-content" style="margin-top: 20px;">
+		<div id="jb-content" style="margin-top: 40px;">
 			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png"
 				width="40px" height="40px"></a>
 			<div id="textright">
@@ -145,26 +140,31 @@
 		수강한 강의목록</button>
 		</div>
 			<h3>필수 과목</h3>
-			<br/>
+			<!--  
+			<div style="color: #4582EC; font-size:15pt; margin-left:5%; font-weight:bold;">
+				채플 1/2  이수 &nbsp;&nbsp; 사회봉사 1/1 이수
+			</div>
+			-->
+			</br>
 			<div>
 				<table id="table3">
 					<tr>
-						<td style="background-color:#4582EC; color:#fff;
+						<td style="color:#4582EC; 
 							border-top: 1px solid gray; border-right: 1px solid silver; 
-							border-bottom: 1px solid silver; font-size: 17px; font-weight: bold;"> 채플 </td>
+							border-bottom: 1px solid silver; font-size: 20px; font-weight: bold;"> 채플 </td>
 						<td style="border-top: 1px solid gray;
 							font-size: 20px; font-weight: bold;"> 1 / 2 이수 </td>
 					</tr>
 					<tr>
-						<td style="background-color:#4582EC;  color:#fff;
+						<td style="color:#4582EC; 
 							border-bottom: 1px solid gray; border-right: 1px solid silver; 
-							border-top: 1px solid silver; font-size: 17px; font-weight: bold;"> 사회봉사 </td>
+							border-top: 1px solid silver; font-size: 20px; font-weight: bold;"> 사회봉사 </td>
 						<td style="border-bottom: 1px solid gray; border-top: 1px solid silver; 
 							font-size: 20px; font-weight: bold;"> 1 / 1 이수 </td>
 					</tr>	
 				</table>
 			</div>
-			<br/>
+			</br>
 			<table id="table1">
 				<thead>
 					<tr>

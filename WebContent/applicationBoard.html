@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link rel="stylesheet" href="css/board.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="css/applicationBoard.css">
+<link rel="stylesheet" href="headernFooter.css">
+<link rel="stylesheet" href="css/calender.css">
+<script src="js/calender.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -26,8 +27,8 @@
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및 문의</a></li>
-					</ul>
+						<li class="nav-item"><a class="nav-link" href="applicationBoard.html">신청서 게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및 문의</a></li></ul>
 					<form class="form-inline my-2 my-lg-0">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
@@ -38,75 +39,67 @@
 			</nav>
 		</div>
 		<div id="jb-content">
-			<h2><i class="fa fa-list fa">&nbsp;&nbsp;</i>공지사항 및 문의</h2>
-
+			<h2>신청서 게시판</h2> <!-- 뭐라고 하는게 좋을까 -->
 			<hr>
 			<div class="container">
     			<div class="row">    
        				 <div class="col-xs-8 col-xs-offset-2">
-		 				   <div class="input-group">
+       				 	<!-- 검색 오른쪽으로 밀고싶은데 못함,,  -->
+		 				<div class="input-group">
                 			<input type="text" class="form-control" name="search" placeholder="입력하세요">
                 			<span class="input-group-btn">
-                    			&nbsp;<button class="btn btn-default" type="button"><span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span></button>
+                    			<button class="btn btn-default" type="button"><span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span></button>
                 			</span>
             			 </div>
        				 </div>
 				</div>
 			</div>
-			<br/>
+			</br>
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
+						<th>    </th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="notice">
-						<td id="word-color"> <i class="fa fa-bullhorn fa"></i> </td>
-						<td id="word-color">공지사항입니다.</td>
-						<td id="word-color">관리자</td>
-						<td id="word-color" >2018.09.15</td>
-						<td id="word-color">100</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>1</td>
+						<td>이 수 구 분 변 경 신 청</td>
+						<td>이혜지</td>
+						<td>2018.09.15</td>
 					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>2</td>
-						<td>졸업요건 문의</td>
+						<td>이 수 구 분 변 경 신 청</td>
 						<td>이예지</td>
 						<td>2018.09.10</td>
-						<td>12</td>
 					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>3</td>
-						<td>학점 문의</td>
+						<td>이 수 구 분 변 경 신 청</td>
 						<td>이혜지</td>
 						<td>2018.09.09</td>
-						<td>2</td>
 					</tr>
-
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>4</td>
-						<td>저 졸업 못하나요</td>
+						<td>이 수 구 분 변 경 신 청</td>
 						<td>명혜연</td>
 						<td>2018.08.01</td>
-						<td>22</td>
 					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>5</td>
-						<td>교수 졸업지도</td>
-						<td>이승진</td>
+						<td>이 수 구 분 변 경 신 청</td>
+						<td>김지혜</td>
 						<td>2018.07.31</td>
-						<td>7</td>
 					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>6</td>
-						<td>18학번 졸업요건 문의</td>
+						<td>이 수 구 분 변 경 신 청</td>
 						<td>새내기</td>
 						<td>2018.07.20</td>
-						<td>32</td>
 					</tr>
 				</tbody>
 			</table>
@@ -131,11 +124,30 @@
     				</li>
  				 </ul>
 			</nav>		
-		
-	</div>
- <div id="jb-footer">
-		<p>ⓛⓞⓖⓞ</p>
-	</div>
+		</div>
+		<div id="jb-sidebar">
+			<div id="kCalendar"></div>
+			<script>
+				window.onload = function() {
+					kCalendar('kCalendar');
+				};
+			</script>
+			<div id="sidemenu">
+				<table id="side-school">
+					<tr>
+						<td>성공회<br/>대학교
+						</td>
+						<td>종합정보<br/>시스템
+						</td>
+						<td>e커리어<br/>센터
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="jb-footer" style="position:absolute; bottom:0; width:100%;">
+			<p>ⓛⓞⓖⓞ</p>
+		</div>
 	</div>
 </body>
 </html>
