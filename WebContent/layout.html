@@ -16,7 +16,6 @@
 <title>main page</title>
 </head>
 <body>
-
 	<div id="jb-container">
 		<div id="jb-header">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -31,7 +30,8 @@
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및 문의</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
+								문의</a></li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
 						<ul class="navbar-nav mr-auto">
@@ -43,62 +43,62 @@
 			</nav>
 		</div>
 
-		<div id="info-container"
-			style="position: absolute; width: 1000px; height: 30px; left: 20%; margin-top: 10px;">
-			<button type="button" class="btn btn-outline-primary">김지혜</button>
-			님은 현재
-			<button type="button" class="btn btn-outline-primary">5학기</button>
-			<button type="button" class="btn btn-outline-primary">소프트웨어공학과
-				전공</button>
-			<button type="button" class="btn btn-outline-primary">신문방송학과
-				부전공</button>
-			재학 중입니다.
-			<br/>
-			<div style="margin-top: 5px; position: absolute; left:20%">
-			지도교수님은 &nbsp;
-			<button type="button" class="btn btn-outline-primary">홍은지</button>&nbsp; 교수님 입니다.
-			</div>
-		</div>
-
-		<div class="circleGraph1"
-			style="position: absolute; width: 500px; height: 60px; left: 25%; margin-top: 120px;">
-			<!-- default -->
-			<div class="clearfix">
-				<div class="c100 p50">
-					<span>50%</span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
-					</div>
+		<div id="info-container">
+			<div id="stdInfo" style="position: absolute; margin-left: 10%">
+				<button type="button" class="btn btn-outline-primary">김지혜</button>님은 현재
+				<button type="button" class="btn btn-outline-primary">5학기</button>
+				<button type="button" class="btn btn-outline-primary">소프트웨어공학과 전공</button>
+				<button type="button" class="btn btn-outline-primary">신문방송학과 부전공</button>재학 중입니다. <br />
+				<div style="margin-top: 5px; position: absolute; margin-left: 30%">
+					지도교수님은 &nbsp;
+					<button type="button" class="btn btn-outline-primary">홍은지</button> &nbsp; 교수님 입니다.
 				</div>
 			</div>
-			<div
-				style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold;">
-				&nbsp;&nbsp; 65/130</div>
-			<!-- /default -->
+			<div class="circleGraph1"
+				style="position: absolute; width: 500px; height: 60px; left: 30%; margin-top: 120px;">
+				<!-- default -->
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130</div>
+				<!-- /default -->
+			</div>
+
+			<div id="Nwagon"
+				style="position: absolute; margin-top: 70px; width: 200px; left: 40%; height: 40px;">
+				<script>
+					var options = {
+						'dataset' : {
+							title : 'Web accessibility status',
+							values : [ 25, 10, 7, 3 ], //그라데이션 효과주면 좋을거같아서 값 넘길 때 정렬해서 넘겨야함!
+							colorset : [ '#255fc4', '#4582EC', "#88abe8",
+									'#d5dded' ],
+							fields : [ '전공필수(55%)', '전공선택(23%)', '교양필수(18%)',
+									'교양선택(5%)' ],
+						},
+						'donut_width' : 65,
+						'core_circle_radius' : 0,
+						'chartDiv' : 'Nwagon',
+						'chartType' : 'pie',
+						'chartSize' : {
+							width : 500,
+							height : 200
+						}
+					};
+					Nwagon.chart(options);
+				</script>
+			</div>
 		</div>
 
-		<div id="Nwagon"
-			style="position: absolute; margin-top: 70px; width: 200px; left: 35%; height: 40px;">
-			<script>
-		var options = {
-			'dataset':{
-				title: 'Web accessibility status',
-				values:[25, 10 , 7, 3], //그라데이션 효과주면 좋을거같아서 값 넘길 때 정렬해서 넘겨야함!
-				colorset: ['#255fc4', '#4582EC', "#88abe8", '#d5dded'],
-				fields: ['전공필수(55%)', '전공선택(23%)',  '교양필수(18%)', '교양선택(5%)'],
-			},
-			'donut_width' : 65,
-			'core_circle_radius':0,
-			'chartDiv': 'Nwagon',
-			'chartType': 'pie',
-			'chartSize': {width:500, height:200}
-		};
-		Nwagon.chart(options);
-	</script>
-		</div>
-
-		<div id="goal-container" style="margin-top: 350px; margin-left: 20%;">
+		<div id="goal-container" style="margin-top: 270px; margin-left: 22%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
 			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
 			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
@@ -132,61 +132,66 @@
 				</table>
 			</div>
 		</div>
-		<div id="jb-content" style="margin-top: 40px;">
+		<div id="jb-content"">
 			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png"
 				width="40px" height="40px"></a>
 			<div id="textright">
-		<button type="button" class="btn btn-outline-primary" onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
-		수강한 강의목록</button>
-		</div>
-			<h3>필수 과목</h3>
-			<!--  
-			<div style="color: #4582EC; font-size:15pt; margin-left:5%; font-weight:bold;">
-				채플 1/2  이수 &nbsp;&nbsp; 사회봉사 1/1 이수
+				<button type="button" class="btn btn-outline-primary"
+					onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
+					수강한 강의목록</button>
 			</div>
-			-->
-			<br/>
+			<h3>필수 과목</h3>
+			<br />
 			<div>
 				<table id="table3">
 					<tr>
-						<td style="color:#4582EC; 
-							border-top: 1px solid gray; border-right: 1px solid silver; 
-							border-bottom: 1px solid silver; font-size: 20px; font-weight: bold;"> 채플 </td>
-						<td style="border-top: 1px solid gray;
-							font-size: 20px; font-weight: bold;"> 1 / 2 이수 </td>
+						<td
+							style="background-color:#4582EC; color:#fff; border-top: 1px solid gray; border-right: 1px solid silver; border-bottom: 1px solid silver; font-size: 20px; font-weight: bold;">
+							채플</td>
+						<td
+							style="border-top: 1px solid gray; font-size: 20px; font-weight: bold;">
+							1 / 2 이수</td>
 					</tr>
 					<tr>
-						<td style="color:#4582EC; 
-							border-bottom: 1px solid gray; border-right: 1px solid silver; 
-							border-top: 1px solid silver; font-size: 20px; font-weight: bold;"> 사회봉사 </td>
-						<td style="border-bottom: 1px solid gray; border-top: 1px solid silver; 
-							font-size: 20px; font-weight: bold;"> 1 / 1 이수 </td>
-					</tr>	
+						<td
+							style="background-color:#4582EC; color:#fff; border-bottom: 1px solid gray; border-right: 1px solid silver; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
+							사회봉사</td>
+						<td
+							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
+							1 / 1 이수</td>
+					</tr>
 				</table>
 			</div>
 			</br>
 			<table id="table1">
 				<thead>
 					<tr>
-						<th scope="col" colspan="2" id="th1" style="border-right: 1px solid white">1학년</th>
+						<th scope="col" colspan="2" id="th1"
+							style="border-right: 1px solid white">1학년</th>
 						<th scope="col" colspan="2" id="th1">2학년</th>
 					</tr>
 				</thead>
 				<tr>
-					<td id="td1" style="border-right: 1px solid silver"><strong> 1학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid black"><strong> 2학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid silver"><strong> 1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid black"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
-				<tr >
-					<td id="td2" style="border-right: 1px solid silver"><span>C프로그래밍 Ⅰ</span><br/> <span>과정지도 1</span><br/> <span>정보사회론</span><br/>
-						<span>이산수학</span><br/> <span>말과글</span><br/> <span>대학생활세미나 Ⅰ</span></td>
-					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍 Ⅱ</span><br/> <span>과정지도 2</span><br/> <span>웹페이지
-							구축 Ⅰ</span><br/> <span>대학수학</span><br/> <span style="color: #d9534f;">컴퓨터
-							활용</span><br/> <span>대학생활세미나 Ⅱ</span></td>
-					<td id="td2" style="border-right: 1px solid silver"><span>자바프로그래밍</span><br/> <span>과정지도 3</span><br/> <span
-						style="color: #d9534f;">컴퓨터구조</span><br/> <span>데이터베이스개론</span></td>
-					<td id="td2"><span>자료구조론</span><br/> <span>과정지도 4</span></td>
+				<tr>
+					<td id="td2" style="border-right: 1px solid silver"><span>C프로그래밍
+							Ⅰ</span><br /> <span>과정지도 1</span><br /> <span>정보사회론</span><br /> <span>이산수학</span><br />
+						<span>말과글</span><br /> <span>대학생활세미나 Ⅰ</span></td>
+					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍
+							Ⅱ</span><br /> <span>과정지도 2</span><br /> <span>웹페이지 구축 Ⅰ</span><br />
+						<span>대학수학</span><br /> <span style="color: #d9534f;">컴퓨터
+							활용</span><br /> <span>대학생활세미나 Ⅱ</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>자바프로그래밍</span><br />
+						<span>과정지도 3</span><br /> <span style="color: #d9534f;">컴퓨터구조</span><br />
+						<span>데이터베이스개론</span></td>
+					<td id="td2"><span>자료구조론</span><br /> <span>과정지도 4</span></td>
 				</tr>
 				<thead>
 					<tr>
@@ -195,53 +200,65 @@
 					</tr>
 				</thead>
 				<tr>
-					<td id="td1" style="border-right: 1px solid silver"><strong> 1학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid black"><strong> 2학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid silver"><strong> 1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid black"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-					<td id="td2" style="border-right: 1px solid silver"><span>알고리즘</span><br/> <span>과정지도 5</span></td>
-					<td id="td2" style="border-right: 1px solid black"><span style="color: #d9534f;">과정지도 6</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>알고리즘</span><br />
+						<span>과정지도 5</span></td>
+					<td id="td2" style="border-right: 1px solid black"><span
+						style="color: #d9534f;">과정지도 6</span></td>
 					<td id="td2" style="border-right: 1px solid silver"><span>졸업지도</span></td>
 					<td></td>
 				</tr>
 			</table>
-			<br/>
+			<br />
 			<h3>필수 역량</h3>
-			<br/>
+			<br />
 			<table id="table4">
 				<tr>
 					<td id="th1" style="font-weight: bold; height: 200px">교양필수</td>
-					<td colspan="2" style="border-top:1px solid gray"><span>대학생활세미나Ⅰ</span><br/> <span>대학생활세미나Ⅱ</span><br/> <span
-						style="color: #d9534f;">인권과 평화</span><br/> <span>말과글</span><br/> <span>과학기술과
-							에콜로지</span><br/> <span>데이터활용 및 분석</span><br/> <span style="color: #d9534f;">비아메디아채플(1/2)</span><br/>
+					<td colspan="2" style="border-top: 1px solid gray"><span>대학생활세미나Ⅰ</span><br />
+						<span>대학생활세미나Ⅱ</span><br /> <span style="color: #d9534f;">인권과
+							평화</span><br /> <span>말과글</span><br /> <span>과학기술과 에콜로지</span><br />
+						<span>데이터활용 및 분석</span><br /> <span style="color: #d9534f;">비아메디아채플(1/2)</span><br />
 						<span>사회봉사</span></td>
 				</tr>
 				<tr>
 					<td rowspan="3" id="th3" style="font-weight: bold">영역필수</td>
-					<td id="th2" style="border-top:1px solid gray">가치역량</td>
-					<td style="border-top:1px solid gray"><span>민주시민</span><br/> <span>인간인권</span><br/> <span
-						style="color: #d9534f;">생명평화</span></td>
+					<td id="th2" style="border-top: 1px solid gray">가치역량</td>
+					<td style="border-top: 1px solid gray"><span>민주시민</span><br />
+						<span>인간인권</span><br /> <span style="color: #d9534f;">생명평화</span></td>
 				</tr>
 				<tr>
-					<td id="th2" style="border-top: 1px solid white; border-bottom:1px solid white">대안역량</td>
-					<td style="border-top:1px solid silver"><span style="color: #d9534f;">융 복합적사고</span><br/> <span
-						style="color: #d9534f;">조사 분석 정보활용</span><br/> <span>대안제시 문제해결</span></td>
+					<td id="th2"
+						style="border-top: 1px solid white; border-bottom: 1px solid white">대안역량</td>
+					<td style="border-top: 1px solid silver"><span
+						style="color: #d9534f;">융 복합적사고</span><br /> <span
+						style="color: #d9534f;">조사 분석 정보활용</span><br /> <span>대안제시
+							문제해결</span></td>
 				</tr>
 				<tr>
-					<td id="th2"  style="border-bottom:1px solid gray">실천역량</td>
-					<td style="border-top:1px solid silver"><span style="color: #d9534f;">민주적 소통</span><br/> <span>연대와
-							공동체적 실천</span></td>
+					<td id="th2" style="border-bottom: 1px solid gray">실천역량</td>
+					<td style="border-top: 1px solid silver"><span
+						style="color: #d9534f;">민주적 소통</span><br /> <span>연대와 공동체적
+							실천</span></td>
 				</tr>
 				<tr>
-					<td id="th1" style="font-weight: bold; height: 100px; border-bottom:1px solid #4582EC">전공탐색</td>
-					<td colspan="2" style="border-bottom:1px solid gray"><span>소속학부 1과목 이상</span><br/> <span
-						style="color: #d9534f;">타학부 1과목 이상</span><br/> <span>전공탐색세미나 1과목</span><br/>
-						<span style="color: #d9534f;">총 7개 과목(10/19)</span></td>
+					<td id="th1"
+						style="font-weight: bold; height: 100px; border-bottom: 1px solid #4582EC">전공탐색</td>
+					<td colspan="2" style="border-bottom: 1px solid gray"><span>소속학부
+							1과목 이상</span><br /> <span style="color: #d9534f;">타학부 1과목 이상</span><br />
+						<span>전공탐색세미나 1과목</span><br /> <span style="color: #d9534f;">총
+							7개 과목(10/19)</span></td>
 				</tr>
 			</table>
-			<br/>
+			<br />
 		</div>
 		<div id="jb-sidebar">
 			<div id="kCalendar"></div>
@@ -253,18 +270,18 @@
 			<div id="sidemenu">
 				<table id="table2">
 					<tr>
-						<td>성공회<br/>대학교
+						<td>성공회<br />대학교
 						</td>
-						<td>종합정보<br/>시스템
+						<td>종합정보<br />시스템
 						</td>
-						<td>e커리어<br/>센터
+						<td>e커리어<br />센터
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 		<div id="jb-footer">
-			<br/> <span>ⓛⓞⓖⓞ</span>
+			<br /> <span>ⓛⓞⓖⓞ</span>
 		</div>
 	</div>
 </body>
