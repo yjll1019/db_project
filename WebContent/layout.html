@@ -54,8 +54,26 @@
 					<button type="button" class="btn btn-outline-primary">홍은지</button> &nbsp; 교수님 입니다.
 				</div>
 			</div>
+			
 			<div class="circleGraph1"
-				style="position: absolute; width: 500px; height: 60px; left: 30%; margin-top: 120px;">
+				style="position: absolute; width: 250px; height: 60px; left: 25%; margin-top: 120px;">
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130<br/> &nbsp; 전공필수</div>
+	
+			</div>
+			
+			<div class="circleGraph1"
+				style="position: absolute; width: 250px; height: 60px; left: 38%; margin-top: 120px;">
 				<!-- default -->
 				<div class="clearfix">
 					<div class="c100 p50">
@@ -68,37 +86,30 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; 65/130</div>
+					&nbsp;&nbsp; 65/130<br/> &nbsp; 교양필수</div>
 				<!-- /default -->
 			</div>
-
-			<div id="Nwagon"
-				style="position: absolute; margin-top: 70px; width: 200px; left: 40%; height: 40px;">
-				<script>
-					var options = {
-						'dataset' : {
-							title : 'Web accessibility status',
-							values : [ 25, 10, 7, 3 ], //그라데이션 효과주면 좋을거같아서 값 넘길 때 정렬해서 넘겨야함!
-							colorset : [ '#255fc4', '#4582EC', "#88abe8",
-									'#d5dded' ],
-							fields : [ '전공필수(55%)', '전공선택(23%)', '교양필수(18%)',
-									'교양선택(5%)' ],
-						},
-						'donut_width' : 65,
-						'core_circle_radius' : 0,
-						'chartDiv' : 'Nwagon',
-						'chartType' : 'pie',
-						'chartSize' : {
-							width : 500,
-							height : 200
-						}
-					};
-					Nwagon.chart(options);
-				</script>
+			
+			<div class="circleGraph1"
+				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
+				<!-- default -->
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130<br/> &nbsp; 부전공</div>
+				<!-- /default -->
 			</div>
 		</div>
-
-		<div id="goal-container" style="margin-top: 270px; margin-left: 22%;">
+	
+		<div id="goal-container" style="margin-top: 23%; margin-left: 22%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
 			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
 			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
@@ -132,7 +143,7 @@
 				</table>
 			</div>
 		</div>
-		<div id="jb-content"">
+		<div id="jb-content">
 			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png"
 				width="40px" height="40px"></a>
 			<div id="textright">
@@ -162,7 +173,7 @@
 					</tr>
 				</table>
 			</div>
-			</br>
+			<br/>
 			<table id="table1">
 				<thead>
 					<tr>
@@ -269,20 +280,15 @@
 			</script>
 			<div id="sidemenu">
 				<table id="table2">
-					<tr>
-						<td>성공회<br />대학교
-						</td>
-						<td>종합정보<br />시스템
-						</td>
-						<td>e커리어<br />센터
-						</td>
+					<tr style="font-size: 10pt">
+						<td><button onclick="window.open('http://www.skhu.ac.kr/main.aspx')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">성공회<br/>대학교</button></td>
+						<td><button onclick="window.open('https://forest.skhu.ac.kr/')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">종합정보<br/>시스템</button></td>
+						<td><button onclick="window.open('http://ecareer.skhu.ac.kr/')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">e커리어<br/>센터</button></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		<div id="jb-footer">
-			<br /> <span>ⓛⓞⓖⓞ</span>
-		</div>
+
 	</div>
 </body>
 </html>
