@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css"><!-- 폰트 -->
 <link rel="stylesheet" href="headernFooter.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 <title>교수학생리스트</title>
 </head>
 <body>
@@ -38,17 +40,11 @@
 					</form>
 				</div>
 			</nav>
-		
-		<div style="margin-left:10%; margin-top: 2%;">
-			<h4>학생 목록</h4>
 		</div>
 		
-		<div id="search" style="margin-top: 1%; font-size: 13pt;">
-         <div id="class1" style="display: inline; margin-left: 10%;">
-            <select id="classNumber">
-               <option>1학년b반</option>
-               <option>3학년</option>
-            </select>
+		<div id="search" style="margin-top: 3%; font-size: 10pt;">
+         <div id="class1" style="display: inline; margin-left: 5%; font-size: 15pt;">
+ 			소프트웨어공학과 3학년 목록
          </div>
          
          <div id="class2" style="display: inline; margin-left: 50%;">
@@ -60,13 +56,12 @@
             
             <input type="text" name="searchText" placeholder="검색"  style="margin-left:5px;">
          
-         <button type="button" class="btn btn-primary">조회</button>
+         &nbsp; <button type="button" class="btn btn-primary">조회</button>
          </div>
       </div>
+
       
-      <hr>
-      
-   <div class="table-responsive" style="margin-left: 10%; font-size:10pt;">
+   <div class="table-responsive" style="margin-left: 5%; font-size:10pt; margin-top: 3%">
      <table class="table" style="width:90%;">
        <thead>
          <tr>
@@ -137,38 +132,32 @@
          <td>소프트웨어공학과</td>
          <td>010-1234-5678</td>
       </tr>      
-      <tr>
-         <td>201632011</td>
-         <td>김루비</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>      
-      <tr>
-         <td>201632012</td>
-         <td>이낑깡</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201632013</td>
-         <td>명라이코스</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201632014</td>
-         <td>명설</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
+
        </tbody>
      </table>
    </div>
       
-		
-		<div id="jb-footer" style="position: fixed; bottom:0; width:100%;">
-			<p>ⓛⓞⓖⓞ</p>
-		</div>
+      <div id="page" style="margin-top: 3%">
+			<nav aria-label="Page navigation example"> 
+ 				 <ul class="pagination justify-content-center">
+    				 <li class="page-item">
+      					<a class="page-link" href="#" aria-label="Previous">
+      					  <span aria-hidden="true">&laquo;</span>
+        				  <span class="sr-only">Previous</span>
+     				    </a>
+   	 				</li>
+    				<li class="page-item"><a class="page-link" href="#">1</a></li>
+    				<li class="page-item"><a class="page-link" href="#">2</a></li>
+    				<li class="page-item"><a class="page-link" href="#">3</a></li>
+    				<li class="page-item">
+      					<a class="page-link" href="#" aria-label="Next">
+        					<span aria-hidden="true">&raquo;</span>
+        					<span class="sr-only">Next</span>
+     					</a>
+    				</li>
+ 				 </ul>
+			</nav>		
+			
 		</div>
 </div>
 </body>

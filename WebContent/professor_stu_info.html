@@ -40,10 +40,10 @@
 				</div>
 			</nav>
 		
-	<button type="button" class="btn btn-outline-primary" style="font-size:10pt; margin-left: 80%; margin-top: 3%;"
+	<button type="button" class="btn btn-outline-primary" style="font-size:9pt; margin-left: 80%; margin-top: 2%;"
 	 onclick="window.open('professor_memo.html','학생메모','width=500,height=650,location=no,status=no,scrollbars=yes');">상담내역</button>
 	
-	   <div class="table-responsive" style="margin-left: 10%; font-size:10pt; margin-top:2%; ">
+	   <div class="table-responsive" style="margin-left: 10%; font-size:10pt; margin-top:1%; ">
 	     <table class="table" style="width: 1200px;">
 	       <tbody>
 	      <tr>
@@ -68,90 +68,103 @@
 	     </table>
 	   </div>
 
-		<div style="margin-left:10%; font-size:15pt;">
-		
-			<span id="more" style="CURSOR: hand" 
-			onclick="
-			if(story.style.display=='none'){
-				story.style.display='';more.innerText='수강내역'} 
-			else {
-				story.style.display='none';more.innerText='수강내역'}">
-			수강내역
-			</span>
-			<div id="story" style="display:none; font-size:10pt;">
-				<div style=" margin-top:1%; font-size: 11pt; margin-left: 35%;">
+		<div style="margin-left:10%; ">
+			<h5>수강내역</h5>
+	
+			<div style="font-size:12pt;">
+				<div style=" margin-top:5px; font-size: 10pt; margin-left: 35%;">
 					이수학점 <span style="color:red">80/130 </span>&nbsp;&nbsp;&nbsp;
 					총평점<span style="color:red"> 3.75</span>
 				</div>
-				<table class="table" style="width: 1200px; margin-top: 1%;">
-    		<thead>
-	    		<tr>
-	    			<th>년도</th>
-	    			<th>학기</th>
-	    			<th>과목코드</th>
-	    			<th>과목명</th>
-	    			<th>이수구분</th>
-	    			<th>학점</th>
-	    			<th>성적</th>
-	    		</tr>
-    		</thead>
-    		<tbody>
-    			<tr>
-    				<td>2012</td>
-    				<td>1학기</td>
-    				<td>AC00004</td>
-    				<td>영어I</td>
-    				<td>교선</td>
-    				<td>3</td>
-    				<td>BO</td>
-    			</tr>
-      			<tr>
-    				<td>2012</td>
-    				<td>1학기</td>
-    				<td>AF00011</td>
-    				<td>이산수학</td>
-    				<td>교선</td>
-    				<td>3</td>
-    				<td>BO</td>
-    			</tr>
-       			<tr>
-    				<td>2012</td>
-    				<td>1학기</td>
-    				<td>IB00001</td>
-    				<td>C프로그래밍</td>
-    				<td>전필</td>
-    				<td>3</td>
-    				<td>C+</td>
-    			</tr>
-        			<tr>
-    				<td>2012</td>
-    				<td>1학기</td>
-    				<td>IB00002</td>
-    				<td>과정지도1</td>
-    				<td>전필</td>
-    				<td>1</td>
-    				<td>P</td>
-    			</tr>
-      			<tr>
-    				<td>2012</td>
-    				<td>2학기</td>
-    				<td>AF00016</td>
-    				<td>대학물리와 실험II</td>
-    				<td>교선</td>
-    				<td>3</td>
-    				<td>A0</td>
-    			</tr>  						 			
-    		</tbody>
-      	</table>
+				
+				<select style="margin-top: 1%">
+					<option>2016-1학기</option>
+					<option>2016-2학기</option>
+				</select>
+				     <table class="table" style="width:90%;  margin-top: 1%;">
+				     	<thead>
+		    		<tr>
+		    			<th>년도</th>
+		    			<th>학기</th>
+		    			<th>과목코드</th>
+		    			<th>과목명</th>
+		    			<th>이수구분</th>
+		    			<th>학점</th>
+		    			<th>성적</th>
+		    		</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>AC00004</td>
+	    				<td>영어I</td>
+	    				<td>교선</td>
+	    				<td>3</td>
+	    				<td>BO</td>
+	    			</tr>
+	      			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>AF00011</td>
+	    				<td>이산수학</td>
+	    				<td>교선</td>
+	    				<td>3</td>
+	    				<td>BO</td>
+	    			</tr>
+	       			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>IB00001</td>
+	    				<td>C프로그래밍</td>
+	    				<td>전필</td>
+	    				<td>3</td>
+	    				<td>C+</td>
+	    			</tr>
+	        			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>IB00002</td>
+	    				<td>과정지도1</td>
+	    				<td>전필</td>
+	    				<td>1</td>
+	    				<td>P</td>
+	    			</tr>
+	      			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>AF00016</td>
+	    				<td>대학물리와 실험II</td>
+	    				<td>교선</td>
+	    				<td>3</td>
+	    				<td>A0</td>
+	    			</tr>  	
+	    			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>AF00004</td>
+	    				<td>지구환경과학</td>
+	    				<td>교선</td>
+	    				<td>3</td>
+	    				<td>C+</td>
+	    			</tr>  	
+	    			<tr>
+	    				<td>2016</td>
+	    				<td>1학기</td>
+	    				<td>AF00016</td>
+	    				<td>홈페이지제작</td>
+	    				<td>교선</td>
+	    				<td>3</td>
+	    				<td>A0</td>
+	    			</tr>  						 			
+	    		</tbody>
+				</table>					
+		
+			
 			</div>
 		</div>
-	
-	
-	
-		<div id="jb-footer">
-			<p>ⓛⓞⓖⓞ</p>
-		</div>
-		</div>
+	</div>
+
 </div>
 </body>
 </html>
