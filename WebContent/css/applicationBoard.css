@@ -21,3 +21,13 @@ tbody>tr {
 	word-break: break-all;
 	border: 1px solid gray;
 }
+
+#table2 {
+	width: 250px;
+	height: 100px;
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
+}
