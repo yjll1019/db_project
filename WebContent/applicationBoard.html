@@ -38,20 +38,20 @@
 				</div>
 			</nav>
 		</div>
-		<div id="jb-content">
-			<h2>신청서 게시판</h2> <!-- 뭐라고 하는게 좋을까 -->
+		<div id="jb-content"  style="margin-left: 10%;">
+			<h2>신청서 게시판</h2>
 			<hr>
 			<div class="container">
-    			<div class="row">    
-       				 <div class="col-xs-8 col-xs-offset-2">
-       				 	<!-- 검색 오른쪽으로 밀고싶은데 못함,,  -->
-		 				<div class="input-group">
-                			<input type="text" class="form-control" name="search" placeholder="입력하세요">
-                			<span class="input-group-btn">
-                    			<button class="btn btn-default" type="button"><span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span></button>
-                			</span>
-            			 </div>
-       				 </div>
+				<div class="col-xs-8 col-xs-offset-2">
+					<div class="input-group" style="width: 300px; float: right; margin-bottom: 15px">
+						<input type="text" class="form-control" name="search"
+							placeholder="작성자를 입력하세요">&nbsp;&nbsp; 
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span>
+								</button>
+						</span>
+					</div>
 				</div>
 			</div>
 			<br/>
@@ -59,7 +59,7 @@
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>    </th>
+						<th>신청서 구분</th>
 						<th>작성자</th>
 						<th>작성일</th>
 					</tr>
@@ -67,62 +67,81 @@
 				<tbody>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>1</td>
-						<td>이 수 구 분 변 경 신 청</td>
+						<td>이수구분 변경신청</td>
 						<td>이혜지</td>
 						<td>2018.09.15</td>
 					</tr>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>2</td>
-						<td>이 수 구 분 변 경 신 청</td>
+						<td>이수구분 변경신청</td>
 						<td>이예지</td>
 						<td>2018.09.10</td>
 					</tr>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>3</td>
-						<td>이 수 구 분 변 경 신 청</td>
+						<td>대체과목 성적변경신청</td>
 						<td>이혜지</td>
 						<td>2018.09.09</td>
 					</tr>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>4</td>
-						<td>이 수 구 분 변 경 신 청</td>
+						<td>이수구분 변경신청</td>
 						<td>명혜연</td>
 						<td>2018.08.01</td>
 					</tr>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>5</td>
-						<td>이 수 구 분 변 경 신 청</td>
+						<td>이수구분 변경신청</td>
 						<td>김지혜</td>
 						<td>2018.07.31</td>
 					</tr>
 					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>6</td>
-						<td>이 수 구 분 변 경 신 청</td>
-						<td>새내기</td>
+						<td>이수구분 변경신청</td>
+						<td>이티버</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>7</td>
+						<td>대체과목 성적변경신청</td>
+						<td>김루비</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>8</td>
+						<td>이수구분 변경신청</td>
+						<td>이낑깡</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>9</td>
+						<td>이수구분 변경신청</td>
+						<td>김혜지</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>10</td>
+						<td>이수구분 변경신청</td>
+						<td>이지혜</td>
 						<td>2018.07.20</td>
 					</tr>
 				</tbody>
 			</table>
-
-			<!--  가운데로 옮겨보려고했는데 실패함,, -->
-			<nav aria-label="Page navigation example"> 
- 				 <ul class="pagination justify-content-end">
-    				 <li class="page-item">
-      					<a class="page-link" href="#" aria-label="Previous">
-      					  <span aria-hidden="true">&laquo;</span>
-        				  <span class="sr-only">Previous</span>
-     				    </a>
-   	 				</li>
-    				<li class="page-item"><a class="page-link" href="#">1</a></li>
-    				<li class="page-item"><a class="page-link" href="#">2</a></li>
-    				<li class="page-item"><a class="page-link" href="#">3</a></li>
-    				<li class="page-item">
-      					<a class="page-link" href="#" aria-label="Next">
-        					<span aria-hidden="true">&raquo;</span>
-        					<span class="sr-only">Next</span>
-     					</a>
-    				</li>
- 				 </ul>
+			<br/>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+							class="sr-only">Next</span>
+					</a></li>
+				</ul>
 			</nav>		
 		</div>
 		<div id="jb-sidebar">
@@ -133,20 +152,14 @@
 				};
 			</script>
 			<div id="sidemenu">
-				<table id="side-school">
-					<tr>
-						<td>성공회<br/>대학교
-						</td>
-						<td>종합정보<br/>시스템
-						</td>
-						<td>e커리어<br/>센터
-						</td>
+				<table id="table2">
+					<tr style="font-size: 10pt">
+						<td><button onclick="window.open('http://www.skhu.ac.kr/main.aspx')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">성공회<br/>대학교</button></td>
+						<td><button onclick="window.open('https://forest.skhu.ac.kr/')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">종합정보<br/>시스템</button></td>
+						<td><button onclick="window.open('http://ecareer.skhu.ac.kr/')" style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color:#4582EC; background-color: #fff">e커리어<br/>센터</button></td>
 					</tr>
 				</table>
 			</div>
-		</div>
-		<div id="jb-footer" style="position:absolute; bottom:0; width:100%;">
-			<p>ⓛⓞⓖⓞ</p>
 		</div>
 	</div>
 </body>
