@@ -4,32 +4,16 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" href="headernFooter.css">
+<link rel="stylesheet" href="css/calender.css">
+<link rel="stylesheet" href="css/applicationForm.css">
+<script src="js/calender.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link rel="stylesheet" href="headernFooter.css">
-<style>
-table
-{
-	margin-top: 5%;
-	border:1px solid black;
-	border-collapse:collapse;
-	width : 40%;
-	text-align : center;
-	bottom: 10%;
-	margin-left: 30%
-}
-td, th
-{
- height: 55px;
-border:1px solid black;
-}
-
-</style>
-<title>대체과목신청서</title>
+<title>replace_subject page</title>
 </head>
 <body>
-<div id="content">
-<div id="jb-container">
+	<div id="jb-container">
 		<div id="jb-header">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
@@ -41,84 +25,91 @@ border:1px solid black;
 
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active"><a class="nav-link" href="#">
-								<span class="sr-only">(current)</span>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="applicationBoard.html">신청서 게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
 								문의</a></li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
 						</ul>
 					</form>
 				</div>
 			</nav>
 		</div>
 		
-		<div>
-			<table>
-				<thead>
+		<div id="jb-content" style="text-align: center; margin-left: 18%;">
+			<h2>성 적 대 체 청 원 서</h2>
+
+			<div style="margin-top: 60px">
+				<table id="table1">
 					<tr>
-						<th colspan="5" style="font-size: 20pt; align:center;">성적대체청원서</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>소 속</th>
-						<td>소프트웨어공학과</td>
-						<th >학 번</th>
-						<td colspan="2">201632004</td>
+						<td id="td1">소속</td>
+						<td id="td2" colspan="2">소프트웨어공학과</td>
+						<td id="td1">학번</td>
+						<td id="td2" colspan="2">201632000</td>
 					</tr>
 					<tr>
-						<th>성 명</th>
-						<td>김지혜</td>
-						<th>연락처</th>
-						<td colspan="2">010-1234-5678</td>
+						<td id="td1">성명</td>
+						<td id="td2" colspan="2">김지혜</td>
+						<td id="td1">연락처</td>
+						<td id="td2" colspan="2">010 1234 5678</td>
 					</tr>
-				   <tr>
-	                  <th colspan="2">과 목 명</th>
-	                  <th>학년도-학기</th>
-	                  <th>학점</th>
-	                  <th>성적</th>
-              	  </tr>
-				 <tr>
-				 	<td width="25%">이산수학</td>
-				 	<td width="25%">대학수학</td>
-				 	<td>2018-1</td>
-				 	<td>3</td>
-				 	<td>A0</td>
-				 </tr>
-				 <tr>
-				 	<td colspan="5">
-				 	<br/>
-				 	위와 같이 성적 대체를 신청하오니 허가하여 주시기 바랍니다.
-				 	<br/>
-				 	2018년  09월  25일
-				 	<br/>
-				 	신청인 : 김지혜 (인)
-				 	<br/>
-				 	<br/>
-				 	</td>
-				 </tr>
-				 <tr>
-				 	<th colspan="5" style="font-size: 20pt; align:center;">성공회대학교 교무처장 귀하</th>
-				 </tr>
-				</tbody>
-			</table>
-			<div>
-		<input type="submit" class="btn btn-outline-primary" value="신청하기"
-						style="font-weight: bold; height: 40px; width: 120px; text-align:center; margin-top: 5%; margin-left: 45%" /> 
+				</table>
+			</div>
+			
+			<div style="margin-top: 40px">
+				<table id="table2">
+					<tr id="tr1" style="height: 25px">
+						<td id="td1-2" rowspan="2" style="width: 150px">이수년도 - 학기</td>
+						<td id="td1-2">과목명</td>
+						<td id="td1-2">대체과목명</td>
+					
+					</tr>
+					<tr id="tr1" style="height: 25px">
+						<td style="font-weight: bold; border-right: 1px solid silver">
+							변경 전</td>
+						<td style="font-weight: bold">변경 후</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">2018 - 1</td>
+						<td id="td3">이산수학</td>
+						<td id="td3">대학수학</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+					</tr>
+					<tr id="tr1">
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+						<td id="td3">&nbsp;&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div style="margin-top: 4%; margin-left: 14%; font-size:14pt;">
+				<strong>성적증명서 업로드</strong> &nbsp; &nbsp;
+				<input type="file" value="성적증명서">
+			</div>
+				
+			<div style="margin-top: 40px">
+				<form>
+					<input type="submit" class="btn btn-outline-primary" value="신청"
+						style="font-weight: bold; height: 40px; width: 120px" /> &nbsp;
+					<a href="applicationBoard.html" class="btn btn-primary" 
+						style="font-weight: bold; height: 40px; width: 120px">목록으로</a>
+				</form>
+			</div>
+			
+			
 		</div>
-		</div>
-		
-		<div id="jb-footer" style="position: fixed; bottom:0; width:100%;">
-			<p>ⓛⓞⓖⓞ</p>
-		</div>
+
 	</div>
-</div>
 </body>
 </html>
