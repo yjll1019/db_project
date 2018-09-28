@@ -12,35 +12,32 @@
 <link rel="stylesheet" href="css/circle.css">
 <link rel="stylesheet" href="css/Nwagon.css" type="text/css">
 <link rel="stylesheet" href="css/circle.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="js/header.js"></script>
 <script src="js/Nwagon.js"></script>
 <title>main page</title>
 </head>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarColor01" aria-controls="navbarColor01"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
-								문의</a></li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
-						</ul>
-					</form>
-				</div>
-			</nav>
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>LOGO</span></a></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li class='active has-sub'><a href='#'><span>신청서</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br/>(재수강)</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br/>(초수강)</span></a></li>
+						</ul></li>
+					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>내정보</span></a></li>
+				</ul>
+			</div>
 		</div>
 
 		<div id="info-container">
@@ -109,7 +106,7 @@
 			</div>
 		</div>
 	
-		<div id="goal-container" style="margin-top: 23%; margin-left: 22%;">
+		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
 			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
 			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
@@ -144,8 +141,7 @@
 			</div>
 		</div>
 		<div id="jb-content">
-			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png"
-				width="40px" height="40px"></a>
+			<a id="top" href="#jb-header"><img src="img/rounded-triangle.png" width="40px" height="40px"></a>
 			<div id="textright">
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
@@ -262,7 +258,7 @@
 				</tr>
 				<tr>
 					<td id="th1"
-						style="font-weight: bold; height: 100px; border-bottom: 1px solid #4582EC">전공탐색</td>
+						style="font-weight: bold; height: 120px; border-bottom: 1px solid #4582EC">전공탐색</td>
 					<td colspan="2" style="border-bottom: 1px solid gray"><span>소속학부
 							1과목 이상</span><br /> <span style="color: #d9534f;">타학부 1과목 이상</span><br />
 						<span>전공탐색세미나 1과목</span><br /> <span style="color: #d9534f;">총
@@ -288,7 +284,6 @@
 				</table>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

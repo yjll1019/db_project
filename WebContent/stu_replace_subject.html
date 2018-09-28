@@ -2,6 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="js/header.js"></script>
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
 <link rel="stylesheet" href="headernFooter.css">
@@ -15,35 +21,25 @@
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarColor01" aria-controls="navbarColor01"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="applicationBoard.html">신청서 게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
-								문의</a></li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
-						</ul>
-					</form>
-				</div>
-			</nav>
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>LOGO</span></a></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li class='active has-sub'><a href='#'><span>신청서</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br/>(재수강)</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br/>(초수강)</span></a></li>
+						</ul></li>
+					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>내정보</span></a></li>
+				</ul>
+			</div>
 		</div>
 		
 		<div id="jb-content" style="text-align: center; margin-left: 18%;">
-			<h2>성 적 대 체 청 원 서</h2>
+			<h2>대체과목 이수인정신청</h2>
 
 			<div style="margin-top: 60px">
 				<table id="table1">
@@ -65,15 +61,15 @@
 			<div style="margin-top: 40px">
 				<table id="table2">
 					<tr id="tr1" style="height: 25px">
-						<td id="td1-2" rowspan="2" style="width: 150px">이수년도 - 학기</td>
+						<td id="td1-2" rowspan="2" style="width: 150px; height: 80px">이수년도 - 학기</td>
 						<td id="td1-2">과목명</td>
 						<td id="td1-2">대체과목명</td>
 					
 					</tr>
 					<tr id="tr1" style="height: 25px">
-						<td style="font-weight: bold; border-right: 1px solid silver">
-							변경 전</td>
-						<td style="font-weight: bold">변경 후</td>
+						<td style="font-weight: bold; border-right: 1px solid silver; border-bottom: 1px solid gray">
+							폐지과목</td>
+						<td style="font-weight: bold; border-bottom: 1px solid gray">대체희망과목ㄴ</td>
 					</tr>
 					<tr id="tr1">
 						<td id="td3">2018 - 1</td>

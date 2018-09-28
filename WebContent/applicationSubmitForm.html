@@ -2,46 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" href="headernFooter.css">
 <link rel="stylesheet" href="css/calender.css">
-<link rel="stylesheet" href="css/applicationForm.css">
+<link rel="stylesheet" href="css/applicationSubmitForm.css">
 <script src="js/calender.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="js/header.js"></script>
 <title>applicationForm page</title>
 </head>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarColor01" aria-controls="navbarColor01"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" href="#">나의 졸업요건</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">졸업요건 조회</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="applicationBoard.html">신청서 게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
-								문의</a></li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">LOGOUT</a></li>
-						</ul>
-					</form>
-				</div>
-			</nav>
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>LOGO</span></a></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li class='active has-sub'><a href='#'><span>신청서</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br />(재수강)
+								</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br />(초수강)
+								</span></a></li>
+						</ul></li>
+					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>내정보</span></a></li>
+				</ul>
+			</div>
 		</div>
-		<div id="jb-content" style="text-align: center; margin-left: 13%;">
+		<div id="jb-content" style="text-align: center; margin-left: 18%;">
 			<h2>이 수 구 분 변 경 신 청 서</h2>
 
 			<div style="margin-top: 60px">
@@ -124,9 +121,9 @@
 			</div>
 			<div style="margin-top: 40px">
 				<form>
-					<a href="applicationBoard.html" class="btn btn-primary" 
-						style="font-weight: bold; height: 40px; width: 120px">목록으로</a>
-					<input type="submit" class="btn btn-outline-primary" value="승인"
+					<a href="applicationBoard.html" class="btn btn-primary"
+						style="font-weight: bold; height: 40px; width: 120px">목록으로</a> <input
+						type="submit" class="btn btn-outline-primary" value="승인"
 						style="font-weight: bold; height: 40px; width: 120px" /> <input
 						type="submit" class="btn btn-outline-primary" value="거절"
 						style="font-weight: bold; height: 40px; width: 120px" />
@@ -135,28 +132,7 @@
 		</div>
 
 		<div id="jb-sidebar">
-			<div id="kCalendar"></div>
-			<script>
-				window.onload = function() {
-					kCalendar('kCalendar');
-				};
-			</script>
-			<div id="sidemenu">
-				<table id="side-school">
-					<tr>
-						<td>성공회<br/>대학교
-						</td>
-						<td>종합정보<br/>시스템
-						</td>
-						<td>e커리어<br/>센터
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-		<div id="jb-footer">
-			<br/> <span>ⓛⓞⓖⓞ</span>
+		
 		</div>
 	</div>
 </body>

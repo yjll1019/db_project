@@ -4,7 +4,16 @@ body, html{
  	background-repeat: no-repeat;
  	/*background-color: #d3d3d3;*/
  	background: #f8f8f8;
- 	font-family: 'Oxygen', sans-serif;
+  	font-family: 'NanumSquareRound', sans-serif;
+}
+
+#jb-content {
+	width: 80%;
+	padding: 40px;
+	margin: 20px;
+	font-family: 'NanumSquareRound', sans-serif;
+	background-color:#f8f8;
+	justify-content:center;
 }
 
 .main{
@@ -66,36 +75,3 @@ input::-webkit-input-placeholder {
 .weak{ color:#E66C2C; } 
 .good{ color:#2D98F3; } 
 .strong{ color:#006400; }
-
-#jb-footer {
-	clear: both;
-	width: 100%;
-	height: 100px;
-	background-color: #4582EC;
-	font-family: 'NanumSquareRound', sans-serif;
-	text-align: center;
-	color: white;
-}
-
-#jb-header {
-	width: 100%;
-	margin-bottom: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
-	font-weight: 800;
-	font-size: 24px;
-}
-
-#jb-content {
-	width: 80%;
-	padding: 40px;
-	margin: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
-	background-color:#f8f8;
-	justify-content:center;
-}
-
-#jb-container {
-	width: 100%;
-	margin: 0px auto;
-	padding: 5px;
-}
