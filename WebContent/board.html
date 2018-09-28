@@ -44,24 +44,34 @@
 				</ul>
 			</div>
 		</div>
-		<div id="jb-content">
-			<h2><i class="fa fa-list fa">&nbsp;&nbsp;</i>공지사항 및 문의</h2>
+	<div id="jb-content">
+			<h2>
+				<i class="fa fa-list fa">&nbsp;&nbsp;</i>공지사항 및 문의
+			</h2>
 
 			<hr>
 			<div class="container">
-				<div class="col-xs-8 col-xs-offset-2">
-					<div class="input-group" style="width: 300px; float: right; margin-bottom: 15px">
-						<input type="text" class="form-control" name="search"
-							placeholder="검색어를 입력하세요">&nbsp;&nbsp; 
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<span class="input-group-addon"><i class="fa fa-search fa" aria-hidden="true"></i></span>
-								</button>
-						</span>
-					</div>
+
+
+				<div class="input-group"
+					style="width: 500px; float: right; margin-bottom: 15px">
+					<select name="searchSelect" class="form-control" id="searchSelect">
+						<option value="이름">이름</option>
+						<option value="제목">제목</option>
+					</select> 
+					&nbsp;&nbsp;
+					<input type="text" class="form-control" name="searchText" style="width:200px;"
+						placeholder="입력하세요">&nbsp;&nbsp; <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							<span class="input-group-addon"><i class="fa fa-search fa"
+								aria-hidden="true"></i></span>
+						</button>
+					</span>
 				</div>
+
 			</div>
-			<br/>
+			<br />
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -73,16 +83,24 @@
 				</thead>
 				<tbody>
 					<tr class="notice">
-						<td id="word-color"> <i class="fa fa-bullhorn fa"></i> </td>
+						<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
 						<td id="word-color">공지사항입니다.</td>
 						<td id="word-color">관리자</td>
-						<td id="word-color" >2018.09.15</td>
+						<td id="word-color">2018.09.15</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>졸업요건 문의</td>
 						<td>이예지</td>
 						<td>2018.09.10</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
+							[답변]
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 졸업요건 문의</td>
+						<td>관리자</td>
+						<td>2018.09.11</td>
 					</tr>
 					<tr>
 						<td>3</td>
@@ -92,48 +110,69 @@
 					</tr>
 
 					<tr>
-						<td>4</td>
-						<td>저 졸업 못하나요</td>
-						<td>명혜연</td>
+						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
+							[답변]
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학점문의</td>
+						<td>관리자</td>
 						<td>2018.08.01</td>
 					</tr>
 					<tr>
-						<td>5</td>
+						<td>4</td>
 						<td>교수 졸업지도</td>
 						<td>이승진</td>
 						<td>2018.07.31</td>
 					</tr>
+
 					<tr>
-						<td>6</td>
+						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
+							[답변]
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 교수 졸업지도</td>
+						<td>관리자</td>
+						<td>2018.08.01</td>
+					</tr>
+
+					<tr>
+						<td>5</td>
 						<td>18학번 졸업요건 문의</td>
 						<td>새내기</td>
 						<td>2018.07.20</td>
 					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
+							[답변]
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18학번 졸업요건 문의</td>
+						<td>관리자</td>
+						<td>2018.07.21</td>
+					</tr>
 				</tbody>
 			</table>
 
-			
-			<nav aria-label="Page navigation example"> 
- 				 <ul class="pagination justify-content-center">
-    				 <li class="page-item">
-      					<a class="page-link" href="#" aria-label="Previous">
-      					  <span aria-hidden="true">&laquo;</span>
-        				  <span class="sr-only">Previous</span>
-     				    </a>
-   	 				</li>
-    				<li class="page-item"><a class="page-link" href="#">1</a></li>
-    				<li class="page-item"><a class="page-link" href="#">2</a></li>
-    				<li class="page-item"><a class="page-link" href="#">3</a></li>
-    				<li class="page-item">
-      					<a class="page-link" href="#" aria-label="Next">
-        					<span aria-hidden="true">&raquo;</span>
-        					<span class="sr-only">Next</span>
-     					</a>
-    				</li>
- 				 </ul>
-			</nav>		
+			<a id="createButton" class="btn btn-primary pull-right"
+				href="BoardWrite.jsp?pg=<%=currentPage%>&srchText=<%=srchTextEncoded%>">
+				<i class="glyphicon glyphicon-plus"></i> 글쓰기
+			</a>
+
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+							class="sr-only">Next</span>
+					</a></li>
+				</ul>
+			</nav>
+
+		</div>
 		
-	</div>
 	</div>
 </body>
 </html>
