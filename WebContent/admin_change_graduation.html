@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="js/header.js"></script>
+<title>change_graduation</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>LOGO</span></a></li>
+					<li><a href='#'><span>학생조회</span></a></li>
+					<li><a href='#'><span>신청서목록</span></a></li>
+					<li class='active has-sub'><a href='#'><span>졸업요건수정</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>졸업요건표수정</span></a></li>
+							<li class='last'><a href='#'><span>필수과목수정</span></a></li>
+						</ul></li>
+					<li><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="jb-content">
+
+		
+				<div style="font-size: 14pt;">
+				<select id="classNumber">
+					<option>소프트웨어공학과</option>
+					<option>컴퓨터공학과</option>
+					<option>정보통신공학과</option>
+					<option>글로컬IT학과</option>
+					<option>디지털컨텐츠</option>
+					<option>신문방송학과</option>
+					<option>경영학부</option>
+					<option>사회과학부</option>
+					<option>사회복지학과</option>
+					<option>중어중국학과</option>
+					<option>일어일본학과</option>
+					<option>영어학과</option>
+					<option>신학과</option>
+	            </select>
+				&nbsp;
+				<select>
+					<option>2018</option>
+					<option>2017</option>
+					<option selected>2016</option>
+					<option>2015</option>
+					<option>2014</option>
+				</select>	
+				&nbsp;
+				<button type="button" class="btn btn-outline-primary" style="font-size: 10pt;">조회</button>	
+			</div>
+
+			<br/>	
+			<div style="font-size: 20pt;">		
+				소프트웨어공학과 16학번 이수과목
+				<div style="display: inline; margin-left: 70%; font-size: 14pt; ">
+				<strong>파일 양식 다운로드 : </strong> &nbsp;<a href="file.pdf">파일양식.xlsx</a>
+				</div>	
+			</div>
+
+			<table id="table1" style="margin-top: 2%">
+				<thead>
+					<tr>
+						<th scope="col" colspan="2" id="th1"
+							style="border-right: 1px solid white">1학년</th>
+						<th scope="col" colspan="2" id="th1">2학년</th>
+					</tr>
+				</thead>
+				<tr>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid black"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1"><strong> 2학기 </strong></td>
+				</tr>
+				<tr>
+					<td id="td2" style="border-right: 1px solid silver"><span>C프로그래밍
+							Ⅰ</span><br /> <span>과정지도 1</span><br /> <span>정보사회론</span><br /> <span>이산수학</span><br />
+						<span>말과글</span><br /> <span>대학생활세미나 Ⅰ</span></td>
+					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍
+							Ⅱ</span><br /> <span>과정지도 2</span><br /> <span>웹페이지 구축 Ⅰ</span><br />
+						<span>대학수학</span><br /> <span style="color: #d9534f;">컴퓨터
+							활용</span><br /> <span>대학생활세미나 Ⅱ</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>자바프로그래밍</span><br />
+						<span>과정지도 3</span><br /> <span style="color: #d9534f;">컴퓨터구조</span><br />
+						<span>데이터베이스개론</span></td>
+					<td id="td2"><span>자료구조론</span><br /> <span>과정지도 4</span></td>
+				</tr>
+				<thead>
+					<tr>
+						<th scope="col" colspan="2" id="th1">3학년</th>
+						<th scope="col" colspan="2" id="th1">4학년</th>
+					</tr>
+				</thead>
+				<tr>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid black"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							1학기 </strong></td>
+					<td id="td1"><strong> 2학기 </strong></td>
+				</tr>
+				<tr>
+					<td id="td2" style="border-right: 1px solid silver"><span>알고리즘</span><br />
+						<span>과정지도 5</span></td>
+					<td id="td2" style="border-right: 1px solid black"><span
+						style="color: #d9534f;">과정지도 6</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>졸업지도</span></td>
+					<td></td>
+				</tr>
+			</table>
+			
+			<div style="margin-left: 30%; margin-top: 5%; font-size:14pt; ">
+				<strong>이전 파일 다운로드 : </strong> &nbsp;<a href="file.pdf">20180929소프16.xlsx</a>
+			</div>	
+			
+			<div style="margin-top: 4%; margin-left: 30%; font-size:14pt;">
+				<strong>파일업로드 : </strong> &nbsp; &nbsp;
+				<input type="file" value="파일">
+			</div>
+			
+			<button type="button" class="btn btn-outline-primary" 
+			style="margin-left: 45%; margin-top: 5%; font-size: 14pt;"> &nbsp;저장&nbsp; </button>	
+		</div>
+
+	</div>
+</body>
+</html>
