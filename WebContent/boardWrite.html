@@ -62,53 +62,51 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<form action="board.jsp" method="post"\>
-							<table class="table table-bordered" style="font-size:17px;">
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>작성자</strong></td>
-									<td><input type="text" class="form-control" name="writer"
-										value="김지혜"></td>
-								</tr>
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>제목</strong></td>
-									<td><input type="text" class="form-control" name="subject"></td>
-								</tr>
+						<form action=".jsp" method="post">
 
+							<div class="table-responsive">
+								<table class="table table-bordered" style="font-size: 17px;">
+									<tr>
+										<td style="background-color: #f8f8f8"><strong>이름</strong></td>
+										<td colspan="3"><input type="text" class="form-control" name="name"></td>
+									</tr>
 
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>비밀번호</strong></td>
-									<td><input type="password" class="form-control"
-										name="password"></td>
-								</tr>
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>전체 공개</strong></td>
-									<td><input type="radio" name="publish"></td>
-								</tr>
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>첨부 파일</strong></td>
-									<td><input type="file" class="form-control" name="file" id="file"/></td>
-								</tr>
-								<tr>
-									<td style="background-color:#f8f8f8"><strong>글내용</strong></td>
-									<td><textarea rows="10" cols="50" name="content"
-											class="form-control"></textarea></td>
-								</tr>
-								<tr>
+									<tr>
+										<td style="background-color: #f8f8f8"><strong>제목</strong></td>
+										<td colspan="3"><input type="text" class="form-control" name="title"></td>
+									</tr>
+									<tr>
+										<td style="background-color:#f8f8f8"><strong>비밀번호</strong></td>
+										<td colspan="3"><input type="password"
+											class="form-control" name="password"></td>
+									</tr>
+									<tr>
+										<td style="background-color:#f8f8f8"><strong>전체 공개</strong></td>
+										<td><input type="checkbox" name="publish" style="margin-top:10px; margin-left:10px; margin-right:10px;width:25px;height:25px;"/></td>
+										<td style="background-color:#f8f8f8"><strong>첨부 파일</strong></td>
+										<td><input type="file" class="form-control" name="file" id="file"/></td>
+										
+									</tr>
+									<tr>
+										<td style="background-color: #f8f8f8"><strong>내용</strong></td>
+										<td colspan="3"><textarea name="content" class="form-control" style="width: 100%; height: 200px;">졸업요건이 뭐에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</textarea></td>
+									</tr>
+									
+									
+								</table>
+								<div class="form-group" style="margin-top:30px; margin-left:200px;">
+									<input type="submit" value="글쓰기" class="btn btn-outline-primary">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="btn btn-primary">목록</button>
+								</div>
+							</div>
 
-									<td style="background-color:#f8f8f8; font-size:20px;" colspan="2" class="text-center" >
-										<input type="submit" value="글쓰기" class="btn btn-success">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" class="btn btn-primary">목록</button>
-								</td>
-								</tr></table>
-
-
-						</form>
-					</div>
+					</form>
 				</div>
-
 			</div>
+
 		</div>
+	</div>
 	</div>
 </body>
 </html>
