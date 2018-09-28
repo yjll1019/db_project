@@ -341,8 +341,7 @@
     right: 20px;
     top: 25px;
   }
-  #cssmenu ul.open #menu-button::after,
-  #cssmenu ul.open #menu-button::before {
+ #cssmenu ul.open #menu-button::after, #cssmenu ul.open #menu-button::before {
     border-color: #fff;
   }
 }
@@ -355,29 +354,4 @@
 
 #jb-header {
 	margin-bottom: 20px;
-}
-
-#jb-container {
-	width: 100%;
-	margin: 0px auto;
-}
-
-#jb-content {
-	width: 65%;
-	padding: 40px;
-	margin: 20px;
-	float: left;
-	font-family: 'NanumSquareRound', sans-serif;
-}
-
-#jb-sidebar {
-	width: 260px;
-	padding: 20px;
-	margin: 25px;
-	float: right;
-	position: absolute;
-	top: 100px;
-	left: 50%;
-	margin-left: 400px;
-	height: 200px;
 }
