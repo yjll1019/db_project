@@ -48,9 +48,7 @@ input, input::-webkit-input-placeholder {
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.login-button {
-	margin-top: 5px;
-}
+
 
 .popover {
 	width: 300px;
@@ -71,4 +69,27 @@ input, input::-webkit-input-placeholder {
 
 .strong {
 	color: #006400;
+}
+
+#jb-header {
+	width: 100%;
+	margin-bottom: 20px;
+	font-family: 'NanumSquareRound', sans-serif;
+	font-weight: 800;
+	font-size: 24px;
+}
+
+#jb-content {
+	width: 80%;
+	padding: 40px;
+	margin: 20px;
+	font-family: 'NanumSquareRound', sans-serif;
+	background-color:#f8f8;
+	justify-content:center;
+}
+
+#jb-container {
+	width: 100%;
+	margin: 0px auto;
+	padding: 5px;
 }

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/board.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<title>Insert title here</title>
+<title>applicationList</title>
 </head>
 <body>
 	<div id="jb-container">
@@ -44,117 +44,88 @@
 				</ul>
 			</div>
 		</div>
-	<div id="jb-content">
+	<div id="jb-content"  style="margin-left: 15%;">
 			<h2>
-				<i class="fa fa-list fa">&nbsp;&nbsp;</i>공지사항 및 문의
+				<i class="fa fa-list fa">&nbsp;&nbsp;</i>신청서 목록
 			</h2>
-
 			<hr>
 			<div class="container">
 
 
 				<div class="input-group"
-					style="width: 500px; float: right; margin-bottom: 15px">
+					style="width: 200px; float: right; margin-bottom: 15px">
 					<select name="searchSelect" class="form-control" id="searchSelect">
-						<option value="이름">이름</option>
-						<option value="제목">제목</option>
+						<option value="noSelected">--------전체---------</option>
+						<option value="이수구분변경">이수구분 변경신청</option>
+						<option value="대체과목성적변경">대체과목 성적변경</option>
+						<option value="대체과목이수인정">대체과목 이수인정</option>
 					</select> 
-					&nbsp;&nbsp;
-					<input type="text" class="form-control" name="searchText" style="width:200px;"
-						placeholder="입력하세요">&nbsp;&nbsp; <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<span class="input-group-addon"><i class="fa fa-search fa"
-								aria-hidden="true"></i></span>
-						</button>
-					</span>
 				</div>
 
 			</div>
-			<br />
+			<br/>
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
+						<th>신청서 구분</th>
 						<th>작성일</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="notice">
-						<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
-						<td id="word-color">공지사항입니다.</td>
-						<td id="word-color">관리자</td>
-						<td id="word-color">2018.09.15</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>1</td>
+						<td>이수구분 변경신청</td>
+						<td>2018.09.15</td>
 					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>2</td>
-						<td>졸업요건 문의</td>
-						<td>이예지</td>
+						<td>이수구분 변경신청</td>
 						<td>2018.09.10</td>
 					</tr>
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 졸업요건 문의</td>
-						<td>관리자</td>
-						<td>2018.09.11</td>
-					</tr>
-					<tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
 						<td>3</td>
-						<td>학점 문의</td>
-						<td>이혜지</td>
+						<td>대체과목 성적변경신청</td>
 						<td>2018.09.09</td>
 					</tr>
-
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학점문의</td>
-						<td>관리자</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>4</td>
+						<td>이수구분 변경신청</td>
 						<td>2018.08.01</td>
 					</tr>
-					<tr>
-						<td>4</td>
-						<td>교수 졸업지도</td>
-						<td>이승진</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>5</td>
+						<td>이수구분 변경신청</td>
 						<td>2018.07.31</td>
 					</tr>
-
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 교수 졸업지도</td>
-						<td>관리자</td>
-						<td>2018.08.01</td>
-					</tr>
-
-					<tr>
-						<td>5</td>
-						<td>18학번 졸업요건 문의</td>
-						<td>새내기</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>6</td>
+						<td>이수구분 변경신청</td>
 						<td>2018.07.20</td>
 					</tr>
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18학번 졸업요건 문의</td>
-						<td>관리자</td>
-						<td>2018.07.21</td>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>7</td>
+						<td>대체과목 성적변경신청</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>8</td>
+						<td>이수구분 변경신청</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>9</td>
+						<td>이수구분 변경신청</td>
+						<td>2018.07.20</td>
+					</tr>
+					<tr onclick="document.location = 'applicationSubmitForm.html';">
+						<td>10</td>
+						<td>이수구분 변경신청</td>
+						<td>2018.07.20</td>
 					</tr>
 				</tbody>
 			</table>
-
-			<a id="createButton" class="btn btn-primary pull-right"
-				href="BoardWrite.jsp?pg=<%=currentPage%>&srchText=<%=srchTextEncoded%>">
-				<i class="glyphicon glyphicon-plus"></i> 글쓰기
-			</a>
-
+			<br/>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item"><a class="page-link" href="#"
@@ -169,8 +140,7 @@
 							class="sr-only">Next</span>
 					</a></li>
 				</ul>
-			</nav>
-
+			</nav>		
 		</div>
 		
 	</div>
