@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='css/fullcalendar.min.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.min.css' rel='stylesheet'
+	media='print' />
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" href="headernFooter.css">
+
+<script src='js/moment.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/fullcalendar.min.js'></script>
+<script src='js/ko.js'></script>
+<script>
+
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultDate: '2018-09-26',
+      lang:"ko",
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2018-03-01'
+        },
+        {
+          title: '중간고사',
+          start: '2018-09-07',
+          end: '2018-09-10'
+        },
+        {
+          id: 999,
+          title: '군복학 만기일 ',
+          start: '2018-09-26'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2018-03-11',
+          end: '2018-03-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T10:30:00',
+          end: '2018-03-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2018-03-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2018-03-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2018-03-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2018-03-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2018-03-28'
+        }
+      ]
+    });
+
+  });
+
+</script>
+<style>
+body {
+	margin: 0px 0px;
+	padding: 0;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+
+
+#calendar {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+
+form { 
+
+        margin: 0 auto; 
+
+        width:250px;
+
+    }    
+</style>
+
+
+
+</head>
+<body>
+
+	<div id="jb-container">
+		<div id="jb-header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="main.html">ⓛⓞⓖⓞ</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarColor01" aria-controls="navbarColor01"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active"><a class="nav-link" href="#">
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">졸업요건</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">공지사항 및
+								문의</a></li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</nav>
+		</div>
+
+
+		<div id="jb-container">
+			<div id='calendar'></div>
+			<br>
+			
+			<div id="jb-content justify-content-center">
+		    <input type="text" name="schedule" size="16" placeholder="2018-09-28">&nbsp; &nbsp;
+			<input type="text" name="schedule" size="20"  placeholder="일정을 입력하세요">
+			
+				<div class="form-group">
+<center>
+				<button class="btn btn-primary" type="submit">
+					일정등록<i class="fa fa-check spaceLeft"></i>
+				</button>
+				<button class="btn btn-primary" type="submit">
+					일정수정<i class="fa fa-check spaceLeft"></i>
+				</button>
+				<button class="btn btn-danger" type="submit">
+					일정삭제<i class="fa fa-times spaceLeft"></i>
+				</button>
+	 	</center>
+
+			</div>
+			
+			</div>
+			</div>
+
+</body>
+</html>
