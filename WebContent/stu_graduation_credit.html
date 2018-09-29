@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/calender.css">
+<script src="js/calender.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" href="css/circle.css">
+<link rel="stylesheet" href="css/Nwagon.css" type="text/css">
+<link rel="stylesheet" href="css/circle.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="js/header.js"></script>
+<script src="js/Nwagon.js"></script>
+<title>main page</title>
+</head>
+<body>
+	<div id="jb-container">
+		<div id="jb-header">
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>LOGO</span></a></li>
+					<li class='active has-sub'><a href='#'><span>나의
+								졸업요건</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>필수 학점</span></a></li>
+							<li class='last'><a href='#'><span>필수 과목</span></a></li>
+						</ul></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li class='active has-sub'><a href='#'><span>신청서</span></a>
+						<ul>
+							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br />(재수강)
+								</span></a></li>
+							<li class='last'><a href='#'><span>대체과목신청<br />(초수강)
+								</span></a></li>
+							<li class='last'><a href='#'><span>신청 목록</span></a></li>
+						</ul></li>
+					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li class='last' style="float: right"><a href='#'><span>개인정보변경</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="info-container">
+			<div id="stdInfo" style="position: absolute; margin-left: 10%">
+				<button type="button" class="btn btn-outline-primary">김지혜</button>
+				님은 현재
+				<button type="button" class="btn btn-outline-primary">5학기</button>
+				<button type="button" class="btn btn-outline-primary">소프트웨어공학과
+					전공</button>
+				<button type="button" class="btn btn-outline-primary">신문방송학과
+					부전공</button>
+				재학 중입니다. <br />
+				<div style="margin-top: 5px; position: absolute; margin-left: 30%">
+					지도교수님은 &nbsp;
+					<button type="button" class="btn btn-outline-primary">홍은지</button>
+					&nbsp; 교수님 입니다.
+				</div>
+			</div>
+
+			<div class="circleGraph1"
+				style="position: absolute; width: 250px; height: 60px; left: 25%; margin-top: 120px;">
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130<br /> &nbsp; 전공필수
+				</div>
+
+			</div>
+
+			<div class="circleGraph1"
+				style="position: absolute; width: 250px; height: 60px; left: 38%; margin-top: 120px;">
+				<!-- default -->
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130<br /> &nbsp; 교양필수
+				</div>
+				<!-- /default -->
+			</div>
+
+			<div class="circleGraph1"
+				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
+				<!-- default -->
+				<div class="clearfix">
+					<div class="c100 p50">
+						<span>50%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
+					&nbsp;&nbsp; 65/130<br /> &nbsp; 부전공
+				</div>
+				<!-- /default -->
+			</div>
+		</div>
+
+		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
+			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
+			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
+			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
+			&nbsp;<input type="text" style="width: 30px;"> 목표학점 &nbsp;<input
+				type="text" style="width: 30px;"> &nbsp; &nbsp;
+			<button type="button" class="btn btn-primary">조회</button>
+			<div style="margin-top: 10px;">
+				<table id="scoreCalcul">
+					<tr style="color: #4582EC">
+						<th>학기</th>
+						<th>이수학점</th>
+						<th>취득학점</th>
+						<th>졸업학점</th>
+					</tr>
+					<tr>
+						<td>3-2학기</td>
+						<td>19</td>
+						<td>4.0</td>
+						<td rowspan="3" style="color: red">3.9</td>
+					</tr>
+					<tr>
+						<td>4-1학기</td>
+						<td>19</td>
+						<td>4.0</td>
+					</tr>
+					<tr>
+						<td>4-2학기</td>
+						<td>4</td>
+						<td>4.5</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="jb-content" style="margin-top: 30px; margin-left: 21%;">
+			<form>
+				<table style="width: 700px">
+					<tr>
+						<td><label style="font-size: 15pt; padding-top: 5px"><strong>졸업요건
+									선택</strong></label></td>
+						<td style="padding-left: 200px">
+							<select class="custom-select" style="width: 200px">
+								<option value="1">전공기초</option>
+								<option value="2" selected>전공심화</option>
+							</select>&nbsp;&nbsp;
+							<input type="submit" class="btn btn-primary" value="조회" style="font-size: 15px">
+						</td>
+					</tr>
+				</table>
+			</form>
+			<br />
+			<div>
+				<table style="font-size: 19px; margin-left: 16%; width: 300px; height: 150px;">
+					<tr>
+						<td>필요 전공학점&nbsp;&nbsp;</td>
+						<td><span style="color:#d9534f">65</span><span> / 75</span></td>
+					</tr>
+					<tr>
+						<td>필요 교양학점&nbsp;&nbsp;</td>
+						<td><span>32</span><span> / 32</span></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-left: 45px"><button type="button" class="btn btn-link"><strong>필수 과목 확인하기</strong></button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="jb-sidebar">
+			<div id="kCalendar"></div>
+			<script>
+				window.onload = function() {
+					kCalendar('kCalendar');
+				};
+			</script>
+			<div id="sidemenu">
+				<table id="table2">
+					<tr style="font-size: 10pt">
+						<td><button
+								onclick="window.open('http://www.skhu.ac.kr/main.aspx')"
+								style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color: #4582EC; background-color: #fff">
+								성공회<br />대학교
+							</button></td>
+						<td><button
+								onclick="window.open('https://forest.skhu.ac.kr/')"
+								style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color: #4582EC; background-color: #fff">
+								종합정보<br />시스템
+							</button></td>
+						<td><button
+								onclick="window.open('http://ecareer.skhu.ac.kr/')"
+								style="width: 70px; height: 70px; border: 1px solid #4582EC; border-radius: 50%; color: #4582EC; background-color: #fff">
+								e커리어<br />센터
+							</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
