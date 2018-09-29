@@ -24,13 +24,6 @@ tbody>tr {
 	color: red;
 }
 
-#jb-header {
-	width: 100%;
-	margin-bottom: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
-	font-size: 24px;
-}
-
 #jb-content {
 	margin-top: 30px;
  	margin: 0 auto;
@@ -39,11 +32,6 @@ tbody>tr {
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
-#jb-container {
-	width: 100%;
-	margin: 0px auto;
-	padding: 5px;
-}
 #jb-sidebar {
 	width: 260px;
 	padding: 20px;
