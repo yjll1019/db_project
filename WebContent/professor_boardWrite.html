@@ -19,7 +19,7 @@
 	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	crossorigin="anonymous">
-<title>Insert title here</title>
+<title>교수 게시판 글쓰기</title>
 
 </head>
 <body>
@@ -28,23 +28,11 @@
 			<div id='cssmenu'>
 				<ul>
 					<li><a href='#'><span>LOGO</span></a></li>
-					<li class='active has-sub'><a href='#'><span>나의졸업요건</span></a>
-						<ul>
-							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청</span></a></li>
-						</ul>
-					</li>
+					<li><a href='#'><span>학생조회</span></a></li>
 					<li><a href='#'><span>졸업요건조회</span></a></li>
-					<li class='active has-sub'><a href='#'><span>신청메뉴</span></a>
-						<ul>
-							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청(재수강)</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청(초수강)</span></a></li>
-						</ul>
-					</li>
-					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
-					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-					<li class='last' style="float: right"><a href='#'><span>개인정보변경</span></a></li>
+					<li><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,20 +48,20 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
 						<form action=".jsp" method="post">
 
 							<div class="table-responsive">
 								<table class="table table-bordered" style="font-size: 17px;">
 									<tr>
 										<td style="background-color: #f8f8f8"><strong>이름</strong></td>
-										<td colspan="3"><input type="text" class="form-control" name="name"></td>
+										<td colspan="3"><input type="text" class="form-control" name="name" value="이승진"></td>
 									</tr>
 
 									<tr>
 										<td style="background-color: #f8f8f8"><strong>제목</strong></td>
-										<td colspan="3"><input type="text" class="form-control" name="title"></td>
+										<td colspan="3"><input type="text" class="form-control" name="title" value="졸업요건"></td>
 									</tr>
 									<tr>
 										<td style="background-color:#f8f8f8"><strong>비밀번호</strong></td>
@@ -89,12 +77,12 @@
 									</tr>
 									<tr>
 										<td style="background-color: #f8f8f8"><strong>내용</strong></td>
-										<td colspan="3"><textarea name="content" class="form-control" style="width: 100%; height: 200px;">졸업요건이 뭐에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</textarea></td>
+										<td colspan="3"><textarea name="content" class="form-control" style="width: 100%; height: 200px;">소프트웨어공학과의 졸업요건은 무엇입니꽈.</textarea></td>
 									</tr>
 									
 									
 								</table>
-								<div class="form-group" style="margin-top:30px; margin-left:200px;">
+								<div class="form-group" style="margin-top:30px; margin-left:250px;">
 									<input type="submit" value="글쓰기" class="btn btn-outline-primary">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn btn-primary">목록</button>

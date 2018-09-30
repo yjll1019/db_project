@@ -14,7 +14,6 @@ tbody>tr {
 }
 
 #boardWrite{
-	margin-top: 20px;
  	margin: 0 auto;
  	max-width: 1000px;
     padding: 20px 20px;
@@ -22,14 +21,6 @@ tbody>tr {
 }
 #word-color{
 	color: red;
-}
-
-#jb-header {
-	width: 100%;
-	margin-bottom: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
-	font-weight: 800;
-	font-size: 24px;
 }
 
 #jb-content {
@@ -40,11 +31,6 @@ tbody>tr {
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
-#jb-container {
-	width: 100%;
-	margin: 0px auto;
-	padding: 5px;
-}
 #jb-sidebar {
 	width: 260px;
 	padding: 20px;

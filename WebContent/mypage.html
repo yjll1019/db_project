@@ -26,33 +26,41 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
 	rel='stylesheet' type='text/css'>
+
+<!-- header -->
+<link rel="stylesheet" href="css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="js/header.js"></script>	
+
 <title>Insert title here</title>
 </head>
 <body>
 <div id="jb-container">
 		<div id="jb-header">
-			<div id='cssmenu'>
-				<ul>
-					<li><a href='#'><span>LOGO</span></a></li>
-					<li class='active has-sub'><a href='#'><span>나의졸업요건</span></a>
-						<ul>
-							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청</span></a></li>
-						</ul>
-					</li>
-					<li><a href='#'><span>졸업요건조회</span></a></li>
-					<li class='active has-sub'><a href='#'><span>신청메뉴</span></a>
-						<ul>
-							<li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청(재수강)</span></a></li>
-							<li class='last'><a href='#'><span>대체과목신청(초수강)</span></a></li>
-						</ul>
-					</li>
-					<li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
-					<li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-					<li class='last' style="float: right"><a href='#'><span>개인정보변경</span></a></li>
-				</ul>
-			</div>
+				<div id='cssmenu'>
+            <ul>
+               <li><a href='#'><span>LOGO</span></a></li>
+               <li class='active has-sub'><a href='#'><span>나의 졸업요건</span></a>
+                  <ul>
+                     <li class='last'><a href='#'><span>필수 학점</span></a></li>
+                     <li class='last'><a href='#'><span>필수 과목</span></a></li>
+                  </ul>
+               </li>
+               <li><a href='#'><span>졸업요건 조회</span></a></li>
+               <li class='active has-sub'><a href='#'><span>신청서</span></a>
+                  <ul>
+                     <li class='last'><a href='#'><span>이수구분변경신청</span></a></li>
+                     <li class='last'><a href='#'><span>대체과목신청<br/>(재수강)</span></a></li>
+                     <li class='last'><a href='#'><span>대체과목신청<br/>(초수강)</span></a></li>
+                     <li class='last'><a href='#'><span>신청 목록</span></a></li>
+                  </ul>
+               </li>
+               <li class='last'><a href='#'><span>공지사항 및 문의</span></a></li>
+               <li class='last' style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+               <li class='last' style="float: right"><a href='#'><span>개인정보변경</span></a></li>
+            </ul>
+         </div>
 		</div>
 		<div id="jb-content justify-content-center">
 			<div class="container">
@@ -124,7 +132,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<label for = "kind" class="cols-sm-2 control-label">편입생입니까?</label>
+									<label for = "kind" class="cols-sm-2 control-label">편입생</label>
 									<input type="checkbox" name="kind" id="kind" style="margin-left:20px;width:25px;height:25px;"/>
 								</div>
 								
