@@ -63,7 +63,7 @@
   padding-right: 32px;
 }
 #cssmenu > ul > li:hover > a {
-  color: #dbdbdb;
+  color: #d9d9d9;
 }
 #cssmenu li.has-sub::after {
   display: block;
@@ -158,7 +158,7 @@
   border-bottom: 1px solid #eeeeee;
   padding: 10px 20px;
   font-size: 14px;
-  color: #c0c0c0;
+  color: #000000;
   background: #ffffff;
   -webkit-transition: all .35s ease;
   -moz-transition: all .35s ease;
