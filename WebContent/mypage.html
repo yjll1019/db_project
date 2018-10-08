@@ -73,9 +73,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="name" class="cols-sm-2 control-label">이름</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Kim Ji Hye"/>
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Kim Ji Hye" style="height: 35px;"/>
 								</div>
 							</div>
 						</div>
@@ -84,9 +84,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="email" class="cols-sm-2 control-label">이메일</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="email" id="email"  placeholder="jihye@example.com"/>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="jihye@example.com"  style="height: 35px;"/>
 								</div>
 							</div>
 						</div>
@@ -95,9 +95,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="phone" class="cols-sm-2 control-label">전화번호</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="tel" class="form-control" name="phone" id="phone"  placeholder="010-1111-5389"/>
+									<input type="tel" class="form-control" name="phone" id="phone"  placeholder="010-1111-5389" style="height: 35px;"/>
 								</div>
 							</div>
 						</div>
@@ -106,9 +106,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="password" class="cols-sm-2 control-label">Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-lock  " aria-hidden="true"  style="margin-top: 8px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="비밀번호 입력"/>
+									<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="비밀번호 입력" style="height: 35px;"/>
 								</div>
 				
 							</div>
@@ -118,33 +118,37 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"  style="margin-top: 8px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="비밀번호 확인 입력"/>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="비밀번호 확인 입력" style="height: 35px;"/>
 								</div>
 								
 							</div>
 						</div>
-						<label> </label>
-						<div class="form-group">
-							
+						<div class="form-group" style="margin-top: 20pt;">	
 							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i></span>
-									&nbsp;&nbsp;
-									<label for = "kind" class="cols-sm-2 control-label">편입생</label>
+								<div class="input-group" style="font-size: 13pt;">
+								<span class="input-group-addon">
+									<i class="fas fa-pen-square" ></i>&nbsp; 편입생
+								</span>
 									<input type="checkbox" name="kind" id="kind" style="margin-left:20px;width:25px;height:25px;"/>
 								</div>
 								
+								<div class="input-group" style="font-size: 13pt; margin-top: 8px;">
+									<span class="input-group-addon">
+									<i class="fas fa-pen-square" ></i>&nbsp; 사회봉사면제여부
+									</span>
+									<input type="checkbox" name="kind" id="kind" style="margin-left:20px;width:25px;height:25px;"/>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="margin-top: 25px;">
 							<label for ="major" class="cls-sm-2 control-label">학부/학과</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="major" class="form-control" id="major" >
+									<select name="major" class="form-control" id="major" style="height: 35px; font-size: 12pt;">
 										<option value="notSelect">주전공을 선택해주세요</option>
 										<option value="소프트웨어 공학과">소프트웨어공학과</option>
 										<option value="컴퓨터공학과">컴퓨터공학과</option>
@@ -158,9 +162,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 						
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="subMajor" class="form-control" id="subMajor" >
+									<select name="subMajor" class="form-control" id="subMajor" style="height: 35px; font-size: 12pt;" >
 										<option value="notSelect">부/복수전공을 선택해주세요</option>
 										<option value="소프트웨어 공학과">소프트웨어공학과</option>
 										<option value="컴퓨터공학과">컴퓨터공학과</option>
@@ -182,9 +186,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							</div>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="class" class="form-control" id="class" >
+									<select name="class" class="form-control" id="class" style="height: 35px; font-size: 12pt;">
 										<option value="notSelect">반을 선택해주세요</option>
 										<option value="1반">1반</option>
 										<option value="2반">2반</option>
@@ -200,9 +204,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for ="semester" class="cls-sm-2 control-label">학기</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="semester" class="form-control" id="semester" >
+									<select name="semester" class="form-control" id="semester" style="height: 35px; font-size: 12pt;" >
 										<option value="1학기">1학기</option>
 										<option value="2학기">2학기</option>
 										<option value="3학기">3학기</option>
@@ -221,7 +225,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<label for="file" class="cols-sm-2 control-label">file</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
 									<input type="file" class="form-control" name="file" id="file"/>
 								</div>
@@ -229,7 +233,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 						</div>
 						
 						<div class="form-group" style="margin-top: 20px;">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button">수정</button>
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" >수정</button>
 						</div>
 					
 					</form>

@@ -14,6 +14,13 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="js/header.js"></script>
+<style>
+	#jb-content {
+	width: 80%;
+	margin: 20px;
+	font-family: 'NanumSquareRound', sans-serif;
+}
+</style>
 <title>교수학생리스트</title>
 </head>
 <body>
@@ -31,8 +38,13 @@
 			</div>
 		</div>
 		
-		<div id="search" style="margin-top: 3%; font-size: 10pt;">
-         <div id="class1" style="display: inline; margin-left: 15%; font-size: 12pt;">
+		<div id="jb-content">
+				<div style="margin-left: 20%; margin-top: 3%;">
+					<h3>학생 목록</h3>
+				</div>
+				
+		<div id="search" style="margin-top: 1%; font-size: 13pt;">
+         <div id="class1" style="display: inline; margin-left: 20%; ">
  	        <select id="stuSelect">
                <option>1학년</option>
                <option>2학년</option>
@@ -43,7 +55,7 @@
 			<button type="button" class="btn btn-outline-primary" style="font-size: 9pt">미충족학생조회</button>
          </div>
          
-         <div id="class2" style="display: inline; margin-left: 37%;">
+         <div id="class2" style="display: inline; margin-left: 32%;">
             <select id="searchSelect">
                <option>학번</option>
                <option>이름</option>
@@ -52,86 +64,111 @@
             
             <input type="text" name="searchText" placeholder="검색"  style="margin-left:5px;">
          
-         &nbsp; <button type="button" class="btn btn-primary">조회</button>
+         <button type="button" class="btn btn-primary">조회</button>
          </div>
       </div>
 
       
-   <div class="table-responsive" style="margin-left: 15%; font-size:10pt; margin-top: 3%">
-     <table class="table" style="width:70%;">
-       <thead>
-         <tr>
-      <th>학번</th>
-      <th>이름</th>
-      <th>학과</th>
-      <th>휴대전화번호</th>
-         </tr>
-       </thead>
-       <tbody>
-       <tr>
-         <td>201532001</td>
-         <td>김지혜</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532002</td>
-         <td>명혜연</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>   
-      <tr>
-         <td>201532003</td>
-         <td>이예지</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532004</td>
-         <td>이혜지</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532005</td>
-         <td>명연혜</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532006</td>
-         <td>김혜지</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532007</td>
-         <td>이지예</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532008</td>
-         <td>이지혜</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532009</td>
-         <td>김지혜</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>
-      <tr>
-         <td>201532010</td>
-         <td>이티버</td>
-         <td>소프트웨어공학과</td>
-         <td>010-1234-5678</td>
-      </tr>      
-
-       </tbody>
-     </table>
-   </div>
+   				<div class="table-responsive"
+					style="margin-left: 20%; margin-top: 2%; font-size: 10pt;">
+					<table class="table" style="width: 900px;">
+						<thead>
+							<tr>
+								<th><strong>학번</strong></th>
+								<th><strong>이름</strong></th>
+								<th><strong>학과</strong></th>
+								<th><strong>휴대전화번호</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>201632001</td>
+								<td>김지혜</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632002</td>
+								<td>명혜연</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632003</td>
+								<td>이예지</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632004</td>
+								<td>이혜지</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632005</td>
+								<td>명연혜</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632006</td>
+								<td>김혜지</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632007</td>
+								<td>이지예</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632008</td>
+								<td>이지혜</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632009</td>
+								<td>김지혜</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632010</td>
+								<td>이티버</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632011</td>
+								<td>김루비</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632012</td>
+								<td>이낑깡</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632013</td>
+								<td>명라이코스</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+							<tr>
+								<td>201632014</td>
+								<td>명설</td>
+								<td>소프트웨어공학과</td>
+								<td>010-1234-5678</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
       
       <div id="page" style="margin-top: 3%">
 			<nav aria-label="Page navigation example"> 
