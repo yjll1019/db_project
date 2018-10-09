@@ -70,9 +70,6 @@
 			<br/>	
 			<div style="font-size: 20pt;">		
 				소프트웨어공학과 16학번 이수과목
-				<div style="display: inline; margin-left: 70%; font-size: 14pt; ">
-				<strong>파일 양식 다운로드 : </strong> &nbsp;<a href="file.pdf">파일양식.xlsx</a>
-				</div>	
 			</div>
 
 			<table id="table1" style="margin-top: 2%; width: 100%;">
@@ -93,9 +90,20 @@
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-					<td id="td2" style="border-right: 1px solid silver"><span>C프로그래밍
-							Ⅰ</span><br /> <span>과정지도 1</span><br /> <span>정보사회론</span><br /> <span>이산수학</span><br />
-						<span>말과글</span><br /> <span>대학생활세미나 Ⅰ</span></td>
+					<td id="td2" style="border-right: 1px solid silver">
+						
+						<span>C프로그래밍Ⅰ </span>
+							<br /> 
+						<span>과정지도 1</span>
+							<br /> 
+						<span>정보사회론</span>
+							<br /> 
+						<span>이산수학</span>
+							<br />
+						<span>말과글</span>
+							<br /> 
+						<span>대학생활세미나 Ⅰ</span>
+					</td>
 					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍
 							Ⅱ</span><br /> <span>과정지도 2</span><br /> <span>웹페이지 구축 Ⅰ</span><br />
 						<span>대학수학</span><br /> <span>컴퓨터
@@ -128,16 +136,40 @@
 					<td></td>
 				</tr>
 			</table>
+					
+			<div class="container"
+				style="padding-left: 10px; padding-right: 10px; margin-top:30px; margin-left:50px;font-size: 15pt;">
+				<table style="width: 900px;">
 			
-			<div style="margin-left: 30%; margin-top: 5%; font-size:14pt; ">
-				<strong>이전 파일 다운로드 : </strong> &nbsp;<a href="file.pdf">20180929소프16.xlsx</a>
-			</div>	
-			
-			<div style="margin-top: 4%; margin-left: 30%; font-size:14pt;">
-				<strong>파일업로드 : </strong> &nbsp; &nbsp;
-				<input type="file" value="파일">
+					
+						<tr>
+							<td><select name="major" class="custom-select" style="border:1px solid gray";>
+									<option value="정보통신공학과">정보통신공학과</option>
+									<option value="컴퓨터공학과">컴퓨터공학과</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><select name="grade" class="custom-select" style="border:1px solid gray";>
+									<option value="1">1학년</option>
+									<option value="2">2학년</option>
+									<option value="3">3학년</option>
+									<option value="4">4학년</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><select name="term" class="custom-select" style="border:1px solid gray";>
+									<option value="1">1학기</option>
+									<option value="2">2학기</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="text" class="form-control" name="subjectCode" placeholder="과목코드" style="border:1px solid gray";></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="text" class="form-control" name="subjectName" placeholder="과목명" style="border:1px solid gray";></td>
+						</tr>
+					
+				</table>
 			</div>
-			
 			<button type="button" class="btn btn-outline-primary" 
 			style="margin-left: 45%; margin-top: 5%; font-size: 14pt;"> &nbsp;저장&nbsp; </button>	
 		</div>

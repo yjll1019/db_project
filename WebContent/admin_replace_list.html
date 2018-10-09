@@ -41,13 +41,8 @@
 	         </div>
          
         	 <div id="class2" style="margin-top: 1%;" >
-				<div style="display:inline; margin-left:22%; font-size: 14pt;">
-					<strong>목록수정 :</strong> &nbsp; &nbsp;
-					<input type="file" value="대체과목목록" style="width: 250px;">
-					<button type="button" class="btn btn-primary" style="font-size: 10pt;">업로드</button>
-				</div>
 				
-	         	<div style="display:inline; font-size: 12pt; margin-left: 13%;">
+	         	<div style="display:inline; font-size: 12pt; margin-left:1100px;">
 	            <input type="text" name="searchText" placeholder="과목명을 입력하세요."  style="margin-left:5px;">
 	         	&nbsp; <button type="button" class="btn btn-primary">조회</button>
 	        	 </div>
@@ -55,7 +50,7 @@
       </div>
 
       
-   <div class="table-responsive" style="margin-left: 20%; font-size:8pt; margin-top: 3%; text-align:center;">
+   <div class="table-responsive" style="margin-left: 20%; font-size:8pt; margin-top: 1%; text-align:center;">
      <table class="table" style="width:60%;">
        <thead>
          <tr>
@@ -112,7 +107,39 @@
        </tbody>
      </table>
    </div>
-      
+      <div class="container"
+				style="padding-left: 10px; padding-right: 10px; margin-top:30px; margin-left:50px;font-size: 15pt;">
+				<table style="width: 900px;">
+			
+					
+						<tr>
+							<td><select name="major" class="custom-select" style="border:1px solid gray";>
+									<option value="정보통신공학과">정보통신공학과</option>
+									<option value="컴퓨터공학과">컴퓨터공학과</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><select name="grade" class="custom-select" style="border:1px solid gray";>
+									<option value="1">1학년</option>
+									<option value="2">2학년</option>
+									<option value="3">3학년</option>
+									<option value="4">4학년</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><select name="term" class="custom-select" style="border:1px solid gray";>
+									<option value="1">1학기</option>
+									<option value="2">2학기</option>
+								</select>
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="text" class="form-control" name="subjectCode" placeholder="과목코드" style="border:1px solid gray";></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="text" class="form-control" name="subjectName" placeholder="과목명" style="border:1px solid gray";></td>
+						</tr>
+					
+				</table>
+			</div>
       <div id="page" style="margin-top: 3%">
 			<nav aria-label="Page navigation example"> 
  				 <ul class="pagination justify-content-center">
