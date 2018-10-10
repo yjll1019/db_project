@@ -44,51 +44,50 @@
 				</ul>
 			</div>
 		</div>
-			<div id="jb-content">
+			<div id="jb-content" style="margin-left: 3%; margin-top: 5%;">
 				<div style="margin-left: 20%; margin-top: 3%;">
 					<h3>학생 목록</h3>
 				</div>
-
-				<div id="search" style="margin-top: 1%; font-size: 13pt;">
-					<div id="class1" style="display: inline; margin-left: 20%;">
-						<select id="classNumber">
-							<option>소프트웨어공학과</option>
-							<option>컴퓨터공학과</option>
-							<option>정보통신공학과</option>
-							<option>글로컬IT학과</option>
-							<option>디지털컨텐츠</option>
-							<option>신문방송학과</option>
-							<option>경영학부</option>
-							<option>사회과학부</option>
-							<option>사회복지학과</option>
-							<option>중어중국학과</option>
-							<option>일어일본학과</option>
-							<option>영어학과</option>
-							<option>신학과</option>
-						</select> &nbsp; <select>
-							<option>1학년</option>
-							<option>2학년</option>
-							<option>3학년</option>
-							<option>4학년</option>
-						</select>
-						&nbsp; <button type="button" class="btn btn-outline-primary" style="font-size: 9pt">미충족학생조회</button>
-					</div>
-
-					<div id="class2" style="display: inline; margin-left: 18%;">
-						<select id="searchSelect">
+				
+				<div id="search" style="margin-top: 2%; font-size: 13pt;">
+					 <div class="form-group" id="search" style="display: inline;">
+					    <select class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
+					      <option>소프트웨어공학과</option>
+								<option>컴퓨터공학과</option>
+								<option>정보통신공학과</option>
+								<option>글로컬IT학과</option>
+								<option>디지털컨텐츠</option>
+								<option>신문방송학과</option>
+								<option>경영학부</option>
+								<option>사회과학부</option>
+								<option>사회복지학과</option>
+								<option>중어중국학과</option>
+								<option>일어일본학과</option>
+								<option>영어학과</option>
+								<option>신학과</option>
+							</select> &nbsp; 
+							<select class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:35px;">
+								<option>1학년</option>
+								<option>2학년</option>
+								<option>3학년</option>
+								<option>4학년</option>
+							</select>
+							&nbsp; <button type="button" class="btn btn-outline-primary" style="font-size: 9pt">미충족학생조회</button>
+			  		</div>
+			  		<div class="form-group" id="class2" style="display:inline; margin-left: 5%;">
+						<select class="custom-select" style="width: 80px; ]display: inline; margin-left: 10%; height:35px;">
 							<option>학번</option>
 							<option>이름</option>
 							<option>과목</option>
-						</select> <input type="text" name="searchText" placeholder="검색"
-							style="margin-left: 5px;">
+						</select> 
+						<input type="text" name="searchText" placeholder="검색" style="margin-left: 5px; width: 120px;">
 
 						<button type="button" class="btn btn-primary">조회</button>
 					</div>
-				</div>
-
+			  </div>
 
 				<div class="table-responsive"
-					style="margin-left: 20%; margin-top: 2%; font-size: 10pt;">
+					style="margin-left: 20%; margin-top: 2%; font-size: 12pt;">
 					<table class="table" style="width: 900px;">
 						<thead>
 							<tr>
