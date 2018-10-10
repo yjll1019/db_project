@@ -15,10 +15,7 @@
 	type="text/javascript"></script>
 <script src="js/header.js"></script>
 <link rel="stylesheet" href="css/board.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-	crossorigin="anonymous">
+
 <title>관리자 게시판 글쓰기</title>
 
 </head>
@@ -50,7 +47,7 @@
 			<hr>
 		</div>
 		
-		<div id="boardWrite">
+		<div id="boardWrite" style="margin-top:-30px;max-width: 800px;">
 
 			<div class="container">
 				<div class="row">
@@ -60,32 +57,28 @@
 
 							<div class="table-responsive">
 								<table class="table table-bordered" style="font-size: 17px;">
+									
 									<tr>
-										<td style="background-color: #f8f8f8"><strong>이름</strong></td>
-										<td colspan="3"><input type="text" class="form-control" name="name" value="관리자"></td>
-									</tr>
-
-									<tr>
-										<td style="background-color: #f8f8f8"><strong>제목</strong></td>
+										<td style="background-color: #4582EC;color: white"><strong>제목</strong></td>
 										<td colspan="3"><input type="text" class="form-control" name="title" value="공지사항입니다."></td>
 									</tr>
 									
 									<tr>
-										<td style="background-color:#f8f8f8"><strong>첨부 파일</strong></td>
+										<td style="background-color: #4582EC;color: white"><strong>첨부 파일</strong></td>
 										<td><input type="file" class="form-control" name="file" id="file"/></td>
 										
 									</tr>
 									<tr>
-										<td style="background-color: #f8f8f8"><strong>내용</strong></td>
+										<td  style="background-color: #4582EC;color: white""><strong>내용</strong></td>
 										<td colspan="3"><textarea name="content" class="form-control" style="width: 100%; height: 200px;">졸업요건이 수정되었습니다. 확인부탁드립니다.</textarea></td>
 									</tr>
 									
 									
 								</table>
-								<div class="form-group" style="margin-top:30px; margin-left:250px;">
-									<input type="submit" value="글쓰기" class="btn btn-outline-primary">
+								<div class="form-group" style="margin-top:30px; margin-left:200px;">
+									<input type="submit" value="등록하기" class="btn btn-outline-primary">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button" class="btn btn-primary">목록</button>
+									<button type="button" class="btn btn-primary">목록으로</button>
 								</div>
 							</div>
 
