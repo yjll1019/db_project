@@ -4,7 +4,7 @@ body, html{
  	background-repeat: no-repeat;
  	/*background-color: #d3d3d3;*/
  	background: #f8f8f8;
- 	font-family: 'NanumSquareRound', sans-serif;
+ 	font-family: 'NanumSquare', sans-serif;
 }
 
 .main{
@@ -25,8 +25,7 @@ label{
 	margin-bottom: 15px;
 }
 
-input,
-input::-webkit-input-placeholder {
+input, input::-webkit-input-placeholder {
     font-size: 15px;
     padding-top: 3px;
 }
@@ -47,7 +46,7 @@ input::-webkit-input-placeholder {
  	margin-top: 30px;
  	margin: 0 auto;
  	max-width: 700px;
-    padding: 40px 40px;
+    padding: 40px 80px 20px 80px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 
 }
@@ -66,12 +65,3 @@ input::-webkit-input-placeholder {
 .weak{ color:#E66C2C; } 
 .good{ color:#2D98F3; } 
 .strong{ color:#006400; }
-
-#jb-content {
-	width: 80%;
-	padding: 40px;
-	margin: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
-	background-color:#f8f8f8;
-	justify-content:center;
-}
