@@ -4,11 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+	href="https://cdn.rawgit.com/innks/NanumSquare/master/nanumsquare.min.css">
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset='utf-8'>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,31 +37,31 @@
 			</div>
 		</div>
 	
-		
-	<div class="container">
-	<br/>
-	<h2>&nbsp;&nbsp;전체학과 졸업요건 수정</h2> 
-	<br/><br/>
-							<div class="col-sm-4">
-							<div class="input-group">
-								<select name="major" class="form-control" id="major" >
-								<option value="notSelect">수정하려는 학과를 선택해 주세요</option>
-								<option value="소프트웨어 공학과">소프트웨어공학과</option>
-								<option value="컴퓨터공학과">컴퓨터공학과</option>
-								<option value="정보통신공학과">정보통신 공학과</option>
-								<option value="글로컬IT학과">글로컬IT학과</option>
-								<option value="디지털컨텐츠">디지털컨텐츠</option>
-								<option value="신문방송학과">신문방송학과</option>
-								<option value="경영학부">경영학부</option>
-								<option value="사회과학부">사회과학부</option>
-								<option value="사회복지학과">사회복지학과</option>
-								<option value="중어중국학과">중어중국학과</option>
-								<option value="일어일본학과">일어일본학과</option>
-								<option value="영어학과">영어학과</option>
-								<option value="신학과">신학과</option>
-								</select>
-							</div>
-						</div>
+		<div class="container">
+		<br/>
+			<h2>&nbsp;&nbsp;전체학과 졸업요건 수정</h2> 
+		<br/><br/>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<select name="major" class="form-control" id="major" style="width: 500px">
+						<option value="notSelect">수정하려는 학과/학부를 선택해 주세요</option>
+						<option value="소프트웨어 공학과">소프트웨어공학과</option>
+						<option value="컴퓨터공학과">컴퓨터공학과</option>
+						<option value="IT융합 자율학부">IT융합 자율학부</option>
+						<option value="정보통신공학과">정보통신 공학과</option>
+						<option value="글로컬IT학과">글로컬IT학과</option>
+						<option value="디지털컨텐츠">디지털컨텐츠</option>
+						<option value="신문방송학과">신문방송학과</option>
+						<option value="경영학부">경영학부</option>
+						<option value="사회과학부">사회과학부</option>
+						<option value="사회복지학과">사회복지학과</option>
+						<option value="중어중국학과">중어중국학과</option>
+						<option value="일어일본학과">일어일본학과</option>
+						<option value="영어학과">영어학과</option>
+						<option value="신학과">신학과</option>
+					</select>
+				</div>
+			</div>
 	 <br/>
 			<div class="table-responsive">
 				<table class="table">
@@ -78,71 +76,61 @@
 					<tbody>
 						<tr>
 							<td rowspan="4">소프트웨어 공학과 학생</td>
-							<td>소프트웨어<br> 주전공
-							</td>
-							<td><input type="text" style="width: 400px; height: 120px;"
-								value="[2008~2013학번까지]
-전필37학점 포함하여 전공 60학점  &#13;이상 이수
+							<td>소프트웨어<br> 주전공</td>
+							<td>
+								<textarea cols="55" rows="6">[2008~2013학번까지]
+전필37학점 포함하여 전공 60학점 이상 이수
 
 [2014학번부터]
-전필31학점 포함하여 전공 60학점 이상 이수">
+전필31학점 포함하여 전공 60학점 이상 이수</textarea>
 							</td>
 						<tr>
-							<td>소프트웨어공학과<br>(타과)복수전공
+							<td>소프트웨어공학과<br>(타과)복수전공</td>
+							<td>
+								<textarea cols="55" rows="3">전필 31학점 포함하여 전공 40학점 이상 이수</textarea>
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="전필 31학점 포함하여 전공 40학점 이상 이수"></td>
 						</tr>
 						<tr>
-							<td>소프트웨어공학과<br>(타과)부전공
+							<td>소프트웨어공학과<br>(타과)부전공</td>
+							<td>
+								<textarea cols="55" rows="3">전필 31학점 포함하여 전공 60학점 이상 이수</textarea>
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="전필 31학점 포함하여 전공 60학점 이상 이수">
 						</tr>
 						<tr>
 							<td>소프트웨어공학과<br>편입
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="1,2학년 지도과목을 제외하고 전필 27학점을 포함하여 전공 60학점 이상 이수">
+							<td>
+								<textarea cols="55" rows="3">1,2학년 지도과목을 제외하고 전필 27학점을 포함하여 전공 60학점 이상 이수</textarea>
+							</td>
 						</tr>
-
 						<tr>
 							<td rowspan="3">타과학생</td>
-							<td>소프트웨어공학과<br> 전과
+							<td>소프트웨어공학과<br> 전과</td>
+							<td>
+								<textarea cols="55" rows="3">학번에 따라 전공필수 이수</textarea>
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="학번에 따라 전공필수 이수">
 						</tr>
 						<tr>
-							<td>소프트웨어공학과<br>복수전공
+							<td>소프트웨어공학과<br>복수전공</td>
+							<td>
+								<textarea cols="55" rows="3">지도 과목 제외, 전필 24학점 포함하여 전공 40학점 이상 이수</textarea>
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="지도 과목 제외, 전필 24학점 포함하여 전공 40학점 이상 이수">
 						</tr>
 						<tr>
-							<td>소프트웨어공학과<br>부전공
+							<td>소프트웨어공학과<br>부전공</td>
+							<td>
+								<textarea cols="55" rows="3">전필 , 전선관계없이 21학점 이상 이수</textarea>
 							</td>
-							<td><input type="text" style="width: 400px; height: 70px;"
-								value="전필 , 전선관계없이 21학점 이상 이수 ">
 						</tr>
 					</tbody>
 				</table>
-				
-				<center>
-				<div class="form-group ">
-					<button type="button"
-						class="btn btn-primary btn-lg btn-block login-button"
-						style="width:200pt;height:60t;  font-weight: bold; font-size: 18px">수정하기</button>
-				</div>
-
+				<form class="form-group" style="margin-left: 40%; margin-top: 40px">
+					<button type="button" class="btn btn-primary btn-lg btn-block login-button"
+						style="width:150px; height: 50px; font-size: 16px">수정하기</button>
 				</form>
-				</center>
-
 			</div>
-
 		</div>
 	<br/>
-
 	</div>
 </body>
 </html>
