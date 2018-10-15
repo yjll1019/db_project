@@ -61,17 +61,6 @@
 						</div>
 
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">OTP</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="otp" id="otp"  placeholder="Kim Ji Hye" style="height: 37px; font-size: 13pt;"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
 							<label for="email" class="cols-sm-2 control-label">이메일</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
@@ -124,7 +113,7 @@
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<select name="major" class="form-control" id="major" style="height: 37px; font-size: 13pt;">
+									<select name="major" class="form-control" id="major" style="height: 37px; font-size: 10pt;">
 										<option value="notSelect">주전공을 선택해주세요</option>
 										<option value="소프트웨어 공학과">소프트웨어공학과</option>
 										<option value="컴퓨터공학과">컴퓨터공학과</option>
@@ -135,12 +124,21 @@
 									</select>
 								</div>
 							</div>
+							<br/>
+							
+							
+							
+							<div class="radio" style="font-size: 10pt;">
+ 					&nbsp;	&nbsp;	&nbsp; &nbsp; <input type="radio" name="doubleMajor" value="복수전공" > 복수전공 
+							<input type="radio" name="subMajor" value="부전공"> 부전공
+ 						</div>
 						
+							
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<select name="subMajor" class="form-control" id="subMajor" style="height: 37px; font-size: 13pt;">
+									<select name="subMajor" class="form-control" id="subMajor" style="height: 37px; font-size: 10pt;">
 										<option value="notSelect">부/복수전공을 선택해주세요</option>
 										<option value="소프트웨어 공학과">소프트웨어공학과</option>
 										<option value="컴퓨터공학과">컴퓨터공학과</option>
@@ -163,12 +161,12 @@
 						</div>
 						
 						<div class="form-group">
-							<label for ="semester" class="cls-sm-2 control-label">학기</label>
+							<label for ="semester" class="cls-sm-2 control-label">현재 학기</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<select name="semester" class="form-control" id="semester" style="height: 37px; font-size: 13pt;">
+									<select name="semester" class="form-control" id="semester" style="height: 37px; font-size: 10pt;">
 										<option value="1학기">1학기</option>
 										<option value="2학기">2학기</option>
 										<option value="3학기">3학기</option>
@@ -180,6 +178,18 @@
 										<option value="9학기">9학기</option>
 										<option value="10학기">10학기</option>
 								</select>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label for="otp" class="cols-sm-2 control-label">OTP</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									&nbsp;&nbsp;
+									<input type="text" class="form-control" name="otp" id="otp"  placeholder="종합정보 시스템-웹서비스-OTP" style="height: 37px; font-size: 10pt;"/>
 								</div>
 							</div>
 						</div>
