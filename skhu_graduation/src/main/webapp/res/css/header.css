@@ -45,7 +45,7 @@
 }
 #cssmenu ul li a {
   display: block;
-  font-family: 'NanumSquareRound', sans-serif;
+  font-family: 'NanumSquare', sans-serif;
   text-decoration: none;
 }
 #cssmenu > ul > li > a {
