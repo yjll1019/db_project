@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +11,12 @@
 <link rel="stylesheet" href="res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="res/js/header.js"></script>
-<title>Insert title here</title>
+<link rel="stylesheet" href="res/css/board.css">
+<title>공지사항 작성하기</title>
 </head>
 <body>
-	<div id="jb-header">
+	<div id="jb-container">
+		<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
 				<li>
@@ -41,6 +43,42 @@
 				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='adminInfo.jsp'><span>개인정보변경</span></a></li>
 			</ul>
+		</div>
+	</div>
+		<div id="jb-content">
+			<div id="boardWrite" style="margin-top:-30px;max-width: 800px;">
+				<h2>글쓰기</h2>
+				<hr>
+				<div class="container">
+					<form action=".jsp" method="post">
+						<div class="table-responsive">
+							<table class="table table-bordered" style="font-size: 17px;">
+								<tr>
+									<td style="background-color: #4582EC; color: white; text-align: center"><strong>작성일</strong></td>
+									<td>2018.09.26</td>
+								</tr>
+								<tr>
+									<td style="background-color: #4582EC;color: white; text-align: center"><strong>제목</strong></td>
+									<td colspan="3"><input type="text" class="form-control" name="title" value="공지사항입니다."></td>
+								</tr>
+								<tr>
+									<td style="background-color: #4582EC;color: white; text-align: center"><strong>첨부 파일</strong></td>
+									<td><input type="file" class="form-control" name="file" id="file"/></td>
+								</tr>
+								<tr>
+									<td  style="background-color: #4582EC;color: white; text-align: center"><strong>내용</strong></td>
+									<td colspan="3"><textarea name="content" class="form-control" style="width: 100%; height: 200px;">졸업요건이 수정되었습니다. 확인부탁드립니다.</textarea></td>
+								</tr>
+							</table>
+							<div class="form-group" style="margin-top:30px; margin-left:35%">
+								<input type="submit" value="등록하기" class="btn btn-outline-primary">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-primary">목록으로</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
