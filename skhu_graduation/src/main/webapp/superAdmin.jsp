@@ -20,8 +20,8 @@
 
 <script language="javascript">
 	function open_page() {
-		window.open("superAdmin_create.html", "등록",
-				"width=1170, height=300, left=50, top=50");
+		window.open("superAdmin_create.jsp", "등록",
+				"width=1130, height=250, left=350, top=300");
 	}
 </script>
 
@@ -32,8 +32,7 @@
 			<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
+				<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a href='#'><span>졸업요건 수정</span></a>
 					<ul>
@@ -57,34 +56,24 @@
 		</div>
 	</div>
 		<div id="jb-content">
-			<h2>
-				<i>&nbsp;&nbsp;</i>관리자, 교수 목록
-			</h2>
-
-			<hr>
-			
+			<h2>관리자, 교수 목록</h2>
+			<hr>			
 			<div class="form-group"
 				style="margin-top: -10px;">
 				<button type="button" class="btn btn-outline-primary"
-					style="display: inline; width: 100px; margin-left: 30px;  float: left"
-					onclick="open_page()">등록하기</button>
-				<select name="searchInSuperAdmin" class="form-control"
-					style="display: inline; margin-left:400px;width: 90px; height: 35px; font-size: 15px;">
+					style="display: inline; width: 100px; margin-left: 40px; float: left; font-size: 14px" onclick="open_page()">등록하기</button>
+				<select name="searchInSuperAdmin" class="form-control" style="display: inline; margin-left: 330px; width: 90px; height: 35px; font-size: 15px;">
 					<option>교수</option>
 					<option>관리자</option>
-				</select> <input type="text" class="form-control" name="searchText"
-					placeholder="검색"
-					style="display: inline; margin-left: 5px; width: 150px; height: 35px;">
-
-				<button type="button" class="btn btn-primary">조회</button>
-
-
+				</select>
+				<input type="text" class="form-control" name="searchText" placeholder="검색" style="display: inline; margin-left: 15px; width: 200px; height: 35px;"/>
+					<button type="button" class="btn btn-primary" style="font-size: 14px">조회하기</button>
 			</div>
 			<br />
 			<div class="table-responsive"
 				style="margin-top: -35px;padding-left: 40px; padding-right: 40px; font-size: 15pt;">
-				<table class="table" style="width: 800px;">
-					<thead>
+				<table class="table" style="width: 850px;">
+					<thead style="font-size: 18px">
 						<tr>
 							<th>직책</th>
 							<th>이름</th>
