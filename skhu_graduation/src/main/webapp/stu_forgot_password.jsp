@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>관리자/교수 비밀번호찾기</title>
+<title>학생 비밀번호찾기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -53,25 +53,25 @@
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
-						<input class="input100" type="text" name="email"> <span
+						<input class="input100" type="text" name="id"> <span
 							class="focus-input100" data-placeholder="ID"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass"> <span
-							class="focus-input100" data-placeholder="Email"></span>
+						<input class="input100" type="text" name="otpNumber"> <span
+							class="focus-input100" data-placeholder="OTP"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn" style="background-color: #4582EC"
-								onclick="javascript:password()">send mail</button>
+								onclick="javascript:password()">confirm</button>
 						</div>
 					</div>
 					<br/><br/>
 					<div class="text-center p-t-20">
-						 <a class="txt2" href="stu_forgot_password.jsp"> 학생 비밀번호찾기 </a>
+						 <a class="txt2" href="admin_professor_forgot_password.jsp"> 관리자/교수 비밀번호찾기 </a>
 					</div>
 				</form>
 			</div>
