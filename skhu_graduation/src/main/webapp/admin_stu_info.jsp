@@ -32,7 +32,7 @@
 				<li><a href='admin_stu_search.jsp'><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
-						<li class='last'><a href='allSearchEdit.jsp'><span>졸업요건표 수정</span></a></li>
+						<li class='last'><a href='admin_allSearchEdit.jsp'><span>졸업요건표 수정</span></a></li>
 						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
 						<li class='last'><a href='admin_changeGraduation.jsp'><span>필수과목 수정</span></a></li>
 					</ul>
