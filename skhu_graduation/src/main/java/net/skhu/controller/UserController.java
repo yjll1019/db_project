@@ -41,11 +41,21 @@ public class UserController {
 	//학생 회원가입
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join(Model model, User user){
-		String reString;
 		int result = userMapper.findOne(user.getId());//아이디가 존재하지않으면 0 존재하면 1
+		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
+		
 		if(result==0) {
 			user.setRole("학생");
 
+			if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {//비밀번호가 조건(영어+숫자 8자리 이상)에 맞지 않을 때
+				
+				List<Department> departments = departmentMapper.findAll();
+				model.addAttribute("departments", departments);
+				model.addAttribute("user", user);
+				model.addAttribute("result", 2); //비밀번호 조건에 맞지 않음.
+				return "user/join";
+			}
+			
 			if(user.getConfirmPassword().equals(user.getPassword())) {
 				userMapper.insert(user); //user테이블 insert
 
@@ -74,19 +84,18 @@ public class UserController {
 				}
 
 				model.addAttribute("result", 0);
-				reString = "user/login";
+				return "user/login";
 			}else {
 				List<Department> departments = departmentMapper.findAll();
 				model.addAttribute("departments", departments);
 				model.addAttribute("user", user);
 				model.addAttribute("result", 1); //비밀번호와 확인비밀번호가 다름.
-				reString = "user/join";
+				return "user/join";
 			}
 		}else { //아이디가 존재할 때 > 로그인창으로
 			model.addAttribute("result", -1);
-			reString = "user/login";
+			return "user/login";
 		}
-		return reString;
 	}
 
 	@RequestMapping(value="login", method=RequestMethod.GET)
