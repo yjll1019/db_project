@@ -36,33 +36,41 @@
 <link rel="stylesheet" type="text/css" href="${R}res/css/main.css">
 <!--===============================================================================================-->
 </head>
-<% String result = String.valueOf(request.getAttribute("result")); %>
-
-	<script>
+<% 
+	String result = String.valueOf(request.getAttribute("result"));
+	String alert = String.valueOf(request.getAttribute("alert"));
+%>
+<script>
 	var r = "<%= result%>";
-    if(r==0){
+    if(r == 0){
         alert('회원가입이 완료되었습니다.');
-     }else{
+     } else if(r == -1){
         alert('이미 존재하는 아이디입니다. 아이디는 학번입니다.');
      }
-	</script>
+    
+    var al = "<%= alert%>"
+    	if(al == -1){
+    		alert('존재하지 않는 아이디입니다.');
+    	} else if(al == 0){
+    		alert('로그인에 실패했습니다.');
+    	}
+</script>
 <body>
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-26"> LOGIN </span>
 
-					<div class="wrap-input100 validate-input"
-						data-validate="아이디를 입력하세요">
-						<input class="input100" type="text" name="id"> <span
-							class="focus-input100" data-placeholder="ID"></span>
+					<div class="wrap-input100 validate-input" data-validate="아이디를 입력하세요">
+						<input class="input100" type="text" name="id" value="${ user.id }" /> 
+						<span class="focus-input100" data-placeholder="ID"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="비밀번호를 입력하세요">
-						<input class="input100" type="password" name="pass"> <span
-							class="focus-input100" data-placeholder="Password"></span>
+						<input class="input100" type="password" name="password" value="${ user.password }" /> 
+						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -71,9 +79,10 @@
 							<button class="login100-form-btn">Login</button>
 						</div>
 					</div>
+					
 					<div class="text-center p-t-50">
 						<span class="txt1"></span> 
-						<a class="txt2" href="#" style="font-size: 15px"> 비밀번호찾기 </a>
+						<a class="txt2" href="stu_forgot_password.jsp" style="font-size: 15px"> 비밀번호찾기 </a>
 					</div>
 				</form>
 			</div>

@@ -5,8 +5,12 @@
 		
 	<select id="findOne" resultType="int">
 		select count(*) from user where id like #{userId};
-	</select>	
-		
+	</select>
+	
+	<select id="login" resultType="User">
+		select * from user where id like #{userId};
+	</select>
+	
 	<select id="insert">
 		  insert into user values(#{id}, #{password}, #{userName}, #{email}, #{phone}, #{role});
 	</select>
