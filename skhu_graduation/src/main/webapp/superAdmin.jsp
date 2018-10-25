@@ -33,22 +33,6 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>학생 조회</span></a></li>
-				<li class='active has-sub' ><a href='#'><span>졸업요건 수정</span></a>
-					<ul>
-						<li class='last'><a href='#'><span>졸업요건 표 수정</span></a></li>
-						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
-						<li class='last'><a href='#'><span>필수과목 수정</span></a></li>
-					</ul>
-				</li>
-				<li class='active has-sub' ><a href='#'><span>과목 목록 수정</span></a>
-					<ul>
-						<li class='last'><a href='#'><span>전체과목 목록 수정</span></a></li>
-						<li class='last'><a href='#'><span>대체과목 목록 수정</span></a></li>
-					</ul>
-				</li>
-				<li><a href='#'><span>공지사항 및 문의</span></a></li>
-				<li><a href='#'><span>대학일정 관리</span></a></li>
 				<li><a href='#'><span>관리자/교수 관리</span></a></li>
 				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
