@@ -9,6 +9,9 @@
 <body>
 
 <h1>cckaso harmi</h1>
+<%response.sendRedirect("user/join"); %>
+redirect
+<a href="user/join">join</a>
 
 </body>
 </html>

@@ -9,6 +9,10 @@ public class User {
 	String phone; 
 	String role; //학생, 교수, 관리자
 	
+	//
+	String confirmPassword;
+	String secondMajorDepartmentId;
+	
 	//밑으로는 student 테이블 추가를 위한 변수들
 	String stuSemester; //학기
 	String stuClass; //반
@@ -95,6 +99,19 @@ public class User {
 	}
 	public void setHowToGraduate(String howToGraduate) {
 		this.howToGraduate = howToGraduate;
+	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	public String getSecondMajorDepartmentId() {
+		return secondMajorDepartmentId;
+	}
+	public void setSecondMajorDepartmentId(String secondMajorDepartmentId) {
+		this.secondMajorDepartmentId = secondMajorDepartmentId;
 	}
 	
 	

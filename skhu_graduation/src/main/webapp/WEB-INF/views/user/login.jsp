@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,30 +10,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/vendor/bootstrap/css/bootstrap.min.css">
+	href="${R}res/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	href="${R}res/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/fonts/iconic/css/material-design-iconic-font.min.css">
+	href="${R}res/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="res/vendor/animate/animate.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="res/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="${R}res/vendor/animate/animate.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/vendor/animsition/css/animsition.min.css">
+	href="${R}res/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/vendor/select2/select2.min.css">
+	href="${R}res/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="res/vendor/daterangepicker/daterangepicker.css">
+	href="${R}res/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="res/css/util.css">
-<link rel="stylesheet" type="text/css" href="res/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="${R}res/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="${R}res/css/util.css">
+<link rel="stylesheet" type="text/css" href="${R}res/css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -70,21 +72,21 @@
 
 	<div id="dropDownSelect1"></div>
 	<!--===============================================================================================-->
-	<script src="res/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${R}res/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/vendor/animsition/js/animsition.min.js"></script>
+	<script src="${R}res/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/vendor/bootstrap/js/popper.js"></script>
-	<script src="res/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${R}res/vendor/bootstrap/js/popper.js"></script>
+	<script src="${R}res/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/vendor/select2/select2.min.js"></script>
+	<script src="${R}res/vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/vendor/daterangepicker/moment.min.js"></script>
-	<script src="res/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="${R}res/vendor/daterangepicker/moment.min.js"></script>
+	<script src="${R}res/vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/vendor/countdowntime/countdowntime.js"></script>
+	<script src="${R}res/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
-	<script src="res/js/main.js"></script>
+	<script src="${R}res/js/main.js"></script>
 
 </body>
 </html>

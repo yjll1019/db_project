@@ -16,7 +16,7 @@ import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserController {
 		
 	@Autowired UserMapper userMapper;
@@ -24,22 +24,25 @@ public class UserController {
 	@Autowired DepartmentMapper departmentMapper;
 	
 	//회원가입창
-	@RequestMapping(value="createStu", method=RequestMethod.GET)
-	public String createStu(Model model){
+	@RequestMapping(value="join", method=RequestMethod.GET)
+	public String join(Model model){
 		System.out.println("컨트롤러왔당");
 		User user = new User();
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		model.addAttribute("user", user);
-		return "redirect:join";
+		return "user/join";
 	}
 	
 	//학생 회원가입
-	@RequestMapping(value="createStu", method=RequestMethod.POST)
-	public String createStu(Model model, User user){
+	@RequestMapping(value="join", method=RequestMethod.POST)
+	public String join(Model model, User user){
 		int result = userMapper.findOne(user.getId());//아이디가 존재하지않으면 0 존재하면 1
 		if(result==0) {
+			user.setRole("학생");
 			userMapper.insert(user); //user테이블 insert
+			System.out.println("학과찍기"+user.getDepartmentId());
+			System.out.println("유저완료");
 			Student s = new Student();
 			s.setUserId(user.getId());
 			s.setStuSemester(user.getStuSemester());
@@ -48,12 +51,14 @@ public class UserController {
 			s.setVolunteerExemption(user.getVolunteerExemption());
 			s.setDepartmentId(user.getDepartmentId());
 			s.setHowToGraduate(user.getHowToGraduate());
+		
 			studentMapper.insert(s);//student테이블 insert
+			System.out.println("학생완료");
 			model.addAttribute("result", 0);
 		}else {
 			model.addAttribute("result", 1);
 		}
-		return "redirect:login"; //아이디가 존재할 때 팝업창에 알림 후 로그인 페이지로 이동
+		return "user/login"; //아이디가 존재할 때 팝업창에 알림 후 로그인 페이지로 이동
 	}
 	
 }
