@@ -36,6 +36,16 @@
 <link rel="stylesheet" type="text/css" href="${R}res/css/main.css">
 <!--===============================================================================================-->
 </head>
+<% String result = String.valueOf(request.getAttribute("result")); %>
+
+	<script>
+	var r = "<%= result%>";
+    if(r==0){
+        alert('회원가입이 완료되었습니다.');
+     }else{
+        alert('이미 존재하는 아이디입니다. 아이디는 학번입니다.');
+     }
+	</script>
 <body>
 
 	<div class="limiter">

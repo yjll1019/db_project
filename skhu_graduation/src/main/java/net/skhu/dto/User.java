@@ -12,6 +12,8 @@ public class User {
 	//
 	String confirmPassword;
 	String secondMajorDepartmentId;
+	String doubleMajor;
+	String subMajor;
 	
 	//밑으로는 student 테이블 추가를 위한 변수들
 	String stuSemester; //학기
@@ -101,6 +103,7 @@ public class User {
 		this.howToGraduate = howToGraduate;
 	}
 	
+	//
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
@@ -113,6 +116,19 @@ public class User {
 	public void setSecondMajorDepartmentId(String secondMajorDepartmentId) {
 		this.secondMajorDepartmentId = secondMajorDepartmentId;
 	}
+	public String getDoubleMajor() {
+		return doubleMajor;
+	}
+	public void setDoubleMajor(String doubleMajor) {
+		this.doubleMajor = doubleMajor;
+	}
+	public String getSubMajor() {
+		return subMajor;
+	}
+	public void setSubMajor(String subMajor) {
+		this.subMajor = subMajor;
+	}
+	
 	
 	
 }

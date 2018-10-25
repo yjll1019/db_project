@@ -24,6 +24,13 @@
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Join Page</title>
 </head>
+<% String result = String.valueOf(request.getAttribute("result")); %>
+<script>
+	var r = "<%=result%>";
+	if(r == 1){
+		alert('비밀번호와 확인비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
+	}
+</script>
 <body>
 <div id="jb-container">
 		<div id="jb-header">
@@ -110,30 +117,31 @@
 								<span id="confirmPass"></span>
 							</div>
 						</div>
-					
+		
 						<div class="form-group">
 							<label for ="major" class="cls-sm-2 control-label">학부/학과</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
-									&nbsp;&nbsp;
-								    <select name="departmentId" class="form-control" id="departmentId" style="height: 37px; font-size: 10pt;">
-										<c:forEach var="department" items="${departments }">
-											<option value="${department.id }">${department.name }</option>
-										</c:forEach>
-									 </select>                       
-								</div>
-							</div>
-							<br/>	
-												
- 							<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
+							
+							<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
  								&nbsp;	&nbsp;	&nbsp; &nbsp; &nbsp; &nbsp;
  								<input type="radio" name="howToGraduate" value="전공기초" checked> 전공기초 
  								&nbsp; &nbsp;
 								<input type="radio" name="howToGraduate" value="전공심화"> 전공심화
  							</div>
 							
-							<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+									&nbsp;&nbsp;
+								    <select name="departmentId" class="form-control" id="departmentId" style="height: 37px; font-size: 10pt;">
+										<c:forEach var="department" items="${departments }">
+											<option value="${department.id }"> ${department.name }</option>
+										</c:forEach>
+									 </select>                       
+								</div>
+							</div>
+							<br/>	
+							
+							<div class="checkbox" style="font-size: 10pt; margin-bottom: 7%">
  								&nbsp;	&nbsp;	&nbsp; &nbsp; &nbsp; &nbsp;
  								<input type="checkbox" name="doubleMajor" value="복수전공" > 복수전공 
  								&nbsp; &nbsp;
@@ -182,6 +190,7 @@
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
 									<select name="stuClass" class="form-control" id="stuClass" style="height: 37px; font-size: 10pt;">
+										<option value="없음">없음</option>
 										<option value="a">a반</option>
 										<option value="b">b반</option>
 										<option value="c">c반</option>
@@ -190,8 +199,7 @@
 								</div>
 							</div>
 						</div>
-						
-						
+	
 						<div class="form-group">
 							<label for="otp" class="cols-sm-2 control-label">OTP</label>
 							<div class="cols-sm-10">
