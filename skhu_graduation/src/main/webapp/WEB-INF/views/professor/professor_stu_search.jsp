@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +14,10 @@
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css"><!-- 폰트 -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
-<script src="js/header.js"></script>
+<script src="${R}res/js/header.js"></script>
 <title>교수 학생리스트 </title>
 </head>
 <body>
@@ -24,11 +26,11 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
+					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>학생 조회</span></a></li>
 				<li><a href='#'><span>졸업요건 조회</span></a></li>
 				<li><a href='#'><span>공지사항 및 문의</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>

@@ -34,7 +34,7 @@
 			<ul>
 				<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>관리자/교수 관리</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>
