@@ -12,5 +12,6 @@
 
 <a href="user/join">join</a>
 <a href="user/login">login</a>
+<a href="user/stu_forgot_password">stu_forgot_password</a>
 </body>
 </html>

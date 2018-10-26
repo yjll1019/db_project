@@ -15,4 +15,7 @@
 		  insert into user values(#{id}, #{password}, #{userName}, #{email}, #{phone}, #{role});
 	</select>
 	
+	<select id="changePassword">
+		update user set password=#{password} where id like #{id};
+	</select>
 </mapper>

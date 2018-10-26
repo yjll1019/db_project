@@ -1,6 +1,7 @@
 package net.skhu.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
@@ -145,5 +147,51 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "user/logout";
+	}
+	
+	//학생 비밀번호 찾기
+	@RequestMapping(value="stu_forgot_password", method= RequestMethod.GET)
+	public String stu_forgot_password(Model model){
+		return "user/stu_forgot_password";
+	}
+	
+	@RequestMapping(value="stu_forgot_password", method= RequestMethod.POST)
+	public String stu_forgot_password(Model model, @RequestParam("id") String id){
+		boolean result = true;
+		
+		int resultId = userMapper.findOne(id);//아이디가 존재하지않으면 0 존재하면 1
+		
+		if(resultId==1) { //아이디가 존재하면
+			if(result) { //학생 인증(OTP) 성공
+				String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
+				String chars2[] = "0,1,2,3,4,5,6,7,8,9".split(",");
+				
+				StringBuffer sf = new StringBuffer();
+				Random random = new Random();
+				
+				for(int i=0; i<5; ++i) {
+					sf.append(chars[random.nextInt(chars.length)]);
+				}
+				
+				for(int i=5; i<8; ++i) {
+					sf.append(chars2[random.nextInt(chars2.length)]);
+				}
+				
+				String password = sf.toString();
+				model.addAttribute("result", 1);
+				model.addAttribute("password", password);
+				
+				userMapper.changePassword(id, password);
+				
+				return "user/stu_forgot_password";
+			}else { //학생 인증(OTP) 실패
+				model.addAttribute("result", -1);
+				return "user/stu_forgot_password";
+			}
+		}else { //아이디가 존재하지 않으면
+			
+			model.addAttribute("result",-2);
+			return "user/stu_forgot_password";
+		}
 	}
 }
