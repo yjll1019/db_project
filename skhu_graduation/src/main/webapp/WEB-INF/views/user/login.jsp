@@ -82,7 +82,7 @@
 					
 					<div class="text-center p-t-50">
 						<span class="txt1"></span> 
-						<a class="txt2" href="stu_forgot_password.jsp" style="font-size: 15px"> 비밀번호찾기 </a>
+						<a class="txt2" href="student/stu_forgot_password" style="font-size: 15px"> 비밀번호찾기 </a>
 					</div>
 				</form>
 			</div>
