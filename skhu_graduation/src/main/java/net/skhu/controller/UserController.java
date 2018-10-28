@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.skhu.Util.SecurityUtil;
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -59,6 +60,9 @@ public class UserController {
 			}
 
 			if(user.getConfirmPassword().equals(user.getPassword())) {
+				SecurityUtil su = new SecurityUtil();
+				String enPassword = su.encryptBySHA256(user.getPassword());	// 암호화
+				user.setPassword(enPassword);
 				userMapper.insert(user); //user테이블 insert
 
 				Student s = new Student();
@@ -86,8 +90,8 @@ public class UserController {
 				}
 
 				model.addAttribute("result", 0);
-				return "user/login";
-			}else {
+				return "redirect:login";
+			} else {
 				List<Department> departments = departmentMapper.findAll();
 				model.addAttribute("departments", departments);
 				model.addAttribute("user", user);
@@ -100,6 +104,7 @@ public class UserController {
 		}
 	}
 
+	// 로그인 화면
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login(Model model) {
 		User user = new User();
@@ -107,34 +112,43 @@ public class UserController {
 		return "user/login";
 	}
 
+	// 로그인
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(Model model, User user, HttpSession session) {
 		User result = userMapper.login(user.getId());
 		String url;
 		String alert;
+
 		if(result == null) {	// 아이디가 존재하지 않는 경우
 			alert = "-1";
 			user.setId("");
 			user.setPassword("");
 			url = "user/login";
-		} else {
-			if(result.getPassword().equals(user.getPassword())) {	// 비밀번호가 일치하는 경우
+		}
+		else {
+			SecurityUtil su = new SecurityUtil();
+			String enPassword = su.encryptBySHA256(user.getPassword());	// 암호화
+			user.setPassword(enPassword);
+
+			if(result.getPassword().equals(user.getPassword())) {	// 비밀번호가 일치하는 경우 (암호화된 비밀번호를 비교)
 				alert = "1";
 				session.setAttribute("user", result);
 				String role = result.getRole();
 				if(role.equals("학생"))
-					url = "student/stu_main";
+					url = "redirect:/student/stu_main";
 				else if(role.equals("교수"))
 					url = "professor/professor_stu_search";
 				else if(role.equals("관리자"))
 					url = "admin/admin_stu_search";
 				else
 					url = "admin/superAdmin";
-			} else if(!result.getPassword().equals(user.getPassword())){	// 비밀번호가 일치하지 않는 경우
+			}
+			else if(!result.getPassword().equals(user.getPassword())){	// 비밀번호가 일치하지 않는 경우
 				alert = "0";
 				user.setPassword("");
 				url = "user/login";
-			} else {
+			}
+			else {
 				alert = "";
 				url = "user/login";
 			}
@@ -148,48 +162,48 @@ public class UserController {
 		session.invalidate();
 		return "user/logout";
 	}
-	
+
 	//학생 비밀번호 찾기
 	@RequestMapping(value="stu_forgot_password", method= RequestMethod.GET)
 	public String stu_forgot_password(Model model){
 		return "user/stu_forgot_password";
 	}
-	
+
 	@RequestMapping(value="stu_forgot_password", method= RequestMethod.POST)
 	public String stu_forgot_password(Model model, @RequestParam("id") String id){
 		boolean result = true;
-		
+
 		int resultId = userMapper.findOne(id);//아이디가 존재하지않으면 0 존재하면 1
-		
+
 		if(resultId==1) { //아이디가 존재하면
 			if(result) { //학생 인증(OTP) 성공
 				String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
 				String chars2[] = "0,1,2,3,4,5,6,7,8,9".split(",");
-				
+
 				StringBuffer sf = new StringBuffer();
 				Random random = new Random();
-				
+
 				for(int i=0; i<5; ++i) {
 					sf.append(chars[random.nextInt(chars.length)]);
 				}
-				
+
 				for(int i=5; i<8; ++i) {
 					sf.append(chars2[random.nextInt(chars2.length)]);
 				}
-				
+
 				String password = sf.toString();
 				model.addAttribute("result", 1);
 				model.addAttribute("password", password);
-				
+
 				userMapper.changePassword(id, password);
-				
+
 				return "user/stu_forgot_password";
 			}else { //학생 인증(OTP) 실패
 				model.addAttribute("result", -1);
 				return "user/stu_forgot_password";
 			}
 		}else { //아이디가 존재하지 않으면
-			
+
 			model.addAttribute("result",-2);
 			return "user/stu_forgot_password";
 		}
