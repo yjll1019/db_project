@@ -101,7 +101,7 @@
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<form:input path="password" class="form-control" data-toggle="popover" placeholder="비밀번호를 입력해 주세요" style="height: 37px; font-size: 13pt;"/>
+									<form:input type="password" path="password" class="form-control" placeholder="비밀번호를 입력해 주세요" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
 								</div>
 								
 								<span id="result"></span>
@@ -114,7 +114,7 @@
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<form:input path="confirmPassword" class="form-control" placeholder="비밀번호를 한번 더 입력해 주세요" style="height: 37px; font-size: 13pt;"/>
+									<form:input type="password" path="confirmPassword" class="form-control" placeholder="비밀번호를 한번 더 입력해 주세요" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
 								</div>
 								<span id="confirmPass"></span>
 							</div>
