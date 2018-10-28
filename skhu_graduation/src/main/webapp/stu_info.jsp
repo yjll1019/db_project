@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="net.skhu.dto.*" %>
+ <% 
+ String s= request.getParameter("departmentId");
+ int majorId = (s==null) ? 0 : Integer.parseInt(s);
+ int subMajorId=0;
+ 
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +71,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Kim Ji Hye" style="height: 37px;"/>
+									<input type="text" class="form-control" name="name" id="name"  value="${user.name}" placeholder="${user.name}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -75,7 +82,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="email" id="email"  placeholder="jihye@example.com"  style="height: 37px;"/>
+									<input type="text" class="form-control" name="email" id="email"  value="${user.email}" placeholder= "${user.email}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -86,7 +93,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="tel" class="form-control" name="phone" id="phone"  placeholder="010-1111-5389" style="height: 37px;"/>
+									<input type="tel" class="form-control" name="phone" id="phone" value="${user.phone}" placeholder="${user.phone}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -137,14 +144,11 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="major" class="form-control" id="major" style="height: 37px; font-size: 13pt;">
-										<option value="notSelect">주전공을 선택해주세요</option>
-										<option value="소프트웨어 공학과">소프트웨어공학과</option>
-										<option value="컴퓨터공학과">컴퓨터공학과</option>
-										<option value="인문융합자율학부">인문융합 자율학부</option>
-										<option value="사회융합자율학부">사회융합 자율학부</option>
-										<option value="미디어컨텐츠융합자율학부">미디어컨텐츠융합 자율학부</option>
-										<option value="it융합자율학부">IT융합 자율학부</option>
+									<select name="majorId" class="form-control" id="majorId" style="height: 37px; font-size: 10pt;">
+     									 <option value="0" <%= majorId == 0 ? "selected" : "" %>>주전공을 선택해 주세요</option>
+      									<option value="12" <%= majorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
+  									    <option value="14" <%= majorId == 14 ? "selected" : "" %>>컴퓨터공학과</option>
+      									<option value="10" <%= majorId == 10 ? "selected" : "" %>>IT융합 자율 학부</option>
 									</select>
 								</div>
 							</div>
@@ -153,23 +157,23 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="subMajor" class="form-control" id="subMajor" style="height: 37px; font-size: 13pt;" >
-										<option value="notSelect">부/복수전공을 선택해주세요</option>
-										<option value="소프트웨어 공학과">소프트웨어공학과</option>
-										<option value="컴퓨터공학과">컴퓨터공학과</option>
-										<option value="정보통신공학과">정보통신 공학과</option>
-										<option value="글로컬IT학과">글로컬IT학과</option>
-										<option value="디지털컨텐츠">디지털컨텐츠</option>
-										<option value="신문방송학과">신문방송학과</option>
-										<option value="경영학부">경영학부</option>
-										<option value="사회과학부">사회과학부</option>
-										<option value="사회복지학과">사회복지학과</option>
-										<option value="중어중국학과">중어중국학과</option>
-										<option value="일어일본학과">일어일본학과</option>
-										<option value="영어학과">영어학과</option>
-										<option value="신학과">신학과</option>
-										<option value="해외창">해외창</option>
-										<option value="문화기획전공">문화기획전공</option>
+									<select name="subMajorId" class="form-control" id="subMajorId" style="height: 37px; font-size: 10pt;" >
+     									 <option value="0" <%= subMajorId == 0 ? "selected" : "" %>>부/복수 전공을 선택해 주세요</option>
+      									<option value="11" <%= subMajorId == 11 ? "selected" : "" %>>디지털 컨텐츠학과</option>
+  									    <option value="12" <%= subMajorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
+      									<option value="13" <%= subMajorId == 13 ? "selected" : "" %>>정보통신학과</option>
+     									 <option value="14" <%= subMajorId == 14 ? "selected" : "" %>>컴퓨터공학과</option>
+      									<option value="15" <%= subMajorId == 15 ? "selected" : "" %>>글로컬 IT학과</option>
+  									    <option value="20" <%= subMajorId == 20 ? "selected" : "" %>>경영학부</option>
+      									<option value="21" <%= subMajorId == 21 ? "selected" : "" %>>디지털컨텐츠학과</option>
+      									 <option value="23" <%= subMajorId == 23 ? "selected" : "" %>>사회과학부</option>
+      									<option value="24" <%= subMajorId == 24 ? "selected" : "" %>>사회복지학과</option>
+  									    <option value="26" <%= subMajorId == 26 ? "selected" : "" %>>신문방송학과</option>
+      									<option value="30" <%= subMajorId == 30 ? "selected" : "" %>>신학과</option>
+     									 <option value="31" <%= subMajorId == 31 ? "selected" : "" %>>영어학과</option>
+      									<option value="32" <%= subMajorId == 32 ? "selected" : "" %>>일어일본학과</option>
+  									    <option value="34" <%= subMajorId == 34 ? "selected" : "" %>>중어중국학과</option>
+      									
 								</select>
 								</div>
 							</div>
@@ -177,13 +181,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="class" class="form-control" id="class" style="height: 37px; font-size: 13pt;">
-										<option value="notSelect">반을 선택해주세요</option>
-										<option value="1반">1반</option>
-										<option value="2반">2반</option>
-										<option value="3반">3반</option>
-										<option value="4반">4반</option>
-										<option value="5반">5반</option>
+									<select name="class" class="form-control" id="class" style="height: 37px; font-size: 10pt;">
+      									<option value="0" <%= subMajorId == 0 ? "selected" : "" %>>반을 선택해 주세요</option>
+  									    <option value="1" <%= subMajorId == 1 ? "selected" : "" %>>1반</option>
+      									<option value="2" <%= subMajorId == 2 ? "selected" : "" %>>2반</option>
+     									 <option value="3" <%= subMajorId == 3 ? "selected" : "" %>>3반</option>
+      									<option value="4" <%= subMajorId == 4 ? "selected" : "" %>>4반</option>
+  									    <option value="5" <%= subMajorId == 5 ? "selected" : "" %>>5반</option>
+
 									</select>
 								</div>
 							</div>
@@ -195,17 +200,18 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="semester" class="form-control" id="semester" style="height: 37px; font-size: 13pt;" >
-										<option value="1학기">1학기</option>
-										<option value="2학기">2학기</option>
-										<option value="3학기">3학기</option>
-										<option value="4학기">4학기</option>
-										<option value="5학기">5학기</option>
-										<option value="6학기">6학기</option>
-										<option value="7학기">7학기</option>
-										<option value="8학기">8학기</option>
-										<option value="9학기">9학기</option>
-										<option value="10학기">10학기</option>
+									<select name="semester" class="form-control" id="semester" style="height: 37px; font-size: 10pt;" >
+      									<option value="0" <%= subMajorId == 0 ? "selected" : "" %>>학기를 선택해 주세요</option>
+  									    <option value="1" <%= subMajorId == 1 ? "selected" : "" %>>1학기</option>
+      									<option value="2" <%= subMajorId == 2 ? "selected" : "" %>>2학기</option>
+     									 <option value="3" <%= subMajorId == 3 ? "selected" : "" %>>3학기</option>
+      									<option value="4" <%= subMajorId == 4 ? "selected" : "" %>>4학기</option>
+  									    <option value="5" <%= subMajorId == 5 ? "selected" : "" %>>5학기</option>
+       									<option value="0" <%= subMajorId == 6 ? "selected" : "" %>>6학기</option>
+  									    <option value="1" <%= subMajorId == 7 ? "selected" : "" %>>7학기</option>
+      									<option value="2" <%= subMajorId == 8 ? "selected" : "" %>>8학기</option>
+     									 <option value="3" <%= subMajorId == 9 ? "selected" : "" %>>9학기</option>
+
 								</select>
 								</div>
 							</div>
