@@ -18,4 +18,13 @@
 	<select id="changePassword">
 		update user set password=#{password} where id like #{id};
 	</select>
+	
+	<update id="updateAdmin">
+		update user set 
+			password = #{password},
+			userName = #{userName},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
+	</update>
 </mapper>
