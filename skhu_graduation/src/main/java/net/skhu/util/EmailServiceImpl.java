@@ -1,4 +1,4 @@
-package net.skhu.mapper;
+package net.skhu.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
