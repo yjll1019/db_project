@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.skhu.Util.SecurityUtil;
+import net.skhu.util.SecurityUtil;
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
