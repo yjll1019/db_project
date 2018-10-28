@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+#jb-content {
+	width: 65%;
+	padding: 40px;
+	margin: 20px;
+	float: left;
+	font-family: 'NanumSquareRound', sans-serif;
+}
+
+#jb-sidebar {
+	width: 260px;
+	padding: 20px;
+	margin: 25px;
+	float: right;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	height: 200px;
+}
+
+tbody>tr {
+	cursor: pointer;
+}
+
+.result {
+	margin-top: 20px;
+}
+
+#side-school {
+	width: 250px;
+	height: 100px;
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
+	border: 1px solid gray;
+}
+
+#table2 {
+	width: 250px;
+	height: 100px;
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
+}

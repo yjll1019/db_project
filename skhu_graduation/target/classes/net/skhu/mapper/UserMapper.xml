@@ -18,5 +18,4 @@
 	<select id="changePassword">
 		update user set password=#{password} where id like #{id};
 	</select>
-	
 </mapper>

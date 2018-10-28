@@ -38,7 +38,7 @@
          <br />
          <div class="col-sm-4">
             <div class="input-group">
-               <select name="major" class="form-control" id="major">
+               <select name="subMajor" class="form-control" id="subMajor">
                   <option value="notSelect">조회하려는 학과를 선택해 주세요</option>
                   <option value="소프트웨어 공학과">소프트웨어공학과</option>
                   <option value="컴퓨터공학과">컴퓨터공학과</option>
