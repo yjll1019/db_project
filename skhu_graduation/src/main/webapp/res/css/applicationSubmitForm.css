@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+#table1{
+	width: 100%;
+	height: 150px;
+	text-align: center;
+	table-layout: fixed;
+	word-break: break-all;
+	border: 1px solid gray;
+}
+
+#td1{
+	background-color: #4582EC;
+	color: white;
+	border-bottom: 1px solid white;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#td1-2{
+	background-color: #4582EC;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#td2{
+	border-bottom: 1px solid silver;
+	font-size: 16px;
+}
+
+#td3{
+	border-right: 1px solid silver;
+}
+
+#table2{
+	width: 100%;
+	height: 300px;
+	text-align: center;
+	table-layout: fixed;
+	word-break: break-all;
+	border: 1px solid gray;
+}
+
+#tr1{
+	border-bottom: 1px solid silver;
+}
+
+#table3{
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	table-layout: fixed;
+	word-break: break-all;
+	margin-left: 10px;
+}
+
+#side-school {
+	width: 250px;
+	height: 100px;
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 0 20px;
+	table-layout: fixed;
+	word-break: break-all;
+	border: 1px solid gray;
+}
+
+#jb-content {
+	width: 65%;
+	padding: 40px;
+	margin: 20px;
+	float: left;
+	font-family: 'NanumSquareRound', sans-serif;
+}
+
+#jb-sidebar {
+	width: 260px;
+	padding: 20px;
+	margin: 25px;
+	float: right;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	height: 200px;
+}

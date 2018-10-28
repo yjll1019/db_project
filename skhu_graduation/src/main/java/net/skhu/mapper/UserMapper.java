@@ -11,4 +11,5 @@ public interface UserMapper {
 	User login(String id); // null이면 존재하지 않는 id, 매개변수로 넘어온 id 값의 비밀번호를 가져옴
 	void insert(User u);
 	void changePassword(String id, String password);
+	
 }
