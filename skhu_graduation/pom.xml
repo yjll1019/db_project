@@ -69,7 +69,14 @@
 	  <version>3.1.0</version>
 	  <type>maven-plugin</type>
 	</dependency>	
-		
+	
+	<!--  java mail  -->
+	
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+	
 	</dependencies>
 
 	<build>
