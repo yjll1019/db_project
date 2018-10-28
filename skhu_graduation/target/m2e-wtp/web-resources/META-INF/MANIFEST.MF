@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: jihye
+Build-Jdk: 9.0.4
+Implementation-Title: skhu_graduation
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: net.skhu
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/skhu_graduation
+Created-By: Maven Integration for Eclipse
+
