@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.skhu.dto.FindUtil;
 import net.skhu.dto.User;
-import net.skhu.mapper.EmailServiceImpl;
 import net.skhu.mapper.UserMapper;
+import net.skhu.util.EmailServiceImpl;
+import net.skhu.util.FindUtil;
 
 @Controller
 @RequestMapping("/admin")

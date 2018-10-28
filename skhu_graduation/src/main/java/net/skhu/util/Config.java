@@ -1,4 +1,4 @@
-package net.skhu.mapper;
+package net.skhu.util;
 
 import java.util.Properties;
 
