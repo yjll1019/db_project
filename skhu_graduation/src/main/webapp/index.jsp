@@ -10,8 +10,9 @@
 
 <h1>cckaso harmi</h1>
 
-<a href="user/join">join</a>
-<a href="user/login">login</a>
-<a href="user/stu_forgot_password">stu_forgot_password</a>
+<a href="user/join">join</a></br>
+<a href="user/login">login</a></br>
+<a href="user/stu_forgot_password">stu_forgot_password</a></br>
+<a href="admin/admin_professor_forgot_password">admin_forgot_password</a>
 </body>
 </html>
