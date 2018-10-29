@@ -7,10 +7,6 @@
 		select count(*) from user where id like #{userId};
 	</select>
 	
-	<select id="findById">
-	select * from user where id like #{userId};
-	</select>
-	
 	<select id="login" resultType="User">
 		select * from user where id like #{userId};
 	</select>
@@ -23,9 +19,17 @@
 		update user set password=#{password} where id like #{id};
 	</select>
 	
+
+	<select id="user_info" resultType="User">
+		select * from user where id like #{userId};
+	</select>
+	
+	<select id="stu_info" resultType="Student">
+		select * from student where userId like #{userId};
+		</select>
 		
 	
-
+=======
 	<update id="updateAdmin">
 		update user set 
 			password = #{password},
@@ -34,5 +38,5 @@
 			phone = #{phone}
 		where id = #{id}
 	</update>
-
+>>>>>>> 71f03045e50f1e9b2b3c74c7a85d33fc2b68fadf
 </mapper>

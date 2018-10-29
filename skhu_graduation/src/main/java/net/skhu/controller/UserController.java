@@ -46,7 +46,7 @@ public class UserController {
 	public String join(Model model, User user){
 		int result = userMapper.findOne(user.getId());//아이디가 존재하지않으면 0 존재하면 1
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
-		String emailRegex = "^[_a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$";
+		String emailRegex = "^[_a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+$";
 
 		if(result==0) {
 			user.setRole("학생");
