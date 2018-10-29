@@ -210,4 +210,18 @@ public class UserController {
 			return "user/stu_forgot_password";
 		}
 	}
+	
+	
+	//학생 마이페이지
+	
+	@RequestMapping(value="userInfo", method=RequestMethod.GET)
+	public String userInfo(Model model, @RequestParam("id") String id) {
+		
+		User user=userMapper.findById(id);
+		model.addAttribute(user);
+		return "user/stu_info";
+	}
+
+	
+	
 }
