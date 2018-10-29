@@ -46,22 +46,16 @@ public class UserController {
 	public String join(Model model, User user){
 		int result = userMapper.findOne(user.getId());//아이디가 존재하지않으면 0 존재하면 1
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
-		String emailRegex = "^[_a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+$";
-		
+
 		if(result==0) {
 			user.setRole("학생");
 
-			if((!user.getPassword().matches(regex) || user.getPassword().length()<8 || !user.getPassword().matches(emailRegex))) {//비밀번호가 조건(영어+숫자 8자리 이상)에 맞지 않을 때
+			if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {//비밀번호가 조건(영어+숫자 8자리 이상)에 맞지 않을 때
 
 				List<Department> departments = departmentMapper.findAll();
 				model.addAttribute("departments", departments);
 				model.addAttribute("user", user);
-				if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
-					model.addAttribute("result", 2); //비밀번호 조건에 맞지 않음.
-				}else if( !user.getPassword().matches(emailRegex)) {
-					model.addAttribute("result", 3); //이메일 조건에 맞지 않음.
-				}
-				
+				model.addAttribute("result", 2); //비밀번호 조건에 맞지 않음.
 				return "user/join";
 			}
 
