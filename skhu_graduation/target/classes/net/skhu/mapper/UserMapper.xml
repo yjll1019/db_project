@@ -19,8 +19,19 @@
 		update user set password=#{password} where id like #{id};
 	</select>
 	
+<<<<<<< HEAD
 	<select id="stu_info" resultType="User">
 		select * from user where id like #{userId};
 	</select>
 	
+=======
+	<update id="updateAdmin">
+		update user set 
+			password = #{password},
+			userName = #{userName},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
+	</update>
+>>>>>>> 71f03045e50f1e9b2b3c74c7a85d33fc2b68fadf
 </mapper>
