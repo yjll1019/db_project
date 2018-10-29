@@ -75,21 +75,18 @@ public class AdminController {
 	}
 
 	// 내 정보 페이지 Get
-	@RequestMapping(value="adminInfo",method=RequestMethod.GET)
-	public String adminInfo(Model model) {//HttpSession session 파라미터값으로 잇어야함...
+	@RequestMapping(value="/adminInfo",method=RequestMethod.GET)
+	public String adminInfo(Model model,HttpSession session) {
 
-		/* 세션값이 없어서 실행할 수 없음..
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId()==null) return "user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 		model.addAttribute("user",user);
-		*/
-		User user = new User();
-		model.addAttribute("user",user);
+
 		return "admin/adminInfo";
 	}
 
 	// 내 정보 페이지 POST
-	@RequestMapping(value="adminInfo",method=RequestMethod.POST)
+	@RequestMapping(value="/adminInfo",method=RequestMethod.POST)
 	public String adminInfo(Model model,User user, HttpSession session ) {
 
 		User getUser = (User) session.getAttribute("user");
@@ -120,7 +117,7 @@ public class AdminController {
 		userMapper.updateAdmin(user); // user테이블 update
 		alert="1"; // update 성공
 		model.addAttribute("alert",alert);
-		return "admin/admin_stu_search"; //학생 조회 페이지로
+		return "redirect:/admin/admin_stu_search"; //학생 조회 페이지로
 	}
 
 	//관리자 학생 조회 페이지
