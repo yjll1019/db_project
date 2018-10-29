@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" href="res/css/layout.css">
-<link rel="stylesheet" href="res/css/calender.css">
-<script src="res/js/calender.js"></script>
+<link rel="stylesheet" href="${R}res/css/layout.css">
+<link rel="stylesheet" href="${R}res/css/calender.css">
+<script src="${R}res/js/calender.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<link rel="stylesheet" href="res/css/Nwagon.css" type="text/css">
-<link rel="stylesheet" href="res/css/circle.css">
+<link rel="stylesheet" href="${R}res/css/Nwagon.css" type="text/css">
+<link rel="stylesheet" href="${R}res/css/circle.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="res/js/header.js"></script>
-<script src="res/js/Nwagon.js"></script>
+<script src="${R}res/js/header.js"></script>
+<script src="${R}res/js/Nwagon.js"></script>
 <title>main page</title>
 </head>
 <body>
@@ -25,7 +27,7 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
+					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>나의졸업요건</span></a></li>
 				<li><a href='#'><span>수강목록 조회</span></a></li>
 				<li><a href='#'><span>졸업요건 조회</span></a></li>
@@ -136,7 +138,7 @@
 			</div>
 		</div>
 		<div id="jb-content">
-			<a id="top" href="#jb-header"><img src="res/img/rounded-triangle.png" width="40px" height="40px"></a>
+			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
 			<div id="textright">
 				<button type="button" class="btn btn-outline-primary"
 					onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
