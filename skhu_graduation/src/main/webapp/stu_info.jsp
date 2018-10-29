@@ -228,7 +228,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 						</div>
 						
 						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
 						</div>
 					
 					</form>
