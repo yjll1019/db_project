@@ -216,4 +216,38 @@ public class UserController {
 		}
 	}
 
+	// 개인정보 수정 전 비밀번호 확인 페이지 GET
+	@RequestMapping(value="/check_password",method=RequestMethod.GET)
+	public String checkPassword(Model model,HttpSession session) {
+
+		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		model.addAttribute("user",user);
+		return "user/check_password";
+	}
+	// 개인정보 수정 전 비밀번호 확인 페이지 POST
+	@RequestMapping(value="/check_password",method=RequestMethod.POST)
+	public String checkPassword(Model model, User user, HttpSession session) {
+
+		User getUser = (User) session.getAttribute("user");
+		User result = userMapper.login(getUser.getId());
+
+		SecurityUtil su = new SecurityUtil();
+		String enPassword = su.encryptBySHA256(getUser.getPassword());
+
+		String alert="";
+		String url="";
+
+		//비밀번호 불일치
+		if(!result.getPassword().equals(enPassword)) {
+			alert="-1";
+			url="user/check_password";
+		}else if(result.getPassword().equals(enPassword)) {
+			alert="1"; //비밀번호 일치
+			url="redirect:/admin/adminInfo";// 관리자 개인정보변경 페이지로
+		}
+		model.addAttribute("alert",alert);
+		return url;
+	}
+
 }

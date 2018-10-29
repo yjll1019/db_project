@@ -21,8 +21,23 @@
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${R}res/css/adminInfo.css">
-<title>개인정보변경</title>
+<title>관리자 개인정보변경</title>
 </head>
+<%
+	String alert =String.valueOf(request.getAttribute("alert"));
+%>
+
+<script>
+	var al = "<%=alert%>"
+		if(al==-1){
+			alert('비밀번호 조건이 맞지 않습니다. 영문+숫자 8자리 이상!');
+		}else if(al==-2){
+			alert('비밀번호와 확인비밀번호가 맞지 않습니다.');
+		}else if(al==1){
+			alert('수정 성공!');
+		}
+
+</script>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
@@ -30,7 +45,7 @@
 			<ul>
 				<li>
 					<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-						<img src="res/img/logo.jpg" width="29" height="29">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
 				<li><a href='admin_stu_search.jsp'><span>학생 조회</span></a></li>
