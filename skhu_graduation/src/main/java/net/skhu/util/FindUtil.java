@@ -1,4 +1,4 @@
-package net.skhu.Util;
+package net.skhu.util;
 
 public class FindUtil {
 	public static String getRandomPw(int len) {

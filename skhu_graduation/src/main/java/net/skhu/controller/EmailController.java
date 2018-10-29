@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.skhu.Util.EmailServiceImpl;
-import net.skhu.Util.FindUtil;
-import net.skhu.Util.SecurityUtil;
+import net.skhu.util.EmailServiceImpl;
+import net.skhu.util.FindUtil;
+import net.skhu.util.SecurityUtil;
 import net.skhu.dto.User;
 import net.skhu.mapper.UserMapper;
 

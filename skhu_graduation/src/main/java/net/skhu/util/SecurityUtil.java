@@ -1,4 +1,4 @@
-package net.skhu.Util;
+package net.skhu.util;
 
 import java.security.MessageDigest;
 
