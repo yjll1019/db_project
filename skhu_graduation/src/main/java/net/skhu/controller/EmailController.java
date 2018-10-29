@@ -6,11 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.skhu.dto.User;
+import net.skhu.mapper.UserMapper;
 import net.skhu.util.EmailServiceImpl;
 import net.skhu.util.FindUtil;
 import net.skhu.util.SecurityUtil;
-import net.skhu.dto.User;
-import net.skhu.mapper.UserMapper;
 
 @Controller
 @RequestMapping("/admin")
@@ -65,7 +65,7 @@ public class EmailController {
 				msg +=newPwd;
 
 				this.emailService.sendMessage(user.getEmail(), subject, msg);
-				url="user/login";//로그인 페이지로
+				url="redirect:/user/login";//로그인 페이지로
 			}
 		}
 		model.addAttribute("alert",alert);

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.skhu.util.SecurityUtil;
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -21,6 +20,7 @@ import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.util.SecurityUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -105,7 +105,7 @@ public class UserController {
 			}
 		}else { //아이디가 존재할 때 > 로그인창으로
 			model.addAttribute("result", -1);
-			return "user/login";
+			return "redirect:login";
 		}
 	}
 
@@ -204,7 +204,7 @@ public class UserController {
 
 				userMapper.changePassword(id, enPassword);
 
-				return "user/stu_forgot_password";
+				return "redirect:login";
 			}else { //학생 인증(OTP) 실패
 				model.addAttribute("result", -1);
 				return "user/stu_forgot_password";
@@ -215,18 +215,5 @@ public class UserController {
 			return "user/stu_forgot_password";
 		}
 	}
-	
-	
-	//학생 마이페이지
-	
-	@RequestMapping(value="userInfo", method=RequestMethod.GET)
-	public String userInfo(Model model, @RequestParam("id") String id) {
-		
-		User user=userMapper.findById(id);
-		model.addAttribute(user);
-		return "user/stu_info";
-	}
 
-	
-	
 }
