@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="res/js/header.js"></script>
+<script src="${R}res/js/header.js"></script>
 <title>관리자학생리스트</title>
 <style>
 	#jb-content {
