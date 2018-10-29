@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.skhu.util.SecurityUtil;
+import net.skhu.Util.SecurityUtil;
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -137,11 +137,11 @@ public class UserController {
 				if(role.equals("학생"))
 					url = "redirect:/student/stu_main";
 				else if(role.equals("교수"))
-					url = "professor/professor_stu_search";
+					url = "redirect:/professor/professor_stu_search";
 				else if(role.equals("관리자"))
-					url = "admin/admin_stu_search";
+					url = "redirect:/admin/admin_stu_search";
 				else
-					url = "admin/superAdmin";
+					url = "redirect:/admin/superAdmin";
 			}
 			else if(!result.getPassword().equals(user.getPassword())){	// 비밀번호가 일치하지 않는 경우
 				alert = "0";
@@ -191,11 +191,13 @@ public class UserController {
 					sf.append(chars2[random.nextInt(chars2.length)]);
 				}
 
+				SecurityUtil su = new SecurityUtil();
 				String password = sf.toString();
+				String enPassword = su.encryptBySHA256(password);
 				model.addAttribute("result", 1);
 				model.addAttribute("password", password);
 
-				userMapper.changePassword(id, password);
+				userMapper.changePassword(id, enPassword);
 
 				return "user/stu_forgot_password";
 			}else { //학생 인증(OTP) 실패

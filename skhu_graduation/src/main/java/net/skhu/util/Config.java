@@ -1,4 +1,4 @@
-package net.skhu.util;
+package net.skhu.Util;
 
 import java.util.Properties;
 
