@@ -19,10 +19,15 @@
 		update user set password=#{password} where id like #{id};
 	</select>
 	
-<<<<<<< HEAD
-	<select id="stu_info" resultType="User">
+
+	<select id="user_info" resultType="User">
 		select * from user where id like #{userId};
 	</select>
+	
+	<select id="stu_info" resultType="Student">
+		select * from student where userId like #{userId};
+		</select>
+		
 	
 =======
 	<update id="updateAdmin">

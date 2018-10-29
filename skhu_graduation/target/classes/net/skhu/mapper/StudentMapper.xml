@@ -4,5 +4,12 @@
 	
 	<select id="insert">
 		insert into student values (#{userId}, #{stuSemester}, #{stuClass}, #{transferStudent}, #{volunteerExemption}, #{departmentId}, #{howToGraduate});
+		
 	</select>
+	
+	<select id="stuInfo" resultType="Student">
+		select * from student where userId like #{userId};
+		
+		</select>
+		
 </mapper>
