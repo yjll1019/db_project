@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.skhu.Util.EmailServiceImpl;
+import net.skhu.Util.FindUtil;
+import net.skhu.Util.SecurityUtil;
 import net.skhu.dto.User;
 import net.skhu.mapper.UserMapper;
-import net.skhu.util.EmailServiceImpl;
-import net.skhu.util.FindUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -51,9 +52,11 @@ public class EmailController {
 			else if(result.getEmail().equals(user.getEmail())) { // 이메일 같으면
 				alert="1";
 
+				SecurityUtil su = new SecurityUtil();
 				String newPwd = FindUtil.getRandomPw(8); //8 자리수 임시비밀번호 생성
+				String enPassword = su.encryptBySHA256(newPwd);
 
-				userMapper.changePassword(user.getId(), newPwd); // 임시비밀번호로 디비 변경
+				userMapper.changePassword(user.getId(), enPassword); // 임시비밀번호로 디비 변경
 
 				String msg=""; // message
 
