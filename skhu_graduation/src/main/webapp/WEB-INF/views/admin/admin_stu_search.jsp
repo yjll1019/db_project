@@ -48,8 +48,8 @@
 				</li>
 				<li><a href='admin_board.jsp'><span>공지사항 및 문의</span></a></li>
 				<li><a href='calenderEdit.jsp'><span>대학일정 관리</span></a></li>
-				<li style="float: right"><a href='logout'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='/skhu_graduation/user/check_password'><span>개인정보변경</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>
 	</div>
