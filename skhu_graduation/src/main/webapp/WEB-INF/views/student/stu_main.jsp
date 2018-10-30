@@ -32,7 +32,7 @@
 				<li><a href='#'><span>수강목록 조회</span></a></li>
 				<li><a href='#'><span>졸업요건 조회</span></a></li>
 				<li><a href='#'><span>공지사항 및 문의</span></a></li>
-				<li style="float: right"><a href='logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='student/stu_info'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>
