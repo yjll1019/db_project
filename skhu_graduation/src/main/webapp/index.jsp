@@ -15,5 +15,6 @@
 <a href="user/stu_forgot_password">stu_forgot_password</a><br/>
 <a href="admin/admin_professor_forgot_password">admin_forgot_password</a><br/>
 <a href="admin/adminInfo">adminInfo</a><br/>
+<a href="professor/professor_stu_search">pro_main</a><br/>
 </body>
 </html>

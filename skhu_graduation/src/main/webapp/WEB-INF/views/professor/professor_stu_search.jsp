@@ -18,6 +18,13 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<style>
+	#jb-content {
+	width: 80%;
+	margin: 20px;
+	font-family: 'NanumSquareRound', sans-serif;
+}
+</style>
 <title>교수 학생리스트 </title>
 </head>
 <body>
@@ -42,21 +49,21 @@
 				
 		<div id="search" style="margin-top: 2%; font-size: 13pt;">
          <div id="class1" style="display: inline; margin-left: 20%; ">
-			<select class="custom-select" style="width: 100px; display: inline; margin-left: 3px; height:40px;">
-				<option>1학년</option>
-				<option>2학년</option>
-				<option>3학년</option>
-				<option>4학년</option>
+			<select name="grade" style="width: 100px; display: inline; margin-left: 3px; height:40px;">
+				<option value="1">1학년</option>
+				<option value="2">2학년</option>
+				<option value="3">3학년</option>
+				<option value="4">4학년</option>
 			</select>
             &nbsp;
 			<button type="button" class="btn btn-outline-primary" style="font-size: 10pt">미충족학생조회</button>
          </div>
          
          <div id="class2" style="display: inline; margin-left:27%;">
-            <select class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:40px;">
-               <option>학번</option>
-               <option>이름</option>
-                 <option>과목</option>
+            <select name="searchIndex" style="width: 100px; display: inline; margin-left: 5px; height:40px;">
+               <option value="0">학번</option>
+               <option value="1">이름</option>
+                 <option value="2">과목</option>
             </select>
             
             <input type="text" name="searchText" placeholder="검색"  style="margin-left:7px; width: 150px;">
@@ -78,90 +85,14 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach var="student" items="${ students }">
 							<tr>
-								<td>201632001</td>
-								<td>김지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
+								<td>${student.userId}</td>
+								<td>${student.user.userName}</td>
+								<td>${student.department.name}</td>
+								<td>${student.user.phone}</td>
 							</tr>
-							<tr>
-								<td>201632002</td>
-								<td>명혜연</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632003</td>
-								<td>이예지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632004</td>
-								<td>이혜지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632005</td>
-								<td>명연혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632006</td>
-								<td>김혜지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632007</td>
-								<td>이지예</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632008</td>
-								<td>이지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632009</td>
-								<td>김지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632010</td>
-								<td>이티버</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632011</td>
-								<td>김루비</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632012</td>
-								<td>이낑깡</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632013</td>
-								<td>명라이코스</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632014</td>
-								<td>명설</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>

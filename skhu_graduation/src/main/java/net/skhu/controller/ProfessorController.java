@@ -1,20 +1,33 @@
 package net.skhu.controller;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import net.skhu.dto.User;
+import net.skhu.mapper.StudentMapper;
+import net.skhu.mapper.UserMapper;
 
 @Controller
 @RequestMapping("/professor")
 public class ProfessorController {
 
-	@RequestMapping(value="professor_stu_search", method=RequestMethod.GET)
-	public String login(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+	@Autowired UserMapper userMapper;
+	@Autowired StudentMapper studentMapper;
+
+	static String[] grade= {"1", "2", "3", "4"};
+
+
+	@RequestMapping("professor_stu_search")
+	public String list1 (Model model) {
+		model.addAttribute("students", studentMapper.findAllWithUser());
 		return "professor/professor_stu_search";
 	}
+
+
+
+
+
+
 }

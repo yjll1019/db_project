@@ -11,5 +11,27 @@
 		select * from student where userId like #{userId};
 		
 		</select>
+	<select id="findAllWithUser" resultMap="resultMap1">
+		select s.userId, u.userName, u.phone , d.name
+		from
+		student s left join user u
+		on u.id=s.userId
+		left join department d
+		on s.departmentId=d.id
+		order by userId+0;
+	</select>
+
+	<resultMap id="resultMap1" type="Student">
+		<id property="userId" column="userId" />
+		<collection property="user" ofType="User">
+			<result property="userName" column="userName" />
+			<result property="phone" column="phone" />
+			</collection>
+		<collection property="department" ofType="Department">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+			
+		</collection>
+	</resultMap>
 		
 </mapper>
