@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,28 +10,41 @@
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/board.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="res/js/header.js"></script>
+<script src="${R}res/js/header.js"></script>
 <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquare/master/nanumsquare.min.css">
+<link rel="stylesheet" href="${R}res/css/professorInfo.css">
 <meta charset="UTF-8">
-<title>±³¼ö ¸¶ÀÌÆäÀÌÁö</title>
+<title>êµìˆ˜ ê°œì¸ì •ë³´ë³€ê²½</title>
 </head>
+<%
+	String alert =String.valueOf(request.getAttribute("alert"));
+%>
+<script>
+	var al = "<%=alert%>"
+		if(al==-1){
+			alert('ë¹„ë°€ë²ˆí˜¸ ì¡°ê±´ì´ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤. ì˜ë¬¸+ìˆ«ìž 8ìžë¦¬ ì´ìƒ!');
+		}else if(al==-2){
+			alert('ë¹„ë°€ë²ˆí˜¸ì™€ í™•ì¸ë¹„ë°€ë²ˆí˜¸ê°€ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤.');
+		}
+
+</script>
 <body>
+<div id="jb-container">
 	<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>ÇÐ»ý Á¶È¸</span></a></li>
-				<li><a href='#'><span>Á¹¾÷¿ä°Ç Á¶È¸</span></a></li>
-				<li><a href='#'><span>°øÁö»çÇ× ¹× ¹®ÀÇ</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='#'><span>°³ÀÎÁ¤º¸º¯°æ</span></a></li>
+					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+				<li><a href='professor_stu_search.jsp'><span>í•™ìƒ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ì¡¸ì—…ìš”ê±´ ì¡°íšŒ</span></a></li>
+				<li><a href='admin_board.jsp'><span>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='#'><span>ê°œì¸ì •ë³´ë³€ê²½</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -37,71 +52,71 @@
 			<div class="container">
 				<div class="row main">
 					<div class="main-login main-center">
-						<form class="form-horizontal" method="post" action="#" style="width: 300px">
+						<form class="form-horizontal" method="post" style="width: 300px">
 
 							<div class="form-group">
-								<label for="name" class="cols-sm-2 control-label">ÀÌ¸§</label>
+								<label for="name" class="cols-sm-2 control-label">ì´ë¦„</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-user fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="name" id="name" placeholder="±³¼ö´Ô" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="userName" value="${user.userName }" style="height: 37px; font-size: 13pt;"/>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="email" class="cols-sm-2 control-label">ÀÌ¸ÞÀÏ</label>
+								<label for="email" class="cols-sm-2 control-label">ì´ë©”ì¼</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="email" id="email" placeholder="professor@skhu.ac.kr" style="height: 37px; font-size: 13pt;"/>
+										<input type="email" class="form-control" name="email" value="${user.email }" style="height: 37px; font-size: 13pt;"/>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="phone" class="cols-sm-2 control-label">ÀüÈ­¹øÈ£</label>
+								<label for="phone" class="cols-sm-2 control-label">ì „í™”ë²ˆí˜¸</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-phone fa" aria-hidden="true"></i></span> 
 											&nbsp;&nbsp; 
-											<input type="tel" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" style="height: 37px; font-size: 13pt;"/>
+											<input type="tel" class="form-control" name="phone" value="${user.phone }" style="height: 37px; font-size: 13pt;"/>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="major" class="cls-sm-2 control-label">ÇÐ°ú(ºÎ)</label>
+								<label for="departmentId" class="cls-sm-2 control-label">í•™ê³¼(ë¶€)</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<select name="major" class="form-control" id="major" style="height: 37px; font-size: 13pt;">
-											<option value="notSelect">¼Ò¼Ó ÇÐ°ú(ºÎ)¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä</option>
-											<option value="¼ÒÇÁÆ®¿þ¾î °øÇÐ°ú">¼ÒÇÁÆ®¿þ¾î°øÇÐ°ú</option>
-											<option value="ÄÄÇ»ÅÍ°øÇÐ°ú">ÄÄÇ»ÅÍ°øÇÐ°ú</option>
-											<option value="ÀÎ¹®À¶ÇÕÀÚÀ²ÇÐºÎ">ÀÎ¹®À¶ÇÕ ÀÚÀ²ÇÐºÎ</option>
-											<option value="»çÈ¸À¶ÇÕÀÚÀ²ÇÐºÎ">»çÈ¸À¶ÇÕ ÀÚÀ²ÇÐºÎ</option>
-											<option value="¹Ìµð¾îÄÁÅÙÃ÷À¶ÇÕÀÚÀ²ÇÐºÎ">¹Ìµð¾îÄÁÅÙÃ÷À¶ÇÕ ÀÚÀ²ÇÐºÎ</option>
-											<option value="itÀ¶ÇÕÀÚÀ²ÇÐºÎ">ITÀ¶ÇÕ ÀÚÀ²ÇÐºÎ</option>
+										<select name="departmentId" value="${user.professor.departmentId } class="form-control"  style="height: 37px; font-size: 13pt;">
+											<option value="">ì†Œì† í•™ê³¼(ë¶€)ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”</option>
+											<option value="12">ì†Œí”„íŠ¸ì›¨ì–´ê³µí•™ê³¼</option>
+											<option value="14">ì»´í“¨í„°ê³µí•™ê³¼</option>
+											<option value="32">ì¸ë¬¸ìœµí•© ìžìœ¨í•™ë¶€</option>
+											<option value="25">ì‚¬íšŒìœµí•© ìžìœ¨í•™ë¶€</option>
+											<option value="22">ë¯¸ë””ì–´ì»¨í…ì¸ ìœµí•© ìžìœ¨í•™ë¶€</option>
+											<option value="10">ITìœµí•© ìžìœ¨í•™ë¶€</option>
 										</select>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group" style="margin-bottom: 20px">
-								<label for="major" class="cls-sm-2 control-label">´ã´ç ÇÐ³â</label>
+								<label for="grade" class="cls-sm-2 control-label">ë‹´ë‹¹ í•™ë…„</label>
 								<div class="cols-sm-10" style="margin-bottom: 5px">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="major" class="form-control" id="major" style="height: 37px; font-size: 13pt;">
-											<option value="notSelect">ÇÐ³â ÇØ´ç»çÇ× ¾øÀ½</option>
-											<option value="1ÇÐ³â">1ÇÐ³â</option>
-											<option value="2ÇÐ³â">2ÇÐ³â</option>
-											<option value="3ÇÐ³â">3ÇÐ³â</option>
-											<option value="4ÇÐ³â">4ÇÐ³â</option>
+										<select name="grade" value="${user.professor.grade} class="form-control" style="height: 37px; font-size: 13pt;">
+											<option value="">í•™ë…„ í•´ë‹¹ì‚¬í•­ ì—†ìŒ</option>
+											<option value="1">1í•™ë…„</option>
+											<option value="2">2í•™ë…„</option>
+											<option value="3">3í•™ë…„</option>
+											<option value="4">4í•™ë…„</option>
 										</select>
 									</div>
 								</div>
@@ -110,43 +125,41 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="subMajor" class="form-control" id="subMajor" style="height: 37px; font-size: 13pt;">
-											<option value="notSelect">¹Ý ÇØ´ç»çÇ× ¾øÀ½</option>
-											<option value="1¹Ý">1¹Ý</option>
-											<option value="2¹Ý">2¹Ý</option>
-											<option value="3¹Ý">3¹Ý</option>
-											<option value="4¹Ý">4¹Ý</option>
+										<select name="group" value="${user.professor.group} class="form-control" style="height: 37px; font-size: 13pt;">
+											<option value="">ë°˜ í•´ë‹¹ì‚¬í•­ ì—†ìŒ</option>
+											<option value="1">1ë°˜</option>
+											<option value="2">2ë°˜</option>
+											<option value="3">3ë°˜</option>
+											<option value="4">4ë°˜</option>
 										</select>
 									</div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="password" class="cols-sm-2 control-label">ºñ¹Ð¹øÈ£</label>
+								<label for="password" class="cols-sm-2 control-label">ë¹„ë°€ë²ˆí˜¸</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="password"  placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•˜ì„¸ìš”" style="height: 37px; font-size: 13pt;"/>
 									</div>
-									<span id="result"></span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="confirm" class="cols-sm-2 control-label">ºñ¹Ð¹øÈ£ È®ÀÎ</label>
+								<label for="confirmPassword" class="cols-sm-2 control-label">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
+										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp;
-										<input type="password" class="form-control" name="confirm" id="confirm" placeholder="ºñ¹Ð¹øÈ£ È®ÀÎ" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="confirmPassword"  placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸" style="height: 37px; font-size: 13pt;"/>
 									</div>
-									<span id="confirmPass"></span>
 								</div>
 							</div>
 							<br />
 							<div class="form-group" style="margin-top: 10px; margin-left: 31%; width: 120px;">
-								<button type="button" class="btn btn-primary btn-lg btn-block login-button">¼öÁ¤ÇÏ±â</button>
+								<button  class="btn btn-primary btn-lg btn-block login-button">ìˆ˜ì •í•˜ê¸°</button>
 							</div>
 						</form>
 					</div>
