@@ -6,15 +6,15 @@ public class User {
 	String password;
 	String userName;
 	String email;
-	String phone; 
+	String phone;
 	String role; //학생, 교수, 관리자
-	
+
 	//
 	String confirmPassword;
 	String secondMajorDepartmentId;
 	String doubleMajor;
 	String subMajor;
-	
+
 	//밑으로는 student 테이블 추가를 위한 변수들
 	String stuSemester; //학기
 	String stuClass; //반
@@ -22,49 +22,52 @@ public class User {
 	int volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
-	
+
+	//Professor
+	Professor professor;
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	//student테이블 추가를 위한 get/set
 	public String getStuSemester() {
 		return stuSemester;
@@ -102,7 +105,7 @@ public class User {
 	public void setHowToGraduate(String howToGraduate) {
 		this.howToGraduate = howToGraduate;
 	}
-	
+
 	//
 	public String getConfirmPassword() {
 		return confirmPassword;
@@ -128,7 +131,13 @@ public class User {
 	public void setSubMajor(String subMajor) {
 		this.subMajor = subMajor;
 	}
-	
-	
-	
+	public Professor getProfessor() {
+		return professor;
+	}
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+
+
 }
