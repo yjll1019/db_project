@@ -20,8 +20,6 @@
 		update user set password=#{password} where id like #{id};
 	</select>
 
-	
-
 	<update id="updateAdmin">
 		update user set 
 			password = #{password},
@@ -31,4 +29,11 @@
 		where id = #{id}
 	</update>
 
+	<update id="updateProfessor">
+		update user set 
+			departmentId = #{departmentId},
+			grade = #{grade},
+			class = #{group}
+		where userId = #{userId}
+	</update>
 </mapper>
