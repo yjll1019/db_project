@@ -1,5 +1,7 @@
 package net.skhu.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import net.skhu.dto.ReplaceSubject;
+import net.skhu.dto.Subject;
 import net.skhu.dto.User;
+import net.skhu.mapper.ReplaceSubjectMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.service.ExcelService;
 import net.skhu.util.EmailServiceImpl;
 import net.skhu.util.FindUtil;
 import net.skhu.util.SecurityUtil;
@@ -19,7 +27,9 @@ import net.skhu.util.SecurityUtil;
 public class AdminController {
 
 	@Autowired UserMapper userMapper;
+	@Autowired ReplaceSubjectMapper replaceSubjectMapper;
 	@Autowired private EmailServiceImpl emailService;
+	@Autowired ExcelService excelService;
 
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
@@ -128,4 +138,37 @@ public class AdminController {
 		return "admin/admin_stu_search";
 	}
 
+	//관리자 전체과목 조회 페이지
+	@RequestMapping(value="admin_all_subject", method=RequestMethod.GET)
+	public String admin_all_search(Model model) {
+		return "admin/admin_all_subject";
+	}
+
+	// 전체과목 조회 페이지 파일업로드
+	@RequestMapping(value="subject_upload", method=RequestMethod.POST)
+	public String subject_upload(Model model, @RequestParam("file") MultipartFile file) throws Exception{
+		if(!file.isEmpty()) {
+			List<Subject> subjects = excelService.getSubjectList(file.getInputStream());
+			for(Subject s : subjects) {
+				System.out.println(s.getCode());
+			}
+		}
+		return "redirect:admin_all_subject";
+	}
+
+	// 대체과목목록 조회 페이지
+	@RequestMapping(value="admin_replace_list", method=RequestMethod.GET)
+	public String admin_replace_list(Model model) {
+		return "admin/admin_replace_list";
+	}
+
+	// 대체과목목록 조회 페이지 파일업로드
+	@RequestMapping(value="replace_upload", method=RequestMethod.POST)
+	public String replace_upload(Model model, @RequestParam("file") MultipartFile file) throws Exception{
+		if(!file.isEmpty()) {
+			List<ReplaceSubject> replaceSubjects = excelService.getReplaceSubjectList(file.getInputStream());
+			replaceSubjectMapper.insert(replaceSubjects);
+		}
+		return "redirect:admin_replace_list";
+	}
 }

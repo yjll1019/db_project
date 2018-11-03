@@ -5,13 +5,13 @@ public class Subject {
 	String semester;
 	String code;
 	String divisionClass;
-	int departmentCode;
+	String departmentCode;
 	String subjectName;
 	String completionDivision;
-	int credit;
+	String credit;
 
-	public Subject(String year, String semester, String code, String divisionClass, int departmentCode,
-			String subjectName, String completionDivision, int credit) {
+	public Subject(String year, String semester, String code, String divisionClass, String departmentCode,
+			String subjectName, String completionDivision, String credit) {
 		this.year = year;
 		this.semester = semester;
 		this.code = code;
@@ -54,11 +54,11 @@ public class Subject {
 		this.divisionClass = divisionClass;
 	}
 
-	public int getDepartmentCode() {
+	public String getDepartmentCode() {
 		return departmentCode;
 	}
 
-	public void setDepartmentCode(int departmentCode) {
+	public void setDepartmentCode(String departmentCode) {
 		this.departmentCode = departmentCode;
 	}
 
@@ -78,11 +78,11 @@ public class Subject {
 		this.completionDivision = completionDivision;
 	}
 
-	public int getCredit() {
+	public String getCredit() {
 		return credit;
 	}
 
-	public void setCredit(int credit) {
+	public void setCredit(String credit) {
 		this.credit = credit;
 	}
 
