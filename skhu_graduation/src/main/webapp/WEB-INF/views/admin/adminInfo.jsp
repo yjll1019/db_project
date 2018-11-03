@@ -33,8 +33,6 @@
 			alert('비밀번호 조건이 맞지 않습니다. 영문+숫자 8자리 이상!');
 		}else if(al==-2){
 			alert('비밀번호와 확인비밀번호가 맞지 않습니다.');
-		}else if(al==1){
-			alert('수정 성공!');
 		}
 
 </script>
@@ -82,7 +80,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-user fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="name"value="${user.userName}" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="userName"value="${user.userName}" style="height: 37px; font-size: 13pt;"/>
 									</div>
 								</div>
 							</div>
@@ -115,26 +113,24 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="password" class="form-control" name="password" value="${user.password}" data-toggle="popover" placeholder="비밀번호를 입력하세요" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="password" placeholder="비밀번호를 입력하세요" style="height: 37px; font-size: 13pt;"/>
 									</div>
-									<span id="result"></span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="confirm" class="cols-sm-2 control-label">비밀번호 확인</label>
+								<label for="confirmPassword" class="cols-sm-2 control-label">비밀번호 확인</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp;
-										<input type="password" class="form-control" name="confirm"  placeholder="비밀번호 확인" style="height: 37px; font-size: 13pt;"/>
+										<input type="text" class="form-control" name="confirmPassword"  placeholder="비밀번호 확인" style="height: 37px; font-size: 13pt;"/>
 									</div>
-									<span id="confirmPass"></span>
 								</div>
 							</div>
 							<br />
 							<div class="form-group" style="margin-top: 10px; margin-left: 31%; width: 120px;">
-								<button type="button" class="btn btn-primary btn-lg btn-block login-button">수정하기</button>
+								<button class="btn btn-primary btn-lg btn-block login-button">수정하기</button>
 							</div>
 						</form>
 					</div>
