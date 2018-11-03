@@ -1,7 +1,6 @@
 package net.skhu.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
@@ -185,7 +183,11 @@ public class UserController {
 		User result = userMapper.login(getUser.getId());
 
 		SecurityUtil su = new SecurityUtil();
-		String enPassword = su.encryptBySHA256(getUser.getPassword());
+		String enPassword = su.encryptBySHA256(user.getPassword());
+
+		//System.out.println("세션 비번 값:"+ result.getPassword());
+		//System.out.println("비번 입력값:"+user.getPassword());
+		//System.out.println("비번 암호화값:"+enPassword);
 
 		String alert="";
 		String url="";
