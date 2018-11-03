@@ -51,8 +51,8 @@
 	}else if(r == -2){
 		alert('해당 아이디가 존재하지 않습니다.')
 	}else if(r == 1){
-   		 alert('비밀번호가 변경되었습니다. 변경된 비밀번호는 '+pw+' 입니다.');
-   		location.href="login";
+   		 alert('OTP인증이 완료되었습니다. 비밀번호를 변경해주세요.');
+   		location.href="change_password";
     }
 	
 </script>
@@ -65,7 +65,7 @@
 				<form:form method="post" class="login100-form validate-form">
 					<div class="text-center" style="font-size: 30px; padding-bottom: 30px;
 						font-weight: 800; font-family: 'NanumSquare', sans-serif;">
-						<span> 비밀번호찾기 </span>
+						<span> 비밀번호 변경</span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
@@ -82,8 +82,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button type="submit" class="login100-form-btn" style="background-color: #4582EC"
-								onclick="javascript:password()">confirm</button>
+							<button type="submit" class="login100-form-btn" style="background-color: #4582EC">confirm</button>
 						</div>
 					</div>
 					<br/><br/>

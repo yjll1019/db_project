@@ -168,54 +168,6 @@ public class UserController {
 		return "user/logout";
 	}
 
-	//학생 비밀번호 찾기
-	@RequestMapping(value="stu_forgot_password", method= RequestMethod.GET)
-	public String stu_forgot_password(Model model){
-		return "user/stu_forgot_password";
-	}
-
-	@RequestMapping(value="stu_forgot_password", method= RequestMethod.POST)
-	public String stu_forgot_password(Model model, @RequestParam("id") String id){
-		boolean result = true;
-
-		int resultId = userMapper.findOne(id);//아이디가 존재하지않으면 0 존재하면 1
-
-		if(resultId==1) { //아이디가 존재하면
-			if(result) { //학생 인증(OTP) 성공
-				String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
-				String chars2[] = "0,1,2,3,4,5,6,7,8,9".split(",");
-
-				StringBuffer sf = new StringBuffer();
-				Random random = new Random();
-
-				for(int i=0; i<5; ++i) {
-					sf.append(chars[random.nextInt(chars.length)]);
-				}
-
-				for(int i=5; i<8; ++i) {
-					sf.append(chars2[random.nextInt(chars2.length)]);
-				}
-
-				SecurityUtil su = new SecurityUtil();
-				String password = sf.toString();
-				String enPassword = su.encryptBySHA256(password);
-				model.addAttribute("result", 1);
-				model.addAttribute("password", password);
-
-				userMapper.changePassword(id, enPassword);
-
-				return "redirect:login";
-			}else { //학생 인증(OTP) 실패
-				model.addAttribute("result", -1);
-				return "user/stu_forgot_password";
-			}
-		}else { //아이디가 존재하지 않으면
-
-			model.addAttribute("result",-2);
-			return "user/stu_forgot_password";
-		}
-	}
-
 	// 개인정보 수정 전 비밀번호 확인 페이지 GET
 	@RequestMapping(value="/check_password",method=RequestMethod.GET)
 	public String checkPassword(Model model,HttpSession session) {
