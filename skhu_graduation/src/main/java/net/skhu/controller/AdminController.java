@@ -84,7 +84,7 @@ public class AdminController {
 		return url;
 	}
 
-	// 내 정보 페이지 Get
+	// AdminInfo Get
 	@RequestMapping(value="/adminInfo",method=RequestMethod.GET)
 	public String adminInfo(Model model,HttpSession session) {
 
@@ -95,12 +95,12 @@ public class AdminController {
 		return "admin/adminInfo";
 	}
 
-	// 내 정보 페이지 POST
+	// AdminInfo POST
 	@RequestMapping(value="/adminInfo",method=RequestMethod.POST)
 	public String adminInfo(Model model,User user, HttpSession session ) {
 
-		User getUser = (User) session.getAttribute("user");
-		User result = userMapper.login(getUser.getId());
+		User userGetId = (User) session.getAttribute("user");
+		user.setId(userGetId.getId());
 		String alert="";
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
 
@@ -125,8 +125,8 @@ public class AdminController {
 		user.setPassword(enPssword);
 
 		userMapper.updateAdmin(user); // user테이블 update
-		alert="1"; // update 성공
-		model.addAttribute("alert",alert);
+
+
 		return "redirect:/admin/admin_stu_search"; //학생 조회 페이지로
 	}
 
