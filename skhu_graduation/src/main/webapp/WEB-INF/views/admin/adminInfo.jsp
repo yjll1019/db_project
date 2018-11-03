@@ -91,7 +91,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="email" value="${user.email}" style="height: 37px; font-size: 13pt;"/>
+										<input type="email" class="form-control" name="email" value="${user.email}" style="height: 37px; font-size: 13pt;"/>
 									</div>
 								</div>
 							</div>

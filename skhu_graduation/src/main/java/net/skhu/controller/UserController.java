@@ -185,10 +185,6 @@ public class UserController {
 		SecurityUtil su = new SecurityUtil();
 		String enPassword = su.encryptBySHA256(user.getPassword());
 
-		//System.out.println("세션 비번 값:"+ result.getPassword());
-		//System.out.println("비번 입력값:"+user.getPassword());
-		//System.out.println("비번 암호화값:"+enPassword);
-
 		String alert="";
 		String url="";
 
@@ -198,7 +194,12 @@ public class UserController {
 			url="user/check_password";
 		}else if(result.getPassword().equals(enPassword)) {
 			alert="1"; //비밀번호 일치
-			url="redirect:/admin/adminInfo";// 관리자 개인정보변경 페이지로
+			if(getUser.getRole().equals("관리자")) {
+				url="redirect:/admin/adminInfo";// 관리자 개인정보변경 페이지로
+			}else if(getUser.getRole().equals("교수")) {
+				url="redirect:/professor/professor_info";// 교수 개인정보변경 페이지로
+			}
+
 		}
 		model.addAttribute("alert",alert);
 		return url;
