@@ -7,9 +7,6 @@
 		select count(*) from user where id like #{userId};
 	</select>
 	
-	<select id="findById">
-	select * from user where id like #{userId};
-	</select>
 	
 	<select id="login" resultType="User">
 		select * from user where id like #{userId};
@@ -22,8 +19,7 @@
 	<select id="changePassword">
 		update user set password=#{password} where id like #{id};
 	</select>
-	
-		
+
 	
 
 	<update id="updateAdmin">

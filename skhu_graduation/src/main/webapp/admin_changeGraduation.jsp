@@ -45,34 +45,40 @@
 			</ul>
 		</div>
 	</div>
+	
 		<div id="jb-content" style="padding-left: 6%">
+		
+					<form method="post" class ="form-inline mb5">
 				<div style="font-size: 14pt;">
-				<select id="classNumber">
-					<option>소프트웨어공학과</option>
-					<option>컴퓨터공학과</option>
-					<option>정보통신공학과</option>
-					<option>글로컬IT학과</option>
-					<option>디지털컨텐츠</option>
-					<option>신문방송학과</option>
-					<option>경영학부</option>
-					<option>사회과학부</option>
-					<option>사회복지학과</option>
-					<option>중어중국학과</option>
-					<option>일어일본학과</option>
-					<option>영어학과</option>
-					<option>신학과</option>
+				<select name="major" class="form-control">
+						<option value="0">수정하려는 학과 선택</option>
+						<option value="12">소프트웨어공학과</option>
+						<option value="14">컴퓨터공학과</option>
+						<option value="13">정보통신 공학과</option>
+						<option value="15">글로컬IT학과</option>
+						<option value="21">디지털컨텐츠</option>
+						<option value="26">신문방송학과</option>
+						<option value="20">경영학부</option>
+						<option value="23">사회과학부</option>
+						<option value="24">사회복지학과</option>
+						<option value="34">중어중국학과</option>
+						<option value="33">일어일본학과</option>
+						<option value="31">영어학과</option>
+						<option value="30">신학과</option>
 	            </select>
 				&nbsp;
-				<select>
-					<option>2018</option>
-					<option>2017</option>
-					<option selected>2016</option>
-					<option>2015</option>
-					<option>2014</option>
+				<select name="year" class="form-control">
+					<option value="2018">2018</option>
+					<option value="2017" >2017</option>
+					<option value="2016" >2016</option>
+					<option value="2015" >2015</option>
+					<option value="2014">2014</option>
+					<option value="2013">2013</option>
 				</select>	
 				&nbsp;
-				<button type="button" class="btn btn-outline-primary" style="font-size: 13px;">조회하기</button>	
+				<button type="submit" class="btn btn-outline-primary" style="font-size: 13px;">조회하기</button>	
 			</div>
+			</form>
 			<br/>	
 			<div style="font-size: 20pt;">		
 				소프트웨어공학과 16학번 이수과목

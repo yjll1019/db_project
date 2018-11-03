@@ -46,7 +46,7 @@
 				<div style="margin-left: 20%;">
 					<h3>학생 목록</h3>
 				</div>
-				
+				<form method="post">
 		<div id="search" style="margin-top: 2%; font-size: 13pt;">
          <div id="class1" style="display: inline; margin-left: 20%; ">
 			<select name="grade" style="width: 100px; display: inline; margin-left: 3px; height:40px;">
@@ -61,16 +61,17 @@
          
          <div id="class2" style="display: inline; margin-left:27%;">
             <select name="searchIndex" style="width: 100px; display: inline; margin-left: 5px; height:40px;">
-               <option value="0">학번</option>
-               <option value="1">이름</option>
-                 <option value="2">과목</option>
+               <option value="0" >학번</option>
+               <option value="1" >이름</option>
+                 <option value="2" >과목</option>
             </select>
             
             <input type="text" name="searchText" placeholder="검색"  style="margin-left:7px; width: 150px;">
          
-         <button type="button" class="btn btn-primary">조회</button>
+         <button type="submit" class="btn btn-primary">조회</button>
          </div>
       </div>
+      </form>
 
       
    				<div class="table-responsive"
