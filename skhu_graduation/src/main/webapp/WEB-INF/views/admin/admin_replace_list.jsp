@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="res/js/header.js"></script>
+<script src="${R}res/js/header.js"></script>
 <title>관리자-대체과목 목록</title>
 </head>
 <body>
@@ -20,7 +22,7 @@
 			<ul>
 				<li>
 					<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-						<img src="res/img/logo.jpg" width="29" height="29">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
 				<li><a href='admin_stu_search.jsp'><span>학생 조회</span></a></li>
@@ -44,7 +46,7 @@
 			</ul>
 		</div>
 	</div>
-		<div style="margin-top: 30px; margin: 0 auto; max-width: 1000px; padding: 40px 40px; font-family: 'NanumSquareRound', sans-serif;">
+		<div style="margin-top: 30px; margin: 0 auto; max-width: 1000px; padding: 40px 40px; font-family: 'NanumSquare', sans-serif;">
 			<h2>대체과목 목록</h2>
 			<hr>
 			<form>
@@ -246,6 +248,12 @@
 				<input type="submit" class="btn btn-outline-primary" value="저장하기"
 					style="margin-left: 45%; margin-top: 3%; font-size: 15px;"/>
 			</form>
+			<form action="replace_upload" method="post" enctype="multipart/form-data">							
+					<div class="form-group" style="display: inline;">
+						<input type="file" name="file" style="width: 250px;">
+						<button type="submit" class="btn btn-primary">업로드</button>			   	
+		 			</div>				
+				</form>
 			</div>
 		</div>
 	</div>
