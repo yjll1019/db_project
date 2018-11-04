@@ -1,22 +1,24 @@
 package net.skhu;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication
-@Controller
-public class SkhuGraduationApplication {
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public class SkhuGraduationApplication extends SpringBootServletInitializer{
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		System.out.println("========= server started! =========");
+		return application.sources(SkhuGraduationApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SkhuGraduationApplication.class, args);
-		System.out.println("============server start!!!============");
-	}
-	
-	@RequestMapping("/home")
-	public @ResponseBody String home() {
-		return "redirect:index";
 	}
 }
