@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.skhu.dto.Professor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
+import net.skhu.mapper.DepartmentMapper;
+import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.util.SecurityUtil;
@@ -24,6 +27,9 @@ public class ProfessorController {
 
 	@Autowired UserMapper userMapper;
 	@Autowired StudentMapper studentMapper;
+	@Autowired ProfessorMapper professorMapper;
+	@Autowired DepartmentMapper departmentMapper;
+
 	static String[] searchIndex = {"s.userId, s.userName"};
 
 	@RequestMapping("professor_stu_search")
@@ -61,13 +67,16 @@ public class ProfessorController {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+
+		Professor professor = professorMapper.findById(user.getId());
 		model.addAttribute("user",user);
+		model.addAttribute("professor",professor);
 
 		return "professor/professor_info";
 	}
 	// professor_info POST
 		@RequestMapping(value="/professor_info",method=RequestMethod.POST)
-		public String professor_info(Model model,User user, HttpSession session ) {
+		public String professor_info(Model model,User user,Professor professor, HttpSession session ) {
 
 			User userGetId = (User) session.getAttribute("user");
 			user.setId(userGetId.getId());
@@ -93,8 +102,10 @@ public class ProfessorController {
 			SecurityUtil su = new SecurityUtil();
 			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 			user.setPassword(enPssword);
+			professor.setUserId(userGetId.getId());
+			userMapper.updateAdmin(user); // user테이블 update
+			professorMapper.updateProfessor(professor); //professor테이블 update
 
-			userMapper.updateProfessor(user); // user테이블 update
 
 
 			return "redirect:/professor/professor_stu_search"; //학생 조회 페이지로

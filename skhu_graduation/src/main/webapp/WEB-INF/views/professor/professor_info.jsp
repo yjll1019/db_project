@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -92,15 +93,31 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<select name="departmentId" value="${user.professor.departmentId } class="form-control"  style="height: 37px; font-size: 13pt;">
-											<option value="">소속 학과(부)를 선택해주세요</option>
-											<option value="12">소프트웨어공학과</option>
-											<option value="14">컴퓨터공학과</option>
-											<option value="32">인문융합 자율학부</option>
-											<option value="25">사회융합 자율학부</option>
-											<option value="22">미디어컨텐츠융합 자율학부</option>
-											<option value="10">IT융합 자율학부</option>
-										</select>
+										<select name="departmentId" class="form-control" style="height: 37px; font-size: 13pt;">
+											<option value="" <c:if test="${professor.departmentId==null }">selected</c:if>>학과(부) 해당사항 없음</option>
+											<option value="1"<c:if test="${professor.departmentId==1 }">selected</c:if>>공학계</option>
+											<option value="10"<c:if test="${professor.departmentId==10 }">selected</c:if>>공학계 IT융합자율학부</option>
+											<option value="11"<c:if test="${professor.departmentId==11 }">selected</c:if>>공학계 디지털컨텐츠학과</option>
+											<option value="12"<c:if test="${professor.departmentId==12}">selected</c:if>>공학계 소프트웨어공학과</option>
+											<option value="13"<c:if test="${professor.departmentId==13}">selected</c:if>>공학계 정보통신공학과</option>
+											<option value="14"<c:if test="${professor.departmentId==14}">selected</c:if>>공학계 컴퓨터공학과</option>
+											<option value="15"<c:if test="${professor.departmentId==15}">selected</c:if>>공학계 글로컬IT학과</option>
+											<option value="2"<c:if test="${professor.departmentId==2}">selected</c:if>>사회계</option>
+											<option value="20"<c:if test="${professor.departmentId==20}">selected</c:if>>사회계 경영학부</option>
+											<option value="21"<c:if test="${professor.departmentId==21}">selected</c:if>>사회계 디지털컨텐츠학과</option>
+											<option value="22"<c:if test="${professor.departmentId==22}">selected</c:if>>사회계 미디어컨텐츠융합자율학부</option>
+											<option value="23"<c:if test="${professor.departmentId==23}">selected</c:if>>사회계 사회과학부</option>
+											<option value="24"<c:if test="${professor.departmentId==24}">selected</c:if>>사회계 사회복지학과</option>
+											<option value="25"<c:if test="${professor.departmentId==25}">selected</c:if>>사회계 사회융합자율학부</option>
+											<option value="26"<c:if test="${professor.departmentId==26}">selected</c:if>>사회계 신문방송학과</option>
+											<option value="30"<c:if test="${professor.departmentId==30}">selected</c:if>>인문계 신학과</option>
+											<option value="31"<c:if test="${professor.departmentId==31}">selected</c:if>>인문계 영어학과</option>
+											<option value="32"<c:if test="${professor.departmentId==32}">selected</c:if>>인문계 인문융합자율학부</option>
+											<option value="33"<c:if test="${professor.departmentId==33}">selected</c:if>>인문계 일어일본학과</option>
+											<option value="34"<c:if test="${professor.departmentId==34}">selected</c:if>>인문계 중어중국학과</option>
+											<option value="4"<c:if test="${professor.departmentId==4}">selected</c:if>>교양계</option>
+											<option value="5"<c:if test="${professor.departmentId==5}">selected</c:if>>자연계</option>
+										</select>	
 									</div>
 								</div>
 							</div>
@@ -111,12 +128,12 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="grade" value="${user.professor.grade} class="form-control" style="height: 37px; font-size: 13pt;">
-											<option value="">학년 해당사항 없음</option>
-											<option value="1">1학년</option>
-											<option value="2">2학년</option>
-											<option value="3">3학년</option>
-											<option value="4">4학년</option>
+										<select name="grade" class="form-control" style="height: 37px; font-size: 13pt;">
+											<option value="" <c:if test="${professor.grade==null }">selected</c:if>>학년 해당사항 없음</option>
+											<option value="1"<c:if test="${professor.grade==1 }">selected</c:if>>1학년</option>
+											<option value="2"<c:if test="${professor.grade==2 }">selected</c:if>>2학년</option>
+											<option value="3"<c:if test="${professor.grade==3 }">selected</c:if>>3학년</option>
+											<option value="4"<c:if test="${professor.grade==4 }">selected</c:if>>4학년</option>
 										</select>
 									</div>
 								</div>
@@ -125,12 +142,12 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="group" value="${user.professor.group} class="form-control" style="height: 37px; font-size: 13pt;">
-											<option value="">반 해당사항 없음</option>
-											<option value="1">1반</option>
-											<option value="2">2반</option>
-											<option value="3">3반</option>
-											<option value="4">4반</option>
+										<select name="group" class="form-control" style="height: 37px; font-size: 13pt;">
+											<option value=""<c:if test="${professor.group==null }">selected</c:if>>반 해당사항 없음</option>
+											<option value="1"<c:if test="${professor.group==1 }">selected</c:if>>1반</option>
+											<option value="2"<c:if test="${professor.group==2 }">selected</c:if>>2반</option>
+											<option value="3"<c:if test="${professor.group==3 }">selected</c:if>>3반</option>
+											<option value="4"<c:if test="${professor.group==4 }">selected</c:if>>4반</option>
 										</select>
 									</div>
 								</div>
@@ -142,7 +159,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="password"  placeholder="비밀번호를 입력하세요" style="height: 37px; font-size: 13pt;"/>
+										<input type="password" class="form-control" name="password"  placeholder="비밀번호를 입력하세요" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
 									</div>
 								</div>
 							</div>
@@ -153,7 +170,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp;
-										<input type="text" class="form-control" name="confirmPassword"  placeholder="비밀번호 확인" style="height: 37px; font-size: 13pt;"/>
+										<input type="password" class="form-control" name="confirmPassword"  placeholder="비밀번호 확인" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
 									</div>
 								</div>
 							</div>
