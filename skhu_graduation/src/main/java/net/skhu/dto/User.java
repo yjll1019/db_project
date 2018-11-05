@@ -23,9 +23,6 @@ public class User {
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
 
-	//Professor
-	Professor professor;
-
 	public String getId() {
 		return id;
 	}
@@ -131,13 +128,5 @@ public class User {
 	public void setSubMajor(String subMajor) {
 		this.subMajor = subMajor;
 	}
-	public Professor getProfessor() {
-		return professor;
-	}
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
-
 
 }

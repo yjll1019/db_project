@@ -12,6 +12,7 @@ public class Student {
 	String howToGraduate; //전공기초, 심화
 	User user;
 	Department department;
+	SecondMajor secondMajor;
 
 	public User getUser() {
 		return user;
@@ -72,6 +73,12 @@ public class Student {
 	}
 	public void setHowToGraduate(String howToGraduate) {
 		this.howToGraduate = howToGraduate;
+	}
+	public SecondMajor getSecondMajor() {
+		return secondMajor;
+	}
+	public void setSecondMajor(SecondMajor secondMajor) {
+		this.secondMajor = secondMajor;
 	}
 
 

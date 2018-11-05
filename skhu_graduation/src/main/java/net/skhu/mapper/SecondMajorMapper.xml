@@ -6,4 +6,19 @@
 	insert into secondMajor values(#{userId}, #{division}, #{departmentId});
 	</select>
 	
+	<select id="findOneById" resultMap="resultMap1">
+		select se.userId,d.name 
+		from secondMajor se 
+		left join department d on se.departmentId=d.id
+		where se.userId = #{userId}
+	</select>
+	<resultMap id="resultMap1" type="SecondMajor">
+		<id property="userId" column="userId"/>
+		<result property="division" column="division"/>
+		<result property="departmentId" column="departmentId"/>
+		<association property="department" javaType="Department">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+		</association>
+	</resultMap>
 </mapper>

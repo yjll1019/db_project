@@ -40,21 +40,39 @@
 		where u.userName like #{userName};
 	</select>
 	
+	<select id="findOneWithUser" resultMap="resultMap1">
+		select s.*, u.*,d.*, se.*
+		from student s 
+		left join user u on u.id=s.userId
+		left join department d on s.departmentId=d.id
+		left join secondMajor se on s.userId = se.userId
+		where s.userId=#{id};
+	</select>
 
 	<resultMap id="resultMap1" type="Student">
 		<id property="userId" column="userId" />
-		<collection property="user" ofType="User">
+		<result property="stuSemester" column="stuSemester"/>
+		<result property="stuClass" column="stuClass"/>
+		<result property="transferStudent" column="transferStudent"/>
+		<result property="volunteerExemption" column="volunteerExemption"/>
+		<result property="departmentId" column="departmentId"/>
+		<result property="howToGraduate" column="howToGraduate"/>
+		<association property="user" javaType="User">
+			<id property="id" column="id"/>
 			<result property="userName" column="userName" />
 			<result property="phone" column="phone" />
-			</collection>
-		<collection property="department" ofType="Department">
+			<result property="email" column="email"/>
+		</association>
+		<association property="department" javaType="Department">
 			<id property="id" column="id" />
 			<result property="name" column="name" />
-			
-		</collection>
+		</association>
+		<association property="secondMajor" javaType="SecondMajor">
+			<id property="userId" column="userId"/>
+			<result property="division" column="division"/>
+			<result property="departmentId" column="departmentId"/>
+		</association>
 	</resultMap>
-	
-	
 	
 		
 </mapper>
