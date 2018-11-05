@@ -5,18 +5,18 @@ public class Subject {
 	String semester;
 	String code;
 	String divisionClass;
-	String departmentCode;
+	String departmentId;
 	String subjectName;
 	String completionDivision;
 	String credit;
 
-	public Subject(String year, String semester, String code, String divisionClass, String departmentCode,
+	public Subject(String year, String semester, String code, String divisionClass, String departmentId,
 			String subjectName, String completionDivision, String credit) {
 		this.year = year;
 		this.semester = semester;
 		this.code = code;
 		this.divisionClass = divisionClass;
-		this.departmentCode = departmentCode;
+		this.departmentId = departmentId;
 		this.subjectName = subjectName;
 		this.completionDivision = completionDivision;
 		this.credit = credit;
@@ -54,12 +54,12 @@ public class Subject {
 		this.divisionClass = divisionClass;
 	}
 
-	public String getDepartmentCode() {
-		return departmentCode;
+	public String getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartmentCode(String departmentCode) {
-		this.departmentCode = departmentCode;
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	public String getSubjectName() {
