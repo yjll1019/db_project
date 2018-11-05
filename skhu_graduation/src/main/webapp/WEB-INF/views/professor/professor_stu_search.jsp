@@ -15,11 +15,25 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<script>
+$(function() { 
+	$("[data-url]").click(function() { 
+		var url = $(this).attr("data-url");   
+		location.href = url;   })  
+})
+
+</script>
 <style>
 	#jb-content {
 	width: 80%;
 	margin: 20px;
 	font-family: 'NanumSquare', sans-serif;
+	}
+	tr:hover td {
+	background-color: #ffe;
+	cursor: pointer;
+	}
+	[data-url]:hover td{background-color:#ffe; cursor: pointer;}
 }
 </style>
 <title>교수 학생리스트 </title>
@@ -84,7 +98,7 @@
 						</thead>
 						<tbody>
 						<c:forEach var="student" items="${ students }">
-							<tr>
+							<tr data-url="professor_stu_info?id=${student.userId }">
 								<td>${student.userId}</td>
 								<td>${student.user.userName}</td>
 								<td>${student.department.name}</td>
