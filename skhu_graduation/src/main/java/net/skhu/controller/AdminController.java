@@ -2,7 +2,6 @@ package net.skhu.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.skhu.dto.ReplaceSubject;
-import net.skhu.dto.Student;
 import net.skhu.dto.Subject;
 import net.skhu.dto.User;
-import net.skhu.dto.GraduationText;
+import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
 import net.skhu.mapper.UserMapper;
-import net.skhu.mapper.GraduationMapper;
 import net.skhu.service.ExcelService;
 import net.skhu.util.EmailServiceImpl;
 import net.skhu.util.FindUtil;
@@ -176,12 +173,28 @@ public class AdminController {
 		}
 		return "redirect:admin_replace_list";
 	}
+<<<<<<< HEAD
 	
+=======
+
+	//졸업요건 text수정
+
+	@RequestMapping(value="admin_grduation_text", method=RequestMethod.GET)
+	public String list(Model model,  @RequestParam("majorIndex") int majorIndex) {
+		System.out.println(Integer.toString(majorIndex));
+>>>>>>> 3a8f454223591ebe38eeb7af7a7d7f5573cb10ee
 
 	@RequestMapping(value="admin_graduation_text", method=RequestMethod.GET)
 	public String admin_graduation_text(Model model) {
 		return "admin/admin_graduation_text";
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+
+
+
+>>>>>>> 3a8f454223591ebe38eeb7af7a7d7f5573cb10ee
 }
