@@ -1,11 +1,12 @@
 package net.skhu.dto;
 
 public class SecondMajor {
-	
+
 	String userId;
 	String division;
 	String departmentId;
-	
+	Department department;
+
 	public String getUserId() {
 		return userId;
 	}
@@ -24,7 +25,11 @@ public class SecondMajor {
 	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
 	}
-	
-	
-	
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 }
