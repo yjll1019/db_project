@@ -26,7 +26,7 @@ public class SkhuGraduationApplication extends SpringBootServletInitializer{
 
 	@RequestMapping(value="/")
 	public String index() {
-		return "/index";
+		return "/home";
 	}
 
 }
