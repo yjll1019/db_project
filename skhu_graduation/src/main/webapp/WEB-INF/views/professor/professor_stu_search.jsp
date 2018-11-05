@@ -1,17 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css"><!-- ÆùÆ® -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${R}res/css/header.css">
@@ -22,10 +19,10 @@
 	#jb-content {
 	width: 80%;
 	margin: 20px;
-	font-family: 'NanumSquareRound', sans-serif;
+	font-family: 'NanumSquare', sans-serif;
 }
 </style>
-<title>±³¼ö ÇÐ»ý¸®½ºÆ® </title>
+<title>êµìˆ˜ í•™ìƒë¦¬ìŠ¤íŠ¸ </title>
 </head>
 <body>
 	<div id="jb-container">
@@ -34,41 +31,41 @@
 			<ul>
 				<li><a href='#'
 					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>ÇÐ»ý Á¶È¸</span></a></li>
-				<li><a href='#'><span>Á¹¾÷¿ä°Ç Á¶È¸</span></a></li>
-				<li><a href='#'><span>°øÁö»çÇ× ¹× ¹®ÀÇ</span></a></li>
+				<li><a href='#'><span>í•™ìƒ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ì¡¸ì—…ìš”ê±´ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='../user/check_password'><span>°³ÀÎÁ¤º¸º¯°æ</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>ê°œì¸ì •ë³´ë³€ê²½</span></a></li>
 			</ul>
 		</div>
 	</div>
 		<div id="jb-content" style="margin-left: 3%; margin-top:5%;">
 				<div style="margin-left: 20%;">
-					<h3>ÇÐ»ý ¸ñ·Ï</h3>
+					<h3>í•™ìƒ ëª©ë¡</h3>
 				</div>
 				<form method="post">
 		<div id="search" style="margin-top: 2%; font-size: 13pt;">
          <div id="class1" style="display: inline; margin-left: 20%; ">
 			<select name="grade" style="width: 100px; display: inline; margin-left: 3px; height:40px;">
-				<option value="1">1ÇÐ³â</option>
-				<option value="2">2ÇÐ³â</option>
-				<option value="3">3ÇÐ³â</option>
-				<option value="4">4ÇÐ³â</option>
+				<option value="1">1í•™ë…„</option>
+				<option value="2">2í•™ë…„</option>
+				<option value="3">3í•™ë…„</option>
+				<option value="4">4í•™ë…„</option>
 			</select>
             &nbsp;
-			<button type="button" class="btn btn-outline-primary" style="font-size: 10pt">¹ÌÃæÁ·ÇÐ»ýÁ¶È¸</button>
+			<button type="button" class="btn btn-outline-primary" style="font-size: 10pt">ë¯¸ì¶©ì¡±í•™ìƒì¡°íšŒ</button>
          </div>
          
          <div id="class2" style="display: inline; margin-left:27%;">
             <select name="searchIndex" style="width: 100px; display: inline; margin-left: 5px; height:40px;">
-               <option value="0" >ÇÐ¹ø</option>
-               <option value="1" >ÀÌ¸§</option>
-                 <option value="2" >°ú¸ñ</option>
+               <option value="0" >í•™ë²ˆ</option>
+               <option value="1" >ì´ë¦„</option>
+                 <option value="2" >ê³¼ëª©</option>
             </select>
             
-            <input type="text" name="searchText" placeholder="°Ë»ö"  style="margin-left:7px; width: 150px;">
+            <input type="text" name="searchText" placeholder="ê²€ìƒ‰"  style="margin-left:7px; width: 150px;">
          
-         <button type="submit" class="btn btn-primary">Á¶È¸</button>
+         <button type="submit" class="btn btn-primary">ì¡°íšŒ</button>
          </div>
       </div>
       </form>
@@ -77,12 +74,12 @@
    				<div class="table-responsive"
 					style="margin-left: 20%; margin-top: 2%; font-size: 14pt;">
 					<table class="table" style="width: 900px;">
-						<thead>
+						<thead style="font-size: 18px; font-weight: 500px;">
 							<tr>
-								<th><strong>ÇÐ¹ø</strong></th>
-								<th><strong>ÀÌ¸§</strong></th>
-								<th><strong>ÇÐ°ú</strong></th>
-								<th><strong>ÈÞ´ëÀüÈ­¹øÈ£</strong></th>
+								<th><strong>í•™ë²ˆ</strong></th>
+								<th><strong>ì´ë¦„</strong></th>
+								<th><strong>í•™ê³¼</strong></th>
+								<th><strong>íœ´ëŒ€ì „í™”ë²ˆí˜¸</strong></th>
 							</tr>
 						</thead>
 						<tbody>

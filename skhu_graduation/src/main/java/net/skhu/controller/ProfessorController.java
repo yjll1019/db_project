@@ -32,14 +32,14 @@ public class ProfessorController {
 		return "professor/professor_stu_search";
 	}
 
-
 	//학생 검색
 	@RequestMapping(value="professor_stu_search", method=RequestMethod.POST)
 	public String list(Model model,  @RequestParam("searchIndex") int searchIndex, @RequestParam("searchText") String input) {
 		System.out.println(Integer.toString(searchIndex));
-		input= input+"%";
+		input= "%" + input + "%";
+		System.out.println(input);
 
-		Student student = new Student();
+		//Student student = new Student();
 		List<Student> students = null;
 
 		switch(searchIndex) {
