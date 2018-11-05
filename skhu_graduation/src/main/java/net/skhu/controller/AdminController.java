@@ -177,16 +177,11 @@ public class AdminController {
 		return "redirect:admin_replace_list";
 	}
 	
-	//졸업요건 text수정
-	
-	@RequestMapping(value="admin_grduation_text", method=RequestMethod.GET)
-	public String list(Model model,  @RequestParam("majorIndex") int majorIndex) {
-		System.out.println(Integer.toString(majorIndex)); 
 
-		return "professor/professor_stu_search";
+	@RequestMapping(value="admin_graduation_text", method=RequestMethod.GET)
+	public String admin_graduation_text(Model model) {
+		return "admin/admin_graduation_text";
 	}
-
-	
 	
 	
 }
