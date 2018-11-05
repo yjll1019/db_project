@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.SubjectMapper">
+
+	<insert id="insert" parameterType="java.util.List">
+		INSERT into subject(year, semester, code, divisionClass, departmentId,
+			subjectName, completionDivision, credit) 
+		VALUES 
+		<foreach collection="list" item="subject" separator=" , ">
+			('${subject.year}', '${subject.semester}', '${subject.code}',
+			 '${subject.divisionClass}', '${subject.departmentId}', '${subject.subjectName}',
+			 '${subject.completionDivision}', '${subject.credit}')
+		</foreach>
+	</insert>
+	
+</mapper>

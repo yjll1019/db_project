@@ -17,6 +17,7 @@ import net.skhu.dto.Subject;
 import net.skhu.dto.User;
 import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
+import net.skhu.mapper.SubjectMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.service.ExcelService;
 import net.skhu.util.EmailServiceImpl;
@@ -29,6 +30,7 @@ public class AdminController {
 
 	@Autowired UserMapper userMapper;
 	@Autowired ReplaceSubjectMapper replaceSubjectMapper;
+	@Autowired SubjectMapper subjectMapper;
 	@Autowired private EmailServiceImpl emailService;
 	@Autowired ExcelService excelService;
 	@Autowired GraduationMapper graduationMapper;
@@ -149,13 +151,13 @@ public class AdminController {
 	// 전체과목 조회 페이지 파일업로드
 	@RequestMapping(value="subject_upload", method=RequestMethod.POST)
 	public String subject_upload(Model model, @RequestParam("file") MultipartFile file) throws Exception{
+		String r = "-1";
 		if(!file.isEmpty()) {
 			List<Subject> subjects = excelService.getSubjectList(file.getInputStream());
-			for(Subject s : subjects) {
-				System.out.println(s.getCode());
-			}
+			subjectMapper.insert(subjects);
+			r = "1";
 		}
-		return "redirect:admin_all_subject";
+		return "redirect:admin_all_subject?r=" + r;
 	}
 
 	// 대체과목목록 조회 페이지

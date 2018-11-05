@@ -22,6 +22,15 @@
 		font-family: 'NanumSquare', sans-serif;
 	}
 </style>
+<% String s = request.getParameter("r"); %>
+<script>
+	var r = <%= s %>;
+	if(r == "1"){
+    	alert('업로드 성공!');
+ 	} else if(r == "-1"){
+ 		alert('업로드 실패 혹은 선택된 파일이 없습니다.');
+ 	}
+</script>
 </head>
 <body>
 	<div id="jb-container">
