@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
@@ -16,7 +17,7 @@ tbody>tr {
 #boardWrite{
  	margin: 0 auto;
     padding: 20px 20px;
-	font-family: 'NanumSquareRound', sans-serif;
+	font-family: 'NanumSquare', sans-serif;
 }
 #word-color{
 	color: red;
@@ -27,7 +28,7 @@ tbody>tr {
  	margin: 0 auto;
  	max-width: 1000px;
     padding: 40px 40px;
-	font-family: 'NanumSquareRound', sans-serif;
+	font-family: 'NanumSquare', sans-serif;
 }
 
 #jb-sidebar {
