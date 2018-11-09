@@ -1,57 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
-<script src="js/header.js"></script>
-<link rel="stylesheet" href="res/css/board.css">
+<link rel="stylesheet" href="${R}res/css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="${R}res/js/header.js"></script>
+<link rel="stylesheet" href="${R}res/css/board.css">
 
-<title>ÇÐ»ý-°Ô½ÃÆÇ</title>
+<title>ê²Œì‹œê¸€ ëª©ë¡</title>
 </head>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>³ªÀÇÁ¹¾÷¿ä°Ç</span></a></li>
-				<li><a href='#'><span>¼ö°­¸ñ·Ï Á¶È¸</span></a></li>
-				<li><a href='#'><span>Á¹¾÷¿ä°Ç Á¶È¸</span></a></li>
-				<li><a href='#'><span>°øÁö»çÇ× ¹× ¹®ÀÇ</span></a></li>
+				<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="res/img/logo.jpg" width="29" height="29">
+					</a>
+				</li>
+				<li><a href='#'><span>ë‚˜ì˜ì¡¸ì—…ìš”ê±´</span></a></li>
+				<li><a href='#'><span>ìˆ˜ê°•ëª©ë¡ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ì¡¸ì—…ìš”ê±´ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</span></a></li>
 				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='#'><span>°³ÀÎÁ¤º¸º¯°æ</span></a></li>
+				<li style="float: right"><a href='#'><span>ê°œì¸ì •ë³´ë³€ê²½</span></a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="jb-content">
-			<h2>
-				<i>&nbsp;&nbsp;</i>°øÁö»çÇ× ¹× ¹®ÀÇ
-			</h2>
-
+			<h2>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</h2>
 			<hr>
 			<div class="container">
-
-
 				<div class="input-group"
 					style="width: 500px; float: right; margin-bottom: 15px">
 					<select name="searchSelect" class="form-control" id="searchSelect">
-						<option value="ÀÌ¸§">ÀÌ¸§</option>
-						<option value="Á¦¸ñ">Á¦¸ñ</option>
+						<option value="ì´ë¦„">ì´ë¦„</option>
+						<option value="ì œëª©">ì œëª©</option>
 					</select> 
 					&nbsp;&nbsp;
 					<input type="text" class="form-control" name="searchText" style="width:200px;"
-						placeholder="ÀÔ·ÂÇÏ¼¼¿ä">&nbsp;&nbsp; <span
+						placeholder="ìž…ë ¥í•˜ì„¸ìš”">&nbsp;&nbsp; <span
 						class="input-group-btn">
 						<button class="btn btn-default" type="button">
 							<span class="input-group-addon"><i class="fa fa-search fa"
@@ -65,76 +61,76 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>¹øÈ£</th>
-						<th>Á¦¸ñ</th>
-						<th>ÀÛ¼ºÀÚ</th>
-						<th>ÀÛ¼ºÀÏ</th>
+						<th>ë²ˆí˜¸</th>
+						<th>ì œëª©</th>
+						<th>ìž‘ì„±ìž</th>
+						<th>ìž‘ì„±ì¼</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="notice">
 						<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
-						<td id="word-color">°øÁö»çÇ×ÀÔ´Ï´Ù.</td>
-						<td id="word-color">°ü¸®ÀÚ</td>
+						<td id="word-color">ê³µì§€ì‚¬í•­ìž…ë‹ˆë‹¤.</td>
+						<td id="word-color">ê´€ë¦¬ìž</td>
 						<td id="word-color">2018.09.15</td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td>Á¹¾÷¿ä°Ç ¹®ÀÇ</td>
-						<td>ÀÌ¿¹Áö</td>
+						<td>ì¡¸ì—…ìš”ê±´ ë¬¸ì˜</td>
+						<td>ì´ì˜ˆì§€</td>
 						<td>2018.09.10</td>
 					</tr>
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[´äº¯]
+							[ë‹µë³€]
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Á¹¾÷¿ä°Ç ¹®ÀÇ</td>
-						<td>°ü¸®ÀÚ</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ì¡¸ì—…ìš”ê±´ ë¬¸ì˜</td>
+						<td>ê´€ë¦¬ìž</td>
 						<td>2018.09.11</td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td>ÇÐÁ¡ ¹®ÀÇ</td>
-						<td>ÀÌÇýÁö</td>
+						<td>í•™ì  ë¬¸ì˜</td>
+						<td>ì´í˜œì§€</td>
 						<td>2018.09.09</td>
 					</tr>
 
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[´äº¯]
+							[ë‹µë³€]
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ÇÐÁ¡¹®ÀÇ</td>
-						<td>°ü¸®ÀÚ</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; í•™ì ë¬¸ì˜</td>
+						<td>ê´€ë¦¬ìž</td>
 						<td>2018.08.01</td>
 					</tr>
 					<tr>
 						<td>4</td>
-						<td>±³¼ö Á¹¾÷Áöµµ</td>
-						<td>ÀÌ½ÂÁø</td>
+						<td>êµìˆ˜ ì¡¸ì—…ì§€ë„</td>
+						<td>ì´ìŠ¹ì§„</td>
 						<td>2018.07.31</td>
 					</tr>
 
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[´äº¯]
+							[ë‹µë³€]
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ±³¼ö Á¹¾÷Áöµµ</td>
-						<td>°ü¸®ÀÚ</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; êµìˆ˜ ì¡¸ì—…ì§€ë„</td>
+						<td>ê´€ë¦¬ìž</td>
 						<td>2018.08.01</td>
 					</tr>
 
 					<tr>
 						<td>5</td>
-						<td>18ÇÐ¹ø Á¹¾÷¿ä°Ç ¹®ÀÇ</td>
-						<td>»õ³»±â</td>
+						<td>18í•™ë²ˆ ì¡¸ì—…ìš”ê±´ ë¬¸ì˜</td>
+						<td>ìƒˆë‚´ê¸°</td>
 						<td>2018.07.20</td>
 					</tr>
 					<tr>
 						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[´äº¯]
+							[ë‹µë³€]
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18ÇÐ¹ø Á¹¾÷¿ä°Ç ¹®ÀÇ</td>
-						<td>°ü¸®ÀÚ</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18í•™ë²ˆ ì¡¸ì—…ìš”ê±´ ë¬¸ì˜</td>
+						<td>ê´€ë¦¬ìž</td>
 						<td>2018.07.21</td>
 					</tr>
 				</tbody>
@@ -142,13 +138,14 @@
 
 			<a id="createButton" class="btn btn-primary pull-right"
 				href="BoardWrite.jsp?pg=">
-				 <!-- ^%=currentPage%>&srchText= ^%=srchTextEncoded%>  ^ÀÚ¸®¿¡ < >µé¾î°¡¾ßÇÔ, pg=´ÙÀ½ ºÙ¾î¾ßÇÔ, 
-				 ÀÌ°Å¶§¸Å ¿À·ù³ª¼­ ÁÖ¼® Ã³¸®  -->
+				 <!-- ^%=currentPage%>&srchText= ^%=srchTextEncoded%>  ^ìžë¦¬ì— < >ë“¤ì–´ê°€ì•¼í•¨, pg=ë‹¤ìŒ ë¶™ì–´ì•¼í•¨, 
+				 ì´ê±°ë•Œë§¤ ì˜¤ë¥˜ë‚˜ì„œ ì£¼ì„ ì²˜ë¦¬  
 				 
-				 
-				<i class="glyphicon glyphicon-plus"></i> ±Û¾²±â
+				 ${ ê´€ë¦¬ìž ? ê³µì§€ì‚¬í•­ ìž‘ì„±íŽ˜ì´ì§€ url : ë¬¸ì˜ê¸€ ìž‘ì„±íŽ˜ì´ì§€ url}
+				 -->
+				 			 
+				<i class="glyphicon glyphicon-plus"></i> ê¸€ì“°ê¸°
 			</a>
-
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item"><a class="page-link" href="#"
