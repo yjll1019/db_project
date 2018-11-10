@@ -65,6 +65,9 @@
 					
 					<div class="form-group" align="center" style="margin-top: 40px">
 						<button type="button" class="btn btn-outline-primary">목록으로</button>
+						<!-- 작성자에게 보이도록 c:if 처리하기 
+						&nbsp;&nbsp;<a href="edit?id=${ board.boardId }" class="btn btn-primary">수정하기</a>
+						-->	
 						<!-- 관리자에게 보이도록 c:if 처리하기 
 						&nbsp;&nbsp;<a href="delete?id=${ board.boardId }" class="btn btn-danger" data-confirm-delete>삭제하기</a>
 						-->				
