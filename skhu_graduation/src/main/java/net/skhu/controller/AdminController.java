@@ -19,7 +19,9 @@ import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
 import net.skhu.mapper.SubjectMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.model.Pagination;
 import net.skhu.service.ExcelService;
+import net.skhu.service.ReplaceSubjectService;
 import net.skhu.util.EmailServiceImpl;
 import net.skhu.util.FindUtil;
 import net.skhu.util.SecurityUtil;
@@ -34,6 +36,7 @@ public class AdminController {
 	@Autowired private EmailServiceImpl emailService;
 	@Autowired ExcelService excelService;
 	@Autowired GraduationMapper graduationMapper;
+	@Autowired ReplaceSubjectService replaceService;
 
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
@@ -163,8 +166,9 @@ public class AdminController {
 
 	// 대체과목목록 조회 페이지
 	@RequestMapping(value="admin_replace_list", method=RequestMethod.GET)
-	public String admin_replace_list(Model model) {
-		model.addAttribute("replace",replaceSubjectMapper.findAll());
+	public String admin_replace_list(Model model,Pagination pagination) {
+		model.addAttribute("replace",replaceService.findByType(pagination));
+		model.addAttribute("searchBy",replaceService.getSerachByOptions());
 		return "admin/admin_replace_list";
 	}
 
@@ -184,4 +188,14 @@ public class AdminController {
 		return "admin/admin_graduation_text";
 	}
 
+	/*
+	//findByType - 대체과목목록 조회 조건
+	@RequestMapping("findByType")
+	public String findByType(Model model, Pagination pagination) {
+		model.addAttribute("replace",replaceService.findByType(pagination));
+		model.addAttribute("searchBy",replaceService.getSerachByOptions());
+		return "admin/admin_replace_list";
+
+	}
+	*/
 }
