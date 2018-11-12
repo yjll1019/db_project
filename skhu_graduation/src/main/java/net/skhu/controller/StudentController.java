@@ -1,5 +1,9 @@
 package net.skhu.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.skhu.dto.MySubject;
 import net.skhu.dto.User;
+import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.util.SecurityUtil;
 
@@ -17,6 +23,7 @@ import net.skhu.util.SecurityUtil;
 public class StudentController {
 
 	@Autowired UserMapper userMapper;
+	@Autowired MySubjectMapper mySubjectMapper;
 	
 	@RequestMapping(value="stu_main", method=RequestMethod.GET)
 	public String main(Model model) {
@@ -92,5 +99,35 @@ public class StudentController {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "student/stu_info";
+	}
+	
+	//수강 과목 조회를 위한 메소드
+	@RequestMapping(value="stu_subject_list", method=RequestMethod.GET)
+	public String stu_subject_list(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		List<MySubject> mySubjectlist = mySubjectMapper.findAll(user.getId());
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		return "student/stu_subject_list";
+	}
+	
+	@RequestMapping(value="stu_subject_list", method=RequestMethod.POST)
+	public String stu_subject_list(Model model, HttpSession session, @RequestParam("subjectListId") int subjectListId) {
+		User user = (User) session.getAttribute("user");
+		List<MySubject> mySubjectlist;
+		System.out.println("subjectListId는"+subjectListId);
+		if(subjectListId==0) {//전체조회
+			mySubjectlist = mySubjectMapper.findAll(user.getId());
+		}else if(subjectListId==1){//전공필수
+			mySubjectlist = mySubjectMapper.findByMajorEssential(user.getId());
+		}else if(subjectListId==2){//전공선택
+			mySubjectlist = mySubjectMapper.findByMajorSelect(user.getId());
+		}else if(subjectListId==3){//교양필수
+			mySubjectlist = mySubjectMapper.findByRefinementEssential(user.getId());
+		}else {//교양선택
+			mySubjectlist = mySubjectMapper.findByRefinementSelect(user.getId());
+		}
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		model.addAttribute("subjectListId", subjectListId);
+		return "student/stu_subject_list";
 	}
 }
