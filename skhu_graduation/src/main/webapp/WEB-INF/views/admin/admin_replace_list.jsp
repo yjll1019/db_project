@@ -36,13 +36,13 @@
 				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
 					<ul>
 						<li class='last'><a href='admin_all_subject.jsp'><span>전체과목 목록</span></a></li>
-						<li class='last'><a href='admin_replace_list.jsp'><span>대체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
 					</ul>
 				</li>
 				<li><a href='admin_board.jsp'><span>공지사항 및 문의</span></a></li>
 				<li><a href='calenderEdit.jsp'><span>대학일정 관리</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='adminInfo.jsp'><span>개인정보변경</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -81,66 +81,15 @@
 					<td><strong> 과목명 </strong></td>
 				</tr>
 				<tbody style="font-size: 12pt;">
-					<tr>
-						<td style="border-right: 1px solid silver">AA00034</td>
-						<td style="border-right: 1px solid black">대학수학</td>
-						<td style="border-right: 1px solid silver">AD0034</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HA00034</td>
-						<td style="border-right: 1px solid black">전공선택</td>
-						<td style="border-right: 1px solid silver">FA00034</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">FG00034</td>
-						<td style="border-right: 1px solid black">Python 프로그래밍</td>
-						<td style="border-right: 1px solid silver">GA00034</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">VA00034</td>
-						<td style="border-right: 1px solid black">전공선택</td>
-						<td style="border-right: 1px solid silver">TA00034</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">EA00034</td>
-						<td style="border-right: 1px solid black">컴퓨터네트워크</td>
-						<td style="border-right: 1px solid silver">AA00045</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HH00034</td>
-						<td style="border-right: 1px solid black">컴퓨터네트워크</td>
-						<td style="border-right: 1px solid silver">EA00024</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HH00034</td>
-						<td style="border-right: 1px solid black">컴퓨터네트워크</td>
-						<td style="border-right: 1px solid silver">EA00024</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HH00034</td>
-						<td style="border-right: 1px solid black">Python 프로그래밍</td>
-						<td style="border-right: 1px solid silver">EA00024</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HH00034</td>
-						<td style="border-right: 1px solid black">컴퓨터네트워크</td>
-						<td style="border-right: 1px solid silver">EA00024</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
-					<tr>
-						<td style="border-right: 1px solid silver">HH00034</td>
-						<td style="border-right: 1px solid black">전공선택</td>
-						<td style="border-right: 1px solid silver">EA00024</td>
-						<td style="border-right: 1px solid silver">대학수학</td>
-					</tr>
+					<c:forEach var="replace" items="${replace }">
+						<tr>
+							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
+							<td style="border-right: 1px solid black">${replace.subject.subjectName }</td>
+							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
+							<td style="border-right: 1px solid silver">${replace.replaceSubjectName }</td>
+						</tr>
+					</c:forEach>
+					
 				</tbody>
 			</table>
 			<div style="margin-top: 4%">
