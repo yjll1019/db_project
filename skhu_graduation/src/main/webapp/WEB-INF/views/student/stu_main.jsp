@@ -29,7 +29,7 @@
 				<li><a href='#'
 					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>나의졸업요건</span></a></li>
-				<li><a href='#'><span>수강목록 조회</span></a></li>
+				<li><a href='stu_subject_list'><span>수강목록 조회</span></a></li>
 				<li><a href='#'><span>졸업요건 조회</span></a></li>
 				<li><a href='#'><span>공지사항 및 문의</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
@@ -139,11 +139,7 @@
 		</div>
 		<div id="jb-content">
 			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
-			<div id="textright">
-				<button type="button" class="btn btn-outline-primary"
-					onclick="window.open('test.jsp','수강한강의목록','width=500,height=700,location=no,status=no,scrollbars=yes');">
-					수강한 강의목록</button>
-			</div>
+
 			<h3>필수 과목</h3>
 			<br />
 			<div>

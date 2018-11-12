@@ -1,0 +1,23 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.MySubjectMapper">
+
+	<select id="findAll" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId};
+	</select>
+
+	<select id="findByMajorEssential" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '전필';
+	</select>
+	
+	<select id="findByMajorSelect" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '전선';
+	</select>
+	
+	<select id="findByRefinementEssential" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '교필';
+	</select>
+	
+	<select id="findByRefinementSelect" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '교선';
+	</select>
+</mapper>
