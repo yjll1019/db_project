@@ -43,7 +43,7 @@
 				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
 					<ul>
 						<li class='last'><a href='admin_all_subject.jsp'><span>전체과목 목록</span></a></li>
-						<li class='last'><a href='admin_replace_list.jsp'><span>대체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
 					</ul>
 				</li>
 				<li><a href='admin_board.jsp'><span>공지사항 및 문의</span></a></li>
