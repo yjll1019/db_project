@@ -9,6 +9,11 @@ public class Subject {
 	String subjectName;
 	String completionDivision;
 	String credit;
+	Department department;
+
+	public Subject() {
+
+	}
 
 	public Subject(String year, String semester, String code, String divisionClass, String departmentId,
 			String subjectName, String completionDivision, String credit) {
@@ -84,6 +89,14 @@ public class Subject {
 
 	public void setCredit(String credit) {
 		this.credit = credit;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 }

@@ -4,6 +4,9 @@ public class ReplaceSubject {
 	int id;
 	String subjectCode;
 	String replaceSubject;
+	String replaceSubjectName;//대체과목 이름 join
+	Subject subject;
+	Department department;
 	/* 과목코드가 아닌 경우
 	 * 1인 경우 전공선택과목으로 대체
 	 * 2인 경우 경제학전공과목에서 대체
@@ -15,6 +18,9 @@ public class ReplaceSubject {
 	 * 8인 경우 사회학전공과목에서 선택
 	 * 9인 경우 정치학전공과목에서 선택
 	*/
+	public ReplaceSubject() {
+
+	}
 
 	public ReplaceSubject(String subjectCode, String replaceSubject) {
 		this.subjectCode = subjectCode;
@@ -43,6 +49,30 @@ public class ReplaceSubject {
 
 	public void setReplaceSubject(String replaceSubject) {
 		this.replaceSubject = replaceSubject;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public String getReplaceSubjectName() {
+		return replaceSubjectName;
+	}
+
+	public void setReplaceSubjectName(String replaceSubjectName) {
+		this.replaceSubjectName = replaceSubjectName;
 	}
 
 }

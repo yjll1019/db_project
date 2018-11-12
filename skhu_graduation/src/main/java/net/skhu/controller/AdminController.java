@@ -129,16 +129,17 @@ public class AdminController {
 		user.setPassword(enPssword);
 
 		userMapper.updateAdmin(user); // user테이블 update
-
+		session.removeAttribute("user");
+		session.setAttribute("user",user);//으아아아 세션..실패
 
 		return "redirect:/admin/admin_stu_search"; //학생 조회 페이지로
 	}
 
 	//관리자 학생 조회 페이지
 	@RequestMapping(value="admin_stu_search", method=RequestMethod.GET)
-	public String main(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+	public String main(Model model, HttpSession session) {
+		User userGet = (User) session.getAttribute("user");
+		model.addAttribute("user", userGet);
 		return "admin/admin_stu_search";
 	}
 
@@ -163,6 +164,7 @@ public class AdminController {
 	// 대체과목목록 조회 페이지
 	@RequestMapping(value="admin_replace_list", method=RequestMethod.GET)
 	public String admin_replace_list(Model model) {
+		model.addAttribute("replace",replaceSubjectMapper.findAll());
 		return "admin/admin_replace_list";
 	}
 
