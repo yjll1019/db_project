@@ -17,6 +17,32 @@
 		left join department d on d.id = sub.departmentId
 	</select>
 	
+	<select id="findByType" resultMap="resultMap1">
+		<bind name="start" value="(pg-1) * sz"/>
+		select re.*, sub.subjectName, resub.subjectName replaceSubjectName,d.name
+		from replaceSubject re 
+		left join subject sub on re.subjectCode = sub.code 
+		left join subject resub on re.replaceSubject = resub.code 
+		left join department d on d.id = sub.departmentId
+		<where>
+			<if test="sb==1">re.replaceSubject = #{st}</if>
+			<if test="sb==2">INSTR(resub.subjectName,#{st})>0</if>
+		</where>
+		LIMIT ${start},${sz}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(re.subjectCode)
+		from replaceSubject re 
+		left join subject sub on re.subjectCode = sub.code 
+		left join subject resub on re.replaceSubject = resub.code 
+		left join department d on d.id = sub.departmentId
+		<where>
+			<if test="sb==1">re.replaceSubject = #{st}</if>
+			<if test="sb==2">INSTR(resub.subjectName,#{st})>0</if>
+		</where>
+	</select>
+	
 	<select id="findByDepartment" resultMap="resultMap1">
 		select re.*, sub.*, resub.subjectName replaceSubjectName,d.name
 		from replaceSubject re 
