@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -49,7 +53,14 @@
 		<div style="margin-top: 30px; margin: 0 auto; max-width: 1000px; padding: 40px 40px; font-family: 'NanumSquare', sans-serif;">
 			<h2>대체과목 목록</h2>
 			<hr>
-			<form>
+			<form:form method="get" modelAttribute="pagination">
+				<form:hidden path="pg" value="1"/>
+				<form:select path="sb" class="form-group"
+							itemValue="value" itemLabel="label" items="${searchBy }"/>
+				<form:input path="st" class="form-control" placeholder="검색하세요"/>
+				<button type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="조회하기"></button>
+			</form:form>
+			<!--	
 				<div class="form-group" style="margin-top: -10px; margin-left: 415px; width: 540px;">
 					<select name="major" class="form-control" style="display: inline; width: 120px; height: 35px; font-size: 15px;">
 						<option value="학부/학과">학부/학과</option>
@@ -66,6 +77,7 @@
 					<input type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="조회하기"/>
 				</div>
 			</form>
+			 -->
 			<br />
 			<table class="table table-bordered" style="margin-top: -35px; width: 700; height: 300px; text-align: center; table-layout: fixed;">
 				<thead>
@@ -205,6 +217,7 @@
 				</form>
 			</div>
 		</div>
+		<my:pagination pageSize="${pagination.sz }" recordCount="${pagination.recordCount }"/>
 	</div>
 </body>
 </html>
