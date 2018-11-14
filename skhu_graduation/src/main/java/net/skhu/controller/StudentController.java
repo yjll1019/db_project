@@ -130,7 +130,6 @@ public class StudentController {
 			if(year==0) {//전체조회
 				mySubjectlist = mySubjectMapper.findAll(user.getId()); 
 			}else {//수강년도, 수강학기 조회
-				
 				mySubjectlist = mySubjectMapper.findByYearAndSemester(user.getId(), (String)subjectListYear,  (String)subjectListSemester);
 			}
 			model.addAttribute("mySubjectlist", mySubjectlist);
@@ -184,5 +183,22 @@ public class StudentController {
 
 				return "redirect:/student/stu_main"; //학생 조회 페이지로
 			}
-
+	
+	//학생 전공인정
+	@RequestMapping(value="stu_major_admit",method=RequestMethod.GET)
+	public String stu_major_admit(Model model, HttpSession session, @RequestParam ("subjectCode") String subjectCode) {
+		User user = (User) session.getAttribute("user");
+		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode);
+		model.addAttribute("mySubject", mySubject);
+		String completionDivision;
+		if(mySubject.getCompletionDivision().contains("교")) {
+			 completionDivision = "교선";
+			model.addAttribute("completionDivision", completionDivision);
+		}else {
+			completionDivision = "전선";
+			model.addAttribute("completionDivision", completionDivision);
+		}
+		return "stu_major_admit";
+	}
+		
 }

@@ -12,4 +12,5 @@ public interface MySubjectMapper {
 	int findAllCount(String userId);
 	List<MySubject> findByYearAndSemester(String userId, String takeYear, String takeSemester);
 	int findByYearAndSemesterCount(String userId, String takeYear, String takeSemester);
+	MySubject findByOneSubject(String userId, String subjectCode);
 }

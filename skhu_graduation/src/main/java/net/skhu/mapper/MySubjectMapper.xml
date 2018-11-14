@@ -6,7 +6,7 @@
 	
 	</select>
 
-	<select id="findAllCount" resultType="Integer"><!-- 페이지네이션 미완성 -->
+	<select id="findAllCount" resultType="int"><!-- 페이지네이션 미완성 -->
 		select count(*) from mySubject where userId like #{userId}
 	</select>
 
@@ -19,4 +19,7 @@
 	select * from mySubject where userId like #{userId} and takeSemester like #{takeYear} and takeYear like #{takeSemester}
 	</select>
 	
+	<select id="findByOneSubject" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
+	</select>
 </mapper>

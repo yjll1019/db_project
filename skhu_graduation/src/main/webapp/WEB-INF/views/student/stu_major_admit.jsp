@@ -23,22 +23,26 @@
 					<table style="margin-left: 100px; margin-top: 30px; border-bottom: 1px solid #d2d4d8; 
 						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed;">
 						<tr style="height: 40px">
-							<td> AF00011 </td>
-							<td> 공업수학 </td>
-							<td> 교양선택 </td>
-							<td> A+ </td>
+							<td> ${mySubject.subjectCode} </td>
+							<td> ${mySubject.subjectName} </td>
+							<td> ${mySubject.completionDivision} </td>
+							<td>${mySubject.score}</td>
 						</tr>
 					</table>
+					<%
+						String completionDivision = (String)request.getAttribute("completionDivision");
+					%>
 					<div class="form-group" style="margin-top: 30px; margin-bottom: 40px">
 						<div class="custom-control custom-radio" style="margin-top: 30px; margin-right: 15px; display:inline;">
-							<input type="radio" id="customRadio1" name="customRadio"
-								class="custom-control-input" checked> <label
-								class="custom-control-label" for="customRadio1">교양학점</label>
+							<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="교선"
+							<%=(completionDivision.equals("교선"))? "checked":"" %>	>
+							 <label class="custom-control-label" for="customRadio1">교양학점</label>
 						</div>
 						<div class="custom-control custom-radio" style="margin-top: 10px; margin-bottom: 20px; display:inline;">
-							<input type="radio" id="customRadio2" name="customRadio"
-								class="custom-control-input"> <label
-								class="custom-control-label" for="customRadio2">전공학점</label>
+							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="전선"
+							<%=(completionDivision.equals("전선"))? "checked":"" %>
+							> 
+							<label class="custom-control-label" for="customRadio2">전공학점</label>
 						</div>
 					</div>
 					<div class="btn-r">

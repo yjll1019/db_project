@@ -76,7 +76,7 @@
 					</select> &nbsp;
 					
 					<button type="submit" class="btn btn-primary" style="font-size: 12pt; margin-top:1%">조회</button>
-					</form:form>
+					
 				</div>
 			</div>
 	
@@ -110,8 +110,9 @@
 								<div class="dropdown">
 									<button class="dropbtn">&nbsp;변경&nbsp;</button>
 									<div class="dropdown-content">
-										<a href="#">대체과목변경(초수강)</a> <a href="#">대체과목변경(재수강)</a> 
-										<a href="#">전공인정승인</a>
+										<a href="#">대체과목변경(초수강)</a>
+										<a href="#">대체과목변경(재수강)</a> 
+										<a href="stu_major_admit">전공인정승인</a>
 									</div>
 								</div>
 							</td>
@@ -120,6 +121,7 @@
 					</tbody>
 				</table>
 			</div>
+			</form:form>
 	</div>
 			<div id="page">
 				<nav aria-label="Page navigation example">
