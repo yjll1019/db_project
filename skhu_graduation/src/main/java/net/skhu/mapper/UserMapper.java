@@ -15,5 +15,6 @@ public interface UserMapper {
 	void changePassword(String id, String password);
 	void updateAdmin(User u);
 	void updateProfessor(User u);
+	void updateStudent(User u);
 	User findById(String userId);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.skhu.dto.MySubject;
 import net.skhu.dto.User;
 import net.skhu.mapper.MySubjectMapper;
+import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.util.SecurityUtil;
 
@@ -24,6 +25,7 @@ public class StudentController {
 
 	@Autowired UserMapper userMapper;
 	@Autowired MySubjectMapper mySubjectMapper;
+	@Autowired StudentMapper studentMapper;
 	
 	@RequestMapping(value="stu_main", method=RequestMethod.GET)
 	public String main(Model model) {
@@ -93,13 +95,7 @@ public class StudentController {
 		}
 		return "student/change_password";
 	}
-	
-	@RequestMapping(value="stu_info", method=RequestMethod.GET)
-	public String sudentInformation(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		return "student/stu_info";
-	}
+
 	
 	//수강 과목 조회를 위한 메소드
 	@RequestMapping(value="stu_subject_list", method=RequestMethod.GET)
@@ -130,4 +126,50 @@ public class StudentController {
 		model.addAttribute("subjectListId", subjectListId);
 		return "student/stu_subject_list";
 	}
+	
+	//professor_info GET
+		@RequestMapping(value="stu_info",method=RequestMethod.GET)
+		public String stu_info(Model model,HttpSession session) {
+
+			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+			model.addAttribute("user",user);
+
+			return "student/stu_info";
+		}
+		// professor_info POST
+			@RequestMapping(value="stu_info",method=RequestMethod.POST)
+			public String stu_info(Model model,User user, HttpSession session ) {
+
+				User userGetId = (User) session.getAttribute("user");
+				user.setId(userGetId.getId());
+				String alert="";
+				String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
+
+				//비밀번호 조건에 맞지 않을 떄
+				if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
+					alert="-1";
+					model.addAttribute("user",user);
+					model.addAttribute("alert",alert);
+					return "student/stu_info";
+
+				}
+				// 비밀번호와 확인비밀번호가 다를 때
+				if(!user.getConfirmPassword().equals(user.getPassword())) {
+					alert="-2";
+					model.addAttribute("user",user);
+					model.addAttribute("alert",alert);
+					return "student/stu_info";
+				}
+
+				SecurityUtil su = new SecurityUtil();
+				String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
+				user.setPassword(enPssword);
+
+
+
+
+				return "redirect:/student/stu_main"; //학생 조회 페이지로
+			}
+
 }

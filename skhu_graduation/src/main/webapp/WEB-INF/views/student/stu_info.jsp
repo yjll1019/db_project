@@ -61,8 +61,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			</ul>
 		</div>
 	</div>
-
-	<div id="jb-content justify-content-center">
+<div id="jb-content justify-content-center">
 			<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
@@ -218,6 +217,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								</div>
 							</div>
 						</div>
+	
 						<div class="form-group">
 							<label for="file" class="cols-sm-2 control-label">file</label>
 							<div class="cols-sm-10">

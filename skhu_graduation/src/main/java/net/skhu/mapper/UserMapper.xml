@@ -36,4 +36,16 @@
 			class = #{group}
 		where userId = #{userId}
 	</update>
+
+	<update id="updateStudent">
+		update user set
+		userName = #{userName},
+		email = #{email},
+		phone = #{phone}
+		where id = #{id}
+	</update>
+	
+	
+	
+	
 </mapper>

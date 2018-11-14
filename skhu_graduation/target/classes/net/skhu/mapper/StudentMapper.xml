@@ -41,11 +41,11 @@
 	</select>
 	
 	<select id="findOneWithUser" resultMap="resultMap1">
-		select s.*, u.*,d.*, se.*
+		select s.*, u.*,d.*, m.*
 		from student s 
 		left join user u on u.id=s.userId
 		left join department d on s.departmentId=d.id
-		left join secondMajor se on s.userId = se.userId
+		left join secondMajor m on s.userId = m.userId
 		where s.userId=#{id};
 	</select>
 

@@ -10,6 +10,7 @@ import net.skhu.dto.Student;
 public interface StudentMapper {
 
 	void insert(Student s); //회원가입 조건 충족 시 insert
+	void update(Student s);
 	Student stuInfo(String userId);
 	Student findOneWithUser(String userId);
 	List<Student> findAllWithUser();
