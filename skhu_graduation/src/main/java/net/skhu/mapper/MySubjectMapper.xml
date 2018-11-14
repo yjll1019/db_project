@@ -2,22 +2,21 @@
 <mapper namespace="net.skhu.mapper.MySubjectMapper">
 
 	<select id="findAll" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId};
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId}
+	
 	</select>
 
-	<select id="findByMajorEssential" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '전필';
+	<select id="findAllCount" resultType="Integer"><!-- 페이지네이션 미완성 -->
+		select count(*) from mySubject where userId like #{userId}
+	</select>
+
+	<select id="findByYearAndSemester" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject
+	 where userId like #{userId} and takeYear like #{takeYear} and takeSemester like #{takeSemester}
 	</select>
 	
-	<select id="findByMajorSelect" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '전선';
+	<select id="findByYearAndSemesterCount"><!-- 페이지네이션 미완성 -->
+	select * from mySubject where userId like #{userId} and takeSemester like #{takeYear} and takeYear like #{takeSemester}
 	</select>
 	
-	<select id="findByRefinementEssential" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '교필';
-	</select>
-	
-	<select id="findByRefinementSelect" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and completionDivision like '교선';
-	</select>
 </mapper>

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <c:url var="R" value="/" />    
 <!DOCTYPE html>
 <html>
@@ -41,25 +44,45 @@
 				</div>
 
 			<div id="search" style="margin-top: 1%; font-size: 10pt;">
-				<div id="class1" style="display: inline; margin-left: 72%; font-size: 12pt;">
+				<div id="class1" style="display: inline; font-size: 12pt;">
 				
-				<form:form method="post">			
-					<select class="custom-select" name="subjectListId" id="subjectListId" style="width: 120px; height:40px; margin-left: 70%;">
-						 <option value=0>전체</option>
-						<option value=1>전공필수</option>
-						<option value=2>전공선택</option>
-						<option value=3>교양필수</option>
-						<option value=4>교양선택</option>
+				<form:form method="post">	
+				<select class="custom-select" name="subjectListYear" id="subjectListYear" style="width: 100px; height:40px; margin-left: 15%; margin-top:1%">
+				
+				<%
+					int enterYear = (Integer)request.getAttribute("enterYear");
+					int currentYear = (Integer)request.getAttribute("currentYear");
+					int i = enterYear;
+					int year = 0;
+					if(request.getAttribute("year")!=null)
+						year = (Integer)request.getAttribute("year");
+					int semester = 1;
+					if(request.getAttribute("semester")!=null)
+						semester = (Integer)request.getAttribute("semester");
+				%>
+					<option value=0>전체</option>
+				<%
+					for(i=enterYear; i<=currentYear; ++i){
+				%>
+					<option <%=(i==year)? "selected":""%>><%=i %></option>
+				<%
+					}
+				%>
+				</select> &nbsp;	
+						
+				<select class="custom-select" name="subjectListSemester" id="subjectListSemester" style="width: 100px; height:40px; margin-left:1%; margin-top:1%">
+						 <option value=1 <%= (1==semester)? "selected" : "" %>>1학기</option>
+						<option value=2 <%= (2==semester)? "selected" : "" %>>2학기</option>
 					</select> &nbsp;
-					<button type="submit" class="btn btn-primary"
-						style="font-size: 12pt">조회</button>
+					
+					<button type="submit" class="btn btn-primary" style="font-size: 12pt; margin-top:1%">조회</button>
 					</form:form>
 				</div>
 			</div>
 	
 	
 			<div class="table-responsive"
-				style="margin-left: 15%; font-size: 12pt; margin-top: 3%">
+				style="margin-left: 15%; font-size: 12pt; margin-top: 2%">
 				<table class="table" style="width: 70%; margin-bottom: 100px;">
 					<thead>
 						<tr>
@@ -102,14 +125,16 @@
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
+							aria-label="Previous"> 
+						<span aria-hidden="true">&laquo;</span> <!-- <<표시 -->
+								<span class="sr-only">Previous</span> <!--  -->
 						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item" name="pageCount" value=cnt><a class="page-link" href="#" value="1">1</a></li>
 						<li class="page-item"><a class="page-link" href="#">2</a></li>
 						<li class="page-item"><a class="page-link" href="#">3</a></li>
 						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+							aria-label="Next"> 
+						<span aria-hidden="true">&raquo;</span> <span
 								class="sr-only">Next</span>
 						</a></li>
 					</ul>
