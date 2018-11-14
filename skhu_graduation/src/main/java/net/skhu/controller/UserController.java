@@ -199,6 +199,9 @@ public class UserController {
 			}else if(getUser.getRole().equals("교수")) {
 				url="redirect:/professor/professor_info";// 교수 개인정보변경 페이지로
 			}
+			else if(getUser.getRole().equals("학생")) {
+				url="redirect:/student/stu_info";// 교수 개인정보변경 페이지로
+			}
 
 		}
 		model.addAttribute("alert",alert);
