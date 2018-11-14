@@ -19,20 +19,56 @@
 </head>
 <body>
 	<div id="jb-container">
-		<div id="jb-header">
+		<div id="jb-header"> <!-- role에 따라 다른 헤더가 보이도록 할 예정 -->
 		<div id='cssmenu'>
-			<ul>
-				<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-						<img src="res/img/logo.jpg" width="29" height="29">
-					</a>
-				</li>
-				<li><a href='#'><span>나의졸업요건</span></a></li>
-				<li><a href='#'><span>수강목록 조회</span></a></li>
-				<li><a href='#'><span>졸업요건 조회</span></a></li>
-				<li><a href='#'><span>공지사항 및 문의</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='#'><span>개인정보변경</span></a></li>
-			</ul>
+			<c:if test="${ user.role == '관리자' }">
+				<ul>
+					<li>
+						<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+							<img src="res/img/logo.jpg" width="29" height="29">
+						</a>
+					</li>
+					<li><a href='admin_stu_search.jsp'><span>학생 조회</span></a></li>
+					<li class='active has-sub'><a><span>졸업요건 수정</span></a>
+						<ul>
+							<li class='last'><a href='admin_allSearchEdit.jsp'><span>졸업요건표 수정</span></a></li>
+							<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+							<li class='last'><a href='admin_changeGraduation.jsp'><span>필수과목 수정</span></a></li>
+						</ul>
+					</li>
+					<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
+						<ul>
+							<li class='last'><a href='admin_all_subject.jsp'><span>전체과목 목록</span></a></li>
+							<li class='last'><a href='admin_replace_list.jsp'><span>대체과목 목록</span></a></li>
+						</ul>
+					</li>
+					<li><a href='admin_board.jsp'><span>공지사항 및 문의</span></a></li>
+					<li><a href='admin_calenderEdit.jsp'><span>대학일정 관리</span></a></li>
+					<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='adminInfo.jsp'><span>개인정보변경</span></a></li>
+				</ul>
+			</c:if>
+			<c:if test="${ user.role == '학생' }">
+				<ul>
+					<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+					<li><a href='#'><span>나의졸업요건</span></a></li>
+					<li><a href='#'><span>수강목록 조회</span></a></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='student/stu_info'><span>개인정보변경</span></a></li>
+				</ul>
+			</c:if>
+			<c:if test="${ user.role == '교수' }">
+				<ul>
+					<li><a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+					<li><a href='#'><span>학생 조회</span></a></li>
+					<li><a href='#'><span>졸업요건 조회</span></a></li>
+					<li><a href='#'><span>공지사항 및 문의</span></a></li>
+					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
+				</ul>
+			</c:if>
 		</div>
 	</div>
 	<div id="jb-content">
@@ -141,7 +177,7 @@
 				 <!-- ^%=currentPage%>&srchText= ^%=srchTextEncoded%>  ^자리에 < >들어가야함, pg=다음 붙어야함, 
 				 이거때매 오류나서 주석 처리  
 				 
-				 ${ 관리자 ? 공지사항 작성페이지 url : 문의글 작성페이지 url}
+				 { 관리자 ? 공지사항 작성페이지 url : 문의글 작성페이지 url}
 				 -->
 				 			 
 				<i class="glyphicon glyphicon-plus"></i> 글쓰기
