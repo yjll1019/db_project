@@ -49,7 +49,7 @@
 	</div>
 		<div id="jb-content">
 			<div id="boardWrite" style="margin-top:-30px; max-width: 800px;">
-				<h2>&nbsp;&nbsp;공지사항 작성<!-- ${ board.boardId == null ? "수정" : "등록" } --></h2>
+				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId == null ? "등록" : "수정" }</h2>
 				<hr>
 				<div class="container">
 					<form method="post">
@@ -57,13 +57,21 @@
 								<tr>
 									<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>제목</strong></td>
 									<td colspan="3">
-										<input type="text" class="form-control" name="title" value="공지사항입니다.">
+										<input type="text" class="form-control" name="title" value="${ board.title }">
 									</td>
 								</tr>
+								<!--
 								<tr>
 									<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>첨부 파일</strong></td>
-									<td><input type="file" class="form-control" name="file" id="file"/></td>
+									<td>
+										<c:forEach var="file" items="{ files }">
+											<a href="download?fileId={file.id}">{ file.fileName }</a>&nbsp;&nbsp;&nbsp;
+											<span style="color: gray">{ file.fileSize }</span>&nbsp;&nbsp;
+											<a class="btn btn-default btn-xs" href="fileDelete?fileId={file.id}">삭제</a> <br/>
+										</c:forEach>
+									</td>
 								</tr>
+								-->
 								<tr>
 									<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
 									<td colspan="3">
@@ -73,10 +81,16 @@
 							</table>
 							<div class="form-group" align="center" style="margin-top: 40px">
 								<button type="submit" class="btn btn-outline-primary">등록하기</button>&nbsp;&nbsp;
-        						<a href="delete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
-								<button type="button" class="btn btn-outline-primary">목록으로</button>
+        						<a href="boardDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+								<a href="board" class="btn btn-outline-primary">목록으로</a>
 							</div>
 					</form>
+					<!-- 
+					<form method="post" enctype="multipart/form-data" action="upload?boardId=${ board.boardId }">
+						<input type="file" name="fileUpload" style="width: 600px; margin: 10px;" multiple />
+						<button type="submit" class="btn btn-primary">업로드</button> <br/>
+					</form>
+					-->
 				</div>
 			</div>
 		</div>
