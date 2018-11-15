@@ -87,7 +87,13 @@
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>첨부 파일</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px"><a href='#' download>file.pdf</a></td>
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
+									<c:forEach var="file" items="${ files }">
+										<a href="user/download?id=${file.id}">${ file.fileName }</a>&nbsp;&nbsp;&nbsp;
+										<span style="color: gray">${ file.fileSize }</span>&nbsp;&nbsp;
+										<a class="btn btn-default btn-xs" href="file/delete?id=${file.id}">삭제</a> <br/>
+									</c:forEach>
+								</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
@@ -95,10 +101,10 @@
 							</tr>
 						</table>
 						<div class="form-group" align="center" style="margin-top: 40px">
-							<button type="button" class="btn btn-outline-primary">목록으로</button>
-							<!-- 작성자에게 보이도록 c:if 처리하기 
-								&nbsp;&nbsp;<a href="edit?id=${ board.boardId }" class="btn btn-primary">수정하기</a>
-							-->		
+							<a class="btn btn-outline-primary" href="board">목록으로</a>
+							<c:if test="${board.userId == user.userId}">
+								&nbsp;&nbsp;<a href="edit?id={ board.boardId }" class="btn btn-primary">수정하기</a>
+							</c:if>	
 						</div>
 					</form>
 				</div>

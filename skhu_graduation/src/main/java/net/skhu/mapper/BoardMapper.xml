@@ -16,16 +16,16 @@
 	
 	<select id="findByName" resultType="Board">
 		select * 
-		from board b,(select b.boardId as number 
+		from board b,(select b.boardId as number, u.userNamet 
 						from board b join user u on b.userId = u.id 
-						where userName like '%#{userName}%') sub 
+						where userName like #{userName}) sub 
 		where sub.number = b.groupNumber
 		order by postType, groupNumber DESC, groupOrder ASC;
 	</select>
 	
 	<select id="findByTitle" resultType="Board">
 		select * from board 
-		where title like '%#{title}%' 
+		where title like #{title} 
 		order by postType, groupNumber DESC, groupOrder ASC;  
 	</select>
 
