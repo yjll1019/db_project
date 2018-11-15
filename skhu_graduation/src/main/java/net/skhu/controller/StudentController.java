@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.skhu.dto.Department;
 import net.skhu.dto.MySubject;
+import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
+import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.MySubjectMapper;
+import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.util.SecurityUtil;
@@ -28,6 +32,8 @@ public class StudentController {
 	@Autowired UserMapper userMapper;
 	@Autowired MySubjectMapper mySubjectMapper;
 	@Autowired StudentMapper studentMapper;
+	@Autowired DepartmentMapper departmentMapper;
+	@Autowired SecondMajorMapper secondMajorMapper;
 	
 	@RequestMapping(value="stu_main", method=RequestMethod.GET)
 	public String main(Model model) {
@@ -150,18 +156,24 @@ public class StudentController {
 			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 			Student student = studentMapper.findOneWithUser(user.getId());
 			model.addAttribute("student", student);
+			List<Department> departments = departmentMapper.findAll();
+			model.addAttribute("departments", departments);
+			List<SecondMajor> secondMajors = secondMajorMapper.findAll();
+			model.addAttribute("secondMajors", secondMajors);
 
 			return "student/stu_info";
 		}
 		
 		// professor_info POST
 			@RequestMapping(value="stu_info",method=RequestMethod.POST)
-			public String stu_info(Model model,User user, HttpSession session ) {
+			public String stu_info(Model model,User user, HttpSession session, Student student ) {
 
 				User userGetId = (User) session.getAttribute("user");
 				user.setId(userGetId.getId());
 				String alert="";
 				String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
+				studentMapper.update(student);
+				userMapper.updateStudent(user);
 
 				//비밀번호 조건에 맞지 않을 떄
 				if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {

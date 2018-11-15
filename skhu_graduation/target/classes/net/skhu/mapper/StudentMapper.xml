@@ -6,6 +6,14 @@
 		insert into student values (#{userId}, #{stuSemester}, #{stuClass}, #{transferStudent}, #{volunteerExemption}, #{departmentId}, #{howToGraduate});	
 	</select>
 	
+	<update id="update">
+		update student set
+		stuSemester = #{stuSemester},
+		stuClass = #{stuClass},
+		howToGraduate = #{howToGraduate}
+		where userId = #{userId}
+	</update>
+	
 	<select id="stuInfo" resultType="Student">
 		select * from student where userId like #{userId};	
 	</select>

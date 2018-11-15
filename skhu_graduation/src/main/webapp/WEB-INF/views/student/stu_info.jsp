@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ page import="net.skhu.dto.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:url var="R" value="/" />
  <% 
  String s= request.getParameter("departmentId");
@@ -65,6 +66,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
+				<form:form method="post"  modelAttribute="student">
 					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px">
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">이름</label>
@@ -128,7 +130,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<span class="input-group-addon">
 									<i class="fas fa-pen-square" ></i>&nbsp; 편입생
 								</span>
-									<input type="checkbox" name="kind" id="kind" style="margin-left:20px; width:25px; height:25px;"/>
+									<input type="checkbox" name="kind"  id="kind" style="margin-left:20px; width:25px; height:25px;"/>
 								</div>
 								
 								<div class="input-group" style="font-size: 13pt; margin-top: 8px;">
@@ -145,12 +147,8 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="majorId" class="form-control" id="majorId" style="height: 37px; font-size: 10pt;">
-     									 <option value="0" <%= majorId == 0 ? "selected" : "" %>>주전공을 선택해 주세요</option>
-      									<option value="12" <%= majorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
-  									    <option value="14" <%= majorId == 14 ? "selected" : "" %>>컴퓨터공학과</option>
-      									<option value="10" <%= majorId == 10 ? "selected" : "" %>>IT융합 자율 학부</option>
-									</select>
+							<form:select path="departmentId" class="form-control" itemValue="id" itemLabel="name" items="${ departments }" 
+							style="height: 37px; font-size: 10pt;" />
 								</div>
 							</div>
 						
@@ -158,7 +156,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="subMajorId" class="form-control" id="subMajorId" style="height: 37px; font-size: 10pt;" >
+							<select name="subMajorId" class="form-control" id="subMajorId" style="height: 37px; font-size: 10pt;" >
      									 <option value="0" <%= subMajorId == 0 ? "selected" : "" %>>부/복수 전공을 선택해 주세요</option>
       									<option value="11" <%= subMajorId == 11 ? "selected" : "" %>>디지털 컨텐츠학과</option>
   									    <option value="12" <%= subMajorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
@@ -234,6 +232,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 						</div>
 					
 					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

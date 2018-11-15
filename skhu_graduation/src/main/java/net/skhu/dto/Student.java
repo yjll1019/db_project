@@ -10,6 +10,15 @@ public class Student {
 	int volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
+	String subMajor;
+	
+	
+	public String getSubMajor() {
+		return subMajor;
+	}
+	public void setSubMajor(String subMajor) {
+		this.subMajor = subMajor;
+	}
 	User user;
 	Department department;
 	SecondMajor secondMajor;

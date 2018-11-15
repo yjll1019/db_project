@@ -6,6 +6,12 @@
 	insert into secondMajor values(#{userId}, #{division}, #{departmentId});
 	</select>
 	
+		<select id="findAll" resultMap="resultMap1">
+		select s.*, d.name 
+		from secondMajor s
+		left join department d on s.departmentId=d.id
+	</select>
+	
 	<select id="findOneById" resultMap="resultMap1">
 		select se.userId,d.name 
 		from secondMajor se 

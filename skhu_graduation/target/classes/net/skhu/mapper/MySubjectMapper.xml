@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.MySubjectMapper">
+
+	<select id="findAll" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId}
+	
+	</select>
+
+	<select id="findAllCount" resultType="int"><!-- 페이지네이션 미완성 -->
+		select count(*) from mySubject where userId like #{userId}
+	</select>
+
+	<select id="findByYearAndSemester" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject
+	 where userId like #{userId} and takeYear like #{takeYear} and takeSemester like #{takeSemester}
+	</select>
+	
+	<select id="findByYearAndSemesterCount"><!-- 페이지네이션 미완성 -->
+	select * from mySubject where userId like #{userId} and takeSemester like #{takeYear} and takeYear like #{takeSemester}
+	</select>
+	
+	<select id="findByOneSubject" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
+	</select>
+</mapper>
