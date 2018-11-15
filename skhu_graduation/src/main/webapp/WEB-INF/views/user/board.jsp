@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -75,23 +76,23 @@
 			<h2>공지사항 및 문의</h2>
 			<hr>
 			<div class="container">
-				<div class="input-group"
-					style="width: 500px; float: right; margin-bottom: 15px">
-					<select name="searchSelect" class="form-control" id="searchSelect">
-						<option value="이름">이름</option>
-						<option value="제목">제목</option>
-					</select> 
-					&nbsp;&nbsp;
-					<input type="text" class="form-control" name="searchText" style="width:200px;"
-						placeholder="입력하세요">&nbsp;&nbsp; <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<span class="input-group-addon"><i class="fa fa-search fa"
-								aria-hidden="true"></i></span>
-						</button>
-					</span>
-				</div>
-
+				<form method="post">
+	 				<div class="input-group" style="width: 500px; float: right; margin-bottom: 15px">
+						<select name="searchSelect" class="form-control" id="searchSelect">
+							<option value="1">이름</option>
+							<option value="2">제목</option>
+						</select> 
+						&nbsp;&nbsp;
+						<input type="text" class="form-control" name="searchText" style="width:200px;" placeholder="입력하세요">&nbsp;&nbsp; 
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="input-group-addon">
+									<i class="fa fa-search fa" aria-hidden="true"></i>
+								</span>
+							</button>
+						</span>
+					</div>
+				</form>
 			</div>
 			<br />
 			<table class="table table-hover">
@@ -104,84 +105,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="notice">
-						<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
-						<td id="word-color">공지사항입니다.</td>
-						<td id="word-color">관리자</td>
-						<td id="word-color">2018.09.15</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>졸업요건 문의</td>
-						<td>이예지</td>
-						<td>2018.09.10</td>
-					</tr>
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 졸업요건 문의</td>
-						<td>관리자</td>
-						<td>2018.09.11</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>학점 문의</td>
-						<td>이혜지</td>
-						<td>2018.09.09</td>
-					</tr>
-
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학점문의</td>
-						<td>관리자</td>
-						<td>2018.08.01</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>교수 졸업지도</td>
-						<td>이승진</td>
-						<td>2018.07.31</td>
-					</tr>
-
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 교수 졸업지도</td>
-						<td>관리자</td>
-						<td>2018.08.01</td>
-					</tr>
-
-					<tr>
-						<td>5</td>
-						<td>18학번 졸업요건 문의</td>
-						<td>새내기</td>
-						<td>2018.07.20</td>
-					</tr>
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right fa"></i>
-							[답변]
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18학번 졸업요건 문의</td>
-						<td>관리자</td>
-						<td>2018.07.21</td>
-					</tr>
+					<c:forEach var="board" items="${ boards }">
+						<c:choose>
+							<c:when test="${ board.postType == 1 }">
+								<tr class="notice">
+									<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
+									<td id="word-color">${ board.title }</td>
+									<td id="word-color">${ board.userName }</td>
+									<td id="word-color">
+										<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
+									</td>
+								</tr>
+							</c:when>
+							<c:when test="${ board.postType == 2 }">
+								<tr>
+									<td>${ board.boardId }</td>
+									<td>${ board.groupOrder == 1 ? '<i class="fa fa-arrow-right fa"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : ''}${ board.title }</td>
+									<td>${ board.userName }</td>
+									<td>
+										<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
+									</td>
+								</tr>
+							</c:when>
+						</c:choose>
+					</c:forEach>
 				</tbody>
 			</table>
 
-			<a id="createButton" class="btn btn-primary pull-right"
-				href="BoardWrite.jsp?pg=">
-				 <!-- ^%=currentPage%>&srchText= ^%=srchTextEncoded%>  ^자리에 < >들어가야함, pg=다음 붙어야함, 
-				 이거때매 오류나서 주석 처리  
-				 
-				 { 관리자 ? 공지사항 작성페이지 url : 문의글 작성페이지 url}
-				 -->
-				 			 
+			<a class="btn btn-primary pull-right" href="${ user.role == '관리자' ? 'user/noticeCreate' : 'user/questionCreate' }">		 
 				<i class="glyphicon glyphicon-plus"></i> 글쓰기
 			</a>
+			
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item"><a class="page-link" href="#"
@@ -198,8 +152,7 @@
 				</ul>
 			</nav>
 
-		</div>
-		
+		</div>	
 	</div>
 </body>
 </html>
