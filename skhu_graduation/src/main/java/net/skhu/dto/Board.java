@@ -12,6 +12,7 @@ public class Board {
 	int groupNumber;
 	int groupOrder;
 	String postType;
+	String userName;
 	
 	public int getBoardId() {
 		return boardId;
@@ -84,4 +85,13 @@ public class Board {
 	public void setPostType(String postType) {
 		this.postType = postType;
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 }
