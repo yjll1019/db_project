@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="R" value="/" />
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,31 +80,35 @@
 						<table class="table table-bordered" align="center" style="margin-top: 40px; font-size: 17px; text-align: center; max-width: 640px; width: 80%;">
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>제목</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">졸업요건 변경 안내입니다.</td>
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">${ board.title }.</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>작성일</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">2018.11.11</td>
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
+									<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
+								</td>
 							</tr>
+							<!--
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>첨부 파일</strong></td>
 								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
-									<c:forEach var="file" items="${ files }">
-										<a href="user/download?id=${file.id}">${ file.fileName }</a>&nbsp;&nbsp;&nbsp;
-										<span style="color: gray">${ file.fileSize }</span>&nbsp;&nbsp;
-										<a class="btn btn-default btn-xs" href="file/delete?id=${file.id}">삭제</a> <br/>
-									</c:forEach>
+									<c forEach var="file" items={ files }">
+										<a href="download?fileId={file.id}">{ file.fileName }</a>
+										<span style="color: gray">{ file.fileSize }</span>&nbsp;&nbsp;
+										<a class="btn btn-default btn-xs" href="file/delete?id={file.id}">삭제</a> <br/>
+									</c forEach>
 								</td>
 							</tr>
+							-->
 							<tr>
 								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
-								<td colspan="3" style="text-align: left; padding: 40px;">졸업요건이 수정되었습니다. 확인부탁드립니다.</td>
+								<td colspan="3" style="text-align: left; padding: 40px;">${ board.content }</td>
 							</tr>
 						</table>
 						<div class="form-group" align="center" style="margin-top: 40px">
 							<a class="btn btn-outline-primary" href="board">목록으로</a>
-							<c:if test="${board.userId == user.userId}">
-								&nbsp;&nbsp;<a href="edit?id={ board.boardId }" class="btn btn-primary">수정하기</a>
+							<c:if test="${board.userId == user.id}">
+								&nbsp;&nbsp;<a href="board_notice_edit?boardId=${ board.boardId }" class="btn btn-primary">수정하기</a>
 							</c:if>	
 						</div>
 					</form>

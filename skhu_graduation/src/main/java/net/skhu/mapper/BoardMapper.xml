@@ -54,7 +54,7 @@
 		update board set 
 			date = now(),
 			content = #{content},
-			title = #{title},
+			title = #{title}
 		where boardId = #{boardId}
 	</update>
 	
@@ -63,14 +63,14 @@
 			date = now(),
 			content = #{content},
 			password = #{password},
-			title = #{title},
+			title = #{title}
 		where boardId = #{boardId}
 	</update>
 	
 	<update id="updateAnswer">
 		update board set 
 			date = now(),
-			content = #{content},
+			content = #{content}
 		where boardId = #{boardId}
 	</update>
 	

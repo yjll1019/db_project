@@ -140,7 +140,7 @@ $(function() {
 				</tbody>
 			</table>
 
-			<a class="btn btn-primary pull-right" href="${ user.role == '관리자' ? 'user/noticeCreate' : 'user/questionCreate' }">		 
+			<a class="btn btn-primary pull-right" href="${ user.role == '관리자' ? 'user/board_notice_create' : 'user/board_question_create' }">		 
 				<i class="glyphicon glyphicon-plus"></i> 글쓰기
 			</a>
 			
