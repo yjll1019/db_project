@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.MySubject;
+import net.skhu.dto.Student;
 import net.skhu.dto.User;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.StudentMapper;
@@ -142,12 +143,13 @@ public class StudentController {
 		}
 	
 	//professor_info GET
-		@RequestMapping(value="stu_info",method=RequestMethod.GET)
+		@RequestMapping("stu_info")
 		public String stu_info(Model model,HttpSession session) {
 
 			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-			model.addAttribute("user",user);
+			Student student = studentMapper.findOneWithUser(user.getId());
+			model.addAttribute("student", student);
 
 			return "student/stu_info";
 		}

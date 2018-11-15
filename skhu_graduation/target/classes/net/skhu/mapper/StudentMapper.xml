@@ -46,7 +46,7 @@
 		left join user u on u.id=s.userId
 		left join department d on s.departmentId=d.id
 		left join secondMajor m on s.userId = m.userId
-		where s.userId=#{id};
+		where s.userId like #{userId};
 	</select>
 
 	<resultMap id="resultMap1" type="Student">

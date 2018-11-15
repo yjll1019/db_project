@@ -65,14 +65,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#" style="width: 300px">
+					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px">
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">¿Ã∏ß</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name" id="name"  value="${user.name}" placeholder="${user.name}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="name"   value="${student.user.userName}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="email" id="email"  value="${user.email}" placeholder= "${user.email}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="email"   value="${student.user.email}"style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -94,7 +94,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="tel" class="form-control" name="phone" id="phone" value="${user.phone}" placeholder="${user.phone}" style="height: 37px;"/>
+									<input type="tel" class="form-control" name="phone"  value="${student.user.phone}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>

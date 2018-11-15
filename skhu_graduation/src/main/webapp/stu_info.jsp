@@ -71,7 +71,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name" id="name"  value="${user.name}" placeholder="${user.name}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="name" id="name"  value="${student.user.name}" placeholder="${studentuser.name}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
