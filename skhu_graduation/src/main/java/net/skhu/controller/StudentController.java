@@ -151,18 +151,23 @@ public class StudentController {
 	//professor_info GET
 		@RequestMapping("stu_info")
 		public String stu_info(Model model,HttpSession session) {
-
-			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+			User user = (User) session.getAttribute("user");
+			
+			
+			User users=userMapper.findById(user.getId());
+			
+			model.addAttribute("users", users );
+			
 			Student student = studentMapper.findOneWithUser(user.getId());
-			model.addAttribute("student", student);
-			List<Department> departments = departmentMapper.findAll();
-			model.addAttribute("departments", departments);
-			List<SecondMajor> secondMajors = secondMajorMapper.findAll();
-			model.addAttribute("secondMajors", secondMajors);
+			model.addAttribute("student", student );
+			
+			SecondMajor secondMajor=secondMajorMapper.findOneById(user.getId());
 
 			return "student/stu_info";
 		}
+		
+
+
 		
 		// professor_info POST
 			@RequestMapping(value="stu_info",method=RequestMethod.POST)

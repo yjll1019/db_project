@@ -45,6 +45,12 @@
 		where id = #{id}
 	</update>
 	
+	<select id="findById" resultType="User">
+		select *
+		from user
+		where id= #{id};
+	</select>
+	
 	
 	
 	
