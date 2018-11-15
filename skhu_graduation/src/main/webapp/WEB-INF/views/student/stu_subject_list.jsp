@@ -19,10 +19,10 @@
 <script src="${R}res/js/header.js"></script>
 <!-- button drop down 링크 -->
 <link rel="stylesheet" href="${R}res/css/stu_subject_list.css">
-
 <title></title>
 </head>
 <body>
+
 	<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
@@ -76,7 +76,7 @@
 					</select> &nbsp;
 					
 					<button type="submit" class="btn btn-primary" style="font-size: 12pt; margin-top:1%">조회</button>
-					
+				</form:form>	
 				</div>
 			</div>
 	
@@ -112,7 +112,9 @@
 									<div class="dropdown-content">
 										<a href="#">대체과목변경(초수강)</a>
 										<a href="#">대체과목변경(재수강)</a> 
-										<a href="stu_major_admit">전공인정승인</a>
+										 <a href="<c:url value="stu_major_admit" > 
+  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+ 											 </c:url>">전공인정신청</a>
 									</div>
 								</div>
 							</td>
@@ -121,7 +123,6 @@
 					</tbody>
 				</table>
 			</div>
-			</form:form>
 	</div>
 			<div id="page">
 				<nav aria-label="Page navigation example">

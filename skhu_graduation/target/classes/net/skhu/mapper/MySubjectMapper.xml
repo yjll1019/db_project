@@ -22,4 +22,8 @@
 	<select id="findByOneSubject" resultType="MySubject">
 	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
 	</select>
+	
+	<update id="majorAdmit">
+		update mySubject set changeComplete=#{changeComplete}, completionDivision=#{completionDivision} where userId like #{userId} and subjectCode=#{subjectCode};
+	</update>
 </mapper>
