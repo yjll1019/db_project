@@ -14,8 +14,15 @@
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<script>
+$(function() { 
+	$("[data-url]").click(function() { 
+		var url = $(this).attr("data-url");   
+		location.href = url;
+	})  
+})
+</script>
 <link rel="stylesheet" href="${R}res/css/board.css">
-
 <title>게시글 목록</title>
 </head>
 <body>
@@ -79,6 +86,7 @@
 				<form method="post">
 	 				<div class="input-group" style="width: 500px; float: right; margin-bottom: 15px">
 						<select name="searchSelect" class="form-control" id="searchSelect">
+							<option value="0">전체</option>
 							<option value="1">이름</option>
 							<option value="2">제목</option>
 						</select> 
@@ -108,7 +116,7 @@
 					<c:forEach var="board" items="${ boards }">
 						<c:choose>
 							<c:when test="${ board.postType == 1 }">
-								<tr class="notice">
+								<tr class="notice" data-url="board_notice?id=${ board.boardId }"> <!-- data-url 안 넘어감..ㅜ -->
 									<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
 									<td id="word-color">${ board.title }</td>
 									<td id="word-color">${ board.userName }</td>
@@ -118,7 +126,7 @@
 								</tr>
 							</c:when>
 							<c:when test="${ board.postType == 2 }">
-								<tr>
+								<tr data-url="${board.groupOrder == 1 ? 'board_answer' : 'board_question'}?id=${board.boardId}">
 									<td>${ board.boardId }</td>
 									<td>${ board.groupOrder == 1 ? '<i class="fa fa-arrow-right fa"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : ''}${ board.title }</td>
 									<td>${ board.userName }</td>
