@@ -177,8 +177,6 @@ public class StudentController {
 				user.setId(userGetId.getId());
 				String alert="";
 				String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
-				studentMapper.update(student);
-				userMapper.updateStudent(user);
 
 				//비밀번호 조건에 맞지 않을 떄
 				if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
@@ -199,6 +197,9 @@ public class StudentController {
 				SecurityUtil su = new SecurityUtil();
 				String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 				user.setPassword(enPssword);
+				
+				studentMapper.update(student);
+				userMapper.updateStudent(user);
 
 				return "redirect:/student/stu_main"; //학생 조회 페이지로
 			}
