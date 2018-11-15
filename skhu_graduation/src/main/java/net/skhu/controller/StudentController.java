@@ -242,10 +242,6 @@ public class StudentController {
 			mySubject.setChangeComplete("교선");// 원래 있던 값을 저장
 			redirectAttributes.addAttribute("result", "1");
 		}
-		System.out.println(mySubject.getCompletionDivision());
-		System.out.println(mySubject.getChangeComplete());
-		System.out.println(mySubject.getSubjectCode());
-		System.out.println(mySubject.getUserId());
 		mySubjectMapper.majorAdmit(mySubject);
 		redirectAttributes.addAttribute("subjectCode", mySubject.getSubjectCode());
 		redirectAttributes.addAttribute("completionDivision", mySubject.getCompletionDivision());
