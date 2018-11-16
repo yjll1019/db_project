@@ -1,126 +1,95 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
+
+<c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquare/master/nanumsquare.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/css/header.css">
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="res/js/header.js"></script>
-<title>ÇÐ»ý- ´ëÃ¼°ú¸ñ ¸®½ºÆ® </title>
+<link rel="stylesheet" href="${R}res/css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+<script src="${R}res/js/header.js"></script>
+<title>í•™ìƒ- ëŒ€ì²´ê³¼ëª© ë¦¬ìŠ¤íŠ¸ </title>
 </head>
 <body>
-	<div id="jb-header">
+	<div id="jb-container">
+		<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>³ªÀÇÁ¹¾÷¿ä°Ç</span></a></li>
-				<li><a href='#'><span>¼ö°­¸ñ·Ï Á¶È¸</span></a></li>
-				<li><a href='#'><span>Á¹¾÷¿ä°Ç Á¶È¸</span></a></li>
-				<li><a href='#'><span>°øÁö»çÇ× ¹× ¹®ÀÇ</span></a></li>
-				<li style="float: right"><a href='#'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='#'><span>°³ÀÎÁ¤º¸º¯°æ</span></a></li>
+					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+				<li><a href='#'><span>ë‚˜ì˜ì¡¸ì—…ìš”ê±´</span></a></li>
+				<li><a href='stu_subject_list'><span>ìˆ˜ê°•ëª©ë¡ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ì¡¸ì—…ìš”ê±´ ì¡°íšŒ</span></a></li>
+				<li><a href='#'><span>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>ê°œì¸ì •ë³´ë³€ê²½</span></a></li>
 			</ul>
 		</div>
 	</div>
+		<div
+			style="margin-top: 30px; margin: 0 auto; max-width: 1000px; padding: 40px 40px; font-family: 'NanumSquare', sans-serif;">
+			<h2>ëŒ€ì²´ê³¼ëª© ëª©ë¡</h2>
+			<hr>
+			<form:form method="get" modelAttribute="pagination">
+				<form:hidden path="pg" value="1" />
+				<form:select path="sb" class="form-control"
+					style="display: inline; max-width:150px; margin-left:450px;"
+					itemValue="value" itemLabel="label" items="${searchBy }" />
+				<form:input path="st" class="form-control"
+					style="display: inline; max-width:200px;" placeholder="ê²€ìƒ‰í•˜ì„¸ìš”" />
+				<input type="submit" class="btn btn-outline-primary" value="ì¡°íšŒí•˜ê¸°" />
+			</form:form>
 
-	
-		<div id="search" style="margin-top: 3%; font-size: 10pt;">
-         <div style="font-size:20pt; margin-left: 20%;">
-         	<strong>´ëÃ¼°ú¸ñ¸ñ·Ï</strong>
-         </div>
-         
-         <div id="class2" style="display: inline; margin-left: 65%; font-size: 12pt;">
-             <input type="text" name="searchText" placeholder="°ú¸ñ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä."  style="margin-left:5px;">
-	         	&nbsp; <button type="button" class="btn btn-primary">Á¶È¸</button>
-         </div>
-      </div>
+			<br />
+			<table class="table table-bordered"
+				style="margin-top: -15px; width: 700; max-height: 500px; text-align: center; table-layout: fixed;">
+				<thead>
+					<tr style="background-color: #4582EC; color: white;">
+						<th scope="col" colspan="2"
+							style="border-right: 1px solid white; font-size: 15pt">íì§€ëœ
+							ê³¼ëª©</th>
+						<th scope="col" colspan="2" style="font-size: 15pt">ëŒ€ì²´ ê³¼ëª©</th>
+					</tr>
+				</thead>
+				<tr style="font-size: 18px">
+					<td style="height: 20px; border-right: 1px solid silver"><strong>
+							ê³¼ëª©ì½”ë“œ </strong></td>
+					<td style="height: 20px; border-right: 1px solid black"><strong>
+							ê³¼ëª©ëª… </strong></td>
+					<td style="height: 20px; border-right: 1px solid silver"><strong>
+							ê³¼ëª©ì½”ë“œ </strong></td>
+					<td><strong> ê³¼ëª©ëª… </strong></td>
+				</tr>
+				<tbody style="font-size: 12pt;">
+					<c:forEach var="replace" items="${replace }">
+						<tr>
+							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
+							<td style="border-right: 1px solid black">${replace.subject.subjectName }</td>
+							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
+							<td style="border-right: 1px solid silver">${replace.replaceSubjectName }</td>
+						</tr>
+					</c:forEach>
 
-      
-   <div class="table-responsive" style="margin-left: 20%; font-size:8pt; margin-top: 3%; text-align:center;">
-     <table class="table" style="width:60%;">
-       <thead>
-         <tr>
-    	  <th style=" font-size: 15pt">ÆóÁöµÈ °ú¸ñ</th>
-  	      <th style="font-size: 15pt">´ëÃ¼ °ú¸ñ</th>
-         </tr>
-       </thead>
-       
-       <tbody style="font-size: 12pt;">
-       <tr>
-         <td>ÀÌ»ê¼öÇÐ</td>
-         <td>´ëÇÐ¼öÇÐ</td>
-       </tr>
-       <tr>
-         <td>À¥ÆäÀÌÁö±¸ÃàI</td>
-         <td>Àü°ø¼±ÅÃ</td>
-       </tr>
-       <tr>
-         <td>CÇÁ·Î±×·¡¹ÖI</td>
-         <td>Python ÇÁ·Î±×·¡¹Ö</td>
-       </tr>
-       <tr>
-         <td>ÀÚ¹ÙÇÁ·Î±×·¡¹Ö</td>
-         <td>Àü°ø¼±ÅÃ</td>
-       </tr>
-       <tr>
-         <td>ÄÄÇ»ÅÍ±¸Á¶</td>
-         <td>ÄÄÇ»ÅÍ³×Æ®¿öÅ©</td>
-       </tr>
-       <tr>
-         <td>¿î¿µÃ¼Á¦·Ð</td>
-         <td>Àü°ø¼±ÅÃ</td>
-       </tr>
-       <tr>
-         <td>¾Ë°í¸®Áò</td>
-         <td>Àü°ø¼±ÅÃ</td>
-       </tr>
-       <tr>
-         <td>°ø¾÷¼öÇÐI</td>
-         <td>´ëÇÐ¼öÇÐ</td>
-       </tr>
-       <tr>
-         <td>C++ÇÁ·Î±×·¡¹Ö</td>
-         <td>ÀÚ¹ÙÇÁ·Î±×·¡¹Ö</td>
-       </tr>
-       <tr>
-         <td>µ¥ÀÌÅÍÅë½Å</td>
-         <td>µ¥ÀÌÅÍº£ÀÌ½º</td>
-       </tr>
-       <tr>
-         <td>ÄÄÇ»ÅÍ±×·¡ÇÈ½º</td>
-         <td>µðÁöÅÐ¿µ»óÃ³¸®</td>
-       </tr>                   	
-       </tbody>
-     </table>
-   </div>
-      
-      <div id="page" style="margin-top: 3%">
-			<nav aria-label="Page navigation example"> 
- 				 <ul class="pagination justify-content-center">
-    				 <li class="page-item">
-      					<a class="page-link" href="#" aria-label="Previous">
-      					  <span aria-hidden="true">&laquo;</span>
-        				  <span class="sr-only">Previous</span>
-     				    </a>
-   	 				</li>
-    				<li class="page-item"><a class="page-link" href="#">1</a></li>
-    				<li class="page-item"><a class="page-link" href="#">2</a></li>
-    				<li class="page-item"><a class="page-link" href="#">3</a></li>
-    				<li class="page-item">
-      					<a class="page-link" href="#" aria-label="Next">
-        					<span aria-hidden="true">&raquo;</span>
-        					<span class="sr-only">Next</span>
-     					</a>
-    				</li>
- 				 </ul>
-			</nav>		
-			
+				</tbody>
+			</table>
+
+			<my:pagination pageSize="${pagination.sz }"
+				recordCount="${pagination.recordCount }" />
+
 		</div>
+	</div>
 </body>
 </html>

@@ -25,7 +25,9 @@ import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.model.Pagination;
 import net.skhu.service.ExcelService;
+import net.skhu.service.ReplaceSubjectService;
 import net.skhu.util.SecurityUtil;
 
 @Controller
@@ -43,6 +45,7 @@ public class StudentController {
 	@Autowired
 	SecondMajorMapper secondMajorMapper;
 	@Autowired ExcelService excelService;
+	@Autowired ReplaceSubjectService replaceService;
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -192,7 +195,7 @@ public class StudentController {
 		return "student/stu_subject_list";
 	}
 
-	// professor_info GET
+	// stu_info GET
 	@RequestMapping("stu_info")
 	public String stu_info(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -209,7 +212,7 @@ public class StudentController {
 		return "student/stu_info";
 	}
 
-	// professor_info POST
+	// stu_info POST
 	@RequestMapping(value = "stu_info", method = RequestMethod.POST)
 	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor, HttpSession session) {
 
@@ -324,6 +327,18 @@ public class StudentController {
 		return "student/stu_replace_repeat";
 	}
 
+	// 대체과목목록 조회 페이지
+		@RequestMapping(value="stu_replace_list", method=RequestMethod.GET)
+		public String stu_replace_list(Model model,Pagination pagination) {//,HttpSession session
+			//User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+			//System.out.println(user.getRole());
+			//if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+			//if(!(user.getRole().equals("학생"))) return "redirect:/user/login"; // 관리자 아니면 로그인창으로
+
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "student/stu_replace_list";
+		}
 
 
 }
