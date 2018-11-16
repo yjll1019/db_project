@@ -51,6 +51,8 @@
 			alert('이메일이 아이디와 일치하지 않습니다.');
 		}else if(al==1){
 			alert('이메일로 임시 비밀번호를 전송하였습니다!');
+		}else if(al == -2){
+			alert('학생 아이디입니다. 학생 비밀번호찾기를 통해 비밀번호를 변경해주세요.');
 		}
 
 </script>
@@ -84,7 +86,7 @@
 					</div>
 					<br/><br/>
 					<div class="text-center p-t-20">
-						 <a class="txt2" href="stu_forgot_password.jsp"> 학생 비밀번호찾기 </a>
+						 <a class="txt2" href="../student/stu_forgot_password"> 학생 비밀번호찾기 </a>
 					</div>
 				</form:form>
 			</div>
