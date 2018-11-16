@@ -47,9 +47,9 @@ int n = base + 11;
 if (n <= pageCount)
     pages.add(new Page(n, "&gt;"));
 %>
-<ul class="pagination">
+<ul class="pagination" style="width:500px;margin-left:300px;">
   <% for (Page p : pages) { %>
-    <li class='<%= p.page == currentPage ? "active" : "" %>'>
+    <li class='<%= p.page == currentPage ? "active" : "" %>' style="border: 1px solid #ddd; padding:8px 8px;">
         <a href='<%= url.replace("@@@", String.valueOf(p.page)) %>'><%= p.label %></a>
     </li>    
   <% } %>
