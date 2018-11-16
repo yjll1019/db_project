@@ -174,11 +174,13 @@ public class AdminController {
 	// 대체과목목록 조회 페이지 파일업로드
 	@RequestMapping(value="replace_upload", method=RequestMethod.POST)
 	public String replace_upload(Model model, @RequestParam("file") MultipartFile file) throws Exception{
+		String r = "-1";
 		if(!file.isEmpty()) {
 			List<ReplaceSubject> replaceSubjects = excelService.getReplaceSubjectList(file.getInputStream());
 			replaceSubjectMapper.insert(replaceSubjects);
+			r = "1";
 		}
-		return "redirect:admin_replace_list";
+		return "redirect:admin_replace_list?r=" + r;
 	}
 
 
