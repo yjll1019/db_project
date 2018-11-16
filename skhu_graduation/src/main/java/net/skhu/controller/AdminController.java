@@ -110,38 +110,40 @@ public class AdminController {
 
 		User userGetId = (User) session.getAttribute("user");
 		user.setId(userGetId.getId());
+		user.setRole(userGetId.getRole());
 		String alert="";
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
-		
-		if(user.getPassword().length() > 0) {
-		//비밀번호 조건에 맞지 않을 떄
-		if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
-			alert="-1";
-			model.addAttribute("user",user);
-			model.addAttribute("alert",alert);
-			return "admin/adminInfo";
 
-		}
-		// 비밀번호와 확인비밀번호가 다를 때
-		if(!user.getConfirmPassword().equals(user.getPassword())) {
-			alert="-2";
-			model.addAttribute("user",user);
-			model.addAttribute("alert",alert);
-			return "admin/adminInfo";
-		}
-		
-		SecurityUtil su = new SecurityUtil();
-		String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
-		user.setPassword(enPssword);
+		if(user.getPassword().length() > 0) {
+
+			//비밀번호 조건에 맞지 않을 떄
+			if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
+				alert="-1";
+				model.addAttribute("user",user);
+				model.addAttribute("alert",alert);
+				return "admin/adminInfo";
+
+			}
+			// 비밀번호와 확인비밀번호가 다를 때
+			if(!user.getConfirmPassword().equals(user.getPassword())) {
+				alert="-2";
+				model.addAttribute("user",user);
+				model.addAttribute("alert",alert);
+				return "admin/adminInfo";
+			}
+			SecurityUtil su = new SecurityUtil();
+			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
+			user.setPassword(enPssword);
+
 		} else {
 			user.setPassword(userGetId.getPassword());
 		}
-		
+
 		userMapper.updateAdmin(user); // user테이블 update
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
 
-		return "redirect:adminInfo";
+		return "redirect:admin_stu_search";
 	}
 
 	//관리자 학생 조회 페이지
@@ -205,5 +207,5 @@ public class AdminController {
 		return "admin/admin_replace_list";
 
 	}
-	*/
+	 */
 }
