@@ -25,7 +25,7 @@
 		left join subject resub on re.replaceSubject = resub.code 
 		left join department d on d.id = sub.departmentId
 		<where>
-			<if test="sb==1">re.replaceSubject = #{st}</if>
+			<if test="sb==1">INSTR(re.replaceSubject, #{st})>0</if>
 			<if test="sb==2">INSTR(resub.subjectName,#{st})>0</if>
 		</where>
 		LIMIT ${start},${sz}
