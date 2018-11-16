@@ -14,4 +14,7 @@ public interface MySubjectMapper {
 	int findByYearAndSemesterCount(String userId, String takeYear, String takeSemester);
 	MySubject findByOneSubject(String userId, String subjectCode);
 	void majorAdmit(MySubject mySubject);
+	
+	// 엑셀 업로드
+	void insert(List<MySubject> mySubjects);
 }

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.MySubject;
@@ -24,6 +25,7 @@ import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.service.ExcelService;
 import net.skhu.util.SecurityUtil;
 
 @Controller
@@ -40,6 +42,7 @@ public class StudentController {
 	DepartmentMapper departmentMapper;
 	@Autowired
 	SecondMajorMapper secondMajorMapper;
+	@Autowired ExcelService excelService; 
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -53,9 +56,9 @@ public class StudentController {
 	public String main(Model model, RedirectAttributes redirectAttributes ,@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, @RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
 		User user = new User();
 		model.addAttribute("user", user);
-		
+
 		Map<Integer, Integer> map = new HashMap<Integer,Integer>();
-		
+
 		int x = Integer.parseInt(saveCredit);
 		int i=Integer.parseInt(beforeSemester)+1;
 		while(x!=0) {
@@ -69,7 +72,7 @@ public class StudentController {
 			}
 			map.put(i++, value);//(학기, 그 학기에 들어야하는 학점)
 		}
-	
+
 		int saveSemester = 8-map.size();
 		double score = Math.round((((Integer.parseInt(goalCredit)*saveSemester)-Integer.parseInt(allCredit))/saveSemester)*10)/10.0; //소수 첫째짜리까지 출력
 		redirectAttributes.addAttribute("map", map);
@@ -77,7 +80,7 @@ public class StudentController {
 		redirectAttributes.addAttribute("goalCredit", goalCredit);
 		return "redirect:/student/stu_goalCredit";
 	}
-	
+
 	// 학생 비밀번호 찾기를 위한 OTP검사
 	@RequestMapping(value = "stu_forgot_password", method = RequestMethod.GET)
 	public String stu_forgot_password(Model model) {
@@ -279,4 +282,14 @@ public class StudentController {
 		return "redirect:/student/stu_major_admit";
 	}
 
+	// 수강한 목록 엑셀 업로드
+	@RequestMapping(value="mySubject_upload", method=RequestMethod.POST)
+	public String replace_upload(Model model, @RequestParam("file") MultipartFile file, HttpSession session) throws Exception{
+		User user = (User) session.getAttribute("user");
+		if(!file.isEmpty()) {
+			List<MySubject> mySubjects = excelService.getMySubjectList(file.getInputStream(), user.getId());
+			mySubjectMapper.insert(mySubjects);
+		}
+		return "redirect:stu_subject_list";
+	}
 }
