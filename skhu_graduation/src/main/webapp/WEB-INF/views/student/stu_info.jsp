@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ page import="net.skhu.dto.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:url var="R" value="/" />
  <% 
  String s= request.getParameter("departmentId");
@@ -45,6 +46,18 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 
 <title>학생 마이페이지 </title>
 </head>
+<%
+	String alert =String.valueOf(request.getAttribute("alert"));
+%>
+<script>
+	var al = "<%=alert%>"
+		if(al==-1){
+			alert('비밀번호 조건이 맞지 않습니다. 영문+숫자 8자리 이상!');
+		}else if(al==-2){
+			alert('비밀번호와 확인비밀번호가 맞지 않습니다.');
+		}
+
+</script>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
@@ -65,14 +78,15 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#" style="width: 300px">
+
+					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px">
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">이름</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name" id="name" value="${user.userName}" placeholder="${user.userName}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="name"   value="${users.userName}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -83,7 +97,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="email" id="email"  value="${user.email}" placeholder= "${user.email}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="email"   value="${users.email}"style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -94,7 +108,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="tel" class="form-control" name="phone" id="phone" value="${user.phone}" placeholder="${user.phone}" style="height: 37px;"/>
+									<input type="tel" class="form-control" name="phone"  value="${users.phone}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -122,13 +136,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								
 							</div>
 						</div>
+
 						<div class="form-group" style="margin-top: 20pt;">	
 							<div class="cols-sm-10">
 								<div class="input-group" style="font-size: 13pt;">
 								<span class="input-group-addon">
 									<i class="fas fa-pen-square" ></i>&nbsp; 편입생
 								</span>
-									<input type="checkbox" name="kind" id="kind" style="margin-left:20px; width:25px; height:25px;"/>
+									<input type="checkbox" name="kind"  id="kind" style="margin-left:20px; width:25px; height:25px;"/>
 								</div>
 								
 								<div class="input-group" style="font-size: 13pt; margin-top: 8px;">
@@ -139,100 +154,91 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								</div>
 							</div>
 						</div>
+						
 						<div class="form-group" style="margin-top: 25px;">
 							<label for ="major" class="cls-sm-2 control-label">학부/학과</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="majorId" class="form-control" id="majorId" style="height: 37px; font-size: 10pt;">
-     									 <option value="0" <%= majorId == 0 ? "selected" : "" %>>주전공을 선택해 주세요</option>
-      									<option value="12" <%= majorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
-  									    <option value="14" <%= majorId == 14 ? "selected" : "" %>>컴퓨터공학과</option>
-      									<option value="10" <%= majorId == 10 ? "selected" : "" %>>IT융합 자율 학부</option>
+									<select name="majorId" class="form-control" value="${student.departmentId }" style="height: 37px; font-size: 10pt;">
+     									 <option value="0"  <c:if test="${student.departmentId == 0}">selected</c:if> >주전공을 선택해 주세요</option>
+      									<option value="12" <c:if test="${student.departmentId == 12}">selected</c:if>>소프트웨어 공학과</option>
+  									    <option value="14" <c:if test="${student.departmentId == 14}">selected</c:if>>컴퓨터공학과</option>
+      									<option value="10" <c:if test="${student.departmentId == 10}">selected</c:if>>IT융합 자율 학부</option>
 									</select>
 								</div>
+							</div>
 							</div>
 						
 							<div class="cols-sm-10" style="margin-top:5px;">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="subMajorId" class="form-control" id="subMajorId" style="height: 37px; font-size: 10pt;" >
-     									 <option value="0" <%= subMajorId == 0 ? "selected" : "" %>>부/복수 전공을 선택해 주세요</option>
-      									<option value="11" <%= subMajorId == 11 ? "selected" : "" %>>디지털 컨텐츠학과</option>
-  									    <option value="12" <%= subMajorId == 12 ? "selected" : "" %>>소프트웨어 공학과</option>
-      									<option value="13" <%= subMajorId == 13 ? "selected" : "" %>>정보통신학과</option>
-     									 <option value="14" <%= subMajorId == 14 ? "selected" : "" %>>컴퓨터공학과</option>
-      									<option value="15" <%= subMajorId == 15 ? "selected" : "" %>>글로컬 IT학과</option>
-  									    <option value="20" <%= subMajorId == 20 ? "selected" : "" %>>경영학부</option>
-      									<option value="21" <%= subMajorId == 21 ? "selected" : "" %>>디지털컨텐츠학과</option>
-      									 <option value="23" <%= subMajorId == 23 ? "selected" : "" %>>사회과학부</option>
-      									<option value="24" <%= subMajorId == 24 ? "selected" : "" %>>사회복지학과</option>
-  									    <option value="26" <%= subMajorId == 26 ? "selected" : "" %>>신문방송학과</option>
-      									<option value="30" <%= subMajorId == 30 ? "selected" : "" %>>신학과</option>
-     									 <option value="31" <%= subMajorId == 31 ? "selected" : "" %>>영어학과</option>
-      									<option value="32" <%= subMajorId == 32 ? "selected" : "" %>>일어일본학과</option>
-  									    <option value="34" <%= subMajorId == 34 ? "selected" : "" %>>중어중국학과</option>
+							<select name="subMajorId" class="form-control" value="${secondMajor.departmentId }" style="height: 37px; font-size: 10pt;" >
+     									 <option value="0" <c:if test="${secondMajor.departmentId == 0}">selected</c:if> >부/복수 전공을 선택해 주세요</option>
+      									<option value="11"<c:if test="${secondMajor.departmentId == 11}">selected</c:if> >디지털 컨텐츠학과</option>
+  									    <option value="12" <c:if test="${secondMajor.departmentId == 12 }">selected</c:if> >소프트웨어 공학과</option>
+      									<option value="13" <c:if test="${secondMajor.departmentId ==13 }">selected</c:if> >정보통신학과</option>
+     									 <option value="14" <c:if test="${secondMajor.departmentId == 14}">selected</c:if> >컴퓨터공학과</option>
+      									<option value="15" <c:if test="${secondMajor.departmentId ==15}">selected</c:if> >글로컬 IT학과</option>
+  									    <option value="20" <c:if test="${secondMajor.departmentId ==20}">selected</c:if> >경영학부</option>
+      									<option value="21" <c:if test="${secondMajor.departmentId ==21}">selected</c:if> >디지털컨텐츠학과</option>
+      									 <option value="23" <c:if test="${secondMajor.departmentId ==23}">selected</c:if> >사회과학부</option>
+      									<option value="24" <c:if test="${secondMajor.departmentId ==24}">selected</c:if> >사회복지학과</option>
+  									    <option value="26" <c:if test="${secondMajor.departmentId ==26}">selected</c:if> >신문방송학과</option>
+      									<option value="30" <c:if test="${secondMajor.departmentId ==30}">selected</c:if>>신학과</option>
+     									 <option value="31"<c:if test="${secondMajor.departmentId ==31}">selected</c:if> >영어학과</option>
+      									<option value="32"<c:if test="${secondMajor.departmentId ==32}">selected</c:if> >일어일본학과</option>
+  									    <option value="34" <c:if test="${secondMajor.departmentId ==34}">selected</c:if> >중어중국학과</option>
       									
 								</select>
 								</div>
 							</div>
-							<div class="cols-sm-10" style="margin-top:5px;">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<select name="class" class="form-control" id="class" style="height: 37px; font-size: 10pt;">
-      									<option value="0" <%= subMajorId == 0 ? "selected" : "" %>>반을 선택해 주세요</option>
-  									    <option value="1" <%= subMajorId == 1 ? "selected" : "" %>>1반</option>
-      									<option value="2" <%= subMajorId == 2 ? "selected" : "" %>>2반</option>
-     									 <option value="3" <%= subMajorId == 3 ? "selected" : "" %>>3반</option>
-      									<option value="4" <%= subMajorId == 4 ? "selected" : "" %>>4반</option>
-  									    <option value="5" <%= subMajorId == 5 ? "selected" : "" %>>5반</option>
-
-									</select>
-								</div>
-							</div>
-						</div>
-						
+							
+							
 						<div class="form-group" style="margin-top:5px;">
 							<label for ="semester" class="cls-sm-2 control-label">학기</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<select name="semester" class="form-control" id="semester" style="height: 37px; font-size: 10pt;" >
-      									<option value="0" <%= subMajorId == 0 ? "selected" : "" %>>학기를 선택해 주세요</option>
-  									    <option value="1" <%= subMajorId == 1 ? "selected" : "" %>>1학기</option>
-      									<option value="2" <%= subMajorId == 2 ? "selected" : "" %>>2학기</option>
-     									 <option value="3" <%= subMajorId == 3 ? "selected" : "" %>>3학기</option>
-      									<option value="4" <%= subMajorId == 4 ? "selected" : "" %>>4학기</option>
-  									    <option value="5" <%= subMajorId == 5 ? "selected" : "" %>>5학기</option>
-       									<option value="0" <%= subMajorId == 6 ? "selected" : "" %>>6학기</option>
-  									    <option value="1" <%= subMajorId == 7 ? "selected" : "" %>>7학기</option>
-      									<option value="2" <%= subMajorId == 8 ? "selected" : "" %>>8학기</option>
-     									 <option value="3" <%= subMajorId == 9 ? "selected" : "" %>>9학기</option>
+									<select name="semester" class="form-control" value="${student.stuSemester}"  style="height: 37px; font-size: 10pt;" >
+      									<option value="0" <c:if test="${student.stuSemester == 0}">selected</c:if> >학기를 선택해 주세요</option>
+  									    <option value="1" <c:if test="${student.stuSemester == 1}">selected</c:if>>1학기</option>
+      									<option value="2" <c:if test="${student.stuSemester == 2}">selected</c:if>>2학기</option>
+     									 <option value="3" <c:if test="${student.stuSemester == 3}">selected</c:if>>3학기</option>
+      									<option value="4" <c:if test="${student.stuSemester == 4}">selected</c:if>>4학기</option>
+  									    <option value="5" <c:if test="${student.stuSemester == 5}">selected</c:if>>5학기</option>
+       									<option value="0" <c:if test="${student.stuSemester == 6}">selected</c:if>>6학기</option>
+  									    <option value="1" <c:if test="${student.stuSemester == 7}">selected</c:if>>7학기</option>
+      									<option value="2" <c:if test="${student.stuSemester == 8}">selected</c:if>>8학기</option>
+     									 <option value="3" <c:if test="${student.stuSemester == 9}">selected</c:if>>9학기</option>
 
 								</select>
 								</div>
 							</div>
 						</div>
-						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
-							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
-						</div>			
-					</form>
-					<form action="mySubject_upload" method="post" enctype="multipart/form-data">
-							<div class="form-group">
+												
+						
+						
+						
+						
+						<div class="form-group">
 							<label for="file" class="cols-sm-2 control-label">file</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="file" name="file" style="width: 250px;">
-									<button type="submit" class="btn btn-primary">업로드</button>
+									<input type="file" class="form-control" name="file" id="file"/>
 								</div>
 							</div>
-						</div>					
+						</div>
+						
+						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
+						</div>
+					
 					</form>
 				</div>
 			</div>

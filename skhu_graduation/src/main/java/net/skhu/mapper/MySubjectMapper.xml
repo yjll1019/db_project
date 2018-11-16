@@ -23,12 +23,7 @@
 	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
 	</select>
 	
-	<insert id="insert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-		INSERT into mySubject(takeYear, takeSemester, subjectCode, subjectName, completionDivision, credit, score, userId) 
-		VALUES 
-		<foreach collection="list" item="mySubject" separator=" , ">
-			('${mySubject.takeYear}', '${mySubject.takeSemester}', '${mySubject.subjectCode}', '${mySubject.subjectName}',
-			 '${mySubject.completionDivision}', '${mySubject.credit}', '${mySubject.score}', '${mySubject.userId}')
-		</foreach>
-	</insert>
+	<update id="majorAdmit">
+		update mySubject set changeComplete=#{changeComplete}, completionDivision=#{completionDivision} where userId like #{userId} and subjectCode=#{subjectCode};
+	</update>
 </mapper>

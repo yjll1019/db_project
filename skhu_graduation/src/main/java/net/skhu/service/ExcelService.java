@@ -74,8 +74,7 @@ public class ExcelService {
 				// 업로드된 엑셀 파일에서 Subject 객체 목록을 읽어서 리턴하는 메소드
 				public List<MySubject> getMySubjectList(InputStream input, String userId) throws Exception {
 					List<MySubject> mySubjects = new ArrayList<>();
-					DataFormatter formatter = new DataFormatter();
-					
+
 					// 업로드된 엑셀 파일을 읽기 위한 workbook 객체 생성
 					Workbook workbook = WorkbookFactory.create(input);
 
@@ -85,13 +84,13 @@ public class ExcelService {
 					for (int r = 1; r < sheet.getPhysicalNumberOfRows() ; ++r) {
 						Row row = sheet.getRow(r);		// r번째 행의 데이터를 읽기 위한 row객체 생성
 						if (row.getCell(0) == null) break;		// 데이터가 없으면 읽기를 종료
-						String takeYear = formatter.formatCellValue(row.getCell(0));
-						String takeSemester = formatter.formatCellValue(row.getCell(1));
-						String subjectCode = formatter.formatCellValue(row.getCell(2));
-						String subjectName = formatter.formatCellValue(row.getCell(3));
-						String completionDivision = formatter.formatCellValue(row.getCell(4));
-						String credit = formatter.formatCellValue(row.getCell(5));
-						String score = formatter.formatCellValue(row.getCell(6));
+						String takeYear = row.getCell(0).getStringCellValue();
+						String takeSemester = row.getCell(1).getStringCellValue();
+						String subjectCode = row.getCell(2).getStringCellValue();
+						String subjectName = row.getCell(3).getStringCellValue();
+						String completionDivision = row.getCell(5).getStringCellValue();
+						String credit = row.getCell(6).getStringCellValue();
+						String score = row.getCell(7).getStringCellValue();
 
 						// 읽은 데이터로 객체를 생성하여 목록에 추가
 						mySubjects.add(new MySubject(takeYear, takeSemester, subjectCode, subjectName,
