@@ -64,31 +64,14 @@
 			<hr>
 			<form:form method="get" modelAttribute="pagination">
 				<form:hidden path="pg" value="1"/>
-				<form:select path="sb" class="form-group"
+				<form:select path="sb" class="form-control" style="display: inline; max-width:150px; margin-left:450px;"
 							itemValue="value" itemLabel="label" items="${searchBy }"/>
-				<form:input path="st" class="form-control" placeholder="검색하세요"/>
-				<button type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="조회하기"></button>
+				<form:input path="st" class="form-control" style="display: inline; max-width:200px;" placeholder="검색하세요"/>
+				<input type="submit" class="btn btn-outline-primary" value="조회하기"/>
 			</form:form>
-			<!--	
-				<div class="form-group" style="margin-top: -10px; margin-left: 415px; width: 540px;">
-					<select name="major" class="form-control" style="display: inline; width: 120px; height: 35px; font-size: 15px;">
-						<option value="학부/학과">학부/학과</option>
-						<option value="소프트웨어공학과">소프트웨어공학과</option>
-						<option value="정보통신공학과">정보통신공학과</option>
-						<option value="컴퓨터공학과">컴퓨터공학과</option>
-						<option value="글로컬IT공학과">글로컬IT공학과</option>
-					</select>
-					<select name="searchSubject" class="form-control" style="display: inline; width: 120px; height: 35px; font-size: 15px;">
-						<option>과목코드</option>
-						<option>과목이름</option>
-					</select>
-					<input type="text" class="form-control" name="searchText" placeholder="검색" style="display: inline; margin-left: 5px; width: 150px; height: 35px;">
-					<input type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="조회하기"/>
-				</div>
-			</form>
-			 -->
+		
 			<br />
-			<table class="table table-bordered" style="margin-top: -35px; width: 700; height: 300px; text-align: center; table-layout: fixed;">
+			<table class="table table-bordered" style="margin-top: -15px; width: 700; max-height: 300px; text-align: center; table-layout: fixed;">
 				<thead>
 					<tr style="background-color: #4582EC; color: white;">
 						<th scope="col" colspan="2" style="border-right: 1px solid white; font-size: 15pt">폐지된 과목</th>
@@ -96,9 +79,9 @@
 					</tr>
 				</thead>
 				<tr style="font-size: 18px">
-					<td style="height: 50px; border-right: 1px solid silver"><strong> 과목코드 </strong></td>
-					<td style="height: 50px; border-right: 1px solid black"><strong> 과목명 </strong></td>
-					<td style="height: 50px; border-right: 1px solid silver"><strong> 과목코드 </strong></td>
+					<td style="height: 20px; border-right: 1px solid silver"><strong> 과목코드 </strong></td>
+					<td style="height: 20px; border-right: 1px solid black"><strong> 과목명 </strong></td>
+					<td style="height: 20px; border-right: 1px solid silver"><strong> 과목코드 </strong></td>
 					<td><strong> 과목명 </strong></td>
 				</tr>
 				<tbody style="font-size: 12pt;">
@@ -113,27 +96,9 @@
 					
 				</tbody>
 			</table>
-			<div style="margin-top: 4%">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center" style="margin-top:20px;">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-							</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								<span class="sr-only">Next</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
+			
+			<my:pagination pageSize="${pagination.sz }" recordCount="${pagination.recordCount }"/>
+			
 			<div class="container" style="margin-top: 30px; font-size: 15pt">
 			<form>
 				<table style="width: 900px;">
@@ -226,7 +191,6 @@
 				</form>
 			</div>
 		</div>
-		<my:pagination pageSize="${pagination.sz }" recordCount="${pagination.recordCount }"/>
 	</div>
 </body>
 </html>
