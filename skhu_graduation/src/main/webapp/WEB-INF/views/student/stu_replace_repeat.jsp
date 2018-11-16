@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,20 +25,22 @@
 					<table style="margin-left: 100px; margin-top: 30px; border-bottom: 1px solid #d2d4d8; 
 						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed;">
 						<tr style="height: 40px">
-							<td> AF00011 </td>
-							<td> 이산수학 </td>
-							<td> 교양선택 </td>
-							<td> A+ </td>
+							<td> ${mySubject.subjectCode} </td>
+							<td> ${mySubject.subjectName} </td>
+							<td> ${mySubject.completionDivision} </td>
+							<td>${mySubject.score}</td>
 						</tr>
 					</table>
 					<div class="form-group">
 						<select class="custom-select" style="width: 60%; margin-top: 30px; margin-bottom: 20px">
 							<option selected>대체 가능한 필수과목</option>
-							<option value="1">과정지도3</option>
-							<option value="2">웹프로그래밍1</option>
-							<option value="3">대학수학</option>
+						<c:forEach var="list" items="${subjectList}">
+							<option value="${list.subjectCode}">${list.subjectName}</option>
+						</c:forEach>
 						</select>
 					</div>
+
+					
 					<div class="btn-r">
 						<input type="submit" class="btn btn-primary" value="적용하기" style="font-size: 15px; width: 100px" />
 					</div>

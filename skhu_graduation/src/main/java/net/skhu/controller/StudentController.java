@@ -302,8 +302,8 @@ public class StudentController {
 			return "redirect:stu_info?r=-1";
 		}
 	}
-	//대체과목 초수강 
-	@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
+	//대체과목 재수강
+	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.GET)
 	public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
 		User user = (User) session.getAttribute("user");
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
@@ -314,14 +314,14 @@ public class StudentController {
 		
 		if (mySubject.getCompletionDivision().contains("교")) {
 			completionDivision = "교선";
-			subjectList=mySubjectMapper.findBySubjectType(completionDivision);		
+			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);	
 			model.addAttribute("subjectList", subjectList);
 		} else {
 			completionDivision = "전선";
-			subjectList=mySubjectMapper.findBySubjectType(completionDivision);		
+			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);	
 			model.addAttribute("subjectList", subjectList);
 		}
-		return "student/stu_replace_first";
+		return "student/stu_replace_repeat";
 	}
 	
 	
