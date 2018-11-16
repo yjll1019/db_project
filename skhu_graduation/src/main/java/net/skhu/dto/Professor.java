@@ -6,6 +6,9 @@ public class Professor {
 	String grade; // 담당 학년
 	String group; // 담당 반. 원래는 class임.
 
+	//department
+	Department department;
+
 	public String getUserId() {
 		return userId;
 	}
@@ -29,6 +32,17 @@ public class Professor {
 	}
 	public void setGroup(String group) {
 		this.group = group;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	@Override
+	public String toString() {
+		return "Professor [userId=" + userId + ", departmentId=" + departmentId + ", grade=" + grade + ", group="
+				+ group + ", department=" + department + "]";
 	}
 
 
