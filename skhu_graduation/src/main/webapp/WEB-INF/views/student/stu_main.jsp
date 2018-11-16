@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="R" value="/" />    
 <!DOCTYPE html>
@@ -102,15 +103,16 @@
 				<!-- /default -->
 			</div>
 		</div>
-	
+		<form:form method="post">
 		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label> &nbsp;&nbsp;
-			직전학기 &nbsp;<input type="text" name="beforeSemester" style="width: 30px;"> 
-			남은학점 &nbsp; <input type="text" name="saveCredit" style="width: 30px;"> 
-			전체학점 &nbsp; <input type="text" name="allCredit" style="width: 30px;"> 
-			목표학점 &nbsp; <input type="text" name="goalCredit" style="width: 30px;"> &nbsp; &nbsp;
-			<button type="submit" class="btn btn-primary">조회</button>
+			직전학기 &nbsp;<input type="text" id="beforeSemester" name="beforeSemester" style="width: 40px;"/> 
+			남은학점 &nbsp; <input type="text" name="saveCredit" style="width: 40px;"/> 
+			전체학점 &nbsp; <input type="text" name="allCredit" style="width: 40px;"/> 
+			목표학점 &nbsp; <input type="text" name="goalCredit" style="width: 30px;"/>
+		<button type="submit" class="btn btn-primary">조회</button>
 		</div>
+	</form:form>
 		<div id="jb-content">
 			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
 

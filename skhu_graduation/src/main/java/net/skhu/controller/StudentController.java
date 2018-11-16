@@ -1,10 +1,11 @@
 package net.skhu.controller;
 
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import net.skhu.dto.MySubject;
 import net.skhu.dto.SecondMajor;
@@ -51,37 +53,61 @@ public class StudentController {
 		return "student/stu_main";
 	}
 
-	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때
-	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
-	public String main(Model model, RedirectAttributes redirectAttributes,
-			@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit,
-			@RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
-		User user = new User();
-		model.addAttribute("user", user);
+	   //stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
+	   @RequestMapping(value = "stu_main", method = RequestMethod.POST)
+	   public String main(Model model, RedirectAttributes redirectAttributes, @RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
+	         @RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
+	      User user = new User();
+	      model.addAttribute("user", user);
 
-		Map<Integer, Integer> map = new HashMap<Integer,Integer>();
+	      Map<String, Integer> map = new LinkedHashMap<String,Integer>();
+	      String s;
+	      int x = Integer.parseInt(saveCredit);
+	      int i=Integer.parseInt(beforeSemester)+1;
+	      while(x!=0) {
+	         int value=0;
+	         if(x-19>0) {
+	            value = 19;
+	            x-=19;
+	         }else {
+	            value = x;
+	            x-=x;
+	            
+	            if(i%2==1) {
+	                s = (i+1)/2+"학년1학기";
+	            }else {
+	                s = (i)/2+"학년2학기";
+	            }
+	            map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
+	            break;
+	         }
+	         if(i%2==1) {
+	             s = (i+1)/2+"학년1학기";
+	         }else {
+	             s = (i)/2+"학년2학기";
+	         }
+	         i++;
+	         map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
+	      }
 
-		int x = Integer.parseInt(saveCredit);
-		int i=Integer.parseInt(beforeSemester)+1;
-		while(x!=0) {
-			int value=0;
-			if(x%19>18) {
-				value = 19;
-				x=-19;
-			}else {
-				value = x;
-				x=-x;
-			}
-			map.put(i++, value);//(학기, 그 학기에 들어야하는 학점)
-		}
 
-		int saveSemester = 8-map.size();
-		double score = Math.round((((Integer.parseInt(goalCredit)*saveSemester)-Integer.parseInt(allCredit))/saveSemester)*10)/10.0; //소수 첫째짜리까지 출력
-		redirectAttributes.addAttribute("map", map);
-		redirectAttributes.addAttribute("score", score);
-		redirectAttributes.addAttribute("goalCredit", goalCredit);
-		return "redirect:/student/stu_goalCredit";
-	}
+	      double score = Math.round((((Double.parseDouble(goalCredit)*(map.size()+1))-Double.parseDouble(allCredit))/map.size())*10)/10.0; //소수 첫째짜리까지 출력
+	      redirectAttributes.addFlashAttribute("map", map);
+	      redirectAttributes.addAttribute("score", score);
+	      redirectAttributes.addAttribute("goalCredit", goalCredit);
+
+	      return "redirect:/student/stu_goalCredit";
+	   }
+
+	   //목표학점 결과 보여주는 페이지
+	   @RequestMapping(value = "stu_goalCredit", method = RequestMethod.GET)
+	   public String stu_goalCredit(Model model, HttpServletRequest request,@RequestParam("score") double score, @RequestParam("goalCredit") String goalCredit) {
+	      Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+	      model.addAttribute("map", (Map<String, Object>)flashMap.get("map"));
+	      model.addAttribute("score", score);
+	      model.addAttribute("goalCredit", goalCredit);
+	      return "student/stu_goalCredit";
+	   }
 
 	// 학생 비밀번호 찾기를 위한 OTP검사
 	@RequestMapping(value = "stu_forgot_password", method = RequestMethod.GET)
