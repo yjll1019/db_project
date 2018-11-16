@@ -116,7 +116,7 @@ $(function() {
 					<c:forEach var="board" items="${ boards }">
 						<c:choose>
 							<c:when test="${ board.postType == 1 }">
-								<tr class="notice" data-url="board_notice?id=${ board.boardId }"> <!-- data-url 안 넘어감..ㅜ -->
+								<tr class="notice" data-url="board_notice?id=${ board.boardId }">
 									<td id="word-color"><i class="fa fa-bullhorn fa"></i></td>
 									<td id="word-color">${ board.title }</td>
 									<td id="word-color">${ board.userName }</td>
@@ -126,7 +126,7 @@ $(function() {
 								</tr>
 							</c:when>
 							<c:when test="${ board.postType == 2 }">
-								<tr data-url="${board.groupOrder == 1 ? 'board_answer' : 'board_question'}?id=${board.boardId}">
+								<tr data-url="${board.groupOrder == 1 ? 'board_answer' : 'board_question_unlocked'}?boardId=${board.boardId}">
 									<td>${ board.boardId }</td>
 									<td>${ board.groupOrder == 1 ? '<i class="fa fa-arrow-right fa"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : ''}${ board.title }</td>
 									<td>${ board.userName }</td>
@@ -140,7 +140,7 @@ $(function() {
 				</tbody>
 			</table>
 
-			<a class="btn btn-primary pull-right" href="${ user.role == '관리자' ? 'user/board_notice_create' : 'user/board_question_create' }">		 
+			<a class="btn btn-primary pull-right" href="${ user.role == '관리자' ? 'board_notice_create' : 'board_question_create' }">		 
 				<i class="glyphicon glyphicon-plus"></i> 글쓰기
 			</a>
 			
