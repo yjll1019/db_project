@@ -107,9 +107,9 @@
 					</table>
 					
 					<div class="form-group" align="center" style="margin-top: 40px">
-      					<button type="submit" class="btn btn-outline-primary">등록하기</button>&nbsp;&nbsp;
+      					<button type="submit" class="btn btn-primary">등록하기</button>&nbsp;&nbsp;
       					<c:if test="${ board.boardId > 0 }">
-        					<a href="questionDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+        					<a href="questionDelete?id=${ board.boardId }" class="btn btn-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
         				</c:if>
       					<a href="board" class="btn btn-outline-primary">목록으로</a>
     				</div>					

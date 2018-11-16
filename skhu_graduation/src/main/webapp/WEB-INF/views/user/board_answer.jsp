@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -80,34 +81,30 @@
 						<table class="table table-bordered" align="center" style="margin-top: 40px; font-size: 17px; text-align: center; max-width: 640px; width: 80%;">
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>제목</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">[답변완료] 졸업 요건 문의드립니다.</td>
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">${ board.title }</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>작성자</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">교무처</td>
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">${ board.userName }</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>작성일</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">2018.09.26</td>
-							</tr>
-							<tr>
-								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>문의내용</strong></td>
-								<td colspan="3" style="text-align: left; padding: 40px;">
-									소프트웨어공학과 졸업요건 어디에서 확인가능한가요??							
+								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
+									<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
 								</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>답변내용</strong></td>
 								<td colspan="3" style="text-align: left; padding: 40px;">
-									<span>졸업요건조회 메뉴에서 확인가능합니다.</span>
+									<span>${ board.content }</span>
 								</td>
 							</tr>
 						</table>
 						<div class="form-group" align="center" style="margin-top: 40px">
-							<button type="button" class="btn btn-outline-primary">목록으로</button>
-							<!-- 작성자에게 보이도록 c:if 처리하기 
-								&nbsp;&nbsp;<a href="edit?id=${ board.boardId }" class="btn btn-primary">수정하기</a>
-							-->	
+							<a href="board" class="btn btn-outline-primary">목록으로</a>
+							<c:if test="${ user.id == board.userId }">
+								&nbsp;&nbsp;<a href="board_answer_edit?boardId=${ board.boardId }" class="btn btn-primary">수정하기</a>
+							</c:if>	
 						</div>
 					</form>
 				</div>

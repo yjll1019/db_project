@@ -50,32 +50,31 @@
 		</div>
 		<div id="jb-content">
 			<div id="boardWrite" style="margin-top:-30px; max-width: 800px;">
-				<h2>&nbsp;&nbsp;답변 작성<!-- ${ board.boardId == null ? "수정" : "등록" } --></h2>
+				<h2>&nbsp;&nbsp;답변 ${ board.boardId < 0 ? "등록" : "수정" }</h2>
 				<hr>
 				<div class="container">
 					<form method="post">
 						<table class="table table-bordered" align="center" style="margin-top: 40px; font-size: 17px; text-align: center; max-width: 640px; width: 80%;">
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>제목</strong></td>
-								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">[답변완료] 졸업 요건 문의드립니다.</td>
-							</tr>
-							<tr>
-								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>문의내용</strong></td>
-								<td colspan="3" style="text-align: left; padding: 40px;">
-									소프트웨어공학과 졸업요건 어디에서 확인가능한가요??							
+								<td colspan="3">
+										<input type="text" class="form-control" name="title" value="${ board.title }">
 								</td>
 							</tr>
 							<tr>
 								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>답변내용</strong></td>
 								<td colspan="3">
-									<textarea name="answer" class="form-control" style="width: 100%; height: 260px;">졸업요건조회 메뉴에서 확인가능합니다.</textarea>
+									<textarea name="content" class="form-control" style="width: 100%; height: 260px;">${ board.content }</textarea>
 								</td>
 							</tr>
 						</table>
+						<input type="hidden" name="groupNumber" value="${ board.groupNumber }" />
 						<div class="form-group" align="center" style="margin-top: 40px">
 							<button type="submit" class="btn btn-outline-primary">등록하기</button>&nbsp;&nbsp;
-        					<a href="delete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
-							<button type="button" class="btn btn-outline-primary">목록으로</button>
+							<c:if test="${ board.boardId > 0 }">
+        						<a href="answerDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+							</c:if>
+							<a href="board" class="btn btn-outline-primary">목록으로</a>
 						</div>
 					</form>
 				</div>

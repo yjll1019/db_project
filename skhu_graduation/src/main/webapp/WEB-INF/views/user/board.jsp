@@ -128,7 +128,8 @@ $(function() {
 							<c:when test="${ board.postType == 2 }">
 								<tr data-url="${board.groupOrder == 1 ? 'board_answer' : 'board_question_unlocked'}?boardId=${board.boardId}">
 									<td>${ board.boardId }</td>
-									<td>${ board.groupOrder == 1 ? '<i class="fa fa-arrow-right fa"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : ''}${ board.title }</td>
+									<td>${ board.groupOrder == 1 ? '<i class="fa fa-arrow-right fa"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : ''}
+										${ !empty board.password ? '<i class="fas fa-lock fa"></i>&nbsp;' : ''}${ board.title }</td>
 									<td>${ board.userName }</td>
 									<td>
 										<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
