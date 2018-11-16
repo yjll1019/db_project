@@ -81,31 +81,31 @@
 						<tr>
 							<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>이름</strong></td>
 							<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
-								<span>학생</span>
+								<span>${ board.userName }</span>
 							</td>									
 						</tr>
 						<tr>
 							<td style="background-color: #4582EC; color: white; padding-top: 18px"><strong>제목</strong></td>
 							<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
-								<span>졸업요건 문의드립니다.</span>
+								<span>${ board.title }</span>
 							</td>
 						</tr>
 						<tr>
 							<td style="background-color: #4582EC; color: white; height: 400px; padding-top: 190px"><strong>내용</strong></td>
 							<td colspan="3" style="text-align: left; padding: 40px;">
-								<span>졸업요건이 뭐에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
+								<span>${ board.content }</span>
 							</td>
 						</tr>
 					</table>
 					
 					<div class="form-group" align="center" style="margin-top: 40px">
-						<button type="button" class="btn btn-outline-primary">목록으로</button>
-						<!-- 작성자에게 보이도록 c:if 처리하기 
-						&nbsp;&nbsp;<a href="edit?id=${ board.boardId }" class="btn btn-primary">수정하기</a>
-						-->	
-						<!-- 관리자에게 보이도록 c:if 처리하기 
-						&nbsp;&nbsp;<a href="delete?id=${ board.boardId }" class="btn btn-danger" data-confirm-delete>삭제하기</a>
-						-->				
+						<a href="board" class="btn btn-outline-primary">목록으로</a>
+						<c:if test="${ user.id == board.userId }">
+							&nbsp;&nbsp;<a href="board_question_edit?boardId=${ board.boardId }" class="btn btn-primary">수정하기</a>
+						</c:if>	
+						<c:if test="${ user.role == '관리자' }">
+							&nbsp;&nbsp;<a href="questionDelete?id=${ board.boardId }" class="btn btn-danger" data-confirm-delete>삭제하기</a>
+						</c:if>			
 					</div>
 				</form>
 			</div>

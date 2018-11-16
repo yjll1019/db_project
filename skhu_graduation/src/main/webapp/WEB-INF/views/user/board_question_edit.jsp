@@ -16,7 +16,12 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
 <link rel="stylesheet" href="${R}res/css/board.css">
-
+<script>
+	var r = ${ result };
+	if(r == -1){
+        alert('비밀번호는 4자리 이상이어야합니다.');
+     }
+</script>
 <title>문의 작성 및 수정</title>
 </head>
 <body>
@@ -75,26 +80,27 @@
 		</div>
 		<div id="jb-content">
 			<div id="boardWrite"style="max-width: 800px;">
-				<h3>&nbsp;&nbsp;글 수정<!-- ${ board.boardId == null ? "수정" : "등록" } --></h3>
+				<h3>&nbsp;&nbsp;글 ${ board.boardId > 0 ? "수정" : "등록" }</h3>
 				<hr>
 				<form method="post">
 					<table class="table table-bordered" style="margin-left: 10%; margin-top: 40px; font-size: 17px; text-align: center; width: 80%">
 						<tr>
 							<td style="background-color: #4582EC; color: white; padding-top: 18px"><strong>제목</strong></td>
 							<td colspan="3">
-								<input type="text" class="form-control" name="title" value="졸업요건 문의드립니다." style="height: 35px">
+								<input type="text" class="form-control" name="title" value="${ board.title }" style="height: 35px">
 							</td>
 						</tr>
 						<tr>
 							<td style="background-color: #4582EC; color: white; height: 400px; padding-top: 190px"><strong>내용</strong></td>
 							<td colspan="3">
-								<textarea name="content" class="form-control" style="width: 100%; height: 400px;">졸업요건이 뭐에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</textarea>
+								<textarea name="content" class="form-control" style="width: 100%; height: 400px;">${ board.content }</textarea>
 							</td>
 						</tr>
 						<tr>
 							<td style="background-color: #4582EC; color: white; padding-top: 26px"><strong>비밀번호</strong></td>
 							<td colspan="3" style="text-align: left">
-								<input type="password" class="form-control" name="password" style="width: 150px; height: 35px; font-family: sans-serif">
+								<input type="password" class="form-control" name="password" value="${ board.password }"
+									style="width: 150px; height: 35px; font-family: sans-serif">
 								<span style="color: gray; font-size: 12pt">※ 비밀번호를 입력하시면 비밀글로 저장됩니다. (비밀번호는 4자리 이상)</span>
 							</td>
 						</tr>
@@ -102,8 +108,10 @@
 					
 					<div class="form-group" align="center" style="margin-top: 40px">
       					<button type="submit" class="btn btn-outline-primary">등록하기</button>&nbsp;&nbsp;
-        				<a href="delete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
-      					<a href="list" class="btn btn-outline-primary">목록으로</a>
+      					<c:if test="${ board.boardId > 0 }">
+        					<a href="questionDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+        				</c:if>
+      					<a href="board" class="btn btn-outline-primary">목록으로</a>
     				</div>					
 				</form>
 			</div>

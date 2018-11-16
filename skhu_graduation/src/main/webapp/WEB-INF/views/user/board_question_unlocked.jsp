@@ -36,7 +36,13 @@
 <link rel="stylesheet" type="text/css" href="${R}res/css/main.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+<script>
+	var r = ${ result };
+	if(r == -1){
+        alert('비밀번호가 일치하지 않습니다.');
+     }
 
+</script>
 </head>
 <body>
 	<div class="limiter">
@@ -51,7 +57,7 @@
 							class="focus-input100" data-placeholder="password"></span>
 					</div>
 					<div class="form-group" align="center" style="margin-top: 60px;">
-						<button type="button" class="btn btn-outline-primary">목록으로</button>
+						<a href="board" class="btn btn-outline-primary">목록으로</a>
 						<button type="submit" class="btn btn-primary" style="margin-left: 20px">확인하기</button>
 					</div>
 				</form>
