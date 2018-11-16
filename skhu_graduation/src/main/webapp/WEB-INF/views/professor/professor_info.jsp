@@ -92,7 +92,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<select name="departmentId" value="${user.professor.departmentId } class="form-control"  style="height: 37px; font-size: 13pt;">
+										<select name="departmentId"  class="form-control"  style="height: 37px; font-size: 13pt;">
 											<option value="">소속 학과(부)를 선택해주세요</option>
 											<option value="12">소프트웨어공학과</option>
 											<option value="14">컴퓨터공학과</option>
@@ -111,7 +111,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="grade" value="${user.professor.grade} class="form-control" style="height: 37px; font-size: 13pt;">
+										<select name="grade" class="form-control" style="height: 37px; font-size: 13pt;">
 											<option value="">학년 해당사항 없음</option>
 											<option value="1">1학년</option>
 											<option value="2">2학년</option>
@@ -125,7 +125,7 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="group" value="${user.professor.group} class="form-control" style="height: 37px; font-size: 13pt;">
+										<select name="group" class="form-control" style="height: 37px; font-size: 13pt;">
 											<option value="">반 해당사항 없음</option>
 											<option value="1">1반</option>
 											<option value="2">2반</option>

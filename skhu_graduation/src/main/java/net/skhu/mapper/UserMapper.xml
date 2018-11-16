@@ -31,10 +31,11 @@
 
 	<update id="updateProfessor">
 		update user set 
-			departmentId = #{departmentId},
-			grade = #{grade},
-			class = #{group}
-		where userId = #{userId}
+			password = #{password},
+			userName = #{userName},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
 	</update>
 
 	<update id="updateStudent">

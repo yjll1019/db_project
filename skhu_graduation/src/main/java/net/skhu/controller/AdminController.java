@@ -132,10 +132,9 @@ public class AdminController {
 		user.setPassword(enPssword);
 
 		userMapper.updateAdmin(user); // user테이블 update
-		session.removeAttribute("user");
-		session.setAttribute("user",user);//으아아아 세션..실패
+		session.invalidate();//일단 로그인하도록...ㅠㅠㅠ
 
-		return "redirect:/admin/admin_stu_search"; //학생 조회 페이지로
+		return "redirect:/user/login"; //일단 로그인하도록...ㅠㅠ
 	}
 
 	//관리자 학생 조회 페이지

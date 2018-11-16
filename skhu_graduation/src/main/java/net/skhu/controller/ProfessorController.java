@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.skhu.dto.Professor;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
 import net.skhu.mapper.CounselMapper;
+import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
@@ -29,6 +31,7 @@ public class ProfessorController {
 	@Autowired StudentMapper studentMapper;
 	@Autowired SecondMajorMapper secondMajorMapper;
 	@Autowired CounselMapper counselMapper;
+	@Autowired ProfessorMapper professorMapper;
 
 	static String[] searchIndex = {"s.userId, s.userName"};
 
@@ -67,16 +70,20 @@ public class ProfessorController {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		List<Professor> professor = professorMapper.findOneWithUser(user.getId());
+		System.out.println(professor.toString());
 		model.addAttribute("user",user);
-
+		model.addAttribute("professor",professor);
 		return "professor/professor_info";
 	}
 	// professor_info POST
 		@RequestMapping(value="/professor_info",method=RequestMethod.POST)
-		public String professor_info(Model model,User user, HttpSession session ) {
+		public String professor_info(Model model,User user, Professor professor, HttpSession session ) {
 
 			User userGetId = (User) session.getAttribute("user");
 			user.setId(userGetId.getId());
+			professor.setUserId(userGetId.getId());
+
 			String alert="";
 			String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
 
@@ -84,6 +91,7 @@ public class ProfessorController {
 			if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
 				alert="-1";
 				model.addAttribute("user",user);
+				model.addAttribute("professor",professor);
 				model.addAttribute("alert",alert);
 				return "professor/professor_info";
 
@@ -92,6 +100,7 @@ public class ProfessorController {
 			if(!user.getConfirmPassword().equals(user.getPassword())) {
 				alert="-2";
 				model.addAttribute("user",user);
+				model.addAttribute("professor",professor);
 				model.addAttribute("alert",alert);
 				return "professor/professor_info";
 			}
@@ -101,9 +110,10 @@ public class ProfessorController {
 			user.setPassword(enPssword);
 
 			userMapper.updateProfessor(user); // user테이블 update
+			professorMapper.updateProfessor(professor); // professor 테이블 update
 
-
-			return "redirect:/professor/professor_stu_search"; //학생 조회 페이지로
+			session.invalidate(); //일단 로그인하도록...ㅠㅠㅠ
+			return "redirect:/user/login"; //일단 로그인하도록...ㅠㅠㅠ
 		}
 
 		//professor_stu_info GET
