@@ -1,6 +1,7 @@
 package net.skhu.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -177,8 +178,9 @@ public class AdminController {
 	@RequestMapping(value="admin_replace_list", method=RequestMethod.GET)
 	public String admin_replace_list(Model model,Pagination pagination,HttpSession session) {
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		//System.out.println(user.getRole());
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-		if(user.getRole()!="admin") return "redirect:/user/login"; // 관리자 아니면 로그인창으로
+		if(!(user.getRole().equals("관리자"))) return "redirect:/user/login"; // 관리자 아니면 로그인창으로
 
 		model.addAttribute("replace",replaceService.findByType(pagination));
 		model.addAttribute("searchBy",replaceService.getSerachByOptions());
@@ -194,13 +196,17 @@ public class AdminController {
 		deleteSubject.add(subject.getDeleteSemester());
 		deleteSubject.add(subject.getDeleteCode());
 		deleteSubject.add(subject.getDeleteSubjectName());
+		//System.out.println(deleteSubject.toString());
 
 		List<String> replaceSubject = new ArrayList<String>();
 		replaceSubject.add(subject.getDepartmentId());
-		replaceSubject.add(subject.getYear());
 		replaceSubject.add(subject.getSemester());
 		replaceSubject.add(subject.getCode());
 		replaceSubject.add(subject.getSubjectName());
+
+		HashMap hash = new HashMap();
+		hash.put("deleteSubject",deleteSubject);
+		hash.put("replaceSubject",replaceSubject);
 
 		String alert="";
 
