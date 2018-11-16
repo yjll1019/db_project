@@ -43,20 +43,21 @@
          <div class="col-sm-4">
             <div class="input-group">
                <select name="subMajor" class="form-control" id="subMajor">
-                  <option value="notSelect">조회하려는 학과를 선택해 주세요</option>
-                  <option value="소프트웨어 공학과">소프트웨어공학과</option>
-                  <option value="컴퓨터공학과">컴퓨터공학과</option>
-                  <option value="정보통신공학과">정보통신 공학과</option>
-                  <option value="글로컬IT학과">글로컬IT학과</option>
-                  <option value="디지털컨텐츠">디지털컨텐츠</option>
-                  <option value="신문방송학과">신문방송학과</option>
-                  <option value="경영학부">경영학부</option>
-                  <option value="사회과학부">사회과학부</option>
-                  <option value="사회복지학과">사회복지학과</option>
-                  <option value="중어중국학과">중어중국학과</option>
-                  <option value="일어일본학과">일어일본학과</option>
-                  <option value="영어학과">영어학과</option>
-                  <option value="신학과">신학과</option>
+                  <option value="0">조회하려는 학과를 선택해 주세요</option>
+      									<option value="11" >디지털 컨텐츠학과</option>
+  									    <option value="12"  >소프트웨어 공학과</option>
+      									<option value="13"  >정보통신학과</option>
+     									 <option value="14"  >컴퓨터공학과</option>
+      									<option value="15"  >글로컬 IT학과</option>
+  									    <option value="20"  >경영학부</option>
+      									<option value="21"  >디지털컨텐츠학과</option>
+      									 <option value="23"  >사회과학부</option>
+      									<option value="24"  >사회복지학과</option>
+  									    <option value="26"  >신문방송학과</option>
+      									<option value="30" >신학과</option>
+     									 <option value="31">영어학과</option>
+      									<option value="32" >일어일본학과</option>
+  									    <option value="34">중어중국학과</option>
                </select>
             </div>
          </div>
