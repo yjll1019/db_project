@@ -219,26 +219,22 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								</div>
 							</div>
 						</div>
-												
-						
-						
-						
-						
-						<div class="form-group">
+						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
+						</div>		
+					</form>
+					<form action="mySubject_upload" method="post" enctype="multipart/form-data">
+							<div class="form-group">
 							<label for="file" class="cols-sm-2 control-label">file</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="file" class="form-control" name="file" id="file"/>
+									<input type="file" name="file" style="width: 250px;" />
+									<button type="submit" class="btn btn-primary">업로드</button>
 								</div>
 							</div>
-						</div>
-						
-						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
-							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
-						</div>
-					
+						</div>					
 					</form>
 				</div>
 			</div>
