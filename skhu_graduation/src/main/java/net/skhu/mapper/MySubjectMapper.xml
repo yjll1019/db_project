@@ -23,6 +23,11 @@
 	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
 	</select>
 	
+	<select id="findBySubjectType" resultType="MySubject">
+	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision 
+	from mySubject where userId like #{userId} and completionDivision like #{completionDivision}; 
+	</select>
+	
 	<update id="majorAdmit">
 		update mySubject set changeComplete=#{changeComplete}, completionDivision=#{completionDivision} where userId like #{userId} and subjectCode=#{subjectCode};
 	</update>

@@ -157,6 +157,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 						
 						<div class="form-group" style="margin-top: 25px;">
 							<label for ="major" class="cls-sm-2 control-label">학부/학과</label>
+							<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
+ 								&nbsp;	&nbsp;	&nbsp; &nbsp;
+ 								<input type="radio" name="howToGraduate" value="전공기초" checked> 전공기초 
+ 								&nbsp; &nbsp;
+								<input type="radio" name="howToGraduate" value="전공심화"> 전공심화
+ 							</div>
+ 							
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
@@ -171,6 +178,12 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							</div>
 							</div>
 						
+							<div class="checkbox" style="font-size: 10pt; margin-bottom: 7%">
+ 								&nbsp;	&nbsp;	&nbsp; &nbsp; 
+ 								<input type="checkbox" name="doubleMajor" value="복수전공" > 복수전공 
+ 								&nbsp; &nbsp;
+								<input type="checkbox" name="subMajor" value="부전공"> 부전공
+ 							</div>
 							<div class="cols-sm-10" style="margin-top:5px;">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
@@ -219,7 +232,8 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								</div>
 							</div>
 						</div>
-						<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
+
+							<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
 							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
 						</div>		
 					</form>

@@ -209,7 +209,7 @@ public class StudentController {
 
 	// professor_info POST
 	@RequestMapping(value = "stu_info", method = RequestMethod.POST)
-	public String stu_info(Model model, User user, HttpSession session, Student student) {
+	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor, HttpSession session) {
 
 		User userGetId = (User) session.getAttribute("user");
 		user.setId(userGetId.getId());
@@ -219,7 +219,8 @@ public class StudentController {
 		// 비밀번호 조건에 맞지 않을 떄
 		if (!user.getPassword().matches(regex) || user.getPassword().length() < 8) {
 			alert = "-1";
-			model.addAttribute("user", user);
+			model.addAttribute("user",user);
+			model.addAttribute("student",student);
 			model.addAttribute("alert", alert);
 			return "student/stu_info";
 
@@ -227,7 +228,9 @@ public class StudentController {
 		// 비밀번호와 확인비밀번호가 다를 때
 		if (!user.getConfirmPassword().equals(user.getPassword())) {
 			alert = "-2";
-			model.addAttribute("user", user);
+			model.addAttribute("user",user);
+			model.addAttribute("student",student);
+			model.addAttribute("secondMajor",secondMajor);
 			model.addAttribute("alert", alert);
 			return "student/stu_info";
 		}
@@ -236,8 +239,9 @@ public class StudentController {
 		String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 		user.setPassword(enPssword);
 
-		studentMapper.update(student);
-		userMapper.updateStudent(user);
+		studentMapper.update(student); //student 테이블 update
+		userMapper.updateStudent(user); //user 테이블 update
+		secondMajorMapper.update(secondMajor);
 
 		return "redirect:/student/stu_main"; // 학생 조회 페이지로
 	}
@@ -292,4 +296,28 @@ public class StudentController {
 		}
 		return "redirect:stu_subject_list";
 	}
+	//대체과목 초수강 
+	@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
+	public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
+		User user = (User) session.getAttribute("user");
+		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
+		model.addAttribute("mySubject", mySubject);
+		String completionDivision;
+		List<MySubject> subjectList;
+		
+		
+		if (mySubject.getCompletionDivision().contains("교")) {
+			completionDivision = "교선";
+			subjectList=mySubjectMapper.findBySubjectType(completionDivision);		
+			model.addAttribute("subjectList", subjectList);
+		} else {
+			completionDivision = "전선";
+			subjectList=mySubjectMapper.findBySubjectType(completionDivision);		
+			model.addAttribute("subjectList", subjectList);
+		}
+		return "student/stu_replace_first";
+	}
+	
+	
+	
 }

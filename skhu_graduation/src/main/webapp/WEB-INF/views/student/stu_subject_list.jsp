@@ -109,8 +109,12 @@
 								<div class="dropdown">
 									<button class="dropbtn">&nbsp;변경&nbsp;</button>
 									<div class="dropdown-content">
-										<a href="#">대체과목변경(초수강)</a>
-										<a href="#">대체과목변경(재수강)</a> 
+										 <a href="<c:url value="../student/stu_replace_first" > 
+  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+ 											 </c:url>">대체과목변경(초수강)</a>
+										 <a href="<c:url value="stu_replace_repeat" > 
+  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+ 											 </c:url>">대체과목변경(재수강)</a>
 										 <a href="<c:url value="stu_major_admit" > 
   											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
  											 </c:url>">전공인정신청</a>
