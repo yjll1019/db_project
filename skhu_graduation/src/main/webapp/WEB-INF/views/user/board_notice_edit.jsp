@@ -49,7 +49,7 @@
 	</div>
 		<div id="jb-content">
 			<div id="boardWrite" style="margin-top:-30px; max-width: 800px;">
-				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId == null ? "등록" : "수정" }</h2>
+				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId < 0 ? "등록" : "수정" }</h2>
 				<hr>
 				<div class="container">
 					<form method="post">
@@ -75,13 +75,15 @@
 								<tr>
 									<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
 									<td colspan="3">
-										<textarea name="content" class="form-control" style="width: 100%; height: 260px;">졸업요건이 수정되었습니다. 확인부탁드립니다.</textarea>
+										<textarea name="content" class="form-control" style="width: 100%; height: 260px;">${ board.content }</textarea>
 									</td>
 								</tr>
 							</table>
 							<div class="form-group" align="center" style="margin-top: 40px">
 								<button type="submit" class="btn btn-outline-primary">등록하기</button>&nbsp;&nbsp;
-        						<a href="boardDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+								<c:if test="${ board.boardId > 0 }">
+        							<a href="noticeDelete?id=${ board.boardId }" class="btn btn-outline-danger" data-confirm-delete>삭제하기</a>&nbsp;&nbsp;
+								</c:if>
 								<a href="board" class="btn btn-outline-primary">목록으로</a>
 							</div>
 					</form>

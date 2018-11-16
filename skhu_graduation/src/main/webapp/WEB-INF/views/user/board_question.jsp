@@ -104,6 +104,7 @@
 							&nbsp;&nbsp;<a href="board_question_edit?boardId=${ board.boardId }" class="btn btn-primary">수정하기</a>
 						</c:if>	
 						<c:if test="${ user.role == '관리자' }">
+							&nbsp;&nbsp;<a href="board_answer_create?boardId=${ board.boardId }" class="btn btn-primary">답변하기</a>
 							&nbsp;&nbsp;<a href="questionDelete?id=${ board.boardId }" class="btn btn-danger" data-confirm-delete>삭제하기</a>
 						</c:if>			
 					</div>

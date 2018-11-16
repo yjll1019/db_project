@@ -62,7 +62,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/board_notice_create", method=RequestMethod.POST)
-	public String board_notice_insert(Model model, Board board) {
+	public String board_notice_insert(Model model, Board board, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		board.setUserId(user.getId());
 		boardMapper.insertNotice(board);
 		return "redirect:board";
 	}
@@ -83,9 +85,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/noticeDelete")
-	public void noticeDelete(@RequestParam("id") int id) throws Exception {
+	public String noticeDelete(@RequestParam("id") int id) throws Exception {
 		//fileMapper.deleteByBoardId(id);
 		boardMapper.deleteNotice(id);
+		return "redirect:board";
 	}
 
 	/*
@@ -184,11 +187,17 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/board_question_unlocked", method=RequestMethod.GET)
-	public String board_question_locked(Model model, @RequestParam("boardId") int boardId) {
+	public String board_question_locked(Model model, HttpSession session, 
+			@RequestParam("boardId") int boardId) {
 		Board board = boardMapper.findOne(boardId);
-		if(board.getPassword() != null) {
-			model.addAttribute("boardId", boardId);
-			return "user/board_question_unlocked";
+		User user = (User) session.getAttribute("user");
+		if(!user.getRole().equals("관리자")) {
+			if(board.getPassword() != null) {
+				model.addAttribute("boardId", boardId);
+				return "user/board_question_unlocked";
+			} else {
+				return "redirect:board_question?boardId=" + boardId;
+			}
 		} else {
 			return "redirect:board_question?boardId=" + boardId;
 		}
@@ -205,5 +214,50 @@ public class BoardController {
 			model.addAttribute("result", "-1");
 			return "redirect:board_question_unlocked?boardId=" + boardId;
 		}
+	}
+
+	// 답변
+	@RequestMapping(value="/board_answer", method=RequestMethod.GET)
+	public String board_answer(Model model, @RequestParam("boardId") int id) {
+		Board board = boardMapper.findOne(id);
+		model.addAttribute("board", board);
+		return "user/board_answer";
+	}
+
+	@RequestMapping(value="/board_answer_create", method=RequestMethod.GET)
+	public String board_answer_create(Model model, @RequestParam("boardId") int id) {
+		Board question = boardMapper.findOne(id);
+		Board board = new Board();
+		board.setGroupNumber(id);
+		board.setTitle("[답변] " + question.getTitle());
+		model.addAttribute("board", board);
+		return "user/board_answer_edit";
+	}
+
+	@RequestMapping(value="/board_answer_create", method=RequestMethod.POST)
+	public String board_answer_insert(Model model, Board board, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		board.setUserId(user.getId());
+		boardMapper.insertAnswer(board);
+		return "redirect:board";
+	}
+
+	@RequestMapping(value="/board_answer_edit", method=RequestMethod.GET)
+	public String board_answer_edit(Model model, @RequestParam("boardId") int boardId) {
+		Board board = boardMapper.findOne(boardId);
+		model.addAttribute("board", board);
+		return "user/board_answer_edit";
+	}
+
+	@RequestMapping(value="/board_answer_edit", method=RequestMethod.POST)
+	public String board_answer_update(Model model, Board board) {
+		boardMapper.updateAnswer(board);
+		return "redirect:board_answer?boardId=" + board.getBoardId();
+	}
+
+	@RequestMapping("/answerDelete")
+	public String answerDelete(@RequestParam("id") int id) throws Exception {
+		boardMapper.deleteAnswer(id);
+		return "redirect:board";
 	}
 }
