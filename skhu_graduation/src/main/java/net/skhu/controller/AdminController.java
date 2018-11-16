@@ -1,5 +1,6 @@
 package net.skhu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -174,10 +175,52 @@ public class AdminController {
 
 	// 대체과목목록 조회 페이지
 	@RequestMapping(value="admin_replace_list", method=RequestMethod.GET)
-	public String admin_replace_list(Model model,Pagination pagination) {
+	public String admin_replace_list(Model model,Pagination pagination,HttpSession session) {
+		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getRole()!="admin") return "redirect:/user/login"; // 관리자 아니면 로그인창으로
+
 		model.addAttribute("replace",replaceService.findByType(pagination));
 		model.addAttribute("searchBy",replaceService.getSerachByOptions());
 		return "admin/admin_replace_list";
+	}
+
+	// 폐지과목 신청 및 대체 과목 신청
+	@RequestMapping(value="admin_replace_list", method=RequestMethod.POST)
+	public String admin_replace_list(Model model, Subject subject, HttpSession session) {
+		List<String> deleteSubject = new ArrayList<String>();
+		deleteSubject.add(subject.getDeleteDepartmentId());
+		deleteSubject.add(subject.getDeleteYear());
+		deleteSubject.add(subject.getDeleteSemester());
+		deleteSubject.add(subject.getDeleteCode());
+		deleteSubject.add(subject.getDeleteSubjectName());
+
+		List<String> replaceSubject = new ArrayList<String>();
+		replaceSubject.add(subject.getDepartmentId());
+		replaceSubject.add(subject.getYear());
+		replaceSubject.add(subject.getSemester());
+		replaceSubject.add(subject.getCode());
+		replaceSubject.add(subject.getSubjectName());
+
+		String alert="";
+
+		if((subjectMapper.findDelete(deleteSubject)>0) && (subjectMapper.findReplace(replaceSubject)>0)) {//subject테이블에 입력 정보 존재
+			replaceSubjectMapper.insertSubject(subject.getDeleteCode(),subject.getCode());
+			System.out.println("폐지,대체과목 저장 완료!");
+			return "adimin_replace_list";
+		}else if(!(subjectMapper.findDelete(deleteSubject)>0)) {//입력한 폐지 과목 정보가 subject 테이블에 없다.
+			alert="-1";
+			model.addAttribute("alert",alert);
+			model.addAttribute("subject",subject);
+			return "admin_replace_list";
+		}else if(!( (subjectMapper.findReplace(replaceSubject)>0))) {//입력한 대체 과목 정보가 subject 테이블에 없다.
+			alert="-2";
+			model.addAttribute("alert",alert);
+			model.addAttribute("subject",subject);
+			return "admin_replace_list";
+		}
+
+		return "admin_replace_list";
 	}
 
 	// 대체과목목록 조회 페이지 파일업로드

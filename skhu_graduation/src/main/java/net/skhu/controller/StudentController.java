@@ -42,7 +42,7 @@ public class StudentController {
 	DepartmentMapper departmentMapper;
 	@Autowired
 	SecondMajorMapper secondMajorMapper;
-	@Autowired ExcelService excelService; 
+	@Autowired ExcelService excelService;
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -51,10 +51,10 @@ public class StudentController {
 		return "student/stu_main";
 	}
 
-	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
+	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때
 	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
 	public String main(Model model, RedirectAttributes redirectAttributes,
-			@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
+			@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit,
 			@RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
 		User user = new User();
 		model.addAttribute("user", user);
@@ -243,7 +243,7 @@ public class StudentController {
 
 		studentMapper.update(student); //student 테이블 update
 		userMapper.updateStudent(user); //user 테이블 update
-		secondMajorMapper.update(secondMajor);
+		//secondMajorMapper.update(secondMajor);
 
 		return "redirect:/student/stu_main"; // 학생 조회 페이지로
 	}
@@ -290,10 +290,10 @@ public class StudentController {
 
 	// 수강한 목록 엑셀 업로드
 	@RequestMapping(value="mySubject_upload", method=RequestMethod.POST)
-	public String replace_upload(Model model, @RequestParam("file") MultipartFile file, 
+	public String replace_upload(Model model, @RequestParam("file") MultipartFile file,
 			HttpSession session) throws Exception{
 		User user = (User) session.getAttribute("user");
-		
+
 		if(!file.isEmpty()) {
 			List<MySubject> mySubjects = excelService.getMySubjectList(file.getInputStream(), user.getId());
 			mySubjectMapper.insert(mySubjects);
@@ -310,20 +310,20 @@ public class StudentController {
 		model.addAttribute("mySubject", mySubject);
 		String completionDivision;
 		List<MySubject> subjectList;
-		
-		
+
+
 		if (mySubject.getCompletionDivision().contains("교")) {
 			completionDivision = "교선";
-			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);	
+			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);
 			model.addAttribute("subjectList", subjectList);
 		} else {
 			completionDivision = "전선";
-			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);	
+			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);
 			model.addAttribute("subjectList", subjectList);
 		}
 		return "student/stu_replace_repeat";
 	}
-	
-	
-	
+
+
+
 }

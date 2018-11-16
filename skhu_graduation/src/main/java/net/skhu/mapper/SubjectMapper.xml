@@ -13,4 +13,22 @@
 		</foreach>
 	</insert>
 	
+	<select id="findDelete" resultType="int">
+		select count(*) from subject 
+		where code= #{deleteSubject.get(3)} 
+		and departmentId=#{deleteSubject.get(0)}
+		and year=#{deleteSubject.get(1)}
+		and semester=#{deleteSubject.get(2)}
+		and subjectName=#{deleteSubject.get(4)} 
+	</select>
+	
+	<select id="findReplace" resultType="int">
+		select count(*) from subject 
+		where code= #{replaceSubject.get(3)} 
+		and departmentId=#{replaceSubject.get(0)}
+		and year=#{replaceSubject.get(1)}
+		and semester=#{replaceSubject.get(2)}
+		and subjectName=#{replaceSubject.get(4)}
+	</select>
+	
 </mapper>

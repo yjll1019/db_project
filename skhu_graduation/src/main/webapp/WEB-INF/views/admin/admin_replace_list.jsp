@@ -100,11 +100,11 @@
 			<my:pagination pageSize="${pagination.sz }" recordCount="${pagination.recordCount }"/>
 			
 			<div class="container" style="margin-top: 30px; font-size: 15pt">
-			<form>
+			<form action="admin_replace_list" method="post" modelAttribute="subject">
 				<table style="width: 900px;">
 					<tr>
 						<td><strong>폐지과목</strong></td>
-						<td><select name="major" class="form-control"
+						<td><select name="DeleteDepartmentId" class="form-control"
 							style="margin-left: 0px; border: 1px solid gray">
 								<option value="학부/학과">학부/학과</option>
 								<option value="소프트웨어공학과">소프트웨어공학과</option>
@@ -115,35 +115,31 @@
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<select name="grade" class="form-control" style="margin-left: 10px; border: 1px solid gray;">
-								<option value="1">1학년</option>
-								<option value="2">2학년</option>
-								<option value="3">3학년</option>
-								<option value="4">4학년</option>
-							</select>
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td>
-							<select name="term" class="form-control" style="margin-left: 10px; border: 1px solid gray;">
+							<select name="DeleteSemester" class="form-control" style="margin-left: 5px; border: 1px solid gray;">
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
 							</select>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<input type="text" class="form-control" name="subjectCode" placeholder="과목코드"
-								style="margin-left: 10px; width: 130px; border: 1px solid gray"/>
+							<input type="text" class="form-control" name="DeleteYear" placeholder="예)2018"
+								style="margin-left: 5px; width: 130px; border: 1px solid gray"/>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<input type="text" class="form-control" name="subjectName" placeholder="과목명"
+							<input type="text" class="form-control" name="DeleteCode" placeholder="과목코드"
+								style="margin-left: 5px; width: 130px; border: 1px solid gray"/>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>
+							<input type="text" class="form-control" name="DeleteSubjectName" placeholder="과목명"
 								style="width: 200px; border: 1px solid gray;"/>
 						</td>
 					</tr>
 					<tr><td>&nbsp;</td></tr>
 					<tr>
 						<td style="width: 100px"><strong>대체과목</strong></td>
-						<td><select name="major" class="form-control"
+						<td><select name="departmentId" class="form-control"
 							style="margin-left: 0px; border: 1px solid gray">
 								<option value="학부/학과">학부/학과</option>
 								<option value="소프트웨어공학과">소프트웨어공학과</option>
@@ -154,24 +150,20 @@
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<select name="grade" class="form-control" style="margin-left: 10px; border: 1px solid gray;">
-								<option value="1">1학년</option>
-								<option value="2">2학년</option>
-								<option value="3">3학년</option>
-								<option value="4">4학년</option>
-							</select>
-						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td>
-							<select name="term" class="form-control" style="margin-left: 10px; border: 1px solid gray;">
+							<select name="semester" class="form-control" style="margin-left: 5px; border: 1px solid gray;">
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
 							</select>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<input type="text" class="form-control" name="subjectCode" placeholder="과목코드"
-								style="margin-left: 10px; width: 130px; border: 1px solid gray"/>
+							<input type="text" class="form-control" name="year" placeholder="예)2018"
+								style="margin-left: 5px; width: 130px; border: 1px solid gray"/>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>
+							<input type="text" class="form-control" name="code" placeholder="과목코드"
+								style="margin-left: 5px; width: 130px; border: 1px solid gray"/>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>

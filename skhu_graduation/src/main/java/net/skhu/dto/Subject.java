@@ -11,6 +11,13 @@ public class Subject {
 	String credit;
 	Department department;
 
+	//폐지 과목 위함
+	String DeleteYear;
+	String DeleteSemester;
+	String DeleteCode;
+	String DeleteDepartmentId;
+	String DeleteSubjectName;
+
 	public Subject() {
 
 	}
@@ -98,5 +105,46 @@ public class Subject {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
+	public String getDeleteYear() {
+		return DeleteYear;
+	}
+
+	public void setDeleteYear(String deleteYear) {
+		DeleteYear = deleteYear;
+	}
+
+	public String getDeleteSemester() {
+		return DeleteSemester;
+	}
+
+	public void setDeleteSemester(String deleteSemester) {
+		DeleteSemester = deleteSemester;
+	}
+
+	public String getDeleteCode() {
+		return DeleteCode;
+	}
+
+	public void setDeleteCode(String deleteCode) {
+		DeleteCode = deleteCode;
+	}
+
+	public String getDeleteDepartmentId() {
+		return DeleteDepartmentId;
+	}
+
+	public void setDeleteDepartmentId(String deleteDepartmentId) {
+		DeleteDepartmentId = deleteDepartmentId;
+	}
+
+	public String getDeleteSubjectName() {
+		return DeleteSubjectName;
+	}
+
+	public void setDeleteSubjectName(String deleteSubjectName) {
+		DeleteSubjectName = deleteSubjectName;
+	}
+
 
 }
