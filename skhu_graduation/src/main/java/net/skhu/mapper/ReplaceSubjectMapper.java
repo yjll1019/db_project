@@ -19,6 +19,7 @@ import net.skhu.model.Pagination;
 @Mapper
 public interface ReplaceSubjectMapper {
 	void insert(List<ReplaceSubject> replaceSubjects);
+	void insertSubject(String deleteCode, String replaceCode);
 	int count(Pagination pagination);
 	List<ReplaceSubject> findAll();
 	List<ReplaceSubject> findByType(Pagination pagination);

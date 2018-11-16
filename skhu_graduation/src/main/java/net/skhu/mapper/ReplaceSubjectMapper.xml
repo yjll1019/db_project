@@ -9,6 +9,10 @@
 			('${replaceSubject.subjectCode}', '${replaceSubject.replaceSubject}')
 		</foreach>
 	</insert>
+	<insert id="insertSubject">
+		INSERT into replaceSubject(SubjectCode, replaceSubject)
+		VALUES(#{deleteCode},#{replaceCode})
+	</insert>
 	<select id="findAll" resultMap="resultMap1">
 		select re.*, sub.subjectName, resub.subjectName replaceSubjectName,d.name
 		from replaceSubject re 

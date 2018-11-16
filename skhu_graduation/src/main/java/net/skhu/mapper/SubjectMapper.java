@@ -9,4 +9,6 @@ import net.skhu.dto.Subject;
 @Mapper
 public interface SubjectMapper {
 	void insert(List<Subject> subjects);
+	int findDelete(List<String> deleteSubject);
+	int findReplace(List<String> replaceSubject);
 }
