@@ -57,13 +57,15 @@ public class AdminController {
 		String alert="";
 		String subject = "[성공회대학교] 임시 비밀번호 발급 안내";
 
-		if(result==null) { //아이디 존재하지 않는 경우
+		if(result == null) { //아이디 존재하지 않는 경우
 			alert="-1";
 			user.setId("");
 			user.setEmail("");
 			url = "admin/admin_professor_forgot_password"; // 비밀번호찾기 페이지로
-		}
-		else {
+		} else if(!result.getRole().equals("관리자") && !result.getRole().equals("교수")) {
+			alert = "-2";
+			url="admin/admin_professor_forgot_password";
+		} else {
 			if(!result.getEmail().equals(user.getEmail())) { // 이메일 일치하지 않으면
 				alert = "0";
 				url="admin/admin_professor_forgot_password"; // 비밀번호찾기 페이지로
@@ -93,7 +95,7 @@ public class AdminController {
 
 	// AdminInfo Get
 	@RequestMapping(value="/adminInfo",method=RequestMethod.GET)
-	public String adminInfo(Model model,HttpSession session) {
+	public String adminInfo(Model model, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
@@ -104,13 +106,14 @@ public class AdminController {
 
 	// AdminInfo POST
 	@RequestMapping(value="/adminInfo",method=RequestMethod.POST)
-	public String adminInfo(Model model,User user, HttpSession session ) {
+	public String adminInfo(Model model, User user, HttpSession session ) {
 
 		User userGetId = (User) session.getAttribute("user");
 		user.setId(userGetId.getId());
 		String alert="";
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
-
+		
+		if(user.getPassword().length() > 0) {
 		//비밀번호 조건에 맞지 않을 떄
 		if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
 			alert="-1";
@@ -126,15 +129,19 @@ public class AdminController {
 			model.addAttribute("alert",alert);
 			return "admin/adminInfo";
 		}
-
+		
 		SecurityUtil su = new SecurityUtil();
 		String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 		user.setPassword(enPssword);
-
+		} else {
+			user.setPassword(userGetId.getPassword());
+		}
+		
 		userMapper.updateAdmin(user); // user테이블 update
-		session.invalidate();//일단 로그인하도록...ㅠㅠㅠ
+		session.removeAttribute("user");
+		session.setAttribute("user", user);
 
-		return "redirect:/user/login"; //일단 로그인하도록...ㅠㅠ
+		return "redirect:adminInfo";
 	}
 
 	//관리자 학생 조회 페이지
