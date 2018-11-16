@@ -104,38 +104,12 @@
 		</div>
 	
 		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
-			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label>
-			&nbsp;&nbsp;직전학기 &nbsp;<input type="text" style="width: 30px;">
-			남은학점 &nbsp;<input type="text" style="width: 30px;"> 전체학점
-			&nbsp;<input type="text" style="width: 30px;"> 목표학점 &nbsp;<input
-				type="text" style="width: 30px;"> &nbsp; &nbsp;
-			<button type="button" class="btn btn-primary">조회</button>
-			<div style="margin-top: 10px;">
-				<table id="scoreCalcul">
-					<tr style="color: #4582EC">
-						<th>학기</th>
-						<th>이수학점</th>
-						<th>취득학점</th>
-						<th>졸업학점</th>
-					</tr>
-					<tr>
-						<td>3-2학기</td>
-						<td>19</td>
-						<td>4.0</td>
-						<td rowspan="3" style="color: red">3.9</td>
-					</tr>
-					<tr>
-						<td>4-1학기</td>
-						<td>19</td>
-						<td>4.0</td>
-					</tr>
-					<tr>
-						<td>4-2학기</td>
-						<td>4</td>
-						<td>4.5</td>
-					</tr>
-				</table>
-			</div>
+			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label> &nbsp;&nbsp;
+			직전학기 &nbsp;<input type="text" name="beforeSemester" style="width: 30px;"> 
+			남은학점 &nbsp; <input type="text" name="saveCredit" style="width: 30px;"> 
+			전체학점 &nbsp; <input type="text" name="allCredit" style="width: 30px;"> 
+			목표학점 &nbsp; <input type="text" name="goalCredit" style="width: 30px;"> &nbsp; &nbsp;
+			<button type="submit" class="btn btn-primary">조회</button>
 		</div>
 		<div id="jb-content">
 			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>

@@ -1,7 +1,9 @@
 package net.skhu.controller;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import net.skhu.dto.Department;
 import net.skhu.dto.MySubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -47,6 +48,36 @@ public class StudentController {
 		return "student/stu_main";
 	}
 
+	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
+	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
+	public String main(Model model, RedirectAttributes redirectAttributes ,@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, @RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
+		User user = new User();
+		model.addAttribute("user", user);
+		
+		Map<Integer, Integer> map = new HashMap<Integer,Integer>();
+		
+		int x = Integer.parseInt(saveCredit);
+		int i=Integer.parseInt(beforeSemester)+1;
+		while(x!=0) {
+			int value=0;
+			if(x%19>18) {
+				value = 19;
+				x=-19;
+			}else {
+				value = x;
+				x=-x;
+			}
+			map.put(i++, value);//(학기, 그 학기에 들어야하는 학점)
+		}
+	
+		int saveSemester = 8-map.size();
+		double score = Math.round((((Integer.parseInt(goalCredit)*saveSemester)-Integer.parseInt(allCredit))/saveSemester)*10)/10.0; //소수 첫째짜리까지 출력
+		redirectAttributes.addAttribute("map", map);
+		redirectAttributes.addAttribute("score", score);
+		redirectAttributes.addAttribute("goalCredit", goalCredit);
+		return "redirect:/student/stu_goalCredit";
+	}
+	
 	// 학생 비밀번호 찾기를 위한 OTP검사
 	@RequestMapping(value = "stu_forgot_password", method = RequestMethod.GET)
 	public String stu_forgot_password(Model model) {
