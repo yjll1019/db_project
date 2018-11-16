@@ -43,7 +43,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>	
-
+<% String r = request.getParameter("r"); %>
+<script>
+	var r = <%= r %>;
+	if(r == "-1"){
+ 		alert('업로드 실패 혹은 선택된 파일이 없습니다.');
+ 	}
+</script>
 <title>학생 마이페이지 </title>
 </head>
 <%
@@ -78,15 +84,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-
-					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px">
+					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px; margin-left: 23px">
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">이름</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name"   value="${users.userName}" style="height: 37px;"/>
+									<input type="text" class="form-control" name="name"  value="${users.userName}" style="height: 37px;"/>
 								</div>
 							</div>
 						</div>
@@ -220,14 +225,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       									<option value="0" <c:if test="${student.stuSemester == 0}">selected</c:if> >학기를 선택해 주세요</option>
   									    <option value="1" <c:if test="${student.stuSemester == 1}">selected</c:if>>1학기</option>
       									<option value="2" <c:if test="${student.stuSemester == 2}">selected</c:if>>2학기</option>
-     									 <option value="3" <c:if test="${student.stuSemester == 3}">selected</c:if>>3학기</option>
+     									<option value="3" <c:if test="${student.stuSemester == 3}">selected</c:if>>3학기</option>
       									<option value="4" <c:if test="${student.stuSemester == 4}">selected</c:if>>4학기</option>
   									    <option value="5" <c:if test="${student.stuSemester == 5}">selected</c:if>>5학기</option>
        									<option value="0" <c:if test="${student.stuSemester == 6}">selected</c:if>>6학기</option>
   									    <option value="1" <c:if test="${student.stuSemester == 7}">selected</c:if>>7학기</option>
       									<option value="2" <c:if test="${student.stuSemester == 8}">selected</c:if>>8학기</option>
-     									 <option value="3" <c:if test="${student.stuSemester == 9}">selected</c:if>>9학기</option>
-
+     									<option value="3" <c:if test="${student.stuSemester == 9}">selected</c:if>>9학기</option>
 								</select>
 								</div>
 							</div>
@@ -237,15 +241,15 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >수정하기</button>
 						</div>		
 					</form>
-					<form action="mySubject_upload" method="post" enctype="multipart/form-data">
+					<form action="mySubject_upload" method="post" enctype="multipart/form-data" style="margin-left: 10px">
 							<div class="form-group">
-							<label for="file" class="cols-sm-2 control-label">file</label>
+							<label for="file" class="cols-sm-2 control-label">수강목록 업로드</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 									&nbsp;&nbsp;
 									<input type="file" name="file" style="width: 250px;" />
-									<button type="submit" class="btn btn-primary">업로드</button>
+									<button type="submit" class="btn btn-outline-primary" style="font-size: 13px;">업로드</button>
 								</div>
 							</div>
 						</div>					

@@ -17,6 +17,15 @@
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<% String r = request.getParameter("r"); %>
+<script>
+	var r = <%= r %>;
+	if(r == "1"){
+    	alert('업로드 성공!');
+ 	} else if(r == "-1"){
+ 		alert('업로드 실패 혹은 선택된 파일이 없습니다.');
+ 	}
+</script>
 <title>관리자-대체과목 목록</title>
 </head>
 <body>

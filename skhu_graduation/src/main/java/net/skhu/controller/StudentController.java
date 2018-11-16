@@ -53,7 +53,9 @@ public class StudentController {
 
 	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
 	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
-	public String main(Model model, RedirectAttributes redirectAttributes ,@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, @RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
+	public String main(Model model, RedirectAttributes redirectAttributes,
+			@RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
+			@RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
 		User user = new User();
 		model.addAttribute("user", user);
 
@@ -288,13 +290,17 @@ public class StudentController {
 
 	// 수강한 목록 엑셀 업로드
 	@RequestMapping(value="mySubject_upload", method=RequestMethod.POST)
-	public String replace_upload(Model model, @RequestParam("file") MultipartFile file, HttpSession session) throws Exception{
+	public String replace_upload(Model model, @RequestParam("file") MultipartFile file, 
+			HttpSession session) throws Exception{
 		User user = (User) session.getAttribute("user");
+		
 		if(!file.isEmpty()) {
 			List<MySubject> mySubjects = excelService.getMySubjectList(file.getInputStream(), user.getId());
 			mySubjectMapper.insert(mySubjects);
+			return "redirect:stu_subject_list";
+		} else {
+			return "redirect:stu_info?r=-1";
 		}
-		return "redirect:stu_subject_list";
 	}
 	//대체과목 초수강 
 	@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
