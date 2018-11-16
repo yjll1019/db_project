@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.ProfessorMapper">
+		
+	<select id="findOneWithUser" resultMap="resultMap1">
+		select u.*,p.*,d.*
+		from professor p left join user u on p.userId=u.id 
+		left join department d on p.departmentId = d.id
+		where userId = #{userId}
+	</select>
+	
+	<resultMap id="resultMap1" type="Professor">
+		<id property="userId" column="userId" />
+		<result property="departmentId" column="departmentId"/>
+		<result property="grade" column="grade"/>
+		<result property="group" column="class"/>	
+		<association property="department" javaType="Department">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>	
+	</resultMap>
+	
+	<update id="updateProfessor">
+		update professor set 
+		departmentId = #{departmentId},
+		grade = #{grade},
+		class= #{group}
+		where userId = #{userId}
+	</update>
+</mapper>
