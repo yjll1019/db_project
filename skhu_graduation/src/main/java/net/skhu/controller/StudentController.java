@@ -18,11 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import net.skhu.dto.Department;
+import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
 import net.skhu.mapper.DepartmentMapper;
+import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
@@ -46,6 +49,8 @@ public class StudentController {
 	DepartmentMapper departmentMapper;
 	@Autowired
 	SecondMajorMapper secondMajorMapper;
+	@Autowired
+	GraduationMapper graduationMapper;
 	@Autowired ExcelService excelService;
 	@Autowired ReplaceSubjectService replaceService;
 
@@ -388,6 +393,46 @@ public class StudentController {
 			model.addAttribute("searchBy",replaceService.getSerachByOptions());
 			return "student/stu_replace_list";
 		}
+		
+	//학생 졸업요건 조회
+	    @RequestMapping(value = "stu_allSearch", method = RequestMethod.GET)
+	    public String myInfo(Model model, HttpSession session)
+	    {
+			User user = (User) session.getAttribute("user");
 
+			User users = userMapper.findById(user.getId());
+			model.addAttribute("users", users);
+
+			Student student = studentMapper.findOneWithUser(user.getId());
+			model.addAttribute("student", student);
+			
+			List<Department> departments = departmentMapper.findAll();
+			model.addAttribute("departments", departments);
+			
+					
+			List<GraduationText> list = graduationMapper.findByDepartmentId(user.getDepartmentId());
+
+			model.addAttribute("list", list);
+			
+
+    	
+	        return "student/stu_allSearch";
+	    }
+		
+		 @RequestMapping(value = "stu_allSearch", method = RequestMethod.POST) 
+		    public String selectDepartment(Model model,  @RequestParam("departmentId") String departmentId)
+		    {
+	
+				List<Department> departments = departmentMapper.findAll();
+				model.addAttribute("departments", departments);
+				
+						
+				List<GraduationText> list = graduationMapper.findByDepartmentId(departmentId);
+
+				model.addAttribute("list", list);
+			 
+		        
+		        return "redirect:/student/stu_allSearch";
+		    }
 
 }

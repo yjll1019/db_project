@@ -3,12 +3,9 @@
 <mapper namespace="net.skhu.mapper.GraduationMapper">
 
 	<select id="findByDepartmentId" resultType="GraduationText">
-	select g.*, d.name
-	from graduationText g
-	left join department d
-	on g.departmentId=d.id
-	where g.departmentId like #{departmentId};
-		
+	select *
+	from graduationText 
+	where departmentId like #{departmentId};		
 	</select>
 	
 </mapper>
