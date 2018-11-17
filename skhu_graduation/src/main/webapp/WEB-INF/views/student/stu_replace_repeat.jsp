@@ -15,9 +15,14 @@
 	}
 </style>
 </head>
+<%
+	String result = request.getParameter("result");
+
+%>
+</script>
 <body>
 	<div class="layer-wrap" style="text-align: center; align: center; margin-top: 70px">
-		<form class="pop-layer">
+		<form class="pop-layer"  method="post">
 			<div class="pop-container">
 				<div class="pop-conts">
 					<!--content //-->
@@ -30,20 +35,27 @@
 							<td> ${mySubject.completionDivision} </td>
 							<td>${mySubject.score}</td>
 						</tr>
+						
 					</table>
 					<div class="form-group">
-						<select class="custom-select" style="width: 60%; margin-top: 30px; margin-bottom: 20px">
-							<option selected>대체 가능한 필수과목</option>
+						<select class="custom-select" name="changeSubjectCode" style="width: 60%; margin-top: 30px; margin-bottom: 20px">
+							<option selected>대체 가능한 과목</option>
 						<c:forEach var="list" items="${subjectList}">
 							<option value="${list.subjectCode}">${list.subjectName}</option>
 						</c:forEach>
 						</select>
 					</div>
+					<span>
+					*주의: 변경한 후에 되돌리고 싶으시다면 마이페이지에서 엑셀 업로드를 다시 해주세요.
+					</span>
 
+					<br>
 					
-					<div class="btn-r">
+					
+					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="적용하기" style="font-size: 15px; width: 100px" />
 					</div>
+
 					<!--// content-->
 				</div>
 			</div>
