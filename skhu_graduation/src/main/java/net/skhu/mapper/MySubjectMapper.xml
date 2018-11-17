@@ -40,4 +40,14 @@
 			 '${mySubject.completionDivision}', '${mySubject.credit}', '${mySubject.score}', '${mySubject.userId}')
 		</foreach>
 	</insert>
+	
+	<update id="changeScore">
+	update mySubject
+	set score=#{score}
+	where userId like #{userId} and subjectCode=#{subjectCode};
+	</update>
+	<delete id="deleteSubject">
+	delete from mySubject 
+	where userId like #{userId} and subjectCode like #{subjectCode}; 
+	</delete>
 </mapper>

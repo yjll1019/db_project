@@ -331,7 +331,7 @@ public class StudentController {
 			return "redirect:stu_info?r=-1";
 		}
 	}
-	//대체과목 재수강
+	//대체과목 재수강 get
 	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.GET)
 	public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
 		User user = (User) session.getAttribute("user");
@@ -351,6 +351,29 @@ public class StudentController {
 			model.addAttribute("subjectList", subjectList);
 		}
 		return "student/stu_replace_repeat";
+	}
+	
+	
+	//대체과목 재수강  post
+	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.POST) // completionDivision 0이면 교선 1이면 전선
+	public String stu_replace_repeat(Model model, HttpSession session, RedirectAttributes redirectAttributes,
+			MySubject mySubject, @RequestParam("changeSubjectCode") String changeSubjectCode) {
+
+		User user = (User) session.getAttribute("user");
+
+		mySubject.setUserId(user.getId());
+		 mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
+		 MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
+		 String score=changeSubject.getScore();
+		 
+		 mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
+		 mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
+		 
+
+		 
+		 
+		 redirectAttributes.addAttribute("result", "0");
+		return "redirect:/student/stu_subject_list";
 	}
 
 	// 대체과목목록 조회 페이지

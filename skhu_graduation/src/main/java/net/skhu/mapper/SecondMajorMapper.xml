@@ -27,6 +27,7 @@
 			<result property="name" column="name"/>
 		</association>
 	</resultMap>
+	
 	<update id="update" >
 	update secondMajor set
 	division = #{division}

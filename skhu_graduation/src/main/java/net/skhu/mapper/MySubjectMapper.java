@@ -15,8 +15,11 @@ public interface MySubjectMapper {
 	MySubject findByOneSubject(String userId, String subjectCode);
 	void majorAdmit(MySubject mySubject);
 	List<MySubject> findBySubjectType(String userId,String completionDivision);
-	
+	void deleteSubject(String userId, String subjectCode);
+	void changeScore(String subjectCode, String score, String userId);
 	// 엑셀 업로드
 	void insert(List<MySubject> mySubjects);
+
+
 
 }
