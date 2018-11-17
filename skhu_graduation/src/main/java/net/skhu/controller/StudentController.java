@@ -272,7 +272,7 @@ public class StudentController {
 
 		studentMapper.update(student); //student 테이블 update
 		userMapper.updateStudent(user); //user 테이블 update
-		//secondMajorMapper.update(secondMajor);
+		secondMajorMapper.update(secondMajor);
 
 		return "redirect:/student/stu_main"; // 학생 조회 페이지로
 	}

@@ -10,4 +10,5 @@ public interface SecondMajorMapper {
 	SecondMajor findOneById(String userId);
 	void insert(SecondMajor sm);
 	List<SecondMajor> findAll();
+	void update(SecondMajor sm);
 }
