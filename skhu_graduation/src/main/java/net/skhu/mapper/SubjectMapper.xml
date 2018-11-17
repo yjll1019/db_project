@@ -13,22 +13,36 @@
 		</foreach>
 	</insert>
 	
-	<select id="findDelete" resultType="int">
+	<select id="findDelete" resultType="int" parameterType="hashmap">
 		select count(*) from subject 
-		where code= #{deleteSubject.get(3)} 
-		and departmentId=#{deleteSubject.get(0)}
-		and year=#{deleteSubject.get(1)}
-		and semester=#{deleteSubject.get(2)}
-		and subjectName=#{deleteSubject.get(4)} 
+		where	
+			<foreach collection="list" item="deleteSubject" index="index" separator=", " >
+				code=#{deleteSubject[index]} and departmentId=#{deleteSubject[index]}
+				and year=#{deleteSubject[index]} and semester=#{deleteSubject[index]}
+				and subjectName=#{deleteSubject[index]} 
+			</foreach>
+		<!-- 	
+		code= ${deleteSubject.get(3)} 
+		and departmentId=${deleteSubject.get(0)}
+		and year=${deleteSubject.get(1)}
+		and semester=${deleteSubject.get(2)}
+		and subjectName=${deleteSuject.get(4)}
+		 --> 
 	</select>
 	
-	<select id="findReplace" resultType="int">
+	<select id="findReplace" resultType="int" parameterType="java.util.List">
 		select count(*) from subject 
-		where code= #{replaceSubject.get(3)} 
-		and departmentId=#{replaceSubject.get(0)}
-		and year=#{replaceSubject.get(1)}
-		and semester=#{replaceSubject.get(2)}
-		and subjectName=#{replaceSubject.get(4)}
+		where 
+			<foreach collection="list" item="replaceSubject" index="index" separator=", " >
+				code= #{replaceSubject[index]} and departmentId=#{replaceSubject[index]}
+				and semester=#{replaceSubject[index]} and subjectName=#{replaceSubject[index]}
+			</foreach>
+		<!-- 
+		code= ${replaceSubject.get(2)} 
+		and departmentId=${replaceSubject.get(0)}
+		and semester=${replaceSubject.get(1)}
+		and subjectName=${replaceSubject.get(3)}
+		 -->
 	</select>
 	
 </mapper>
