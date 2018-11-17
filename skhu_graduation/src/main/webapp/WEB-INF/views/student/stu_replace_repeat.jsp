@@ -15,11 +15,7 @@
 	}
 </style>
 </head>
-<%
-	String result = request.getParameter("result");
 
-%>
-</script>
 <body>
 	<div class="layer-wrap" style="text-align: center; align: center; margin-top: 70px">
 		<form class="pop-layer"  method="post">
