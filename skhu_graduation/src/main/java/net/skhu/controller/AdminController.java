@@ -1,7 +1,5 @@
 package net.skhu.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -189,44 +187,72 @@ public class AdminController {
 
 	// 폐지과목 신청 및 대체 과목 신청
 	@RequestMapping(value="admin_replace_list", method=RequestMethod.POST)
-	public String admin_replace_list(Model model, Subject subject, HttpSession session) {
-		List<String> deleteSubject = new ArrayList<String>();
-		deleteSubject.add(subject.getDeleteDepartmentId());
-		deleteSubject.add(subject.getDeleteYear());
-		deleteSubject.add(subject.getDeleteSemester());
-		deleteSubject.add(subject.getDeleteCode());
-		deleteSubject.add(subject.getDeleteSubjectName());
-		//System.out.println(deleteSubject.toString());
-
-		List<String> replaceSubject = new ArrayList<String>();
-		replaceSubject.add(subject.getDepartmentId());
-		replaceSubject.add(subject.getSemester());
-		replaceSubject.add(subject.getCode());
-		replaceSubject.add(subject.getSubjectName());
-
-		HashMap hash = new HashMap();
-		hash.put("deleteSubject",deleteSubject);
-		hash.put("replaceSubject",replaceSubject);
+	public String admin_replace_list(Model model, Subject subject,Pagination pagination, HttpSession session) {
 
 		String alert="";
 
-		if((subjectMapper.findDelete(deleteSubject)>0) && (subjectMapper.findReplace(replaceSubject)>0)) {//subject테이블에 입력 정보 존재
-			replaceSubjectMapper.insertSubject(subject.getDeleteCode(),subject.getCode());
-			System.out.println("폐지,대체과목 저장 완료!");
-			return "adimin_replace_list";
-		}else if(!(subjectMapper.findDelete(deleteSubject)>0)) {//입력한 폐지 과목 정보가 subject 테이블에 없다.
-			alert="-1";
+		//폐지 과목 정보 입력은 다 필수다.
+		if((subject.getDeleteDepartmentId().equals("")) && (subject.getDeleteSemester().equals(""))
+			&& (subject.getDeleteYear().equals("")) && (subject.getDeleteCode().equals(""))
+			&& (subject.getDeleteSubjectName().equals(""))) {
+			alert="0";
 			model.addAttribute("alert",alert);
-			model.addAttribute("subject",subject);
-			return "admin_replace_list";
-		}else if(!( (subjectMapper.findReplace(replaceSubject)>0))) {//입력한 대체 과목 정보가 subject 테이블에 없다.
-			alert="-2";
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "admin/admin_replace_list";
+		}
+		//대체 과목 학과/학부 정보 입력은 필수다.
+		if((subject.getDepartmentId().equals(""))) {
+			alert="1";
 			model.addAttribute("alert",alert);
-			model.addAttribute("subject",subject);
-			return "admin_replace_list";
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "admin/admin_replace_list";
 		}
 
-		return "admin_replace_list";
+		//입력한 폐지 과목 정보가 subject 테이블에 없다.
+		if(subjectMapper.findDelete(subject)<=0) {
+			alert="2";
+			model.addAttribute("alert",alert);
+			model.addAttribute("subject",subject);
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "admin/admin_replace_list";
+		}
+		//대체과목 - 과목 지정인 경우다. 이때는 과목코드와 과목명이 필수다.
+		if(subject.getCompletionDivision().equals("")) {
+			System.out.println("과목 지정인 경우입니다.");
+			if((subject.getSubjectName().equals(""))&&(subject.getClass().equals(""))) { //과목 코드와 과목명 필수 입력해야 합니다.
+				alert="3";
+				model.addAttribute("alert",alert);
+				model.addAttribute("subject",subject);
+				model.addAttribute("replace",replaceService.findByType(pagination));
+				model.addAttribute("searchBy",replaceService.getSerachByOptions());
+				return "admin/admin_replace_list";
+			}else if((subjectMapper.findReplace(subject)<=0)) {//과목 코드와 과목명 입력이 되었지만, 입력한 정보가 subject 테이블에 존재하지 않을 때
+				alert="4";
+				model.addAttribute("alert",alert);
+				model.addAttribute("subject",subject);
+				model.addAttribute("replace",replaceService.findByType(pagination));
+				model.addAttribute("searchBy",replaceService.getSerachByOptions());
+				return "admin/admin_replace_list";
+			}else if(subjectMapper.findReplace(subject)>0){// 입력한 정보가 subject 테이블에 존재할 때
+				replaceSubjectMapper.insertSubject(subject.getDeleteCode(),subject.getCode());
+				System.out.println("폐지,대체과목 과목 지정인 경우저장 완료!");
+				model.addAttribute("replace",replaceService.findByType(pagination));
+				model.addAttribute("searchBy",replaceService.getSerachByOptions());
+				return "admin/admin_replace_list";
+			}
+		}
+		else if(!(subject.getCompletionDivision()==null)) {//대체과목 - 과목 지정이 아닌 경우다. 이때는 과목코드와 과목명은 필요 없다.
+			replaceSubjectMapper.insertWithCompletionDivision(subject.getDeleteCode(),subject.getCompletionDivision());
+			System.out.println("폐지, 대체과목 과목 지정 아닌 경우 저장 완료");
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "admin/admin_replace_list";
+		}
+
+		return "admin/admin_replace_list";
 	}
 
 	// 대체과목목록 조회 페이지 파일업로드

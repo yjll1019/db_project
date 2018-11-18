@@ -4,45 +4,29 @@
 
 	<insert id="insert" parameterType="java.util.List">
 		INSERT into subject(year, semester, code, divisionClass, departmentId,
-			subjectName, completionDivision, credit) 
-		VALUES 
+		subjectName, completionDivision, credit)
+		VALUES
 		<foreach collection="list" item="subject" separator=" , ">
 			('${subject.year}', '${subject.semester}', '${subject.code}',
-			 '${subject.divisionClass}', '${subject.departmentId}', '${subject.subjectName}',
-			 '${subject.completionDivision}', '${subject.credit}')
+			'${subject.divisionClass}', '${subject.departmentId}',
+			'${subject.subjectName}',
+			'${subject.completionDivision}', '${subject.credit}')
 		</foreach>
 	</insert>
-	
-	<select id="findDelete" resultType="int" parameterType="hashmap">
-		select count(*) from subject 
-		where	
-			<foreach collection="list" item="deleteSubject" index="index" separator=", " >
-				code=#{deleteSubject[index]} and departmentId=#{deleteSubject[index]}
-				and year=#{deleteSubject[index]} and semester=#{deleteSubject[index]}
-				and subjectName=#{deleteSubject[index]} 
-			</foreach>
-		<!-- 	
-		code= ${deleteSubject.get(3)} 
-		and departmentId=${deleteSubject.get(0)}
-		and year=${deleteSubject.get(1)}
-		and semester=${deleteSubject.get(2)}
-		and subjectName=${deleteSuject.get(4)}
-		 --> 
+
+	<select id="findDelete" resultType="int">
+		select count(*) from subject
+		where
+		code=#{DeleteCode} and departmentId=#{DeleteDepartmentId}
+		and year=#{DeleteYear} and semester=#{DeleteSemester}
+		and subjectName=#{DeleteSubjectName}
 	</select>
-	
-	<select id="findReplace" resultType="int" parameterType="java.util.List">
-		select count(*) from subject 
-		where 
-			<foreach collection="list" item="replaceSubject" index="index" separator=", " >
-				code= #{replaceSubject[index]} and departmentId=#{replaceSubject[index]}
-				and semester=#{replaceSubject[index]} and subjectName=#{replaceSubject[index]}
-			</foreach>
-		<!-- 
-		code= ${replaceSubject.get(2)} 
-		and departmentId=${replaceSubject.get(0)}
-		and semester=${replaceSubject.get(1)}
-		and subjectName=${replaceSubject.get(3)}
-		 -->
+
+	<select id="findReplace" resultType="int">
+		select count(*) from subject
+		where
+		code=#{code} and departmentId=#{departmentId}
+		and subjectName=#{subjectName}
 	</select>
-	
+
 </mapper>

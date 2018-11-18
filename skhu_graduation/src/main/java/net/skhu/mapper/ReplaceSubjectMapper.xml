@@ -10,8 +10,12 @@
 		</foreach>
 	</insert>
 	<insert id="insertSubject">
-		INSERT into replaceSubject(SubjectCode, replaceSubject)
+		INSERT into replaceSubject(subjectCode, replaceSubject)
 		VALUES(#{deleteCode},#{replaceCode})
+	</insert>
+	<insert id="insertWithCompletionDivision">
+		INSERT into replaceSubject(subjectCode, completionDivision)
+		VALUES(#{deleteCode},#{completionDivision})
 	</insert>
 	<select id="findAll" resultMap="resultMap1">
 		select re.*, sub.subjectName, resub.subjectName replaceSubjectName,d.name
@@ -32,7 +36,7 @@
 			<if test="sb==1">INSTR(re.replaceSubject, #{st})>0</if>
 			<if test="sb==2">INSTR(resub.subjectName,#{st})>0</if>
 		</where>
-		LIMIT ${start},${sz}
+		
 	</select>
 	
 	<select id="count" resultType="int">
@@ -60,6 +64,7 @@
 		<id property="subjectCode" column="subjectCode"/>
 		<result property="replaceSubject" column="replaceSubject"/>
 		<result property="replaceSubjectName" column="replaceSubjectName"/>
+		<result property="completionDivision" column="completionDivision"/>
 		<association property="subject" javaType="Subject">
 			<id property="code" column="code"/>
 			<result property="departmentId" column="departmentId"/>
