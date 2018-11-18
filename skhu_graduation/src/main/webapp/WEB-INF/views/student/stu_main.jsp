@@ -115,9 +115,11 @@
 	</form:form>
 		<div id="jb-content">
 			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
-
+		
 			<h3>필수 과목</h3>
 			<br />
+<a href="reTest">필수과목</a> 
+			<br/>
 			<div>
 				<table id="table3">
 					<tr>

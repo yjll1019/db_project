@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -464,5 +465,42 @@ public class StudentController {
 
 		return "redirect:/student/stu_allSearch";
 	}
+	
+	//필수과목 목록
+	   @RequestMapping(value="reTest", method=RequestMethod.GET)
+	   public String reTest(Model model, HttpSession session) {
+	      User user = new User();
+	      
+	      user.setId("201632021"); //수정 필요
+	      user.setDepartmentId("12");
+	      
+	      List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());
+	      List<String> requiredSubject = mySubjectMapper.requiredSubject(user.getDepartmentId(), user.getId().substring(0, 4));
+	      List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
+	      if(noSubject.contains("AC00001")) //채플제거
+	         noSubject.remove("AC00001");
+	      if(noSubject.contains("AC00003")) //사회봉사제거
+	         noSubject.remove("AC00003");
+	      
 
+	      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
+	      Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
+	      
+	      for(int i=0; i<requiredSubject.size(); ++i) {
+	         String subjectCode = requiredSubject.get(i);
+	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
+	         requiredSubjectMap.put(subjectCode, subjectName);
+	      }
+	      
+	      for(int i=0; i<noSubject.size(); ++i) {
+	         String subjectCode = noSubject.get(i);
+	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
+	         noSubjectMap.put(subjectCode, subjectName);
+	      }
+
+	      model.addAttribute("requiredSubjectMap", requiredSubjectMap);
+	      model.addAttribute("noSubjectMap", noSubjectMap);
+
+	      return "student/reTest";
+	   }
 }

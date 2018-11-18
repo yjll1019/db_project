@@ -19,7 +19,9 @@ public interface MySubjectMapper {
 	void changeScore(String subjectCode, String score, String userId);
 	// 엑셀 업로드
 	void insert(List<MySubject> mySubjects);
-
+	List<String> requiredMySubject(String userId);
+	List<String> requiredSubject(String departmentId, String admissionYear);
+	String getSubjectName(String subjectCode, String year);
 
 
 }

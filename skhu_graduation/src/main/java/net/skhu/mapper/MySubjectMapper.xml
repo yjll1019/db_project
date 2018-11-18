@@ -50,4 +50,23 @@
 	delete from mySubject 
 	where userId like #{userId} and subjectCode like #{subjectCode}; 
 	</delete>
+	
+	<select id="requiredMySubject" resultType="String">
+	select DISTINCT requiredSubject.subjectCode from mySubject
+ 	right outer join requiredSubject on mySubject.subjectCode=requiredSubject.subjectCode
+	where mySubject.userId like #{userId};
+	</select>
+
+	<select id="requiredSubject" resultType="String">
+	select DISTINCT requiredSubject.subjectCode, subject.subjectName 
+	from requiredSubject left join subject 
+	on requiredSubject.subjectCode = subject.code
+	where requiredSubject.admissionYear like #{admissionYear} and 
+	requiredSubject.departmentId like #{departmentId} and subject.year like #{admissionYear}
+	and subject.departmentId like #{departmentId};	
+	</select>	
+	
+	<select id="getSubjectName" resultType="String">
+		select DISTINCT subjectName from subject where code like #{subjectCode} and year like #{year};
+	</select>
 </mapper>
