@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,61 +62,60 @@ public class StudentController {
 		return "student/stu_main";
 	}
 
-	   //stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
-	   @RequestMapping(value = "stu_main", method = RequestMethod.POST)
-	   public String main(Model model, RedirectAttributes redirectAttributes, @RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
-	         @RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
-	      User user = new User();
-	      model.addAttribute("user", user);
+	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
+	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
+	public String main(Model model, RedirectAttributes redirectAttributes, @RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
+			@RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
+		User user = new User();
+		model.addAttribute("user", user);
 
-	      Map<String, Integer> map = new LinkedHashMap<String,Integer>();
-	      String s;
-	      int x = Integer.parseInt(saveCredit);
-	      int i=Integer.parseInt(beforeSemester)+1;
-	      while(x!=0) {
-	         int value=0;
-	         if(x-19>0) {
-	            value = 19;
-	            x-=19;
-	         }else {
-	            value = x;
-	            x-=x;
-	            
-	            if(i%2==1) {
-	                s = (i+1)/2+"학년1학기";
-	            }else {
-	                s = (i)/2+"학년2학기";
-	            }
-	            map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
-	            break;
-	         }
-	         if(i%2==1) {
-	             s = (i+1)/2+"학년1학기";
-	         }else {
-	             s = (i)/2+"학년2학기";
-	         }
-	         i++;
-	         map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
-	      }
+		Map<String, Integer> map = new LinkedHashMap<String,Integer>();
+		String s;
+		int x = Integer.parseInt(saveCredit);
+		int i = Integer.parseInt(beforeSemester) + 1;
+		while(x != 0) {
+			int value = 0;
+			if(x-19 > 0) {
+				value = 19;
+				x -= 19;
+			}else {
+				value = x;
+				x -= x;
 
+				if(i % 2 == 1) {
+					s = (i + 1)/2 + "학년1학기";
+				}else {
+					s = (i)/2 + "학년2학기";
+				}
+				map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
+				break;
+			}
+			if(i % 2 == 1) {
+				s = (i + 1)/2 + "학년1학기";
+			}else {
+				s = (i)/2 + "학년2학기";
+			}
+			i++;
+			map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
+		}
 
-	      double score = Math.round((((Double.parseDouble(goalCredit)*(map.size()+1))-Double.parseDouble(allCredit))/map.size())*10)/10.0; //소수 첫째짜리까지 출력
-	      redirectAttributes.addFlashAttribute("map", map);
-	      redirectAttributes.addAttribute("score", score);
-	      redirectAttributes.addAttribute("goalCredit", goalCredit);
+		double score = Math.round((((Double.parseDouble(goalCredit)*(map.size()+1))-Double.parseDouble(allCredit))/map.size())*10)/10.0; //소수 첫째짜리까지 출력
+		redirectAttributes.addFlashAttribute("map", map);
+		redirectAttributes.addAttribute("score", score);
+		redirectAttributes.addAttribute("goalCredit", goalCredit);
 
-	      return "redirect:/student/stu_goalCredit";
-	   }
+		return "redirect:/student/stu_goalCredit";
+	}
 
-	   //목표학점 결과 보여주는 페이지
-	   @RequestMapping(value = "stu_goalCredit", method = RequestMethod.GET)
-	   public String stu_goalCredit(Model model, HttpServletRequest request,@RequestParam("score") double score, @RequestParam("goalCredit") String goalCredit) {
-	      Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-	      model.addAttribute("map", (Map<String, Object>)flashMap.get("map"));
-	      model.addAttribute("score", score);
-	      model.addAttribute("goalCredit", goalCredit);
-	      return "student/stu_goalCredit";
-	   }
+	//목표학점 결과 보여주는 페이지
+	@RequestMapping(value = "stu_goalCredit", method = RequestMethod.GET)
+	public String stu_goalCredit(Model model, HttpServletRequest request,@RequestParam("score") double score, @RequestParam("goalCredit") String goalCredit) {
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+		model.addAttribute("map", (Map<String, Object>)flashMap.get("map"));
+		model.addAttribute("score", score);
+		model.addAttribute("goalCredit", goalCredit);
+		return "student/stu_goalCredit";
+	}
 
 	// 학생 비밀번호 찾기를 위한 OTP검사
 	@RequestMapping(value = "stu_forgot_password", method = RequestMethod.GET)
@@ -229,57 +229,87 @@ public class StudentController {
 	// stu_info GET
 	@RequestMapping("stu_info")
 	public String stu_info(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+		User getUser = (User) session.getAttribute("user");
 
-		User users = userMapper.findById(user.getId());
+		User user = userMapper.findById(getUser.getId());
 
-		model.addAttribute("users", users);
+		model.addAttribute("user", user);
 
-		Student student = studentMapper.findOneWithUser(user.getId());
+		Student student = studentMapper.findOneWithUser(getUser.getId());
 		model.addAttribute("student", student);
 
-		SecondMajor secondMajor = secondMajorMapper.findOneById(user.getId());
+		SecondMajor secondMajor = secondMajorMapper.findOneForInfo(getUser.getId());
+		model.addAttribute("secondMajor", secondMajor);
+		System.out.println(secondMajor.toString());
 
 		return "student/stu_info";
 	}
 
 	// stu_info POST
+	@Transactional
 	@RequestMapping(value = "stu_info", method = RequestMethod.POST)
-	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor, HttpSession session) {
+	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor, 
+			HttpSession session) {
 
 		User userGetId = (User) session.getAttribute("user");
 		user.setId(userGetId.getId());
+		user.setRole(userGetId.getRole());
+		System.out.println(user.toString());
+		
+		student.setUserId(user.getId());
+		student.setStuSemester(user.getStuSemester());
+		student.setStuClass(user.getStuClass());
+		student.setTransferStudent(user.getTransferStudent() != null ? "1" : "0");
+		student.setVolunteerExemption(user.getVolunteerExemption() != null ? "1" : "0");
+		student.setDepartmentId(user.getDepartmentId());
+		student.setHowToGraduate(user.getHowToGraduate());
+		System.out.println(student.toString());
+		
+		secondMajor.setUserId(userGetId.getId());
+		secondMajor.setDivision(user.getDivision());
+		secondMajor.setDepartmentId(user.getSecondMajorDepartmentId());
+		System.out.println(secondMajor.toString());
+		
 		String alert = "";
 		String regex = "([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; // 영문+숫자
 
-		// 비밀번호 조건에 맞지 않을 떄
-		if (!user.getPassword().matches(regex) || user.getPassword().length() < 8) {
-			alert = "-1";
-			model.addAttribute("user",user);
-			model.addAttribute("student",student);
-			model.addAttribute("alert", alert);
-			return "student/stu_info";
+		if(user.getPassword().length() > 0) {
+			
+			// 비밀번호 조건에 맞지 않을 떄
+			if (!user.getPassword().matches(regex) || user.getPassword().length() < 8) {
+				alert = "-1";
+				model.addAttribute("user",user);
+				model.addAttribute("student",student);
+				model.addAttribute("alert", alert);
+				return "student/stu_info";
 
+			}
+			// 비밀번호와 확인비밀번호가 다를 때
+			if (!user.getConfirmPassword().equals(user.getPassword())) {
+				alert = "-2";
+				model.addAttribute("user",user);
+				model.addAttribute("student",student);
+				model.addAttribute("secondMajor",secondMajor);
+				model.addAttribute("alert", alert);
+				return "student/stu_info";
+			}
+
+			SecurityUtil su = new SecurityUtil();
+			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
+			user.setPassword(enPssword);
+			
+		} else {
+			user.setPassword(userGetId.getPassword());
 		}
-		// 비밀번호와 확인비밀번호가 다를 때
-		if (!user.getConfirmPassword().equals(user.getPassword())) {
-			alert = "-2";
-			model.addAttribute("user",user);
-			model.addAttribute("student",student);
-			model.addAttribute("secondMajor",secondMajor);
-			model.addAttribute("alert", alert);
-			return "student/stu_info";
-		}
-
-		SecurityUtil su = new SecurityUtil();
-		String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
-		user.setPassword(enPssword);
-
-		studentMapper.update(student); //student 테이블 update
+		
 		userMapper.updateStudent(user); //user 테이블 update
-		secondMajorMapper.update(secondMajor);
+		studentMapper.updateForInfo(student); //student 테이블 update
+		secondMajorMapper.insert(secondMajor);
+		
+		session.removeAttribute("user");
+		session.setAttribute("user", user);
 
-		return "redirect:/student/stu_main"; // 학생 조회 페이지로
+		return "redirect:stu_main"; // 학생 조회 페이지로
 	}
 
 	// 학생 전공인정
@@ -357,8 +387,8 @@ public class StudentController {
 		}
 		return "student/stu_replace_repeat";
 	}
-	
-	
+
+
 	//대체과목 재수강  post
 	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.POST) // completionDivision 0이면 교선 1이면 전선
 	public String stu_replace_repeat(Model model, HttpSession session, RedirectAttributes redirectAttributes,
@@ -367,72 +397,72 @@ public class StudentController {
 		User user = (User) session.getAttribute("user");
 
 		mySubject.setUserId(user.getId());
-		 mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
-		 MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
-		 String score=changeSubject.getScore();
-		 
-		 mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
-		 mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
-		 
+		mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
+		MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
+		String score=changeSubject.getScore();
 
-		 
-		 
-		 redirectAttributes.addAttribute("result", "0");
+		mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
+		mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
+
+
+
+
+		redirectAttributes.addAttribute("result", "0");
 		return "redirect:/student/stu_subject_list";
 	}
 
 	// 대체과목목록 조회 페이지
-		@RequestMapping(value="stu_replace_list", method=RequestMethod.GET)
-		public String stu_replace_list(Model model,Pagination pagination) {//,HttpSession session
-			//User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-			//System.out.println(user.getRole());
-			//if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-			//if(!(user.getRole().equals("학생"))) return "redirect:/user/login"; // 관리자 아니면 로그인창으로
+	@RequestMapping(value="stu_replace_list", method=RequestMethod.GET)
+	public String stu_replace_list(Model model,Pagination pagination) {//,HttpSession session
+		//User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		//System.out.println(user.getRole());
+		//if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		//if(!(user.getRole().equals("학생"))) return "redirect:/user/login"; // 관리자 아니면 로그인창으로
 
-			model.addAttribute("replace",replaceService.findByType(pagination));
-			model.addAttribute("searchBy",replaceService.getSerachByOptions());
-			return "student/stu_replace_list";
-		}
-		
+		model.addAttribute("replace",replaceService.findByType(pagination));
+		model.addAttribute("searchBy",replaceService.getSerachByOptions());
+		return "student/stu_replace_list";
+	}
+
 	//학생 졸업요건 조회
-	    @RequestMapping(value = "stu_allSearch", method = RequestMethod.GET)
-	    public String myInfo(Model model, HttpSession session)
-	    {
-			User user = (User) session.getAttribute("user");
+	@RequestMapping(value = "stu_allSearch", method = RequestMethod.GET)
+	public String myInfo(Model model, HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
 
-			User users = userMapper.findById(user.getId());
-			model.addAttribute("users", users);
+		User users = userMapper.findById(user.getId());
+		model.addAttribute("users", users);
 
-			Student student = studentMapper.findOneWithUser(user.getId());
-			model.addAttribute("student", student);
-			
-			List<Department> departments = departmentMapper.findAll();
-			model.addAttribute("departments", departments);
-			
-					
-			List<GraduationText> list = graduationMapper.findByDepartmentId(user.getDepartmentId());
+		Student student = studentMapper.findOneWithUser(user.getId());
+		model.addAttribute("student", student);
 
-			model.addAttribute("list", list);
-			
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
 
-    	
-	        return "student/stu_allSearch";
-	    }
-		
-		 @RequestMapping(value = "stu_allSearch", method = RequestMethod.POST) 
-		    public String selectDepartment(Model model,  @RequestParam("departmentId") String departmentId)
-		    {
-	
-				List<Department> departments = departmentMapper.findAll();
-				model.addAttribute("departments", departments);
-				
-						
-				List<GraduationText> list = graduationMapper.findByDepartmentId(departmentId);
 
-				model.addAttribute("list", list);
-			 
-		        
-		        return "redirect:/student/stu_allSearch";
-		    }
+		List<GraduationText> list = graduationMapper.findByDepartmentId(user.getDepartmentId());
+
+		model.addAttribute("list", list);
+
+
+
+		return "student/stu_allSearch";
+	}
+
+	@RequestMapping(value = "stu_allSearch", method = RequestMethod.POST) 
+	public String selectDepartment(Model model,  @RequestParam("departmentId") String departmentId)
+	{
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+
+
+		List<GraduationText> list = graduationMapper.findByDepartmentId(departmentId);
+
+		model.addAttribute("list", list);
+
+
+		return "redirect:/student/stu_allSearch";
+	}
 
 }

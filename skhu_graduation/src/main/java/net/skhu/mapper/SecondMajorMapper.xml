@@ -3,10 +3,11 @@
 <mapper namespace="net.skhu.mapper.SecondMajorMapper">
 	
 	<select id="insert">
-	insert into secondMajor values(#{userId}, #{division}, #{departmentId});
+		insert into secondMajor values(#{userId}, #{division}, #{departmentId})
+		on duplicate key update division = values(division), departmentId = values(departmentId)
 	</select>
 	
-		<select id="findAll" resultMap="resultMap1">
+	<select id="findAll" resultMap="resultMap1">
 		select s.*, d.name 
 		from secondMajor s
 		left join department d on s.departmentId=d.id
@@ -18,6 +19,12 @@
 		left join department d on se.departmentId=d.id
 		where se.userId = #{userId}
 	</select>
+	
+	<select id="findOneForInfo" resultMap="resultMap1">
+		select * from secondMajor
+		where userId = #{userId}
+	</select>
+	
 	<resultMap id="resultMap1" type="SecondMajor">
 		<id property="userId" column="userId"/>
 		<result property="division" column="division"/>
@@ -29,9 +36,9 @@
 	</resultMap>
 	
 	<update id="update" >
-	update secondMajor set
-	division = #{division}
-	departmentId = #{departmentId}
-	where userId=#{userId}
+		update secondMajor set
+			division = #{division}
+			departmentId = #{departmentId}
+		where userId = #{userId}
 	</update>
 </mapper>

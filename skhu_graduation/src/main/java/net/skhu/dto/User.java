@@ -14,12 +14,14 @@ public class User {
 	String secondMajorDepartmentId;
 	String doubleMajor;
 	String subMajor;
+	
+	String division;
 
 	//밑으로는 student 테이블 추가를 위한 변수들
 	String stuSemester; //학기
 	String stuClass; //반
-	int transferStudent; //편입 여부 >> 1이면 편입생
-	int volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
+	String transferStudent; //편입 여부 >> 1이면 편입생
+	String volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
 
@@ -78,16 +80,16 @@ public class User {
 	public void setStuClass(String stuClass) {
 		this.stuClass = stuClass;
 	}
-	public int getTransferStudent() {
+	public String getTransferStudent() {
 		return transferStudent;
 	}
-	public void setTransferStudent(int transferStudent) {
+	public void setTransferStudent(String transferStudent) {
 		this.transferStudent = transferStudent;
 	}
-	public int getVolunteerExemption() {
+	public String getVolunteerExemption() {
 		return volunteerExemption;
 	}
-	public void setVolunteerExemption(int volunteerExemption) {
+	public void setVolunteerExemption(String volunteerExemption) {
 		this.volunteerExemption = volunteerExemption;
 	}
 	public String getDepartmentId() {
@@ -128,5 +130,20 @@ public class User {
 	public void setSubMajor(String subMajor) {
 		this.subMajor = subMajor;
 	}
-
+	public String getDivision() {
+		return division;
+	}
+	public void setDivision(String division) {
+		this.division = division;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", password=" + password + ", userName=" + userName + ", email=" + email + ", phone="
+				+ phone + ", role=" + role + ", confirmPassword=" + confirmPassword + ", secondMajorDepartmentId="
+				+ secondMajorDepartmentId + ", doubleMajor=" + doubleMajor + ", subMajor=" + subMajor + ", division="
+				+ division + ", stuSemester=" + stuSemester + ", stuClass=" + stuClass + ", transferStudent="
+				+ transferStudent + ", volunteerExemption=" + volunteerExemption + ", departmentId=" + departmentId
+				+ ", howToGraduate=" + howToGraduate + "]";
+	}
+	
 }

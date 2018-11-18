@@ -14,6 +14,17 @@
 		where userId = #{userId}
 	</update>
 	
+	<update id="updateForInfo">
+		update student set
+			stuSemester = #{stuSemester},
+			stuClass = #{stuClass},
+			transferStudent = #{transferStudent},
+			volunteerExemption = #{volunteerExemption},
+			departmentId = #{departmentId},
+			howToGraduate = #{howToGraduate}
+		where userId = #{userId}
+	</update>
+	
 	<select id="stuInfo" resultType="Student">
 		select * from student where userId like #{userId};	
 	</select>
