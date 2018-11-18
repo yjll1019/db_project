@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,11 +54,11 @@ public class ProfessorController {
 
 		switch(searchIndex) {
 		case 0:
-		 students = studentMapper.findById(input);
-		break;
+			students = studentMapper.findById(input);
+			break;
 		case 1:
-		 students = studentMapper.findByName(input);
-		break;
+			students = studentMapper.findByName(input);
+			break;
 
 		}
 		model.addAttribute("students", students);
@@ -66,27 +67,32 @@ public class ProfessorController {
 
 	//professor_info GET
 	@RequestMapping(value="/professor_info",method=RequestMethod.GET)
-	public String professor_info(Model model,HttpSession session) {
+	public String professor_info(Model model, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 		List<Professor> professor = professorMapper.findOneWithUser(user.getId());
-		System.out.println(professor.toString());
-		model.addAttribute("user",user);
-		model.addAttribute("professor",professor);
+		//System.out.println(professor.toString());
+		model.addAttribute("user", user);
+		model.addAttribute("professor", professor);
+
 		return "professor/professor_info";
 	}
+	
 	// professor_info POST
-		@RequestMapping(value="/professor_info",method=RequestMethod.POST)
-		public String professor_info(Model model,User user, Professor professor, HttpSession session ) {
+	@Transactional
+	@RequestMapping(value="/professor_info",method=RequestMethod.POST)
+	public String professor_info(Model model,User user, Professor professor, HttpSession session ) {
 
-			User userGetId = (User) session.getAttribute("user");
-			user.setId(userGetId.getId());
-			professor.setUserId(userGetId.getId());
+		User userGetId = (User) session.getAttribute("user");
+		user.setId(userGetId.getId());
+		user.setRole(userGetId.getRole());
+		professor.setUserId(userGetId.getId());
 
-			String alert="";
-			String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
+		String alert="";
+		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
 
+		if(user.getPassword().length() > 0) {
 			//비밀번호 조건에 맞지 않을 떄
 			if(!user.getPassword().matches(regex) || user.getPassword().length()<8) {
 				alert="-1";
@@ -108,38 +114,44 @@ public class ProfessorController {
 			SecurityUtil su = new SecurityUtil();
 			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 			user.setPassword(enPssword);
-
-			userMapper.updateProfessor(user); // user테이블 update
-			professorMapper.updateProfessor(professor); // professor 테이블 update
-
-			session.invalidate(); //일단 로그인하도록...ㅠㅠㅠ
-			return "redirect:/user/login"; //일단 로그인하도록...ㅠㅠㅠ
+			
+		} else {
+			user.setPassword(userGetId.getPassword());
 		}
 
-		//professor_stu_info GET
-		@RequestMapping(value="/professor_stu_info",method=RequestMethod.GET)
-		public String professor_stu_info(Model model,@RequestParam("id") String id,HttpSession session) {
+		userMapper.updateProfessor(user); // user테이블 update
+		professorMapper.updateProfessor(professor); // professor 테이블 update
 
-			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-			Student student = studentMapper.findOneWithUser(id);
-			SecondMajor secondMajor = secondMajorMapper.findOneById(id);
-			model.addAttribute("user",user);
-			model.addAttribute("student",student);
-			model.addAttribute("secondMajor",secondMajor);
-			return "professor/professor_stu_info";
-		}
-		//professor_momo GET
-		@RequestMapping(value="/professor_memo",method=RequestMethod.GET)
-		public String professor_memo(Model model,@RequestParam("id") String id,HttpSession session) {
+		session.removeAttribute("user");
+		session.setAttribute("user", user);
 
-			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-			//Counsel counsel = counselMapper.findAll(id);
-			//model.addAttribute("counsel",counsel);
-			model.addAttribute("user",user);
-			return "professor/professor_memo";
-		}
+		return "redirect:professor_stu_search";
+	}
+
+	//professor_stu_info GET
+	@RequestMapping(value="/professor_stu_info",method=RequestMethod.GET)
+	public String professor_stu_info(Model model,@RequestParam("id") String id,HttpSession session) {
+
+		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		Student student = studentMapper.findOneWithUser(id);
+		SecondMajor secondMajor = secondMajorMapper.findOneById(id);
+		model.addAttribute("user",user);
+		model.addAttribute("student",student);
+		model.addAttribute("secondMajor",secondMajor);
+		return "professor/professor_stu_info";
+	}
+	//professor_momo GET
+	@RequestMapping(value="/professor_memo",method=RequestMethod.GET)
+	public String professor_memo(Model model,@RequestParam("id") String id,HttpSession session) {
+
+		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		//Counsel counsel = counselMapper.findAll(id);
+		//model.addAttribute("counsel",counsel);
+		model.addAttribute("user",user);
+		return "professor/professor_memo";
+	}
 }
 
 
