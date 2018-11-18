@@ -25,6 +25,13 @@
 		where userId = #{userId}
 	</select>
 	
+	<select id="findSecondMajor" resultType="String">
+	select d.name 
+	from secondMajor s 
+	join department d on s.departmentId = d.id 
+	where s.userId = #{userId};
+	</select>
+	
 	<resultMap id="resultMap1" type="SecondMajor">
 		<id property="userId" column="userId"/>
 		<result property="division" column="division"/>

@@ -14,7 +14,7 @@ public class User {
 	String secondMajorDepartmentId;
 	String doubleMajor;
 	String subMajor;
-	
+
 	String division;
 
 	//밑으로는 student 테이블 추가를 위한 변수들
@@ -145,5 +145,5 @@ public class User {
 				+ transferStudent + ", volunteerExemption=" + volunteerExemption + ", departmentId=" + departmentId
 				+ ", howToGraduate=" + howToGraduate + "]";
 	}
-	
+
 }

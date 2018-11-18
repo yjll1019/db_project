@@ -17,6 +17,10 @@ public interface MySubjectMapper {
 	List<MySubject> findBySubjectType(String userId,String completionDivision);
 	void deleteSubject(String userId, String subjectCode);
 	void changeScore(String subjectCode, String score, String userId);
+	List<MySubject> findMajor(String userId);//전필
+	List<MySubject> findCultural(String userId);//교필
+	int findPray(String userId);//채플
+	int findService(String userId);//사회봉사
 	// 엑셀 업로드
 	void insert(List<MySubject> mySubjects);
 	List<String> requiredMySubject(String userId);

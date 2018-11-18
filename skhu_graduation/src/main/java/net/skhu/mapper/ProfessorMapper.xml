@@ -8,7 +8,10 @@
 		left join department d on p.departmentId = d.id
 		where userId = #{userId}
 	</select>
-	
+	<select id="findName" resultType="String">
+		select u.userName from user u join professor p on u.id = p.userId
+		where p.userId= #{userId}
+	</select>
 	<resultMap id="resultMap1" type="Professor">
 		<id property="userId" column="userId" />
 		<result property="departmentId" column="departmentId"/>

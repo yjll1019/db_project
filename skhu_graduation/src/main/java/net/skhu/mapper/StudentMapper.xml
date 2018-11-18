@@ -67,7 +67,15 @@
 		left join secondMajor m on s.userId = m.userId
 		where s.userId like #{userId};
 	</select>
-
+	
+	<select id="findOneWithProfessor" resultMap="resultMap2">
+		select s.*,p.userId pId,d.name 
+		from student s 
+		join professor p on s.departmentId = p.departmentId 
+		join department d on s.departmentId = d.id
+		where s.departmentId = p.departmentId and s.userId = #{userId}
+	</select>
+	
 	<resultMap id="resultMap1" type="Student">
 		<id property="userId" column="userId" />
 		<result property="stuSemester" column="stuSemester"/>
@@ -90,8 +98,26 @@
 			<id property="userId" column="userId"/>
 			<result property="division" column="division"/>
 			<result property="departmentId" column="departmentId"/>
+			<association property="department" javaType="Department">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
 		</association>
 	</resultMap>
 	
-		
+	<resultMap id="resultMap2" type="Student">
+		<id property="userId" column="userId" />
+		<result property="stuSemester" column="stuSemester"/>
+		<result property="stuClass" column="stuClass"/>
+		<result property="transferStudent" column="transferStudent"/>
+		<result property="volunteerExemption" column="volunteerExemption"/>
+		<result property="departmentId" column="departmentId"/>
+		<result property="howToGraduate" column="howToGraduate"/>
+		<result property="pId" column="pId"/>
+		<association property="department" javaType="Department">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
+	</resultMap>
+
 </mapper>

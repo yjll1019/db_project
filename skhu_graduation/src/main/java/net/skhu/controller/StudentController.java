@@ -29,6 +29,7 @@ import net.skhu.dto.User;
 import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
+import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
@@ -55,17 +56,44 @@ public class StudentController {
 	GraduationMapper graduationMapper;
 	@Autowired ExcelService excelService;
 	@Autowired ReplaceSubjectService replaceService;
+	@Autowired ProfessorMapper professorMapper;
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
-	public String main(Model model) {
-		User user = new User();
+	public String main(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		Student student = studentMapper.findOneWithUser(user.getId());
+		Student professor = studentMapper.findOneWithProfessor(student.getUserId());
+		student.setpName(professorMapper.findName(professor.getpId()));
+		student.setSecondMajorName(secondMajorMapper.findSecondMajor(user.getId()));
+
+		List<MySubject> mySubjectMajor = mySubjectMapper.findMajor(user.getId());
+		List<MySubject> mySubjectCultural = mySubjectMapper.findCultural(user.getId());
+
+		int service = mySubjectMapper.findService(user.getId());//사회봉사
+		int pray = mySubjectMapper.findPray(user.getId());//채플
+		int major=0;//전필
+		int cultural=0;//교필
+
+		//계산
+		for(int i=0; i<mySubjectMajor.size();++i) {
+			major+=Integer.parseInt(mySubjectMajor.get(i).getCredit());
+		}
+		for(int i=0; i<mySubjectCultural.size(); ++i) {
+			cultural+=Integer.parseInt(mySubjectCultural.get(i).getCredit());
+		}
+		student.setMajor(major);
+		student.setCultural(cultural);
+		student.setPray(pray);
+		student.setService(service);
 		model.addAttribute("user", user);
+		model.addAttribute("student",student);
+
 		return "student/stu_main";
 	}
 
-	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때 
+	//stu_main.jsp에서 데이터 입력 후 학점 조회 눌렀을 때
 	@RequestMapping(value = "stu_main", method = RequestMethod.POST)
-	public String main(Model model, RedirectAttributes redirectAttributes, @RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit, 
+	public String main(Model model, RedirectAttributes redirectAttributes, @RequestParam("beforeSemester") String beforeSemester, @RequestParam("saveCredit") String saveCredit,
 			@RequestParam("allCredit") String allCredit, @RequestParam("goalCredit") String goalCredit) {
 		User user = new User();
 		model.addAttribute("user", user);
@@ -112,7 +140,7 @@ public class StudentController {
 	@RequestMapping(value = "stu_goalCredit", method = RequestMethod.GET)
 	public String stu_goalCredit(Model model, HttpServletRequest request,@RequestParam("score") double score, @RequestParam("goalCredit") String goalCredit) {
 		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-		model.addAttribute("map", (Map<String, Object>)flashMap.get("map"));
+		model.addAttribute("map", flashMap.get("map"));
 		model.addAttribute("score", score);
 		model.addAttribute("goalCredit", goalCredit);
 		return "student/stu_goalCredit";
@@ -249,14 +277,14 @@ public class StudentController {
 	// stu_info POST
 	@Transactional
 	@RequestMapping(value = "stu_info", method = RequestMethod.POST)
-	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor, 
+	public String stu_info(Model model, User user, Student student, SecondMajor secondMajor,
 			HttpSession session) {
 
 		User userGetId = (User) session.getAttribute("user");
 		user.setId(userGetId.getId());
 		user.setRole(userGetId.getRole());
 		System.out.println(user.toString());
-		
+
 		student.setUserId(user.getId());
 		student.setStuSemester(user.getStuSemester());
 		student.setStuClass(user.getStuClass());
@@ -265,17 +293,17 @@ public class StudentController {
 		student.setDepartmentId(user.getDepartmentId());
 		student.setHowToGraduate(user.getHowToGraduate());
 		System.out.println(student.toString());
-		
+
 		secondMajor.setUserId(userGetId.getId());
 		secondMajor.setDivision(user.getDivision());
 		secondMajor.setDepartmentId(user.getSecondMajorDepartmentId());
 		System.out.println(secondMajor.toString());
-		
+
 		String alert = "";
 		String regex = "([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; // 영문+숫자
 
 		if(user.getPassword().length() > 0) {
-			
+
 			// 비밀번호 조건에 맞지 않을 떄
 			if (!user.getPassword().matches(regex) || user.getPassword().length() < 8) {
 				alert = "-1";
@@ -298,15 +326,15 @@ public class StudentController {
 			SecurityUtil su = new SecurityUtil();
 			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 			user.setPassword(enPssword);
-			
+
 		} else {
 			user.setPassword(userGetId.getPassword());
 		}
-		
+
 		userMapper.updateStudent(user); //user 테이블 update
 		studentMapper.updateForInfo(student); //student 테이블 update
 		secondMajorMapper.insert(secondMajor);
-		
+
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
 
@@ -450,7 +478,7 @@ public class StudentController {
 		return "student/stu_allSearch";
 	}
 
-	@RequestMapping(value = "stu_allSearch", method = RequestMethod.POST) 
+	@RequestMapping(value = "stu_allSearch", method = RequestMethod.POST)
 	public String selectDepartment(Model model,  @RequestParam("departmentId") String departmentId)
 	{
 
@@ -465,15 +493,15 @@ public class StudentController {
 
 		return "redirect:/student/stu_allSearch";
 	}
-	
+
 	//필수과목 목록
 	   @RequestMapping(value="reTest", method=RequestMethod.GET)
 	   public String reTest(Model model, HttpSession session) {
 	      User user = new User();
-	      
+
 	      user.setId("201632021"); //수정 필요
 	      user.setDepartmentId("12");
-	      
+
 	      List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());
 	      List<String> requiredSubject = mySubjectMapper.requiredSubject(user.getDepartmentId(), user.getId().substring(0, 4));
 	      List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
@@ -481,17 +509,17 @@ public class StudentController {
 	         noSubject.remove("AC00001");
 	      if(noSubject.contains("AC00003")) //사회봉사제거
 	         noSubject.remove("AC00003");
-	      
+
 
 	      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
 	      Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
-	      
+
 	      for(int i=0; i<requiredSubject.size(); ++i) {
 	         String subjectCode = requiredSubject.get(i);
 	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
 	         requiredSubjectMap.put(subjectCode, subjectName);
 	      }
-	      
+
 	      for(int i=0; i<noSubject.size(); ++i) {
 	         String subjectCode = noSubject.get(i);
 	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));

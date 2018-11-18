@@ -12,6 +12,9 @@ public class MySubject {
 	String userId;
 	String changeComplete;
 
+	public MySubject() {
+
+	}
 	public MySubject(String takeYear, String takeSemester, String subjectCode, String subjectName,
 			String completionDivision, String credit, String score, String userId) {
 		this.takeYear = takeYear;

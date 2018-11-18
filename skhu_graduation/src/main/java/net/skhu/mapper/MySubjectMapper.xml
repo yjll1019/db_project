@@ -69,4 +69,24 @@
 	<select id="getSubjectName" resultType="String">
 		select DISTINCT subjectName from subject where code like #{subjectCode} and year like #{year};
 	</select>
+	
+	<select id="findMajor" resultType="MySubject">
+		select * from mySubject 
+		where userId=#{userId} and completionDivision='전필';
+	</select>
+	
+	<select id="findCultural" resultType="MySubject">
+		select * from mySubject 
+		where userId=#{userId} and completionDivision='교필';
+	</select>
+	
+	<select id="findPray" resultType="int">
+		select count(*) from mySubject 
+		where userId=#{userId} and (subjectCode LIKE CONCAT('%','AA','%') or subjectCode ='AC00001') and score='P';
+	</select>
+	
+	<select id="findService" resultType="int">
+		select count(*) from mySubject 
+		where userId=#{userId} and score='P' and (subjectCode='AE00046' or 'AC00003' or 'AE00029' or 'AE00030');
+	</select>
 </mapper>

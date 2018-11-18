@@ -11,14 +11,16 @@ public class Student {
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
 	String subMajor;
-	
-	
-	public String getSubMajor() {
-		return subMajor;
-	}
-	public void setSubMajor(String subMajor) {
-		this.subMajor = subMajor;
-	}
+
+	String pId;// 지도교수Id
+	String pName;//지도교수 Name
+	String secondMajorName;
+
+	int major;//전필
+	int cultural;//교필
+	int pray;//채플
+	int service;//사회봉사
+
 	User user;
 	Department department;
 	SecondMajor secondMajor;
@@ -88,6 +90,58 @@ public class Student {
 	}
 	public void setSecondMajor(SecondMajor secondMajor) {
 		this.secondMajor = secondMajor;
+	}
+
+	public String getpId() {
+		return pId;
+	}
+	public void setpId(String pId) {
+		this.pId = pId;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getSubMajor() {
+		return subMajor;
+	}
+	public void setSubMajor(String subMajor) {
+		this.subMajor = subMajor;
+	}
+
+	public String getSecondMajorName() {
+		return secondMajorName;
+	}
+	public void setSecondMajorName(String secondMajorName) {
+		this.secondMajorName = secondMajorName;
+	}
+
+	public int getMajor() {
+		return major;
+	}
+	public void setMajor(int major) {
+		this.major = major;
+	}
+	public int getCultural() {
+		return cultural;
+	}
+	public void setCultural(int cultural) {
+		this.cultural = cultural;
+	}
+	public int getPray() {
+		return pray;
+	}
+	public void setPray(int pray) {
+		this.pray = pray;
+	}
+
+	public int getService() {
+		return service;
+	}
+	public void setService(int service) {
+		this.service = service;
 	}
 	@Override
 	public String toString() {
