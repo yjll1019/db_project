@@ -31,5 +31,9 @@ public class SecondMajor {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+	@Override
+	public String toString() {
+		return "SecondMajor [userId=" + userId + ", division=" + division + ", departmentId=" + departmentId + "]";
+	}
 
 }

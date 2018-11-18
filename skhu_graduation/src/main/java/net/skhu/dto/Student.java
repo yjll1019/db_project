@@ -6,8 +6,8 @@ public class Student {
 	String userId; //학번
 	String stuSemester; //학기
 	String stuClass; //반
-	int transferStudent; //편입 여부 >> 1이면 편입생
-	int volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
+	String transferStudent; //편입 여부 >> 1이면 편입생
+	String volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
 	String subMajor;
@@ -56,17 +56,17 @@ public class Student {
 		this.stuClass = stuClass;
 	}
 
-	public int getTransferStudent() {
+	public String getTransferStudent() {
 		return transferStudent;
 	}
-	public void setTransferStudent(int transferStudent) {
+	public void setTransferStudent(String transferStudent) {
 		this.transferStudent = transferStudent;
 	}
 
-	public int getVolunteerExemption() {
+	public String getVolunteerExemption() {
 		return volunteerExemption;
 	}
-	public void setVolunteerExemption(int volunteerExemption) {
+	public void setVolunteerExemption(String volunteerExemption) {
 		this.volunteerExemption = volunteerExemption;
 	}
 
@@ -89,6 +89,12 @@ public class Student {
 	public void setSecondMajor(SecondMajor secondMajor) {
 		this.secondMajor = secondMajor;
 	}
-
+	@Override
+	public String toString() {
+		return "Student [userId=" + userId + ", stuSemester=" + stuSemester + ", stuClass=" + stuClass
+				+ ", transferStudent=" + transferStudent + ", volunteerExemption=" + volunteerExemption
+				+ ", departmentId=" + departmentId + ", howToGraduate=" + howToGraduate + ", subMajor=" + subMajor
+				+ ", user=" + user + ", secondMajor=" + secondMajor + "]";
+	}
 
 }

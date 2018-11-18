@@ -8,6 +8,7 @@ import net.skhu.dto.SecondMajor;
 @Mapper
 public interface SecondMajorMapper {
 	SecondMajor findOneById(String userId);
+	SecondMajor findOneForInfo(String userId);
 	void insert(SecondMajor sm);
 	List<SecondMajor> findAll();
 	void update(SecondMajor sm);

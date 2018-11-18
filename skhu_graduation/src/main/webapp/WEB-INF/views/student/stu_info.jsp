@@ -1,263 +1,273 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="net.skhu.dto.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:url var="R" value="/" />
- <% 
- String s= request.getParameter("departmentId");
- int majorId = (s==null) ? 0 : Integer.parseInt(s);
- int subMajorId=0;
- 
- %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="https://bootswatch.com/4/litera/bootstrap.min.css">
+   href="https://bootswatch.com/4/litera/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquare/master/nanumsquare.min.css">
+   href="https://cdn.rawgit.com/innks/NanumSquare/master/nanumsquare.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 <link rel="stylesheet" href="${R}res/css/mypage.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
+   type="text/javascript"></script>
 <!-- Website CSS style -->
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-
 <!-- Website Font style -->
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Passion+One'
-	rel='stylesheet' type='text/css'>
+   rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Oxygen'
-	rel='stylesheet' type='text/css'>
-
+   rel='stylesheet' type='text/css'>
 <!-- header -->
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
-<script src="${R}res/js/header.js"></script>	
-<% String r = request.getParameter("r"); %>
-<script>
-	var r = <%= r %>;
-	if(r == "-1"){
- 		alert('¾÷·Îµå ½ÇÆĞ È¤Àº ¼±ÅÃµÈ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.');
- 	}
-</script>
-<title>ÇĞ»ı ¸¶ÀÌÆäÀÌÁö </title>
-</head>
-<%
+   type="text/javascript"></script>
+<script src="${R}res/js/header.js"></script>   
+<% 
+	String s = request.getParameter("departmentId");
+	int majorId = (s == null) ? 0 : Integer.parseInt(s);
+	int subMajorId = 0;
+	
+	String r = request.getParameter("r"); 
 	String alert =String.valueOf(request.getAttribute("alert"));
 %>
 <script>
-	var al = "<%=alert%>"
-		if(al==-1){
-			alert('ºñ¹Ğ¹øÈ£ Á¶°ÇÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù. ¿µ¹®+¼ıÀÚ 8ÀÚ¸® ÀÌ»ó!');
-		}else if(al==-2){
-			alert('ºñ¹Ğ¹øÈ£¿Í È®ÀÎºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.');
-		}
-
+   var r = <%= r %>;
+   if(r == "-1"){
+       alert('ì—…ë¡œë“œ ì‹¤íŒ¨ í˜¹ì€ ì„ íƒëœ íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.');
+    }
+   
+   var al = "<%= alert %>"
+	      if(al == -1){
+	         alert('ë¹„ë°€ë²ˆí˜¸ ì¡°ê±´ì´ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤. ì˜ë¬¸+ìˆ«ì 8ìë¦¬ ì´ìƒ!');
+	      }else if(al == -2){
+	         alert('ë¹„ë°€ë²ˆí˜¸ì™€ í™•ì¸ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.');
+	      }
 </script>
+<title>ê°œì¸ì •ë³´ë³€ê²½</title>
+</head>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
-		<div id='cssmenu'>
-			<ul>
-				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>³ªÀÇÁ¹¾÷¿ä°Ç</span></a></li>
-				<li><a href='stu_subject_list'><span>¼ö°­¸ñ·Ï Á¶È¸</span></a></li>
-				<li><a href='stu_allSearch'><span>Á¹¾÷¿ä°Ç Á¶È¸</span></a></li>
-				<li><a href='#'><span>°øÁö»çÇ× ¹× ¹®ÀÇ</span></a></li>
-				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='../user/check_password'><span>°³ÀÎÁ¤º¸º¯°æ</span></a></li>
-			</ul>
-		</div>
-	</div>
-<div id="jb-content justify-content-center">
-			<div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="updateStudent" style="width: 300px; margin-left: 23px">
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">ÀÌ¸§</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="name"  value="${users.userName}" style="height: 37px;"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">ÀÌ¸ŞÀÏ</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="text" class="form-control" name="email"   value="${users.email}"style="height: 37px;"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="phone" class="cols-sm-2 control-label">ÀüÈ­¹øÈ£</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="tel" class="form-control" name="phone"  value="${users.phone}" style="height: 37px;"/>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">ºñ¹Ğ¹øÈ£</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock  " aria-hidden="true"  style="margin-top: 8px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="ºñ¹Ğ¹øÈ£ ÀÔ·Â" style="height: 37px;"/>
-								</div>
-				
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">ºñ¹Ğ¹øÈ£ È®ÀÎ</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"  style="margin-top: 8px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎ ÀÔ·Â" style="height: 37px;"/>
-								</div>
-								
-							</div>
-						</div>
-
-						<div class="form-group" style="margin-top: 20pt;">	
-							<div class="cols-sm-10">
-								<div class="input-group" style="font-size: 13pt;">
-								<span class="input-group-addon">
-									<i class="fas fa-pen-square" ></i>&nbsp; ÆíÀÔ»ı
-								</span>
-									<input type="checkbox" name="kind"  id="kind" style="margin-left:20px; width:25px; height:25px;"/>
-								</div>
-								
-								<div class="input-group" style="font-size: 13pt; margin-top: 8px;">
-									<span class="input-group-addon">
-									<i class="fas fa-pen-square" ></i>&nbsp; »çÈ¸ºÀ»ç¸éÁ¦¿©ºÎ
-									</span>
-									<input type="checkbox" name="kind" id="kind" style="margin-left:20px; width:25px; height:25px;"/>
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group" style="margin-top: 25px;">
-							<label for ="major" class="cls-sm-2 control-label">ÇĞºÎ/ÇĞ°ú</label>
-							<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
- 								&nbsp;	&nbsp;	&nbsp; &nbsp;
- 								<input type="radio" name="howToGraduate" value="Àü°ø±âÃÊ" checked> Àü°ø±âÃÊ 
- 								&nbsp; &nbsp;
-								<input type="radio" name="howToGraduate" value="Àü°ø½ÉÈ­"> Àü°ø½ÉÈ­
- 							</div>
- 							
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<select name="majorId" class="form-control" value="${student.departmentId }" style="height: 37px; font-size: 10pt;">
-     									 <option value="0"  <c:if test="${student.departmentId == 0}">selected</c:if> >ÁÖÀü°øÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä</option>
-      									<option value="12" <c:if test="${student.departmentId == 12}">selected</c:if>>¼ÒÇÁÆ®¿ş¾î °øÇĞ°ú</option>
-  									    <option value="14" <c:if test="${student.departmentId == 14}">selected</c:if>>ÄÄÇ»ÅÍ°øÇĞ°ú</option>
-      									<option value="10" <c:if test="${student.departmentId == 10}">selected</c:if>>ITÀ¶ÇÕ ÀÚÀ² ÇĞºÎ</option>
-									</select>
-								</div>
-							</div>
-							</div>
-						
-							<div class="checkbox" style="font-size: 10pt; margin-bottom: 7%">
- 								&nbsp;	&nbsp;	&nbsp; &nbsp; 
- 								<input type="checkbox" name="doubleMajor" value="º¹¼öÀü°ø" > º¹¼öÀü°ø 
- 								&nbsp; &nbsp;
-								<input type="checkbox" name="subMajor" value="ºÎÀü°ø"> ºÎÀü°ø
- 							</div>
-							<div class="cols-sm-10" style="margin-top:5px;">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-							<select name="subMajorId" class="form-control" value="${secondMajor.departmentId }" style="height: 37px; font-size: 10pt;" >
-     									 <option value="0" <c:if test="${secondMajor.departmentId == 0}">selected</c:if> >ºÎ/º¹¼ö Àü°øÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä</option>
-      									<option value="11"<c:if test="${secondMajor.departmentId == 11}">selected</c:if> >µğÁöÅĞ ÄÁÅÙÃ÷ÇĞ°ú</option>
-  									    <option value="12" <c:if test="${secondMajor.departmentId == 12 }">selected</c:if> >¼ÒÇÁÆ®¿ş¾î °øÇĞ°ú</option>
-      									<option value="13" <c:if test="${secondMajor.departmentId ==13 }">selected</c:if> >Á¤º¸Åë½ÅÇĞ°ú</option>
-     									 <option value="14" <c:if test="${secondMajor.departmentId == 14}">selected</c:if> >ÄÄÇ»ÅÍ°øÇĞ°ú</option>
-      									<option value="15" <c:if test="${secondMajor.departmentId ==15}">selected</c:if> >±Û·ÎÄÃ ITÇĞ°ú</option>
-  									    <option value="20" <c:if test="${secondMajor.departmentId ==20}">selected</c:if> >°æ¿µÇĞºÎ</option>
-      									<option value="21" <c:if test="${secondMajor.departmentId ==21}">selected</c:if> >µğÁöÅĞÄÁÅÙÃ÷ÇĞ°ú</option>
-      									 <option value="23" <c:if test="${secondMajor.departmentId ==23}">selected</c:if> >»çÈ¸°úÇĞºÎ</option>
-      									<option value="24" <c:if test="${secondMajor.departmentId ==24}">selected</c:if> >»çÈ¸º¹ÁöÇĞ°ú</option>
-  									    <option value="26" <c:if test="${secondMajor.departmentId ==26}">selected</c:if> >½Å¹®¹æ¼ÛÇĞ°ú</option>
-      									<option value="30" <c:if test="${secondMajor.departmentId ==30}">selected</c:if>>½ÅÇĞ°ú</option>
-     									 <option value="31"<c:if test="${secondMajor.departmentId ==31}">selected</c:if> >¿µ¾îÇĞ°ú</option>
-      									<option value="32"<c:if test="${secondMajor.departmentId ==32}">selected</c:if> >ÀÏ¾îÀÏº»ÇĞ°ú</option>
-  									    <option value="34" <c:if test="${secondMajor.departmentId ==34}">selected</c:if> >Áß¾îÁß±¹ÇĞ°ú</option>
-      									
-								</select>
-								</div>
-							</div>
-							
-							
-						<div class="form-group" style="margin-top:5px;">
-							<label for ="semester" class="cls-sm-2 control-label">ÇĞ±â</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<select name="semester" class="form-control" value="${student.stuSemester}"  style="height: 37px; font-size: 10pt;" >
-      									<option value="0" <c:if test="${student.stuSemester == 0}">selected</c:if> >ÇĞ±â¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä</option>
-  									    <option value="1" <c:if test="${student.stuSemester == 1}">selected</c:if>>1ÇĞ±â</option>
-      									<option value="2" <c:if test="${student.stuSemester == 2}">selected</c:if>>2ÇĞ±â</option>
-     									<option value="3" <c:if test="${student.stuSemester == 3}">selected</c:if>>3ÇĞ±â</option>
-      									<option value="4" <c:if test="${student.stuSemester == 4}">selected</c:if>>4ÇĞ±â</option>
-  									    <option value="5" <c:if test="${student.stuSemester == 5}">selected</c:if>>5ÇĞ±â</option>
-       									<option value="0" <c:if test="${student.stuSemester == 6}">selected</c:if>>6ÇĞ±â</option>
-  									    <option value="1" <c:if test="${student.stuSemester == 7}">selected</c:if>>7ÇĞ±â</option>
-      									<option value="2" <c:if test="${student.stuSemester == 8}">selected</c:if>>8ÇĞ±â</option>
-     									<option value="3" <c:if test="${student.stuSemester == 9}">selected</c:if>>9ÇĞ±â</option>
-								</select>
-								</div>
-							</div>
-						</div>
-
-							<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
-							<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >¼öÁ¤ÇÏ±â</button>
-						</div>		
-					</form>
-					<form action="mySubject_upload" method="post" enctype="multipart/form-data" style="margin-left: 10px">
-							<div class="form-group">
-							<label for="file" class="cols-sm-2 control-label">¼ö°­¸ñ·Ï ¾÷·Îµå</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
-									&nbsp;&nbsp;
-									<input type="file" name="file" style="width: 250px;" />
-									<button type="submit" class="btn btn-outline-primary" style="font-size: 13px;">¾÷·Îµå</button>
-								</div>
-							</div>
-						</div>					
-					</form>
-				</div>
+			<div id='cssmenu'>
+				<ul>
+					<li>
+						<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+							<img src="${R}res/img/logo.jpg" width="29" height="29">
+						</a>
+					</li>
+					<li><a href='stu_main'><span>ë‚˜ì˜ì¡¸ì—…ìš”ê±´</span></a></li>
+					<li><a href='#'><span>ìˆ˜ê°•ëª©ë¡ ì¡°íšŒ</span></a></li>
+					<li><a href='#'><span>ì¡¸ì—…ìš”ê±´ ì¡°íšŒ</span></a></li>
+					<li><a href='#'><span>ê³µì§€ì‚¬í•­ ë° ë¬¸ì˜</span></a></li>
+					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='redirect:stu_Info'><span>ê°œì¸ì •ë³´ë³€ê²½</span></a></li>
+				</ul>
 			</div>
 		</div>
-	</div>
-	</div>
+		<div id="jb-content justify-content-center">
+			<div class="container">
+				<div class="row main">
+					<div class="main-login main-center">
+              			<form class="form-horizontal" method="post" style="width: 300px; margin-left: 23px">
+              			
+							<div class="form-group">
+								<label for="name" class="cols-sm-2 control-label">ì´ë¦„</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
+										&nbsp;&nbsp;
+										<input type="text" class="form-control" name="userName"  value="${user.userName}" style="height: 37px;"/>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="email" class="cols-sm-2 control-label">ì´ë©”ì¼</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
+										&nbsp;&nbsp;
+										<input type="text" class="form-control" name="email" value="${user.email}"style="height: 37px;"/>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="phone" class="cols-sm-2 control-label">ì „í™”ë²ˆí˜¸</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
+										&nbsp;&nbsp;
+										<input type="tel" class="form-control" name="phone" value="${user.phone}" style="height: 37px;"/>
+									</div>
+								</div>
+							</div>
+                  
+							<div class="form-group">
+								<label for="password" class="cols-sm-2 control-label">ë¹„ë°€ë²ˆí˜¸</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-lock  " aria-hidden="true"  style="margin-top: 8px;"></i></span>
+										&nbsp;&nbsp;
+										<input type="password" class="form-control" name="password" data-toggle="popover" placeholder="ë¹„ë°€ë²ˆí˜¸ ì…ë ¥" style="height: 37px;"/>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="confirm" class="cols-sm-2 control-label">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"  style="margin-top: 8px;"></i></span>
+										&nbsp;&nbsp;
+										<input type="password" class="form-control" name="confirmPassword" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸ ì…ë ¥" style="height: 37px;"/>
+									</div>
+								</div>
+							</div>
+
+                  			<div class="form-group" style="margin-top: 20pt;">   
+                     			<div class="cols-sm-10">
+     
+                        			<div class="input-group" style="font-size: 13pt;">
+                        				<span class="input-group-addon"><i class="fas fa-pen-square" ></i>&nbsp; í¸ì…ìƒ</span>
+                           				<input type="checkbox" name="transferStudent" ${ student.transferStudent == '0' ? '' : 'checked' }
+                           					style="margin-left:20px; width:25px; height:25px;"/>
+                        			</div>
+                        			         
+                       				<div class="input-group" style="font-size: 13pt; margin-top: 8px;">
+                           				<span class="input-group-addon"><i class="fas fa-pen-square" ></i>&nbsp; ì‚¬íšŒë´‰ì‚¬ë©´ì œì—¬ë¶€</span>
+                           				<input type="checkbox" name="volunteerExemption" ${ student.volunteerExemption == '0' ? '' : 'checked'}
+                           					style="margin-left:20px; width:25px; height:25px;"/>
+                        			</div>
+                        			
+                     			</div>
+                  			</div>
+                  
+                  			<div class="form-group" style="margin-top: 25px;">
+                     			<label for ="major" class="cls-sm-2 control-label">í•™ë¶€/í•™ê³¼</label>
+                     			
+                     			<div class="radio" style="font-size: 10pt; margin-bottom: 7%">
+                         			&nbsp;&nbsp;&nbsp;&nbsp;
+                         			<input type="radio" name="howToGraduate" value="ì „ê³µê¸°ì´ˆ" ${ student.howToGraduate == 'ì „ê³µê¸°ì´ˆ' ? 'checked' : '' } />ì „ê³µê¸°ì´ˆ 
+                         			&nbsp; &nbsp;
+                        			<input type="radio" name="howToGraduate"value="ì „ê³µì‹¬í™”" ${ student.howToGraduate == 'ì „ê³µì‹¬í™”' ? 'checked' : '' } /> ì „ê³µì‹¬í™”
+                      			</div>
+                      
+                     			<div class="cols-sm-10">
+                        			<div class="input-group" style="margin-bottom: 7%">
+                           				<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
+                           				&nbsp;&nbsp;
+                           				<select name="departmentId" class="form-control" style="height: 37px; font-size: 10pt;">
+                                 			<option value="0" ${student.departmentId == 0 ? 'selected' : '' }>ì£¼ì „ê³µì„ ì„ íƒí•´ ì£¼ì„¸ìš”</option>
+                                 			<option value="12" ${student.departmentId == 12 ? 'selected' : ''}>ì†Œí”„íŠ¸ì›¨ì–´ ê³µí•™ê³¼</option>
+                                 			<option value="14" ${student.departmentId == 14 ? 'selected' : ''}>ì»´í“¨í„°ê³µí•™ê³¼</option>
+                                 			<option value="10" ${student.departmentId == 10 ? 'selected' : ''}>ITìœµí•© ììœ¨ í•™ë¶€</option>
+                           				</select>
+                        			</div>
+                     			</div>
+                     		
+                     			<div class="cols-sm-10">
+									<div class="input-group" style="margin-bottom: 7%">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
+										&nbsp;&nbsp;
+										<select name="stuClass" class="form-control" style="height: 37px; font-size: 10pt;">
+											<option value="0">ë°˜ì„ ì„ íƒí•´ì£¼ì„¸ìš”</option>
+											<option value="a" ${student.stuClass == 'a' ? 'selected' : '' }>aë°˜</option>
+											<option value="b" ${student.stuClass == 'b' ? 'selected' : '' }>bë°˜</option>
+											<option value="c" ${student.stuClass == 'c' ? 'selected' : '' }>cë°˜</option>
+											<option value="d" ${student.stuClass == 'd' ? 'selected' : '' }>dë°˜</option>
+										</select>
+									</div>
+								</div>
+								
+                     		</div>
+                  
+                     		<div class="checkbox" style="font-size: 10pt; margin-bottom: 7%">
+                         		&nbsp;&nbsp;&nbsp;&nbsp; 
+                         		<input type="checkbox" name="division" value="ë³µìˆ˜ì „ê³µ" ${ secondMajor.division == 'ë³µìˆ˜ì „ê³µ' ? 'checked' : ''} /> ë³µìˆ˜ì „ê³µ 
+                         		&nbsp; &nbsp;
+                        		<input type="checkbox" name="division" value="ë¶€ì „ê³µ" ${ secondMajor.division == 'ë¶€ì „ê³µ' ? 'checked' : ''} /> ë¶€ì „ê³µ
+                     		</div>
+                     		
+                     		<div class="cols-sm-10" style="margin-top:5px;">
+                        		<div class="input-group">
+                           			<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
+                           			&nbsp;&nbsp;
+                     				<select name="secondMajorDepartmentId" class="form-control" style="height: 37px; font-size: 10pt;" >
+                                 		<option value="0" <c:if test="${secondMajor.departmentId == 0}">selected</c:if> >ë¶€/ë³µìˆ˜ ì „ê³µì„ ì„ íƒí•´ ì£¼ì„¸ìš”</option>
+                                 		<option value="11"<c:if test="${secondMajor.departmentId == 11}">selected</c:if> >ë””ì§€í„¸ ì»¨í…ì¸ í•™ê³¼</option>
+                                 		<option value="12" <c:if test="${secondMajor.departmentId == 12 }">selected</c:if> >ì†Œí”„íŠ¸ì›¨ì–´ ê³µí•™ê³¼</option>
+                                 		<option value="13" <c:if test="${secondMajor.departmentId == 13 }">selected</c:if> >ì •ë³´í†µì‹ í•™ê³¼</option>
+                                 		<option value="14" <c:if test="${secondMajor.departmentId == 14}">selected</c:if> >ì»´í“¨í„°ê³µí•™ê³¼</option>
+                           		    	<option value="15" <c:if test="${secondMajor.departmentId ==15}">selected</c:if> >ê¸€ë¡œì»¬ ITí•™ê³¼</option>
+                            		    <option value="20" <c:if test="${secondMajor.departmentId ==20}">selected</c:if> >ê²½ì˜í•™ë¶€</option>
+                                 		<option value="21" <c:if test="${secondMajor.departmentId ==21}">selected</c:if> >ë””ì§€í„¸ì»¨í…ì¸ í•™ê³¼</option>
+                                  		<option value="23" <c:if test="${secondMajor.departmentId ==23}">selected</c:if> >ì‚¬íšŒê³¼í•™ë¶€</option>
+                                 		<option value="24" <c:if test="${secondMajor.departmentId ==24}">selected</c:if> >ì‚¬íšŒë³µì§€í•™ê³¼</option>
+                                 		<option value="26" <c:if test="${secondMajor.departmentId ==26}">selected</c:if> >ì‹ ë¬¸ë°©ì†¡í•™ê³¼</option>
+                                 		<option value="30" <c:if test="${secondMajor.departmentId ==30}">selected</c:if>>ì‹ í•™ê³¼</option>
+                                 		<option value="31"<c:if test="${secondMajor.departmentId ==31}">selected</c:if> >ì˜ì–´í•™ê³¼</option>
+                                 		<option value="32"<c:if test="${secondMajor.departmentId ==32}">selected</c:if> >ì¼ì–´ì¼ë³¸í•™ê³¼</option>
+                                 		<option value="34" <c:if test="${secondMajor.departmentId ==34}">selected</c:if> >ì¤‘ì–´ì¤‘êµ­í•™ê³¼</option>
+                       				</select>
+                        		</div>
+                 			</div>
+                 			
+                 			<div class="form-group" style="margin-top:5px;">
+                     			<label for ="semester" class="cls-sm-2 control-label">í•™ê¸°</label>
+                     			<div class="cols-sm-10">
+                        			<div class="input-group">
+                           				<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"  style="margin-top: 10px;"></i></span>
+                           				&nbsp;&nbsp;
+                           				<select name="stuSemester" class="form-control" style="height: 37px; font-size: 10pt;" >
+                                 			<option value="0" <c:if test="${ student.stuSemester == 0 }">selected</c:if> >í•™ê¸°ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”</option>
+                          			    	<option value="1" <c:if test="${ student.stuSemester == 1 }">selected</c:if>>1í•™ê¸°</option>
+                                			<option value="2" <c:if test="${ student.stuSemester == 2 }">selected</c:if>>2í•™ê¸°</option>
+      			                          	<option value="3" <c:if test="${ student.stuSemester == 3 }">selected</c:if>>3í•™ê¸°</option>
+                                 			<option value="4" <c:if test="${ student.stuSemester == 4 }">selected</c:if>>4í•™ê¸°</option>
+                                 			<option value="5" <c:if test="${ student.stuSemester == 5 }">selected</c:if>>5í•™ê¸°</option>
+                                  			<option value="6" <c:if test="${ student.stuSemester == 6 }">selected</c:if>>6í•™ê¸°</option>
+                                 			<option value="7" <c:if test="${ student.stuSemester == 7 }">selected</c:if>>7í•™ê¸°</option>
+                                 			<option value="8" <c:if test="${ student.stuSemester == 8 }">selected</c:if>>8í•™ê¸°</option>
+                        				</select>
+                        			</div>
+                     			</div>
+                  			</div>
+
+                    		<div class="form-group" style="margin-top: 36px; margin-left: 31%; width: 120px;">
+                     			<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >ìˆ˜ì •í•˜ê¸°</button>
+                  			</div>      
+               			</form>
+               			
+               			<form action="mySubject_upload" method="post" enctype="multipart/form-data" style="margin-left: 10px">
+                     		<div class="form-group">
+                     		<label for="file" class="cols-sm-2 control-label">ìˆ˜ê°•ëª©ë¡ ì—…ë¡œë“œ</label>
+                     			<div class="cols-sm-10">
+                        			<div class="input-group">
+                           				<span class="input-group-addon"><i class="fa fa-file-upload fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
+                           				&nbsp;&nbsp;
+                           				<input type="file" name="file" style="width: 250px;" />
+                           				<button type="submit" class="btn btn-outline-primary" style="font-size: 13px;">ì—…ë¡œë“œ</button>
+                        			</div>
+                     			</div>
+                  			</div>               
+               			</form>
+            		</div>
+         		</div>
+      		</div>
+   		</div>
+   </div>
 </body>
 </html>
