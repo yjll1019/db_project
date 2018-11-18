@@ -21,18 +21,31 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+
 <%
 	String r = request.getParameter("r");
+	String alert = String.valueOf(request.getAttribute("alert"));
 %>
 <script>
-	var r =
-<%=r%>
-	;
+	var r = <%=r%>;
 	if (r == "1") {
 		alert('업로드 성공!');
 	} else if (r == "-1") {
 		alert('업로드 실패 혹은 선택된 파일이 없습니다.');
 	}
+	
+	var al = <%=alert%>;
+		if(al==0){
+			alert('폐지 과목 정보 입력은 다 필수입니다. 다 입력해주세요');
+		}else if(al==1){
+			alert('대체 과목의 학과/학부 정보 입력은 필수입니다.');
+		}else if(al==2){
+			alert('입력한 폐지 과목 정보가 없습니다.');
+		}else if(al==3){
+			alert('과목 지정인 경우 과목 코드와 과목명은 필수로 입력해야 합니다.')
+		}else if(al==4){
+			alert('과목 코드와 과목명 입력이 되었지만, 입력한 정보가 존재하지 않습니다.')
+		}
 </script>
 <title>관리자-대체과목 목록</title>
 </head>
@@ -108,7 +121,17 @@
 							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
 							<td style="border-right: 1px solid black">${replace.subject.subjectName }</td>
 							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
-							<td style="border-right: 1px solid silver">${replace.replaceSubjectName }</td>
+							<td style="border-right: 1px solid silver"
+								<c:choose>
+									<c:when test="${replace.completionDivision eq '전공선택'}"> 
+										전공 선택 과목으로 대체
+    								</c:when>
+									<c:when test="${replace.completionDivision eq '교양선택'}"> 
+										교양 선택 과목으로 대체
+    								</c:when>
+								</c:choose>
+							>${replace.replaceSubjectName}</td>
+								
 						</tr>
 					</c:forEach>
 
@@ -120,12 +143,12 @@
 
 			<div class="container" style="margin-top: 30px; font-size: 15pt">
 				<form action="admin_replace_list" method="post"
-					modelAttribute="subject">
+					modelAttribute="subject" ,modelAttribute="pagination">
 					<table style="width: 900px;">
 						<tr>
 							<td><strong>폐지과목</strong></td>
 							<td><select name="DeleteDepartmentId" class="form-control"
-								style="margin-left: 5px; width:150px;border: 1px solid gray">
+								style="margin-left: 5px; width: 150px; border: 1px solid gray">
 									<option value="">학부/학과</option>
 									<option value="12">소프트웨어공학과</option>
 									<option value="14">컴퓨터공학과</option>
@@ -133,27 +156,28 @@
 									<option value="25">사회융합 자율학부</option>
 									<option value="22">미디어컨텐츠융합 자율학부</option>
 									<option value="10">IT융합 자율학부</option>
+									<option value="4">교양계</option>
 							</select></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><select name="DeleteSemester" class="form-control"
-								style="margin-left: 5px; width:100px; border: 1px solid gray;">
+								style="margin-left: 5px; width: 100px; border: 1px solid gray;">
 									<option value="1학기">1학기</option>
 									<option value="2학기">2학기</option>
 							</select></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><input type="text" class="form-control"
 								name="DeleteYear" placeholder="예)2018"
-								style="margin-left: 5px; width: 130px; border: 1px solid gray" />
+								style="margin-left: -140px; width: 130px; border: 1px solid gray" />
 							</td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><input type="text" class="form-control"
 								name="DeleteCode" placeholder="과목코드"
-								style="margin-left: -5px; width: 130px; border: 1px solid gray" />
+								style="margin-left: -140px; width: 130px; border: 1px solid gray" />
 							</td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><input type="text" class="form-control"
 								name="DeleteSubjectName" placeholder="과목명"
-								style="width: 200px;margin-left:-70px; border: 1px solid gray;" /></td>
+								style="width: 200px; margin-left: -210px; border: 1px solid gray;" /></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
@@ -161,7 +185,7 @@
 						<tr>
 							<td style="width: 100px"><strong>대체과목</strong></td>
 							<td><select name="departmentId" class="form-control"
-								style="margin-left: 5px; width:150px; border: 1px solid gray">
+								style="margin-left: 5px; width: 150px; border: 1px solid gray">
 									<option value="">학부/학과</option>
 									<option value="12">소프트웨어공학과</option>
 									<option value="14">컴퓨터공학과</option>
@@ -169,12 +193,14 @@
 									<option value="25">사회융합 자율학부</option>
 									<option value="22">미디어컨텐츠융합 자율학부</option>
 									<option value="10">IT융합 자율학부</option>
+									<option value="4">교양계</option>
 							</select></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td><select name="semester" class="form-control"
-								style="margin-left: 5px; width:100px;border: 1px solid gray;">
-									<option value="1학기">1학기</option>
-									<option value="2학기">2학기</option>
+							<td><select name="completionDivision" class="form-control"
+								style="margin-left: 5px; width: 240px; border: 1px solid gray;">
+									<option value="">과목 지정이 아닌경우만 선택</option>
+									<option value="전공선택">전공선택 과목으로 대체</option>
+									<option value="교양선택">교양선택 과목으로 대체</option>
 							</select></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><input type="text" class="form-control" name="code"

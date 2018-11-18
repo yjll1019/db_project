@@ -9,6 +9,6 @@ import net.skhu.dto.Subject;
 @Mapper
 public interface SubjectMapper {
 	void insert(List<Subject> subjects);
-	int findDelete(List<String> deleteSubject);
-	int findReplace(List<String> replaceSubject);
+	int findDelete(Subject deleteSubject); //폐지과목 정보 여부 확인
+	int findReplace(Subject replaceSubject);//대체과목 정보 여부 확인
 }

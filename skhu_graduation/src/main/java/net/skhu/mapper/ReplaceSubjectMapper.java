@@ -20,6 +20,7 @@ import net.skhu.model.Pagination;
 public interface ReplaceSubjectMapper {
 	void insert(List<ReplaceSubject> replaceSubjects);
 	void insertSubject(String deleteCode, String replaceCode);
+	void insertWithCompletionDivision(String deleteCode, String completionDivision);
 	int count(Pagination pagination);
 	List<ReplaceSubject> findAll();
 	List<ReplaceSubject> findByType(Pagination pagination);
