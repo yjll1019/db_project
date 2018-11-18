@@ -14,6 +14,7 @@ public interface StudentMapper {
 	void updateForInfo(Student s);
 	Student stuInfo(String userId);
 	Student findOneWithUser(String userId);
+	Student findOneWithProfessor(String userId);
 	List<Student> findAllWithUser();
 	List<Student> findById(String userId);
 	List<Student> findByName(String userName);

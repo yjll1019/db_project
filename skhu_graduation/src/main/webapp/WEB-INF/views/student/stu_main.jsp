@@ -20,6 +20,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
 <script src="${R}res/js/Nwagon.js"></script>
+
 <title>main page</title>
 </head>
 <body>
@@ -30,7 +31,7 @@
 				<li><a href='#'
 					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
 				<li><a href='#'><span>나의졸업요건</span></a></li>
-				<li><a href='stu_subject_list'><span>수강목록 조회</span></a></li>
+				<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
 				<li><a href='stu_allSearch'><span>졸업요건 조회</span></a></li>
 				<li><a href='#'><span>공지사항 및 문의</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
@@ -40,21 +41,22 @@
 	</div>
 		<div id="info-container">
 			<div id="stdInfo" style="position: absolute; margin-left: 10%">
-				<button type="button" class="btn btn-outline-primary">김지혜</button>님은 현재
-				<button type="button" class="btn btn-outline-primary">5학기</button>
-				<button type="button" class="btn btn-outline-primary">소프트웨어공학과 전공</button>
-				<button type="button" class="btn btn-outline-primary">신문방송학과 부전공</button>재학 중입니다. <br />
+				<button type="button" class="btn btn-outline-primary">${student.user.userName }</button>님은 현재
+				<button type="button" class="btn btn-outline-primary">${student.stuSemester }</button>학기
+				<button type="button" class="btn btn-outline-primary">${student.department.name }</button>
+				<button type="button" class="btn btn-outline-primary">${student.secondMajorName}</button>재학 중입니다. <br />
 				<div style="margin-top: 5px; position: absolute; margin-left: 30%">
 					지도교수님은 &nbsp;
-					<button type="button" class="btn btn-outline-primary">홍은지</button> &nbsp; 교수님 입니다.
+					<button type="button" class="btn btn-outline-primary">${student.pName }</button> &nbsp; 교수님 입니다.
 				</div>
 			</div>
 			
 			<div class="circleGraph1"
 				style="position: absolute; width: 250px; height: 60px; left: 25%; margin-top: 120px;">
+			
 				<div class="clearfix">
 					<div class="c100 p50">
-						<span>50%</span>
+						<span>${student.major}</span>
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>
@@ -63,7 +65,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; 65/130<br/> &nbsp; 전공필수</div>
+					&nbsp;&nbsp; ${student.major}/130<br/> &nbsp; 전공필수</div>
 	
 			</div>
 			
@@ -72,7 +74,7 @@
 				<!-- default -->
 				<div class="clearfix">
 					<div class="c100 p50">
-						<span>50%</span>
+						<span>${student.cultural}</span>
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>
@@ -81,7 +83,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; 65/130<br/> &nbsp; 교양필수</div>
+					&nbsp;&nbsp; ${student.cultural}/130<br/> &nbsp; 교양필수</div>
 				<!-- /default -->
 			</div>
 			
@@ -128,7 +130,7 @@
 							채플</td>
 						<td
 							style="border-top: 1px solid gray; font-size: 20px; font-weight: bold;">
-							1 / 2 이수</td>
+							${student.pray} / 2 이수</td>
 					</tr>
 					<tr>
 						<td
@@ -136,7 +138,7 @@
 							사회봉사</td>
 						<td
 							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
-							1 / 1 이수</td>
+							${student.service } / 1 이수</td>
 					</tr>
 				</table>
 			</div>

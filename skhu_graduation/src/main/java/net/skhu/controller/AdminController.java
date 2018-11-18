@@ -273,14 +273,5 @@ public class AdminController {
 		return "admin/admin_graduation_text";
 	}
 
-	/*
-	//findByType - 대체과목목록 조회 조건
-	@RequestMapping("findByType")
-	public String findByType(Model model, Pagination pagination) {
-		model.addAttribute("replace",replaceService.findByType(pagination));
-		model.addAttribute("searchBy",replaceService.getSerachByOptions());
-		return "admin/admin_replace_list";
 
-	}
-	 */
 }
