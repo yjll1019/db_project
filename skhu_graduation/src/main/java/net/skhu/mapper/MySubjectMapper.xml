@@ -87,6 +87,6 @@
 	
 	<select id="findService" resultType="int">
 		select count(*) from mySubject 
-		where userId=#{userId} and score='P' and (subjectCode='AE00046' or 'AC00003' or 'AE00029' or 'AE00030');
+		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046' or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
 	</select>
 </mapper>
