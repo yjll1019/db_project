@@ -42,7 +42,8 @@
 		update user set
 		userName = #{userName},
 		email = #{email},
-		phone = #{phone}
+		phone = #{phone},
+		password = #{password}
 		where id = #{id}
 	</update>
 	
