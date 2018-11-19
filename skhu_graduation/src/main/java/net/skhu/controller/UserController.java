@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.SecondMajor;
@@ -41,7 +42,7 @@ public class UserController {
 
 	//학생 회원가입
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(Model model, User user){
+	public String join(Model model, User user , RedirectAttributes redirectAttributes){
 		int result = userMapper.findOne(user.getId());//아이디가 존재하지않으면 0 존재하면 1
 		String regex="([a-zA-Z].+[0-9])|([0-9].+[a-zA-Z])"; //영문+숫자
 		String emailRegex = "^[_a-zA-Z0-9]+@[a-zA-Z]+\\.[a-zA-Z]+$";
@@ -92,7 +93,7 @@ public class UserController {
 					secondMajorMapper.insert(sm);
 				}
 
-				model.addAttribute("result", 0);
+				redirectAttributes.addFlashAttribute("result", 0);
 				return "redirect:login";
 			} else {
 				List<Department> departments = departmentMapper.findAll();
@@ -102,7 +103,7 @@ public class UserController {
 				return "user/join";
 			}
 		}else { //아이디가 존재할 때 > 로그인창으로
-			model.addAttribute("result", -1);
+			redirectAttributes.addFlashAttribute("result", -1);
 			return "redirect:login";
 		}
 	}
