@@ -26,8 +26,9 @@
       <div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+				<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+					<img src="${R}res/img/logo.jpg" width="29" height="29"></a>
+				</li>
 				<li><a href='../professor/professor_stu_search'><span>학생 조회</span></a></li>
 				<li><a href='../professor/professor_allSearch'><span>졸업요건 조회</span></a></li>
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>

@@ -41,7 +41,7 @@
 			<div id='cssmenu'>
 				<ul>
 					<li>
-						<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
 							<img src="${R}res/img/logo.jpg" width="29" height="29">
 						</a>
 					</li>
