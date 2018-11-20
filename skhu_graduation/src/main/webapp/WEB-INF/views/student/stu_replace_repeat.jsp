@@ -15,7 +15,19 @@
 	}
 </style>
 </head>
+<%
+	String result = request.getParameter("result");
 
+%>
+<script>
+	var r = "<%= result%>";
+	if(r == "0"){
+	    alert('선택하신 과목의 성적이 변경되었습니다.');
+		location.href = "stu_subject_list";
+	 } 
+	
+	
+</script>
 <body>
 	<div class="layer-wrap" style="text-align: center; align: center; margin-top: 70px">
 		<form class="pop-layer"  method="post">
@@ -24,7 +36,7 @@
 					<!--content //-->
 					<h4>대체과목 적용</h4>
 					<table style="margin-left: 100px; margin-top: 30px; border-bottom: 1px solid #d2d4d8; 
-						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed; margin-left: 37%;">
+						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed; margin-left: 32%;">
 						<tr style="height: 40px">
 							<td> ${mySubject.subjectCode} </td>
 							<td> ${mySubject.subjectName} </td>

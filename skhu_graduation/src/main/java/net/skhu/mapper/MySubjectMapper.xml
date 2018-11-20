@@ -89,4 +89,22 @@
 		select count(*) from mySubject 
 		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046' or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
 	</select>
+	<select id="findByOneRequiredSubject" resultType="RequiredSubject">
+	select r.subjectCode, s.subjectName name from requiredSubject r
+	left join subject s
+	on r.subjectCode = s.code
+	where subjectCode like concat(#{subjectCode},'%') and
+	admissionYear like left(#{userId}, 4) and
+	s.year like like left(#{userId}, 4) and
+	s.divisionClass like concat(01, '%');
+	
+	</select>
+
+	<update id="changeSubject">
+	update mySubject
+	set subjectCode=#{changeCode},
+	subjectName=#{changeName}
+	where userId like #{userId} and
+	subjectCode=#{beforeCode};
+	</update>
 </mapper>

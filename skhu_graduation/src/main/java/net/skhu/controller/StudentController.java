@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
+import net.skhu.dto.RequiredSubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
@@ -397,7 +399,7 @@ public class StudentController {
 	}
 	//대체과목 재수강 get
 	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.GET)
-	public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
+	public String stu_replace_repeat(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
 		User user = (User) session.getAttribute("user");
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
 		model.addAttribute("mySubject", mySubject);
@@ -429,15 +431,14 @@ public class StudentController {
 		mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
 		MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
 		String score=changeSubject.getScore();
-
+		redirectAttributes.addAttribute("result", "0");
 		mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
 		mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
-
-
-
-
+		redirectAttributes.addAttribute("subjectCode", mySubject.getSubjectCode());
+		redirectAttributes.addAttribute("score", mySubject.getScore());
+		
 		redirectAttributes.addAttribute("result", "0");
-		return "redirect:/student/stu_subject_list";
+		return "redirect:/student/stu_replace_repeat";
 	}
 
 	// 대체과목목록 조회 페이지
@@ -531,4 +532,83 @@ public class StudentController {
 
 	      return "student/reTest";
 	   }
+	   
+		//대체과목 초수강 get
+		@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
+		public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
+			User user = (User) session.getAttribute("user");
+			User oneUser= new User();
+			
+
+		      oneUser.setId("2016320255"); //수정 필요
+		      oneUser.setDepartmentId("12");
+			
+			
+			
+			
+			MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
+			model.addAttribute("mySubject", mySubject);
+			String completionDivision;
+			List<MySubject> subjectList;
+			
+		      List<String> requiredMySubject = mySubjectMapper.requiredMySubject(oneUser.getId());
+		      List<String> requiredSubject = mySubjectMapper.requiredSubject(oneUser.getDepartmentId(), oneUser.getId().substring(0, 4));
+		      List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
+		      if(noSubject.contains("AC00001")) //채플제거
+		         noSubject.remove("AC00001");
+		      if(noSubject.contains("AC00003")) //사회봉사제거
+		         noSubject.remove("AC00003");
+
+
+		      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
+		      Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
+
+		      for(int i=0; i<requiredSubject.size(); ++i) {
+		         String code = requiredSubject.get(i);
+		         String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
+		         requiredSubjectMap.put(code, subjectName);
+		      }
+
+		      for(int i=0; i<noSubject.size(); ++i) {
+		         String code = noSubject.get(i);
+		         String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
+		         noSubjectMap.put(code, subjectName);
+		      }
+
+		      model.addAttribute("requiredSubjectMap", requiredSubjectMap);
+		      model.addAttribute("noSubjectMap", noSubjectMap);
+
+
+			return "student/stu_replace_first";
+		}
+		
+		//대체과목 재수강  post 안들은 과목 -> 들은 과목 처리 
+		@RequestMapping(value = "stu_replace_first", method = RequestMethod.POST) // completionDivision 0이면 교선 1이면 전선
+		public String stu_replace_first(Model model, HttpSession session, RedirectAttributes redirectAttributes,
+				MySubject mySubject, @RequestParam("changeSubjectCode") String changeSubjectCode) {
+			
+			User user = (User) session.getAttribute("user");
+
+			mySubject.setUserId(user.getId());
+			mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
+			RequiredSubject changeSubject = mySubjectMapper.findByOneRequiredSubject(user.getId(), changeSubjectCode); //바꿀 과목
+			String score= mySubject.getScore();//안들은 과목에 넣을 성적을 저장해 놓음 
+			String selectResult = null;
+
+			if (mySubject.getCompletionDivision().contains("필")) {
+				selectResult="0";//필수과목은 필수과목으로 대체될 수 없습니다.
+				
+			} else if(mySubject.getCompletionDivision().contains("교")) {
+				selectResult="1";;//교양은 전공필수 과목으로 대체될 수 없습니다.
+			} else if(mySubject.getCompletionDivision().contains("전선")) {
+				mySubjectMapper.changeSubject(mySubject.getSubjectCode(),changeSubject.getSubjectCode(), changeSubject.getName(),user.getId()); //이름, 과목코드만 바뀌면 됌
+				selectResult="2";//대체과목 변경이 완료되었습니다.
+			}
+			
+			redirectAttributes.addAttribute("subjectCode", mySubject.getSubjectCode());
+			redirectAttributes.addAttribute("subjectName", mySubject.getSubjectName());
+			redirectAttributes.addAttribute("result", selectResult);
+			return "redirect:/student/stu_replace_first";
+		}
+
 }
