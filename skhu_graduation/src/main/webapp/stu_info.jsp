@@ -104,7 +104,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock  " aria-hidden="true"  style="margin-top: 8px;"></i></span>
 									&nbsp;&nbsp;
-									<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="비밀번호 입력" style="height: 37px;"/>
+									<input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="비밀번호 입력" style="font-family: sans-serif; height: 37px;"/>
 								</div>
 				
 							</div>

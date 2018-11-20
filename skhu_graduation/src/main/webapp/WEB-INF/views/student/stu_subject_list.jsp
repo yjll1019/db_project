@@ -25,12 +25,12 @@
 	<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='#'
-					style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='#'><span>나의졸업요건</span></a></li>
-				<li><a href='stu_subject_list'><span>수강목록 조회</span></a></li>
-				<li><a href='stu_allSearch'><span>졸업요건 조회</span></a></li>
-				<li><a href='#'><span>공지사항 및 문의</span></a></li>
+				<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+				<li><a href='../student/stu_main'><span>나의졸업요건</span></a></li>
+				<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
+				<li><a href='../student/stu_allSearch'><span>졸업요건 조회</span></a></li>
+				<li><a href='../student/stu_replace_list'><span>대체과목 조회</span></a></li>
+				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>

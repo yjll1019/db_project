@@ -28,26 +28,26 @@
 		<div id='cssmenu'>
 			<ul>
 				<li>
-					<a href='#' style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-						<img src="res/img/logo.jpg" width="29" height="29">
+					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
-				<li><a href='admin_stu_search.jsp'><span>학생 조회</span></a></li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
-						<li class='last'><a href='admin_allSearchEdit.jsp'><span>졸업요건표 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
 						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
-						<li class='last'><a href='admin_changeGraduation.jsp'><span>필수과목 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
 					</ul>
 				</li>
 				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
 					<ul>
-						<li class='last'><a href='admin_all_subject.jsp'><span>전체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_all_subject'><span>전체과목 목록</span></a></li>
 						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
 					</ul>
 				</li>
-				<li><a href='admin_board.jsp'><span>공지사항 및 문의</span></a></li>
-				<li><a href='calenderEdit.jsp'><span>대학일정 관리</span></a></li>
+				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
+				<li><a href='../admin/calenderEdit'><span>대학일정 관리</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>
@@ -84,14 +84,14 @@
 							&nbsp; <input type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="미충족학생조회"/>
 			  		</div>
 			  		<div class="form-group" id="class2" style="display:inline;">
-						<select class="custom-select" style="width: 80px; ]display: inline; margin-left: 10%; height:35px;">
+						<select class="custom-select" style="width: 80px; ]display: inline; margin-left: 5%; height:35px;">
 							<option>학번</option>
 							<option>이름</option>
 							<option>과목</option>
 						</select> 
-						<input type="text" name="searchText" placeholder="검색" style="margin-left: 5px; width: 120px;">
+						<input type="text" name="searchText" placeholder="검색" style="margin-left: 5px; width: 100px;">
 
-						<input type="submit" class="btn btn-primary" value="조회하기"/>
+						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회하기"/>
 					</div>
 			  </div>
 			  </form>

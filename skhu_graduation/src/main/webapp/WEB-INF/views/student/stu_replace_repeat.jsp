@@ -24,7 +24,7 @@
 					<!--content //-->
 					<h4>대체과목 적용</h4>
 					<table style="margin-left: 100px; margin-top: 30px; border-bottom: 1px solid #d2d4d8; 
-						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed;">
+						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed; margin-left: 37%;">
 						<tr style="height: 40px">
 							<td> ${mySubject.subjectCode} </td>
 							<td> ${mySubject.subjectName} </td>
@@ -34,20 +34,21 @@
 						
 					</table>
 					<div class="form-group">
-						<select class="custom-select" name="changeSubjectCode" style="width: 60%; margin-top: 30px; margin-bottom: 20px">
+						<select class="custom-select" name="changeSubjectCode" style="width: 30%; margin-top: 30px; margin-bottom: 20px">
 							<option selected>대체 가능한 과목</option>
 						<c:forEach var="list" items="${subjectList}">
 							<option value="${list.subjectCode}">${list.subjectName}</option>
 						</c:forEach>
 						</select>
 					</div>
+					
 					<span>
-					*주의: 변경한 후에 되돌리고 싶으시다면 마이페이지에서 엑셀 업로드를 다시 해주세요.
+					*주의: 변경한 후에 되돌리고 싶으시다면 <br/>마이페이지에서 엑셀 업로드를 다시 해주세요.
 					</span>
 
 					<br>
 					
-					
+					<br/>
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="적용하기" style="font-size: 15px; width: 100px" />
 					</div>
