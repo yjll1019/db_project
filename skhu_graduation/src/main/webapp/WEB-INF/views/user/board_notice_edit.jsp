@@ -76,7 +76,7 @@
 	</div>
 		<div id="jb-content">
 			<div id="boardWrite" style="margin-top:-30px; max-width: 800px;">
-				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId < 0 ? "등록" : "수정" }</h2>
+				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId <= 0 ? "등록" : "수정" }</h2>
 				<hr>
 				<div class="container">
 					<form method="post">
