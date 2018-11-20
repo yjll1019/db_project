@@ -18,4 +18,5 @@ public interface StudentMapper {
 	List<Student> findAllWithUser();
 	List<Student> findById(String userId);
 	List<Student> findByName(String userName);
+	List<Student> findByGrade(String semester1, String semester2);
 }

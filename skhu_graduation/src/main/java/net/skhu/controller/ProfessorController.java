@@ -38,29 +38,56 @@ public class ProfessorController {
 
 	@RequestMapping("professor_stu_search")
 	public String list1 (Model model) {
+		
 		model.addAttribute("students", studentMapper.findAllWithUser());
 		return "professor/professor_stu_search";
 	}
 
 	//학생 검색
 	@RequestMapping(value="professor_stu_search", method=RequestMethod.POST)
-	public String list(Model model,  @RequestParam("searchIndex") int searchIndex, @RequestParam("searchText") String input) {
+	public String list(Model model,  @RequestParam("searchIndex") int searchIndex,  @RequestParam("grade") int grade,
+			@RequestParam("searchText") String input) {
 		System.out.println(Integer.toString(searchIndex));
 		input= "%" + input + "%";
 		System.out.println(input);
 
 		//Student student = new Student();
 		List<Student> students = null;
-
+		
+		
+		if(grade != 0) {
+			switch(grade) {
+			case 1:
+				students = studentMapper.findByGrade("1", "2");
+				break;
+			case 2:
+				students = studentMapper.findByGrade("3", "4");
+				break;
+			case 3:
+				students = studentMapper.findByGrade("5", "6");
+				break;
+			case 4:
+				students = studentMapper.findByGrade("7", "8");
+				break;
+		}
+			
+		}
+		else {
+			students = studentMapper.findAllWithUser();
+			
+		}
+		
+		if(searchIndex!=0) {
 		switch(searchIndex) {
-		case 0:
+		case 1:
 			students = studentMapper.findById(input);
 			break;
-		case 1:
+		case 2:
 			students = studentMapper.findByName(input);
 			break;
 
 		}
+	}
 		model.addAttribute("students", students);
 		return "professor/professor_stu_search";
 	}
