@@ -92,7 +92,7 @@
 								<div class="input-group">
 									<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
 									&nbsp;&nbsp;
-									<form:input path="phone" class="form-control" placeholder="010-1111-5389" style="height: 37px; font-size: 13pt;"/>
+									<form:input path="phone" class="form-control" placeholder="010-0000-0000" style="height: 37px; font-size: 13pt;"/>
 								</div>
 							</div>
 						</div>

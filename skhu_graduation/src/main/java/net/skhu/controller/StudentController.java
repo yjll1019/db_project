@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
-import net.skhu.dto.RequiredSubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
@@ -63,6 +61,11 @@ public class StudentController {
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+		//System.out.println(user.getId());
+		if(mySubjectMapper.findAllCount(user.getId()) <= 0) {
+			return "redirect:stu_noData";
+		}
+
 		Student student = studentMapper.findOneWithUser(user.getId());
 		Student professor = studentMapper.findOneWithProfessor(student.getUserId());
 		student.setpName(professorMapper.findName(professor.getpId()));
@@ -71,10 +74,10 @@ public class StudentController {
 		List<MySubject> mySubjectMajor = mySubjectMapper.findMajor(user.getId());
 		List<MySubject> mySubjectCultural = mySubjectMapper.findCultural(user.getId());
 
-		int service = mySubjectMapper.findService(user.getId());//사회봉사
-		int pray = mySubjectMapper.findPray(user.getId());//채플
-		int major=0;//전필
-		int cultural=0;//교필
+		int service = mySubjectMapper.findService(user.getId()); //사회봉사
+		int pray = mySubjectMapper.findPray(user.getId()); //채플
+		int major = 0;//전필
+		int cultural = 0;//교필
 
 		//계산
 		for(int i=0; i<mySubjectMajor.size();++i) {
@@ -136,6 +139,11 @@ public class StudentController {
 		redirectAttributes.addAttribute("goalCredit", goalCredit);
 
 		return "redirect:/student/stu_goalCredit";
+	}
+
+	@RequestMapping("stu_noData")
+	public String stu_noData() {
+		return "student/stu_noData";
 	}
 
 	//목표학점 결과 보여주는 페이지
@@ -269,9 +277,10 @@ public class StudentController {
 		Student student = studentMapper.findOneWithUser(getUser.getId());
 		model.addAttribute("student", student);
 
-		SecondMajor secondMajor = secondMajorMapper.findOneForInfo(getUser.getId());
+		SecondMajor nullCheck = secondMajorMapper.findOneForInfo(getUser.getId());
+		SecondMajor secondMajor = nullCheck == null ? new SecondMajor() : nullCheck;
 		model.addAttribute("secondMajor", secondMajor);
-		System.out.println(secondMajor.toString());
+		//System.out.println(secondMajor.toString());
 
 		return "student/stu_info";
 	}
@@ -296,7 +305,7 @@ public class StudentController {
 		student.setHowToGraduate(user.getHowToGraduate());
 		System.out.println(student.toString());
 
-		secondMajor.setUserId(userGetId.getId());
+		secondMajor.setUserId(user.getId());
 		secondMajor.setDivision(user.getDivision());
 		secondMajor.setDepartmentId(user.getSecondMajorDepartmentId());
 		System.out.println(secondMajor.toString());
@@ -335,8 +344,24 @@ public class StudentController {
 
 		userMapper.updateStudent(user); //user 테이블 update
 		studentMapper.updateForInfo(student); //student 테이블 update
-		secondMajorMapper.insert(secondMajor);
 
+		SecondMajor isEmpty = secondMajorMapper.findOneById(user.getId());
+		System.out.println(isEmpty == null ? "null" : "not null");
+		String nullCheck = secondMajor.getDivision();
+		System.out.println(nullCheck);
+		
+		if (nullCheck != null) {
+			if(secondMajor.getDepartmentId().equals("0")) {
+				alert = "-3"; // 부복수전공 division 값은 있지만 departmentId 값이 없는 경우
+				model.addAttribute("alert", alert);
+				return "student/stu_info";
+			} else {
+				secondMajorMapper.insert(secondMajor);
+			}
+		} else if(isEmpty != null && nullCheck == null) {
+			secondMajorMapper.deleteById(user.getId());
+		}
+		
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
 
@@ -391,15 +416,17 @@ public class StudentController {
 
 		if(!file.isEmpty()) {
 			List<MySubject> mySubjects = excelService.getMySubjectList(file.getInputStream(), user.getId());
+			mySubjectMapper.deleteById(user.getId());
 			mySubjectMapper.insert(mySubjects);
 			return "redirect:stu_subject_list";
 		} else {
 			return "redirect:stu_info?r=-1";
 		}
 	}
+
 	//대체과목 재수강 get
 	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.GET)
-	public String stu_replace_repeat(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
+	public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
 		User user = (User) session.getAttribute("user");
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
 		model.addAttribute("mySubject", mySubject);
@@ -431,14 +458,15 @@ public class StudentController {
 		mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
 		MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
 		String score=changeSubject.getScore();
-		redirectAttributes.addAttribute("result", "0");
+
 		mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
 		mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
-		redirectAttributes.addAttribute("subjectCode", mySubject.getSubjectCode());
-		redirectAttributes.addAttribute("score", mySubject.getScore());
-		
+
+
+
+
 		redirectAttributes.addAttribute("result", "0");
-		return "redirect:/student/stu_replace_repeat";
+		return "redirect:/student/stu_subject_list";
 	}
 
 	// 대체과목목록 조회 페이지
@@ -496,119 +524,40 @@ public class StudentController {
 	}
 
 	//필수과목 목록
-	   @RequestMapping(value="reTest", method=RequestMethod.GET)
-	   public String reTest(Model model, HttpSession session) {
-	      User user = new User();
+	@RequestMapping(value="reTest", method=RequestMethod.GET)
+	public String reTest(Model model, HttpSession session) {
+		User user = new User();
 
-	      user.setId("201632021"); //수정 필요
-	      user.setDepartmentId("12");
+		user.setId("201632021"); //수정 필요
+		user.setDepartmentId("12");
 
-	      List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());
-	      List<String> requiredSubject = mySubjectMapper.requiredSubject(user.getDepartmentId(), user.getId().substring(0, 4));
-	      List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
-	      if(noSubject.contains("AC00001")) //채플제거
-	         noSubject.remove("AC00001");
-	      if(noSubject.contains("AC00003")) //사회봉사제거
-	         noSubject.remove("AC00003");
-
-
-	      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
-	      Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
-
-	      for(int i=0; i<requiredSubject.size(); ++i) {
-	         String subjectCode = requiredSubject.get(i);
-	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
-	         requiredSubjectMap.put(subjectCode, subjectName);
-	      }
-
-	      for(int i=0; i<noSubject.size(); ++i) {
-	         String subjectCode = noSubject.get(i);
-	         String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
-	         noSubjectMap.put(subjectCode, subjectName);
-	      }
-
-	      model.addAttribute("requiredSubjectMap", requiredSubjectMap);
-	      model.addAttribute("noSubjectMap", noSubjectMap);
-
-	      return "student/reTest";
-	   }
-	   
-		//대체과목 초수강 get
-		@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
-		public String stu_replace_first(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
-			User user = (User) session.getAttribute("user");
-			User oneUser= new User();
-			
-
-		      oneUser.setId("2016320255"); //수정 필요
-		      oneUser.setDepartmentId("12");
-			
-			
-			
-			
-			MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
-			model.addAttribute("mySubject", mySubject);
-			String completionDivision;
-			List<MySubject> subjectList;
-			
-		      List<String> requiredMySubject = mySubjectMapper.requiredMySubject(oneUser.getId());
-		      List<String> requiredSubject = mySubjectMapper.requiredSubject(oneUser.getDepartmentId(), oneUser.getId().substring(0, 4));
-		      List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
-		      if(noSubject.contains("AC00001")) //채플제거
-		         noSubject.remove("AC00001");
-		      if(noSubject.contains("AC00003")) //사회봉사제거
-		         noSubject.remove("AC00003");
+		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());
+		List<String> requiredSubject = mySubjectMapper.requiredSubject(user.getDepartmentId(), user.getId().substring(0, 4));
+		List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
+		if(noSubject.contains("AC00001")) //채플제거
+			noSubject.remove("AC00001");
+		if(noSubject.contains("AC00003")) //사회봉사제거
+			noSubject.remove("AC00003");
 
 
-		      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
-		      Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
+		Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
+		Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
 
-		      for(int i=0; i<requiredSubject.size(); ++i) {
-		         String code = requiredSubject.get(i);
-		         String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
-		         requiredSubjectMap.put(code, subjectName);
-		      }
-
-		      for(int i=0; i<noSubject.size(); ++i) {
-		         String code = noSubject.get(i);
-		         String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
-		         noSubjectMap.put(code, subjectName);
-		      }
-
-		      model.addAttribute("requiredSubjectMap", requiredSubjectMap);
-		      model.addAttribute("noSubjectMap", noSubjectMap);
-
-
-			return "student/stu_replace_first";
-		}
-		
-		//대체과목 재수강  post 안들은 과목 -> 들은 과목 처리 
-		@RequestMapping(value = "stu_replace_first", method = RequestMethod.POST) // completionDivision 0이면 교선 1이면 전선
-		public String stu_replace_first(Model model, HttpSession session, RedirectAttributes redirectAttributes,
-				MySubject mySubject, @RequestParam("changeSubjectCode") String changeSubjectCode) {
-			
-			User user = (User) session.getAttribute("user");
-
-			mySubject.setUserId(user.getId());
-			mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
-			RequiredSubject changeSubject = mySubjectMapper.findByOneRequiredSubject(user.getId(), changeSubjectCode); //바꿀 과목
-			String score= mySubject.getScore();//안들은 과목에 넣을 성적을 저장해 놓음 
-			String selectResult = null;
-
-			if (mySubject.getCompletionDivision().contains("필")) {
-				selectResult="0";//필수과목은 필수과목으로 대체될 수 없습니다.
-				
-			} else if(mySubject.getCompletionDivision().contains("교")) {
-				selectResult="1";;//교양은 전공필수 과목으로 대체될 수 없습니다.
-			} else if(mySubject.getCompletionDivision().contains("전선")) {
-				mySubjectMapper.changeSubject(mySubject.getSubjectCode(),changeSubject.getSubjectCode(), changeSubject.getName(),user.getId()); //이름, 과목코드만 바뀌면 됌
-				selectResult="2";//대체과목 변경이 완료되었습니다.
-			}
-			
-			redirectAttributes.addAttribute("subjectCode", mySubject.getSubjectCode());
-			redirectAttributes.addAttribute("subjectName", mySubject.getSubjectName());
-			redirectAttributes.addAttribute("result", selectResult);
-			return "redirect:/student/stu_replace_first";
+		for(int i=0; i<requiredSubject.size(); ++i) {
+			String subjectCode = requiredSubject.get(i);
+			String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
+			requiredSubjectMap.put(subjectCode, subjectName);
 		}
 
+		for(int i=0; i<noSubject.size(); ++i) {
+			String subjectCode = noSubject.get(i);
+			String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
+			noSubjectMap.put(subjectCode, subjectName);
+		}
+
+		model.addAttribute("requiredSubjectMap", requiredSubjectMap);
+		model.addAttribute("noSubjectMap", noSubjectMap);
+
+		return "student/reTest";
+	}
 }
