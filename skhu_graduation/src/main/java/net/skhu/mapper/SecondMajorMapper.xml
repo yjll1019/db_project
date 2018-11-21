@@ -48,4 +48,8 @@
 			departmentId = #{departmentId}
 		where userId = #{userId}
 	</update>
+	
+	<delete id="deleteById">
+		delete from secondMajor where userId = #{userId}
+	</delete>
 </mapper>

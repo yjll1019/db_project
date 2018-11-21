@@ -127,7 +127,7 @@
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
 										<select name="group" class="form-control" style="height: 37px; font-size: 13pt;">
-											<option value="">반 해당사항 없음</option>
+											<option value="없음">반 해당사항 없음</option>
 											<option value="1">1반</option>
 											<option value="2">2반</option>
 											<option value="3">3반</option>

@@ -53,6 +53,8 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	         alert('비밀번호 조건이 맞지 않습니다. 영문+숫자 8자리 이상!');
 	      }else if(al == -2){
 	         alert('비밀번호와 확인비밀번호가 맞지 않습니다.');
+	      } else if(al == -3){
+	    	  alert('부복수전공 학과를 선택해주세요!');
 	      }
 </script>
 <title>개인정보변경</title>
@@ -61,16 +63,16 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	<div id="jb-container">
 		<div id="jb-header">
 			<div id='cssmenu'>
-			<ul>
-				<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
-				<li><a href='../student/stu_main'><span>나의졸업요건</span></a></li>
-				<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
-				<li><a href='../student/stu_allSearch'><span>졸업요건 조회</span></a></li>
-				<li><a href='../student/stu_replace_list'><span>대체과목 조회</span></a></li>
-				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
-				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
-			</ul>
+				<ul>
+					<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;"><img src="${R}res/img/logo.jpg" width="29" height="29"></a></li>
+					<li><a href='../student/stu_main'><span>나의졸업요건</span></a></li>
+					<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
+					<li><a href='../student/stu_allSearch'><span>졸업요건 조회</span></a></li>
+					<li><a href='../student/stu_replace_list'><span>대체과목 조회</span></a></li>
+					<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
+					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+					<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
+				</ul>
 			</div>
 		</div>
 		<div id="jb-content justify-content-center">
@@ -180,7 +182,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 										<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true" style="margin-top: 10px;"></i></span>
 										&nbsp;&nbsp;
 										<select name="stuClass" class="form-control" style="height: 37px; font-size: 10pt;">
-											<option value="0">반을 선택해주세요</option>
+											<option value="없음">반을 선택해주세요</option>
 											<option value="a" ${student.stuClass == 'a' ? 'selected' : '' }>a반</option>
 											<option value="b" ${student.stuClass == 'b' ? 'selected' : '' }>b반</option>
 											<option value="c" ${student.stuClass == 'c' ? 'selected' : '' }>c반</option>
@@ -193,9 +195,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   
                      		<div class="checkbox" style="font-size: 10pt; margin-bottom: 7%">
                          		&nbsp;&nbsp;&nbsp;&nbsp; 
-                         		<input type="checkbox" name="division" value="복수전공" ${ secondMajor.division == '복수전공' ? 'checked' : ''} /> 복수전공 
+                         		<input type="checkbox" name="division" value="복수전공" ${ secondMajor.division eq '복수전공' ? 'checked' : ''} /> 복수전공 
                          		&nbsp; &nbsp;
-                        		<input type="checkbox" name="division" value="부전공" ${ secondMajor.division == '부전공' ? 'checked' : ''} /> 부전공
+                        		<input type="checkbox" name="division" value="부전공" ${ secondMajor.division eq '부전공' ? 'checked' : ''} /> 부전공
                      		</div>
                      		
                      		<div class="cols-sm-10" style="margin-top:5px;">
