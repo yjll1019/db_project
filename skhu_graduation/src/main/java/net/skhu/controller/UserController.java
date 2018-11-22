@@ -143,7 +143,7 @@ public class UserController {
 				else if(role.equals("교수"))
 					url = "redirect:/professor/professor_stu_search";
 				else if(role.equals("관리자"))
-					url = "redirect:/admin/admin_stu_search";
+					url = "redirect:/admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st=";
 				else
 					url = "redirect:/admin/superAdmin";
 			}

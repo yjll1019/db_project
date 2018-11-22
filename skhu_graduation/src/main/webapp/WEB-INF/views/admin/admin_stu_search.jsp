@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<script>
+$(function() { 
+	$("[data-url]").click(function() { 
+		var url = $(this).attr("data-url");   
+		location.href = url;   })  
+})
+
+</script>
 <title>관리자학생리스트</title>
 <style>
 	#jb-content {
@@ -32,7 +40,7 @@
 						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
-				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
+				<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
 						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
@@ -57,39 +65,34 @@
 				<div style="margin-left: 20%; margin-top: 3%;">
 					<h3>학생 목록</h3>
 				</div>
-				<form>
+				<form method="GET">
 				<div id="search" style="margin-top: 2%; font-size: 13pt;">
-					 <div class="form-group" id="search" style="display: inline;">
-					    <select class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
-					      <option>소프트웨어공학과</option>
-								<option>컴퓨터공학과</option>
-								<option>정보통신공학과</option>
-								<option>글로컬IT학과</option>
-								<option>디지털컨텐츠</option>
-								<option>신문방송학과</option>
-								<option>경영학부</option>
-								<option>사회과학부</option>
-								<option>사회복지학과</option>
-								<option>중어중국학과</option>
-								<option>일어일본학과</option>
-								<option>영어학과</option>
-								<option>신학과</option>
-							</select> &nbsp; 
-							<select class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:35px;">
-								<option>1학년</option>
-								<option>2학년</option>
-								<option>3학년</option>
-								<option>4학년</option>
-							</select>
-							&nbsp; <input type="submit" class="btn btn-outline-primary" style="font-size: 14px" value="미충족학생조회"/>
+					 <div class="form-group" style="display: inline;">
+					    <select name="sbd" class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
+					      	<option value="0">전체</option>
+					      	<option value="12" ${sbd == '12' ? 'selected' : ''}>소프트웨어 공학과</option>
+                            <option value="14" ${sbd == '14' ? 'selected' : ''}>컴퓨터공학과</option>
+                            <option value="10" ${sbd == '10' ? 'selected' : ''}>IT융합 자율 학부</option>
+						</select> &nbsp; 
+						<select name="sbg" class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:35px;">
+							<option value="0">전체</option>
+							<option value="1" ${sbg == '1' ? 'selected' : ''}>1학년</option>
+							<option value="2" ${sbg == '2' ? 'selected' : ''}>2학년</option>
+							<option value="3" ${sbg == '3' ? 'selected' : ''}>3학년</option>
+							<option value="4" ${sbg == '4' ? 'selected' : ''}>4학년</option>
+						</select>
+							&nbsp; <a href="student/frustrated" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
 			  		</div>
 			  		<div class="form-group" id="class2" style="display:inline;">
-						<select class="custom-select" style="width: 80px; ]display: inline; margin-left: 5%; height:35px;">
-							<option>학번</option>
-							<option>이름</option>
-							<option>과목</option>
+						<select name="sbi" class="custom-select" style="width: 80px; ]display: inline; margin-left: 5%; height:35px;">
+							<option value="0">검색조건</option>
+							<option value="1" ${sbi == '1' ? 'selected' : ''}>학번</option>
+							<option value="2" ${sbi == '2' ? 'selected' : ''}>이름</option>
+							<option value="3" ${sbi == '3' ? 'selected' : ''}>과목코드</option>
+							<option value="4" ${sbi == '4' ? 'selected' : ''}>과목명</option>
 						</select> 
-						<input type="text" name="searchText" placeholder="검색" style="margin-left: 5px; width: 100px;">
+						
+						<input type="text" name="st" placeholder="검색" style="margin-left: 5px; width: 100px;">
 
 						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회하기"/>
 					</div>
@@ -107,90 +110,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>201632001</td>
-								<td>김지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632002</td>
-								<td>명혜연</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632003</td>
-								<td>이예지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632004</td>
-								<td>이혜지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632005</td>
-								<td>명연혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632006</td>
-								<td>김혜지</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632007</td>
-								<td>이지예</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632008</td>
-								<td>이지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632009</td>
-								<td>김지혜</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632010</td>
-								<td>이티버</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632011</td>
-								<td>김루비</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632012</td>
-								<td>이낑깡</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632013</td>
-								<td>명라이코스</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
-							<tr>
-								<td>201632014</td>
-								<td>명설</td>
-								<td>소프트웨어공학과</td>
-								<td>010-1234-5678</td>
-							</tr>
+							<c:forEach var="user" items="${ users }">
+								<tr data-url="admin_stu_info?id=${user.id }&sbd=${sbd}&sbg=${sbg}&sbi=${sbi}&st=${st}" style="cursor:pointer">
+									<td>${ user.id }</td>
+									<td>${ user.userName }</td>
+									<td>${ user.departmentName }</td>
+									<td>${ user.phone }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -199,24 +126,11 @@
 		 <div id="page"  style="margin-top: 1%;">
 			<nav aria-label="Page navigation example"> 
  				 <ul class="pagination justify-content-center">
-    				 <li class="page-item">
-      					<a class="page-link" href="#" aria-label="Previous">
-      					  <span aria-hidden="true">&laquo;</span>
-        				  <span class="sr-only">Previous</span>
-     				    </a>
-   	 				</li>
     				<li class="page-item"><a class="page-link" href="#">1</a></li>
     				<li class="page-item"><a class="page-link" href="#">2</a></li>
     				<li class="page-item"><a class="page-link" href="#">3</a></li>
-    				<li class="page-item">
-      					<a class="page-link" href="#" aria-label="Next">
-        					<span aria-hidden="true">&raquo;</span>
-        					<span class="sr-only">Next</span>
-     					</a>
-    				</li>
  				 </ul>
 			</nav>		
-			
 		</div>
 	</div>
 </body>

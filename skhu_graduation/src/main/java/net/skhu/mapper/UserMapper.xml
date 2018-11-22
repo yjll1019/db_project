@@ -6,7 +6,7 @@
 	<select id="findOne" resultType="int">
 		select count(*) from user where id like #{userId};
 	</select>
-	
+
 	
 	<select id="login" resultType="User">
 		select * from user where id like #{userId};
@@ -53,7 +53,21 @@
 		where id= #{id};
 	</select>
 	
+	<select id="findByUser" resultType="User" parameterType="String">
+		select u.*, d.name 'departmentName'
+		from user u join student s on u.id = s.userId
+			join department d on s.departmentId = d.id
+			${ value }
+		order by u.id DESC, s.stuSemester;
+	</select>
 	
-	
+	<select id="findBySubject" resultType="User" parameterType="String">
+		select u.*, d.name 'departmentName'
+		from user u join student s on u.id = s.userId
+			join department d on s.departmentId = d.id
+			join mySubject msj on u.id = msj.userId
+			${ value }
+		order by msj.takeYear, u.id DESC;
+	</select>
 	
 </mapper>

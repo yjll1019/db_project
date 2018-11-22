@@ -3,6 +3,7 @@ package net.skhu.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import net.skhu.dto.User;
 
@@ -17,4 +18,7 @@ public interface UserMapper {
 	void updateProfessor(User u);
 	void updateStudent(User u);
 	User findById(String id);
+	
+	List<User> findByUser(String where);
+	List<User> findBySubject(String where);
 }

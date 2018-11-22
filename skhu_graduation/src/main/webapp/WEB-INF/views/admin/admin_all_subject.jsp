@@ -42,7 +42,7 @@
 						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
-				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
+				<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
 						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>

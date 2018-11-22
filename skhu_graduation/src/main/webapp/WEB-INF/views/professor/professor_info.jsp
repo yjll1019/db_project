@@ -93,15 +93,12 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<select name="departmentId"  class="form-control"  style="height: 37px; font-size: 13pt;">
-											<option value="">소속 학과(부)를 선택해주세요</option>
-											<option value="12">소프트웨어공학과</option>
-											<option value="14">컴퓨터공학과</option>
-											<option value="32">인문융합 자율학부</option>
-											<option value="25">사회융합 자율학부</option>
-											<option value="22">미디어컨텐츠융합 자율학부</option>
-											<option value="10">IT융합 자율학부</option>
-										</select>
+										<select name="departmentId" class="form-control" style="height: 37px; font-size: 10pt;">
+                                 			<option value="0">주전공을 선택해 주세요</option>
+                                 			<option value="12" ${professor.departmentId == 12 ? 'selected' : '' }> 소프트웨어 공학과</option>
+                                 			<option value="14" ${professor.departmentId == 14 ? 'selected' : '' }> 컴퓨터공학과</option>
+                                 			<option value="10" ${professor.departmentId == 10 ? 'selected' : '' }> IT융합 자율 학부</option>
+                           				</select>
 									</div>
 								</div>
 							</div>
@@ -113,11 +110,11 @@
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
 										<select name="grade" class="form-control" style="height: 37px; font-size: 13pt;">
-											<option value="">학년 해당사항 없음</option>
-											<option value="1">1학년</option>
-											<option value="2">2학년</option>
-											<option value="3">3학년</option>
-											<option value="4">4학년</option>
+											<option value="0">학년 해당사항 없음</option>
+											<option value="1" ${professor.grade == '1' ? 'selected' : '' }>1학년</option>
+											<option value="2" ${professor.grade == '2' ? 'selected' : '' }>2학년</option>
+											<option value="3" ${professor.grade == '3' ? 'selected' : '' }>3학년</option>
+											<option value="4" ${professor.grade == '4' ? 'selected' : '' }>4학년</option>
 										</select>
 									</div>
 								</div>
@@ -126,12 +123,12 @@
 									<div class="input-group">
 										<span class="input-group-addon" style="margin-top: 8px"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<select name="group" class="form-control" style="height: 37px; font-size: 13pt;">
-											<option value="없음">반 해당사항 없음</option>
-											<option value="1">1반</option>
-											<option value="2">2반</option>
-											<option value="3">3반</option>
-											<option value="4">4반</option>
+										<select name="group" class="form-control" style="height: 37px; font-size: 10pt;">
+											<option value="없음">반을 선택해주세요</option>
+											<option value="a" ${professor.group eq 'a' ? 'selected' : '' }>a반</option>
+											<option value="b" ${professor.group eq 'b' ? 'selected' : '' }>b반</option>
+											<option value="c" ${professor.group eq 'c' ? 'selected' : '' }>c반</option>
+											<option value="d" ${professor.group eq 'd' ? 'selected' : '' }>d반</option>
 										</select>
 									</div>
 								</div>
