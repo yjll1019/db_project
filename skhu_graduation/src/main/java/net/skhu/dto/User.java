@@ -24,6 +24,8 @@ public class User {
 	String volunteerExemption; //사회봉사 면제여부 >> 1이면 면제
 	String departmentId; //학과
 	String howToGraduate; //전공기초, 심화
+	
+	String departmentName; //학과 이름
 
 	public String getId() {
 		return id;
@@ -135,6 +137,13 @@ public class User {
 	}
 	public void setDivision(String division) {
 		this.division = division;
+	}
+	
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	@Override
 	public String toString() {
