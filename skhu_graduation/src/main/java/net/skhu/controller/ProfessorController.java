@@ -98,8 +98,8 @@ public class ProfessorController {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-		List<Professor> professor = professorMapper.findOneWithUser(user.getId());
-		//System.out.println(professor.toString());
+		Professor professor = professorMapper.findOneWithUser(user.getId()).get(0);
+		System.out.println("this" + professor.getDepartmentId());
 		model.addAttribute("user", user);
 		model.addAttribute("professor", professor);
 

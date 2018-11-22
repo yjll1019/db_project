@@ -1,5 +1,6 @@
 package net.skhu.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,11 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.skhu.dto.Department;
+import net.skhu.dto.MySubject;
 import net.skhu.dto.ReplaceSubject;
+import net.skhu.dto.SecondMajor;
+import net.skhu.dto.Student;
 import net.skhu.dto.Subject;
 import net.skhu.dto.User;
 import net.skhu.mapper.GraduationMapper;
+import net.skhu.mapper.MySubjectMapper;
+import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
+import net.skhu.mapper.SecondMajorMapper;
+import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.SubjectMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.model.Pagination;
@@ -32,7 +41,11 @@ public class AdminController {
 
 	@Autowired UserMapper userMapper;
 	@Autowired ReplaceSubjectMapper replaceSubjectMapper;
+	@Autowired MySubjectMapper mySubjectMapper;
 	@Autowired SubjectMapper subjectMapper;
+	@Autowired StudentMapper studentMapper;
+	@Autowired DepartmentMapper departmentMapper;
+	@Autowired SecondMajorMapper secondMajorMapper;
 	@Autowired private EmailServiceImpl emailService;
 	@Autowired ExcelService excelService;
 	@Autowired GraduationMapper graduationMapper;
@@ -146,12 +159,151 @@ public class AdminController {
 		return "redirect:admin_stu_search";
 	}
 
+	/*
+	@RequestMapping(value="admin_stu_search")
+	public String admin_stu_search(Model model) {
+		List<User> users = userMapper.findByUser("");
+		model.addAttribute("users", users);
+		return "admin/admin_stu_search";
+	}
+	 */
 	//관리자 학생 조회 페이지
 	@RequestMapping(value="admin_stu_search", method=RequestMethod.GET)
-	public String main(Model model, HttpSession session) {
-		User userGet = (User) session.getAttribute("user");
-		model.addAttribute("user", userGet);
+	public String main(Model model, HttpSession session, @RequestParam("sbd") String sbd, @RequestParam("sbg") String sbg,
+			@RequestParam("sbi") String sbi, @RequestParam("st") String st) {
+		List<User> users;
+		String where = "";
+		System.out.println("sbd: " + sbd + " sbg: " + sbg + " sbi: " + sbi + " " + st);
+		if(sbd.equals("0") && sbg.equals("0")){	// 전체
+			if(sbi.equals("1"))
+				where = "where u.id like '%" + st + "%' ";
+			else if(sbi.equals("2"))
+				where = "where u.userName like '%" + st +"%' ";
+			else if(sbi.equals("3"))
+				where = "where msj.subjectCode = '" + st + "' ";
+			else if(sbi.equals("4")) {
+				where = st.length() > 0 ? "where msj.subjectName like '%" + st + "%' " : "";
+			}
+		} else if(!sbd.equals("0") && sbg.equals("0")) { // 학과별
+			if(sbi.equals("1"))
+				where = "where s.departmentId = '" + sbd + "' and u.id like '%" + st + "%' ";
+			else if(sbi.equals("2"))
+				where = "where s.departmentId = '" + sbd + "' and u.userName like '%" + st +"%' ";
+			else if(sbi.equals("3"))
+				where = "where s.departmentId = '" + sbd + "' and msj.subjectCode = '" + st + "' ";
+			else if(sbi.equals("4"))
+				where = st.length() > 0 ? "where s.departmentId = '" + sbd + "' and msj.subjectName like '%" + st + "%' " : "where s.departmentId = '" + sbd + "' ";
+				else
+					where = "where s.departmentId = '" + sbd + "' ";
+		} else if(sbd.equals("0") && !sbg.equals("0")) { // 학년별
+			int grade = Integer.parseInt(sbg);
+			if(sbi.equals("1"))
+				where = "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and u.id like '%" + st + "%' ";
+			else if(sbi.equals("2"))
+				where = "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and u.userName like '%" + st +"%' ";
+			else if(sbi.equals("3"))
+				where = "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and msj.subjectCode = '" + st + "' ";
+			else if(sbi.equals("4")) {
+				where = st.length() > 0 ? "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and msj.subjectName like '%" + st + "%' "
+						: "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "')";
+			}
+			else
+				where = "where s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "')";
+		} else {
+			int grade = Integer.parseInt(sbg);
+			if(sbi.equals("1"))
+				where = "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and u.id like '%" + st + "%' ";
+			else if(sbi.equals("2"))
+				where = "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and u.userName like '%" + st +"%' ";
+			else if(sbi.equals("3"))
+				where = "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and msj.subjectCode = '" + st + "' ";
+			else if(sbi.equals("4"))
+				where = st.length() > 0 ? "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "') and msj.subjectName like '%" + st + "%' "
+						: "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "')";
+				else
+					where = "where s.departmentId = '" + sbd + "' and s.stuSemester in('" + (grade*2-1) + "', '" + (grade*2) + "')";
+		}
+
+		System.out.println("where: " + where);
+
+		if(sbi.equals("3") || (sbi.equals("4") && st.length() > 0)) {
+			users = userMapper.findBySubject(where);
+		} else {
+			users = userMapper.findByUser(where);
+		}
+		model.addAttribute("users", users);
+		model.addAttribute("sbd", sbd);
+		model.addAttribute("sbg", sbg);
+		model.addAttribute("sbi", sbi);
+		model.addAttribute("st", st);
+
 		return "admin/admin_stu_search";
+	}
+
+	// 관리자 학생 상세 조회
+	@RequestMapping(value="admin_stu_info", method=RequestMethod.GET)
+	public String admin_stu_info(Model model, @RequestParam("id") String id,
+			@RequestParam("sbd") String sbd, @RequestParam("sbg") String sbg, @RequestParam("sbi") String sbi, @RequestParam("st") String st) {
+		User user = userMapper.findById(id);
+		Student student = studentMapper.findOneWithUser(id);
+		SecondMajor nullCheck = secondMajorMapper.findOneById(id);
+		SecondMajor secondMajor = nullCheck == null ? new SecondMajor() : nullCheck;
+		model.addAttribute("secondMajor", secondMajor);
+		model.addAttribute("user", user);
+		model.addAttribute("student", student);
+		model.addAttribute("sbd", sbd);
+		model.addAttribute("sbg", sbg);
+		model.addAttribute("sbi", sbi);
+		model.addAttribute("st", st);
+		return "admin/admin_stu_info";
+	}
+
+	//관리자 학생 수강목록 조회 페이지
+	@RequestMapping(value="admin_stu_subject", method=RequestMethod.GET)
+	public String admin_stu_subject(Model model, @RequestParam("id") String id, HttpSession session) {
+
+		int enterYear = Integer.parseInt(id.substring(0, 4));
+
+		Calendar c = Calendar.getInstance();
+		int currentYear = c.get(Calendar.YEAR);
+
+		List<MySubject> mySubjectlist = mySubjectMapper.findAll(id);
+
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		model.addAttribute("enterYear", enterYear);
+		model.addAttribute("currentYear", currentYear);
+		model.addAttribute("id", id);
+		return "admin/admin_stu_subject";
+	}
+	
+	@RequestMapping(value = "admin_stu_subject", method = RequestMethod.POST)
+	public String stu_subject_list(Model model, HttpSession session,
+			@RequestParam("subjectListYear") Object subjectListYear,
+			@RequestParam("subjectListSemester") Object subjectListSemester,
+			@RequestParam("id") String id) {
+		int enterYear = Integer.parseInt(id.substring(0, 4));
+		Calendar c = Calendar.getInstance();
+		int currentYear = c.get(Calendar.YEAR);
+
+		List<MySubject> mySubjectlist;
+
+		int year = Integer.parseInt((String) subjectListYear);
+		int semester = Integer.parseInt((String) subjectListSemester);
+		System.out.println(subjectListYear + " " + subjectListSemester);
+		if (year == 0) {// 전체조회
+			mySubjectlist = mySubjectMapper.findAll(id);
+		} else {// 수강년도, 수강학기 조회
+			mySubjectlist = mySubjectMapper.findByYearAndSemester(id, (String) subjectListYear,
+					(String) subjectListSemester + "%");
+		}
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		model.addAttribute("enterYear", enterYear);
+		model.addAttribute("currentYear", currentYear);
+		model.addAttribute("year", year);
+		model.addAttribute("semester", semester);
+		model.addAttribute("id", id);
+
+		return "admin/admin_stu_subject";
 	}
 
 	//관리자 전체과목 조회 페이지
@@ -193,8 +345,8 @@ public class AdminController {
 
 		//폐지 과목 정보 입력은 다 필수다.
 		if((subject.getDeleteDepartmentId().equals("")) && (subject.getDeleteSemester().equals(""))
-			&& (subject.getDeleteYear().equals("")) && (subject.getDeleteCode().equals(""))
-			&& (subject.getDeleteSubjectName().equals(""))) {
+				&& (subject.getDeleteYear().equals("")) && (subject.getDeleteCode().equals(""))
+				&& (subject.getDeleteSubjectName().equals(""))) {
 			alert="0";
 			model.addAttribute("alert",alert);
 			model.addAttribute("replace",replaceService.findByType(pagination));

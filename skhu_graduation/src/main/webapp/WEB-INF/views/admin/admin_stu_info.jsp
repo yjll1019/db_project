@@ -13,29 +13,14 @@
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
+<link rel="stylesheet" href="${R}res/css/mypage.css">
 <!-- Website CSS style -->
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 <!-- Website Font style -->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 	integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${R}res/css/adminInfo.css">
-<title>관리자 개인정보변경</title>
+<title>관리자 학생 정보</title>
 </head>
-<%
-	String alert =String.valueOf(request.getAttribute("alert"));
-%>
-
-<script>
-	var al = "<%=alert%>"
-		if(al==-1){
-			alert('비밀번호 조건이 맞지 않습니다. 영문+숫자 8자리 이상!');
-		}else if(al==-2){
-			alert('비밀번호와 확인비밀번호가 맞지 않습니다.');
-		}
-
-</script>
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
@@ -63,7 +48,7 @@
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
 				<li><a href='../admin/calenderEdit'><span>대학일정 관리</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-				<li style="float: right"><a href='../admin/adminInfo'><span>개인정보변경</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -71,15 +56,24 @@
 			<div class="container">
 				<div class="row main">
 					<div class="main-login main-center">
-						<form class="form-horizontal" method="post" style="width: 300px">
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="name" class="cols-sm-2 control-label">학번</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; 
+										${ user.id }
+									</div>
+								</div>
+							</div>
 
-							<div class="form-group">
+							<div class="form-group" style="margin-bottom: 20px">
 								<label for="name" class="cols-sm-2 control-label">이름</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-user fa" aria-hidden="true"></i></span> 
+										<span class="input-group-addon"><i	class="fa fa-user fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="text" class="form-control" name="userName"value="${user.userName}" style="height: 37px; font-size: 13pt;"/>
+										${ user.userName }
 									</div>
 								</div>
 							</div>
@@ -88,50 +82,68 @@
 								<label for="email" class="cols-sm-2 control-label">이메일</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+										<span class="input-group-addon" ><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<input type="email" class="form-control" name="email" value="${user.email}" style="height: 37px; font-size: 13pt;"/>
+										${ user.email }
 									</div>
 								</div>
 							</div>
 
-							<div class="form-group">
+							<div class="form-group" style="margin-bottom: 20px">
 								<label for="phone" class="cols-sm-2 control-label">전화번호</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-phone fa" aria-hidden="true"></i></span> 
+										<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span> 
 										&nbsp;&nbsp; 
-										<input type="tel" class="form-control" name="phone" value="${user.phone }"style="height: 37px; font-size: 13pt;"/>
+										${ user.phone }
 									</div>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="password" class="cols-sm-2 control-label">비밀번호</label>
+							<label for="major" class="cls-sm-2 control-label">입학구분</label>
+								<div class="cols-sm-10" style="margin-bottom: 20px">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; 
+										${ transferStudent == '0' ? '입학' : '편입' }
+									</div>
+								</div>
+							
+							<div class="form-group" style="margin-bottom: 20px">
+								<label for="major" class="cls-sm-2 control-label">학부/학과</label>
+								<div class="cols-sm-10" style="margin-bottom: 5px">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; 
+										${ student.department.name }
+									</div>
+								</div>
+
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
+										<span class="input-group-addon"><i class="fa fa-graduation-cap fa" aria-hidden="true"></i></span>
 										&nbsp;&nbsp; 
-										<input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
+										${ secondMajor.department.name }
 									</div>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="confirmPassword" class="cols-sm-2 control-label">비밀번호 확인</label>
+							<div class="form-group" style="margin-bottom: 30px">
+								<label for="semester" class="cls-sm-2 control-label">학기</label>
 								<div class="cols-sm-10">
 									<div class="input-group">
-										<span class="input-group-addon" style="margin-top: 10px"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span> 
-										&nbsp;&nbsp;
-										<input type="text" class="form-control" name="confirmPassword" placeholder="비밀번호 확인" style="height: 37px; font-size: 13pt; font-family: sans-serif"/>
+										<span class="input-group-addon"><i class="fa fa-user-graduate fa" aria-hidden="true"></i></span>
+										&nbsp;&nbsp; 
+										${ student.stuSemester } 학기
 									</div>
 								</div>
 							</div>
-							<br />
+							<div class="form-group" style="margin-top: 10px; margin-left: 18%; width: 120px;">
+								<a href="admin_stu_subject?id=${ user.id }" class="btn btn-outline-primary">수강한 강의 목록</a>
+							</div>
 							<div class="form-group" style="margin-top: 10px; margin-left: 31%; width: 120px;">
-								<button class="btn btn-primary btn-lg btn-block login-button">수정하기</button>
+								<a href="admin_stu_search?sbd=${sbd}&sbg=${sbg}&sbi=${sbi}&st=${st}" class="btn btn-primary">목록으로</a>
 							</div>
-						</form>
 					</div>
 				</div>
 			</div>
