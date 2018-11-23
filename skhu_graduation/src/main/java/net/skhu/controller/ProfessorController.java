@@ -3,6 +3,7 @@ package net.skhu.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.skhu.dto.Department;
+import net.skhu.dto.GraduationText;
 import net.skhu.dto.Professor;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -22,6 +25,8 @@ import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
+import net.skhu.mapper.DepartmentMapper;
+import net.skhu.mapper.GraduationMapper;
 import net.skhu.util.SecurityUtil;
 
 @Controller
@@ -33,6 +38,8 @@ public class ProfessorController {
 	@Autowired SecondMajorMapper secondMajorMapper;
 	@Autowired CounselMapper counselMapper;
 	@Autowired ProfessorMapper professorMapper;
+	@Autowired DepartmentMapper departmentMapper;
+	@Autowired GraduationMapper graduationMapper;
 
 	static String[] searchIndex = {"s.userId, s.userName"};
 
@@ -179,6 +186,90 @@ public class ProfessorController {
 		model.addAttribute("user",user);
 		return "professor/professor_memo";
 	}
+	
+	
+	//교수 졸업요건 조회
+	@RequestMapping(value = "professor_allSearch", method = RequestMethod.GET)
+	public String professor_allSearch(Model model, HttpSession session)
+	{
+		User user = (User) session.getAttribute("user");
+
+		User users = userMapper.findById(user.getId());
+		model.addAttribute("users", users);
+
+		Professor professor= professorMapper.findOne(user.getId());
+		model.addAttribute("professor", professor);
+		
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		String departmentId = professor.getDepartmentId();
+		
+		
+		Department department = departmentMapper.findOne(professor.getDepartmentId());
+		model.addAttribute("department", department);
+
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+		
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+		
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+		
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+		
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+		
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+
+		return "professor/professor_allSearch";
+	}
+
+	@RequestMapping(value = "professor_allSearch", method = RequestMethod.POST)
+	public String professor_allSearchh(Model model, HttpSession session,  @RequestParam("departmentId") String departmentId)
+	{
+		User user = (User) session.getAttribute("user");
+
+		User users = userMapper.findById(user.getId());
+		model.addAttribute("users", users);
+
+		Student student = studentMapper.findOneWithUser(user.getId());
+		student.setDepartmentId(departmentId);
+		model.addAttribute("student", student);
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		
+		Department department = departmentMapper.findOne(departmentId);
+		model.addAttribute("department", department);
+
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+		
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+		
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+		
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+		
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+		
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+		
+
+		return "professor/professor_allSearch";
+	}
+
 }
 
 

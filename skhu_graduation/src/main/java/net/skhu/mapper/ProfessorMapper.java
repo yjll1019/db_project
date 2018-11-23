@@ -11,4 +11,5 @@ public interface ProfessorMapper {
 	List<Professor> findOneWithUser(String userId);
 	String findName(String userId);
 	void updateProfessor(Professor p);
+	Professor findOne(String userId);
 }
