@@ -54,10 +54,12 @@
 		<div id="jb-header">
 			<div id='cssmenu'>
 				<ul>
-					<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+					<li><a
+						style="padding: 8px; padding-left: 15px; padding-right: 0px;">
 							<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a></li>
-					<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생 조회</span></a></li>
+					<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생
+								조회</span></a></li>
 					<li class='active has-sub'><a><span>졸업요건 수정</span></a>
 						<ul>
 							<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표
@@ -118,19 +120,17 @@
 					<c:forEach var="replace" items="${replace }">
 						<tr>
 							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
-							<td style="border-right: 1px solid black">${replace.subject.subjectName }</td>
+							<td style="border-right: 1px solid black">${replace.subjectName }</td>
 							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
-							<td style="border-right: 1px solid silver">
-                        <c:choose>
-                           <c:when test="${replace.completionDivision eq '전공선택'}"> 
+							<td style="border-right: 1px solid silver"><c:choose>
+									<c:when test="${replace.completionDivision eq '1'}"> 
                               	전공 선택 과목으로 대체
                             </c:when>
-                           <c:when test="${replace.completionDivision eq '교양선택'}"> 
+									<c:when test="${replace.completionDivision eq '2'}"> 
                               	교양 선택 과목으로 대체
                             </c:when>
-                        </c:choose>
-                     			${replace.replaceSubjectName}</td>
-								
+								</c:choose> ${replace.replaceSubjectName}</td>
+
 						</tr>
 					</c:forEach>
 
@@ -198,8 +198,8 @@
 							<td><select name="completionDivision" class="form-control"
 								style="margin-left: 5px; width: 240px; border: 1px solid gray;">
 									<option value="">과목 지정이 아닌경우만 선택</option>
-									<option value="전공선택">전공선택 과목으로 대체</option>
-									<option value="교양선택">교양선택 과목으로 대체</option>
+									<option value="1">전공선택 과목으로 대체</option>
+									<option value="2">교양선택 과목으로 대체</option>
 							</select></td>
 							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td><input type="text" class="form-control" name="code"
@@ -213,7 +213,8 @@
 						</tr>
 					</table>
 					<input type="submit" class="btn btn-outline-primary" value="저장하기"
-						style="margin-left: 45%; margin-top: 3%; font-size: 15px;" />
+						style="margin-left: 45%; margin-top: 3%; font-size: 15px;" /> 
+					<a href="replaceDelete" class="btn btn-danger" style="margin-left:20px;margin-top:3%; font-size:15px;">삭제하기</a>
 				</form>
 				<form action="replace_upload" method="post"
 					enctype="multipart/form-data">
