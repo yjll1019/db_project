@@ -6,8 +6,8 @@
 	
 	</select>
 
-	<select id="findAllCount" resultType="int"><!-- 페이지네이션 미완성 -->
-		select count(*) from mySubject where userId like #{userId}
+	<select id="findAllCount" resultType="int">
+		select count(*) from mySubject where userId = #{userId}
 	</select>
 
 	<select id="findByYearAndSemester" resultType="MySubject">
@@ -46,8 +46,74 @@
 	set score=#{score}
 	where userId like #{userId} and subjectCode=#{subjectCode};
 	</update>
+	
 	<delete id="deleteSubject">
 	delete from mySubject 
 	where userId like #{userId} and subjectCode like #{subjectCode}; 
 	</delete>
+	
+	<delete id="deleteById">
+		delete from mySubject
+		where userId = #{userId};
+	</delete>
+	
+	<select id="requiredMySubject" resultType="String">
+	select DISTINCT requiredSubject.subjectCode from mySubject
+ 	right outer join requiredSubject on mySubject.subjectCode=requiredSubject.subjectCode
+	where mySubject.userId like #{userId};
+	</select>
+
+	<select id="requiredSubject" resultType="String">
+	select DISTINCT requiredSubject.subjectCode, subject.subjectName 
+	from requiredSubject left join subject 
+	on requiredSubject.subjectCode = subject.code
+	where requiredSubject.admissionYear like #{admissionYear} and 
+	requiredSubject.departmentId like #{departmentId} and subject.year like #{admissionYear}
+	and subject.departmentId like #{departmentId};	
+	</select>	
+	
+	<select id="getSubjectName" resultType="String">
+		select DISTINCT subjectName from subject where code like #{subjectCode} and year like #{year};
+	</select>
+	
+	<select id="findMajor" resultType="MySubject">
+		select * from mySubject 
+		where userId=#{userId} and completionDivision='전필';
+	</select>
+	
+	<select id="findCultural" resultType="MySubject">
+		select * from mySubject 
+		where userId=#{userId} and completionDivision='교필';
+	</select>
+	
+	<select id="findPray" resultType="int">
+		select count(*) from mySubject 
+		where userId=#{userId} and (subjectCode LIKE CONCAT('%','AA','%') or subjectCode ='AC00001') and score='P';
+	</select>
+	
+	<select id="findService" resultType="int">
+		select count(*) from mySubject 
+		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046' or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
+	</select>
+	
+	<select id="findByOneRequiredSubject" resultType="RequiredSubject">
+	select r.subjectCode, s.subjectName name from requiredSubject r
+	left join subject s
+	on r.subjectCode=s.code
+	where r.subjectCode like subjectCode and
+	r.admissionYear like left(#{userId}, 4) and
+	s.year like left(#{userId}, 4) and
+	s.divisionClass like concat(01, '%');
+	</select>
+
+	<update id="changeSubject">
+	update mySubject
+	set subjectCode=#{changeCode},
+	subjectName=#{changeName}
+	where userId like #{userId} and
+	subjectCode=#{beforeCode};
+	</update>
+	
+	
+	
 </mapper>

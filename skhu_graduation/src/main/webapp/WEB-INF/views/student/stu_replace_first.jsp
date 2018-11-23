@@ -32,12 +32,6 @@
 			location.href = "stu_subject_list";	 
 	 } 
 	
-	
-	
-	
-	
-	
-	
 </script>
 <body>
 	<div class="layer-wrap" style="text-align: center; align: center; margin-top: 70px">
