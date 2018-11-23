@@ -74,17 +74,16 @@
 							<option>과목코드</option>
 						</select> 
 						<input type="text" name="searchText" placeholder="검색" style="margin-left: 5px; width: 120px;">&nbsp;
-						<button type="button" class="btn btn-primary">조회</button>
+						<button type="button" class="btn btn-primary" style="font-size: 13px;">조회</button>
 					</div>
 				</form>
 				<form action="subject_upload" method="post" enctype="multipart/form-data">							
-					<div class="form-group" style="display: inline; margin-left: 23%;">
+					<div class="form-group" style="margin-left: 20%; margin-top: 10px">
 						<input type="file" name="file" style="width: 250px;">
-						<button type="submit" class="btn btn-primary">업로드</button>			   	
+						<button type="submit" class="btn btn-primary" style="font-size: 13px;">업로드</button>   	
 		 			</div>				
 				</form>
-				
-				<div class="table-responsive" style="margin-left: 20%; margin-top: 3%; font-size: 12pt;">
+				<div class="table-responsive" style="margin-left: 20%; margin-top: 20px; font-size: 12pt;">
 					<table class="table" style="width: 900px;">
 						<thead style="font-size: 18px; font-weight: 500px;">
 							<tr>
