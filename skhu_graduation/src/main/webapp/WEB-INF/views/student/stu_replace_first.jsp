@@ -41,7 +41,7 @@
 					<!--content //-->
 					<h4>대체과목 적용</h4>
 					<table style="margin-left: 100px; margin-top: 30px; border-bottom: 1px solid #d2d4d8; 
-						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed; margin-left: 32%;">
+						border-top: 1px solid #d2d4d8; width: 400px; table-layout: fixed; margin-left: 37%;">
 						<tr style="height: 40px">
 							<td> ${mySubject.subjectCode} </td>
 							<td> ${mySubject.subjectName} </td>
