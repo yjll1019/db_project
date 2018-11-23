@@ -93,18 +93,13 @@
 									<fmt:formatDate pattern="yyy-MM-dd" value="${ board.date }" />
 								</td>
 							</tr>
-							<!--
 							<tr>
 								<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>첨부 파일</strong></td>
 								<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
-									<c forEach var="file" items={ files }">
-										<a href="download?fileId={file.id}">{ file.fileName }</a>
-										<span style="color: gray">{ file.fileSize }</span>&nbsp;&nbsp;
-										<a class="btn btn-default btn-xs" href="file/delete?id={file.id}">삭제</a> <br/>
-									</c forEach>
+									<iframe id="iframe1" src="${R}user/board_fileList?boardId=${board.boardId}" 
+										style="width: 400px; height: auto; border: none;"></iframe>
 								</td>
 							</tr>
-							-->
 							<tr>
 								<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
 								<td colspan="3" style="text-align: left; padding: 40px;">${ board.content }</td>
@@ -121,5 +116,10 @@
 			</div>
 		</div>
 	</div>
+<script>
+	function setIframeHeight(h) {
+		$("#iframe1").height(h);
+	}
+</script>	
 </body>
 </html>
