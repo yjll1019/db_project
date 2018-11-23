@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import net.skhu.dto.AdminReplaceListDTO;
 import net.skhu.dto.ReplaceSubject;
 import net.skhu.model.Option;
 import net.skhu.model.Pagination;
@@ -21,9 +22,11 @@ public interface ReplaceSubjectMapper {
 	void insert(List<ReplaceSubject> replaceSubjects);
 	void insertSubject(String deleteCode, String replaceCode);
 	void insertWithCompletionDivision(String deleteCode, String completionDivision);
+	void deleteSubject(String deleteCode, String replaceCode);
+	void deleteWithCompletionDivision(String deleteCode, String completionDivision);
 	int count(Pagination pagination);
 	List<ReplaceSubject> findAll();
-	List<ReplaceSubject> findByType(Pagination pagination);
+	List<AdminReplaceListDTO> findByType(Pagination pagination);
 	List<ReplaceSubject> findByDepartment(int id);
 
 	Option[] searchBy = { new Option(0,"검색 조건"), new Option(1,"과목코드"),
