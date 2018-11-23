@@ -220,51 +220,55 @@ public class StudentController {
 	}
 
 	// 수강 과목 조회를 위한 메소드
-	@RequestMapping(value = "stu_subject_list", method = RequestMethod.GET)
-	public String stu_subject_list(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+	   @RequestMapping(value = "stu_subject_list", method = RequestMethod.GET)
+	   public String stu_subject_list(Model model, HttpSession session) {
+	      User user = (User) session.getAttribute("user");
 
-		int enterYear = Integer.parseInt(user.getId().substring(0, 4));
+	      int enterYear = Integer.parseInt(user.getId().substring(0, 4));
 
-		Calendar c = Calendar.getInstance();
-		int currentYear = c.get(Calendar.YEAR);
+	      Calendar c = Calendar.getInstance();
+	      int currentYear = c.get(Calendar.YEAR);
 
-		List<MySubject> mySubjectlist = mySubjectMapper.findAll(user.getId());
+	      List<MySubject> mySubjectlist = mySubjectMapper.findAll(user.getId());
+	      List<String> majorAdmitList = mySubjectMapper.findAllForMajorAdmit(user.getId());
+	      
+	      model.addAttribute("mySubjectlist", mySubjectlist);
+	      model.addAttribute("majorAdmitList", majorAdmitList);
+	      model.addAttribute("enterYear", enterYear);
+	      model.addAttribute("currentYear", currentYear);
+	      
+	      return "student/stu_subject_list";
+	   }
 
-		model.addAttribute("mySubjectlist", mySubjectlist);
-		model.addAttribute("enterYear", enterYear);
-		model.addAttribute("currentYear", currentYear);
+	   @RequestMapping(value = "stu_subject_list", method = RequestMethod.POST)
+	   public String stu_subject_list(Model model, HttpSession session,
+	         @RequestParam("subjectListYear") Object subjectListYear,
+	         @RequestParam("subjectListSemester") Object subjectListSemester) {
+	      User user = (User) session.getAttribute("user");
+	      int enterYear = Integer.parseInt(user.getId().substring(0, 4));
+	      Calendar c = Calendar.getInstance();
+	      int currentYear = c.get(Calendar.YEAR);
 
-		return "student/stu_subject_list";
-	}
+	      List<MySubject> mySubjectlist;
 
-	@RequestMapping(value = "stu_subject_list", method = RequestMethod.POST)
-	public String stu_subject_list(Model model, HttpSession session,
-			@RequestParam("subjectListYear") Object subjectListYear,
-			@RequestParam("subjectListSemester") Object subjectListSemester) {
-		User user = (User) session.getAttribute("user");
-		int enterYear = Integer.parseInt(user.getId().substring(0, 4));
-		Calendar c = Calendar.getInstance();
-		int currentYear = c.get(Calendar.YEAR);
+	      int year = Integer.parseInt((String) subjectListYear);
+	      int semester = Integer.parseInt((String) subjectListSemester);
+	      if (year == 0) {// 전체조회
+	         mySubjectlist = mySubjectMapper.findAll(user.getId());
+	      } else {// 수강년도, 수강학기 조회
+	         mySubjectlist = mySubjectMapper.findByYearAndSemester(user.getId(), (String) subjectListYear,
+	               (String) subjectListSemester);
+	      }
+	      List<String> majorAdmitList = mySubjectMapper.findAllForMajorAdmit(user.getId());
+	      model.addAttribute("mySubjectlist", mySubjectlist);
+	      model.addAttribute("majorAdmitList", majorAdmitList);
+	      model.addAttribute("enterYear", enterYear);
+	      model.addAttribute("currentYear", currentYear);
+	      model.addAttribute("year", year);
+	      model.addAttribute("semester", semester);
 
-		List<MySubject> mySubjectlist;
-
-		int year = Integer.parseInt((String) subjectListYear);
-		int semester = Integer.parseInt((String) subjectListSemester);
-		if (year == 0) {// 전체조회
-			mySubjectlist = mySubjectMapper.findAll(user.getId());
-		} else {// 수강년도, 수강학기 조회
-			mySubjectlist = mySubjectMapper.findByYearAndSemester(user.getId(), (String) subjectListYear,
-					(String) subjectListSemester);
-		}
-		model.addAttribute("mySubjectlist", mySubjectlist);
-		model.addAttribute("enterYear", enterYear);
-		model.addAttribute("currentYear", currentYear);
-		model.addAttribute("year", year);
-		model.addAttribute("semester", semester);
-
-		return "student/stu_subject_list";
-	}
+	      return "student/stu_subject_list";
+	   }
 
 	// stu_info GET
 	@RequestMapping("stu_info")

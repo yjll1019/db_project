@@ -4,6 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@page import="java.util.List"%>
+<%@ page import="net.skhu.dto.*" %>
 <c:url var="R" value="/" />    
 <!DOCTYPE html>
 <html>
@@ -94,38 +96,54 @@
 							<th></th>
 						</tr>
 					</thead>
+					<%
+					List<String> majorAdmitList = (List) request.getAttribute("majorAdmitList");
+					List<MySubject> mySubjectlist = (List) request.getAttribute("mySubjectlist");
+					
+					%>
 					<tbody>
-						<c:forEach var="subject" items="${mySubjectlist }">
+						<%
+							int result = 0;
+							for(int i=0; i<mySubjectlist.size(); ++i){
+								if(majorAdmitList.contains(mySubjectlist.get(i).getSubjectCode())){
+									result = 1;
+								}
+						%>
 							<tr>
-								<td>${subject.takeYear }</td>
-								<td>${subject.takeSemester}</td>
-								<td>${subject.subjectCode }</td>
-								<td>${subject.subjectName }</td>
-								<td>${subject.completionDivision }</td>
-								<td>${subject.credit }</td>
-								<td>${subject.score }</td>
+								<td><%= mySubjectlist.get(i).getTakeYear() %></td>
+								<td><%= mySubjectlist.get(i).getTakeSemester() %></td>
+								<td><%= mySubjectlist.get(i).getSubjectCode() %></td>
+								<td><%= mySubjectlist.get(i).getSubjectName() %></td>
+								<td><%= mySubjectlist.get(i).getCompletionDivision() %></td>
+								<td><%= mySubjectlist.get(i).getCredit() %></td>
+								<td><%= mySubjectlist.get(i).getScore() %></td>
 								<td>
 								<div class="dropdown">
 									<button class="dropbtn">&nbsp;변경&nbsp;</button>
 									<div class="dropdown-content">
 										 <a href="<c:url value="../student/stu_replace_first" > 
-  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+  											<c:param name="subjectCode" value="<%= mySubjectlist.get(i).getSubjectCode() %>"></c:param>
  											 </c:url>">대체과목변경(초수강)</a>
 										 <a href="<c:url value="stu_replace_repeat" > 
-  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+  											<c:param name="subjectCode" value="<%= mySubjectlist.get(i).getSubjectCode() %>"></c:param>
  											 </c:url>">대체과목변경(재수강)</a>
+ 										<%	if(result==1){%>
 										 <a href="<c:url value="stu_major_admit" > 
-  											<c:param name="subjectCode" value="${subject.subjectCode }"></c:param>
+  											<c:param name="subjectCode" value="<%= mySubjectlist.get(i).getSubjectCode() %>"></c:param>
  											 </c:url>">전공인정신청</a>
+ 										<%} %>
 									</div>
 								</div>
-							</td>
+								</td>
 							</tr>
-						</c:forEach>
+						<%
+							}
+						%>
+				
 					</tbody>
 				</table>
 			</div>
-	</div>
+			
 			<div id="page">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
