@@ -86,4 +86,29 @@
 		delete from board where boardId = #{boardId}
 	</delete>
 	
+	<select id="lastBoardId" resultType="int">
+		select max(boardId) from board
+	</select>
+	
+	<select id="findOneById" resultType="Uploadedfile">
+		select * from uploadedfile where id = #{id}
+	</select>
+	
+	<select id="findAllByboardId" resultType="Uploadedfile">
+		select * from uploadedfile where boardId = #{boardId}
+	</select>
+	
+	<insert id="insert">
+		insert into uploadedfile (boardId, fileName, fileSize, data) 
+		values (#{boardId}, #{fileName}, #{fileSize}, #{data})
+	</insert>
+	
+	<delete id="delete">
+		delete from uploadedfile where id = #{id};
+	</delete>
+	
+	<delete id="deleteByBoardId">
+		delete from uploadedfile where boardId = #{boardId}
+	</delete>
+	
 </mapper>

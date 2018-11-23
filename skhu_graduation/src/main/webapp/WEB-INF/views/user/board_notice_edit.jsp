@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -79,7 +80,7 @@
 				<h2>&nbsp;&nbsp;공지사항 ${ board.boardId <= 0 ? "등록" : "수정" }</h2>
 				<hr>
 				<div class="container">
-					<form method="post">
+					<form method="post" enctype="multipart/form-data">
 							<table class="table table-bordered" align="center" style="margin-top: 40px; font-size: 17px; text-align: center; max-width: 640px; width: 80%;">
 								<tr>
 									<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>제목</strong></td>
@@ -87,18 +88,14 @@
 										<input type="text" class="form-control" name="title" value="${ board.title }">
 									</td>
 								</tr>
-								<!--
 								<tr>
 									<td style="background-color: #4582EC; color: white; width: 100px; padding-top: 18px"><strong>첨부 파일</strong></td>
-									<td>
-										<c:forEach var="file" items="{ files }">
-											<a href="download?fileId={file.id}">{ file.fileName }</a>&nbsp;&nbsp;&nbsp;
-											<span style="color: gray">{ file.fileSize }</span>&nbsp;&nbsp;
-											<a class="btn btn-default btn-xs" href="fileDelete?fileId={file.id}">삭제</a> <br/>
-										</c:forEach>
+									<td colspan="3" style="text-align: left; padding-left: 25px; padding-top: 18px">
+										<iframe id="iframe1" src="${R}user/board_fileList?boardId=${board.boardId}" 
+											style="width: 400px; height: auto; border: none;"></iframe>
+										<input type="file" name="fileUpload" style="width: 200px; margin: 10px; display:inline" multiple/>
 									</td>
 								</tr>
-								-->
 								<tr>
 									<td style="background-color: #4582EC; color: white; height: 260px; padding-top: 18px"><strong>내용</strong></td>
 									<td colspan="3">
@@ -114,15 +111,14 @@
 								<a href="board" class="btn btn-outline-primary">목록으로</a>
 							</div>
 					</form>
-					<!-- 
-					<form method="post" enctype="multipart/form-data" action="upload?boardId=${ board.boardId }">
-						<input type="file" name="fileUpload" style="width: 600px; margin: 10px;" multiple />
-						<button type="submit" class="btn btn-primary">업로드</button> <br/>
-					</form>
-					-->
 				</div>
 			</div>
 		</div>
 	</div>
+<script>
+	function setIframeHeight(h) {
+		$("#iframe1").height(h);
+	}
+</script>
 </body>
 </html>
