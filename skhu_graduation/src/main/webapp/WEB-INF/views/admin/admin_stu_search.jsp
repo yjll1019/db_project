@@ -84,7 +84,7 @@ $(function() {
 							&nbsp; <a href="student/frustrated" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
 			  		</div>
 			  		<div class="form-group" id="class2" style="display:inline;">
-						<select name="sbi" class="custom-select" style="width: 80px; ]display: inline; margin-left: 5%; height:35px;">
+						<select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 8%; height:35px;">
 							<option value="0">검색조건</option>
 							<option value="1" ${sbi == '1' ? 'selected' : ''}>학번</option>
 							<option value="2" ${sbi == '2' ? 'selected' : ''}>이름</option>
