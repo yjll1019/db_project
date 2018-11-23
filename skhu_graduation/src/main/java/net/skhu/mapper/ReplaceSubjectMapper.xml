@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.ReplaceSubjectMapper">
+
+   <insert id="insert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+      INSERT into replaceSubject(subjectCode, replaceSubject) 
+      VALUES 
+      <foreach collection="list" item="replaceSubject" separator=" , ">
+         ('${replaceSubject.subjectCode}', '${replaceSubject.replaceSubject}')
+      </foreach>
+   </insert>
+   <insert id="insertSubject">
+      INSERT into replaceSubject(subjectCode, replaceSubject)
+      VALUES(#{deleteCode},#{replaceCode})
+   </insert>
+   <insert id="insertWithCompletionDivision">
+      INSERT into replaceSubject(subjectCode, completionDivision)
+      VALUES(#{deleteCode},#{completionDivision})
+   </insert>
+   <select id="findAll" resultMap="resultMap1">
+      select re.*, sub.subjectName, resub.subjectName replaceSubjectName,d.name
+      from replaceSubject re 
+      left join subject sub on re.subjectCode = sub.code 
+      left join subject resub on re.replaceSubject = resub.code 
+      left join department d on d.id = sub.departmentId
+   </select>
+   
+   <select id="findByType" resultMap="resultMap1">
+      <bind name="start" value="(pg-1) * sz"/>
+      select re.*, sub.subjectName, resub.subjectName replaceSubjectName,d.name
+      from replaceSubject re 
+      left join subject sub on re.subjectCode = sub.code 
+      left join subject resub on re.replaceSubject = resub.code 
+      left join department d on d.id = sub.departmentId
+      <where>
+         <if test="sb==1">INSTR(re.subjectCode, #{st})>0</if>
+         <if test="sb==2">INSTR(sub.subjectName,#{st})>0</if>
+      </where>
+      
+   </select>
+   
+   <select id="count" resultType="int">
+      select count(re.subjectCode)
+      from replaceSubject re 
+      left join subject sub on re.subjectCode = sub.code 
+      left join subject resub on re.replaceSubject = resub.code 
+      left join department d on d.id = sub.departmentId
+      <where>
+         <if test="sb==1">re.replaceSubject = #{st}</if>
+         <if test="sb==2">INSTR(resub.subjectName,#{st})>0</if>
+      </where>
+   </select>
+   
+   <select id="findByDepartment" resultMap="resultMap1">
+      select re.*, sub.*, resub.subjectName replaceSubjectName,d.name
+      from replaceSubject re 
+      left join subject sub on re.subjectCode = sub.code 
+      left join subject resub on re.replaceSubject = resub.code 
+      left join department d on d.id = sub.departmentId
+      where d.id=#{id}
+   </select>
+   
+   <resultMap id="resultMap1" type="ReplaceSubject">
+      <id property="subjectCode" column="subjectCode"/>
+      <result property="replaceSubject" column="replaceSubject"/>
+      <result property="replaceSubjectName" column="replaceSubjectName"/>
+      <result property="completionDivision" column="completionDivision"/>
+      <association property="subject" javaType="Subject">
+         <id property="code" column="code"/>
+         <result property="departmentId" column="departmentId"/>
+         <result property="year" column="year"/>
+         <result property="semester" column="semester"/>
+         <result property="subjectName" column="subjectName"/>
+         <result property="completionDivision" column="completionDivision"/>
+         <result property="credit" column="credit"/>
+         <!--
+         <association property="department" javaType="Department">
+            <id property="id" column="id"/>
+            <id property="name" column="name"/>
+         </association>
+          -->
+      </association>
+   </resultMap>
+</mapper>

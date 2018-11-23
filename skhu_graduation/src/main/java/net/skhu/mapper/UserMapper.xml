@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.UserMapper">
+		
+		
+	<select id="findOne" resultType="int">
+		select count(*) from user where id like #{userId};
+	</select>
+
+	
+	<select id="login" resultType="User">
+		select * from user where id like #{userId};
+	</select>
+	
+	<select id="insert">
+		  insert into user values(#{id}, #{password}, #{userName}, #{email}, #{phone}, #{role});
+	</select>
+	
+	<select id="changePassword">
+		update user set password=#{password} where id like #{id};
+	</select>
+
+	<update id="updateAdmin">
+		update user set 
+			password = #{password},
+			userName = #{userName},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
+	</update>
+
+	<update id="updateProfessor">
+		update user set 
+			password = #{password},
+			userName = #{userName},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
+	</update>
+
+	<update id="updateStudent">
+		update user set
+		userName = #{userName},
+		email = #{email},
+		phone = #{phone},
+		password = #{password}
+		where id = #{id}
+	</update>
+	
+	<select id="findById" resultType="User">
+		select *
+		from user
+		where id= #{id};
+	</select>
+	
+	<select id="findByUser" resultType="User" parameterType="String">
+		select u.*, d.name 'departmentName'
+		from user u join student s on u.id = s.userId
+			join department d on s.departmentId = d.id
+			${ value }
+		order by u.id DESC, s.stuSemester;
+	</select>
+	
+	<select id="findBySubject" resultType="User" parameterType="String">
+		select u.*, d.name 'departmentName'
+		from user u join student s on u.id = s.userId
+			join department d on s.departmentId = d.id
+			join mySubject msj on u.id = msj.userId
+			${ value }
+		order by msj.takeYear, u.id DESC;
+	</select>
+	
+</mapper>

@@ -1,0 +1,44 @@
+@charset "UTF-8";
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+tbody>tr {
+	cursor: pointer;
+}
+
+.result {
+	margin-top: 20px;
+}
+
+.notice{
+	background-color:#f8f8f8;
+}
+
+#boardWrite{
+ 	margin: 0 auto;
+    padding: 20px 20px;
+	font-family: 'NanumSquare', sans-serif;
+}
+#word-color{
+	color: red;
+}
+
+#jb-content {
+	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 1000px;
+    padding: 40px 40px;
+	font-family: 'NanumSquare', sans-serif;
+}
+
+#jb-sidebar {
+	width: 260px;
+	padding: 20px;
+	margin: 25px;
+	float: right;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin-left: 400px;
+	height: 200px;
+}
