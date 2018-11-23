@@ -49,7 +49,7 @@
 			</ul>
 		</div>
 	</div>
-      <div id="jb-content" style="margin-left: 5%">
+      <div id="jb-content" style="margin-left: 10%">
          <h2>&nbsp;&nbsp;전체학과 졸업요건 안내</h2>
          <br />
          <form class="form-horizontal" method="post" >
@@ -67,7 +67,8 @@
 		</div>
 			<br />
          <div class="table-responsive">
-            <table class="table">
+            <table class="table table-bordered"
+				style="margin-top: -15px; width: 1000; max-height: 500px; text-align: center; table-layout: fixed;">
                <thead>
                   <tr>
                      <th>대상</th>
@@ -78,15 +79,46 @@
                </thead>
 						<tbody>
 							<tr>
-								<td rowspan="4">${student.department.name} 학생</td>
-								<td>${student.department.name}<br> 주전공</td>
+								<td rowspan="4">${department.name} 학생</td>
+								<td>${department.name}<br> 주전공</td>
+								<td>${list0.graduationContent}</td>
+								<td  width=230 style=""font-size: 10pt;">${list0.graduationEtc}</td>
 								</tr>
-								<c:forEach var = "text" items="${ list }">
 								<tr>
-								<td>${text.graduationContent}</td>
-								<td>${text.graduationEtc }
+								<td>${department.name}<br>(타과)복수전공</td>
+								<td>${list1.graduationContent}</td>
+								<td width=230>${list1.graduationEtc}</td>
 								</tr>
-								</c:forEach>
+								<tr>
+								<td>${department.name}<br>(타과)부전공</td>
+								<td>${list2.graduationContent}</td>
+								<td>${list2.graduationEtc}</td>
+								</tr>
+								<tr>
+								<td>${department.name}<br>편입</td>
+								<td>${list3.graduationContent }</td>
+								<td>${list3.graduationEtc}</td>
+								</tr>
+								<tr>
+								<td rowspan="3">타과학생</td>
+								<td>${department.name}<br> 전과
+								</td>
+								<td>학번에 따라 전공필수 이수<br> 전과이전 학기의 지도과목은 제외하되, 그만큼의 학점은
+                        전선을 이수하여 전공학점을 채워야 함
+								</tr>
+								<tr>
+								<td>${department.name }<br>복수전공
+								</td>
+								<td>${list4.graduationContent }</td>
+								<td>${list4.graduationEtc}</td>
+								</tr>
+								<tr>
+								<td>${department.name}<br>부전공
+								</td>
+								<td>${list5.graduationContent }</td>
+								<td>${list5.graduationEtc}</td>
+								</tr>
+								</tbody>
 
 					</table>
          </div>

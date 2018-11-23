@@ -5,5 +5,10 @@
 	<select id="findAll" resultType="Department">
 		select * from department;
 	</select>
-	
+
+	<select id="findOne" resultType="Department">
+		select * from department
+		where id like #{departmentId};
+		
+	</select>	
 </mapper>

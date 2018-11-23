@@ -5,7 +5,9 @@
 	<select id="findByDepartmentId" resultType="GraduationText">
 	select *
 	from graduationText 
-	where departmentId like #{departmentId};		
+	where departmentId like #{departmentId} and
+    division like #{division};		
 	</select>
+	
 	
 </mapper>

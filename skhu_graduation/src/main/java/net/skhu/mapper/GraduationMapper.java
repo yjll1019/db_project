@@ -8,6 +8,6 @@ import net.skhu.dto.GraduationText;
 
 @Mapper
 public interface GraduationMapper {
-	List<GraduationText> findByDepartmentId(String departmentId);
+	GraduationText findByDepartmentId(String departmentId, String division);
 	
 }

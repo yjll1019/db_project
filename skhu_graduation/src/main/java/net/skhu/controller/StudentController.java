@@ -485,7 +485,7 @@ public class StudentController {
 
 	//학생 졸업요건 조회
 	@RequestMapping(value = "stu_allSearch", method = RequestMethod.GET)
-	public String myInfo(Model model, HttpSession session)
+	public String stu_allSearch(Model model, HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");
 
@@ -494,34 +494,75 @@ public class StudentController {
 
 		Student student = studentMapper.findOneWithUser(user.getId());
 		model.addAttribute("student", student);
+		
 
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
+		String departmentId = student.getDepartmentId();
+		
+		
+		Department department = departmentMapper.findOne(student.getDepartmentId());
+		model.addAttribute("department", department);
 
-
-		List<GraduationText> list = graduationMapper.findByDepartmentId(user.getDepartmentId());
-
-		model.addAttribute("list", list);
-
-
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+		
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+		
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+		
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+		
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+		
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
 
 		return "student/stu_allSearch";
 	}
 
 	@RequestMapping(value = "stu_allSearch", method = RequestMethod.POST)
-	public String selectDepartment(Model model,  @RequestParam("departmentId") String departmentId)
+	public String stu_allSearch(Model model, HttpSession session,  @RequestParam("departmentId") String departmentId)
 	{
+		User user = (User) session.getAttribute("user");
+
+		User users = userMapper.findById(user.getId());
+		model.addAttribute("users", users);
+
+		Student student = studentMapper.findOneWithUser(user.getId());
+		student.setDepartmentId(departmentId);
+		model.addAttribute("student", student);
 
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
+		
+		Department department = departmentMapper.findOne(departmentId);
+		model.addAttribute("department", department);
 
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+		
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+		
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+		
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+		
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+		
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+		
 
-		List<GraduationText> list = graduationMapper.findByDepartmentId(departmentId);
-
-		model.addAttribute("list", list);
-
-
-		return "redirect:/student/stu_allSearch";
+		return "student/stu_allSearch";
 	}
 
 	//필수과목 목록
