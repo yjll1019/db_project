@@ -1,5 +1,9 @@
 package net.skhu.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,11 +12,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import net.skhu.dto.Board;
+import net.skhu.dto.Uploadedfile;
 import net.skhu.dto.User;
 import net.skhu.mapper.BoardMapper;
 
@@ -49,11 +57,10 @@ public class BoardController {
 	@RequestMapping(value="/board_notice", method=RequestMethod.GET)
 	public String board_notice(Model model, @RequestParam("id") int id) {
 		Board board = boardMapper.findOne(id);
-		//List<UploadedFile> files = fileMapper.findByBoardId(id);
 		model.addAttribute("board", board);
-		//model.addAttribute("files", files);
 		return "user/board_notice";
 	}
+	
 	@RequestMapping(value="/board_notice_create", method=RequestMethod.GET)
 	public String board_notice_create(Model model) {
 		Board board = new Board();
@@ -61,61 +68,101 @@ public class BoardController {
 		return "user/board_notice_edit";
 	}
 
+	@Transactional
 	@RequestMapping(value="/board_notice_create", method=RequestMethod.POST)
-	public String board_notice_insert(Model model, Board board, HttpSession session) {
+	public String board_notice_insert(Model model, Board board, HttpSession session,
+			@RequestParam("fileUpload") MultipartFile[] files) throws IOException {
 		User user = (User) session.getAttribute("user");
 		board.setUserId(user.getId());
 		boardMapper.insertNotice(board);
+		int boardId = boardMapper.lastBoardId();
+		
+		System.out.println("id=" + boardId);
+		
+		for(MultipartFile uploadFile : files) {
+			if(uploadFile.getSize() <= 0) continue;
+			String fileName = Paths.get(uploadFile.getOriginalFilename()).getFileName().toString();
+			System.out.println(fileName);
+			Uploadedfile uploadedFile = new Uploadedfile();
+			uploadedFile.setBoardId(boardId);
+			uploadedFile.setFileName(fileName);
+			uploadedFile.setFileSize((int)uploadFile.getSize());
+			uploadedFile.setData(uploadFile.getBytes());
+			boardMapper.insert(uploadedFile);
+		}
 		return "redirect:board";
 	}
 
 	@RequestMapping(value="/board_notice_edit", method=RequestMethod.GET)
 	public String board_notice_edit(Model model, @RequestParam("boardId") int boardId) {
 		Board board = boardMapper.findOne(boardId);
-		//List<UploadedFile> files = fileMapper.findByBoardId(boardId);
+		//List<Uploadedfile> files = boardMapper.findAllByboardId(boardId);
 		model.addAttribute("board", board);
 		//model.addAttribute("files", files);
 		return "user/board_notice_edit";
 	}
 
 	@RequestMapping(value="/board_notice_edit", method=RequestMethod.POST)
-	public String board_notice_update(Model model, Board board) {
+	public String board_notice_update(Model model, Board board, @RequestParam("fileUpload") MultipartFile[] files) throws IOException {
 		boardMapper.updateNotice(board);
+		
+		for(MultipartFile uploadFile : files) {
+			if(uploadFile.getSize() <= 0) continue;
+			String fileName = Paths.get(uploadFile.getOriginalFilename()).getFileName().toString();
+			System.out.println(fileName);
+			Uploadedfile uploadedFile = new Uploadedfile();
+			uploadedFile.setBoardId(board.getBoardId());
+			uploadedFile.setFileName(fileName);
+			uploadedFile.setFileSize((int)uploadFile.getSize());
+			uploadedFile.setData(uploadFile.getBytes());
+			boardMapper.insert(uploadedFile);
+		}
 		return "redirect:board_notice?id=" + board.getBoardId();
 	}
 
 	@RequestMapping("/noticeDelete")
 	public String noticeDelete(@RequestParam("id") int id) throws Exception {
-		//fileMapper.deleteByBoardId(id);
+		boardMapper.deleteByBoardId(id);
 		boardMapper.deleteNotice(id);
 		return "redirect:board";
 	}
+	
+	@RequestMapping(value="/board_fileList")
+	public String board_fileList(Model model, HttpSession session, @RequestParam("boardId") int boardId) {
+		User user = (User) session.getAttribute("user");
+		List<Uploadedfile> files = boardMapper.findAllByboardId(boardId);
+		model.addAttribute("user", user);
+		model.addAttribute("files", files);
+		model.addAttribute("boardId", boardId);
+		return "user/board_fileList";
+	}
 
-	/*
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public void upload(@RequestParam("fileUpload") MultipartFile[] files, 
+	public String upload(@RequestParam("fileUpload") MultipartFile[] files, 
 			@RequestParam("boardId") int boardId) throws IOException {
 		for(MultipartFile uploadFile : files) {
 			if(uploadFile.getSize() <= 0) continue;
 			String fileName = Paths.get(uploadFile.getOriginalFilename()).getFileName().toString();
 			System.out.println(fileName);
-			UploadedFile uploadedFile = new UploadedFile();
+			Uploadedfile uploadedFile = new Uploadedfile();
 			uploadedFile.setBoardId(boardId);
 			uploadedFile.setFileName(fileName);
 			uploadedFile.setFileSize((int)uploadFile.getSize());
 			uploadedFile.setData(uploadFile.getBytes());
-			//fileMapper.insert(uploadedFile);
+			boardMapper.insert(uploadedFile);
 		}
+		return "redirect:board_fileList?boardId=" + boardId;
 	}
 
 	@RequestMapping("/fileDelete")
-	public void fileDelete(@RequestParam("fileId") int fileId) throws Exception {
-		fileMapper.deleteById(fileId);
+	public String fileDelete(@RequestParam("fileId") int fileId, @RequestParam("boardId") int boardId) throws Exception {
+		boardMapper.delete(fileId);
+		return "redirect:board_fileList?boardId=" + boardId;
 	}
 
 	@RequestMapping("/download")
 	public void download(@RequestParam("fileId") int id, HttpServletResponse response) throws Exception {
-		UploadedFile uploadedFile = fileMapper.findOne(id);
+		Uploadedfile uploadedFile = boardMapper.findOneById(id);
 		if(uploadedFile == null) return;
 		String fileName = URLEncoder.encode(uploadedFile.getFileName(), "UTF-8");
 		response.setContentType("application/octet-stream");
@@ -124,7 +171,6 @@ public class BoardController {
 			output.write(uploadedFile.getData());
 		}
 	}
-	 */
 
 	// 문의
 	@RequestMapping(value="/board_question", method=RequestMethod.GET)

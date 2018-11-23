@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import net.skhu.dto.Board;
+import net.skhu.dto.Uploadedfile;
 
 @Mapper
 public interface BoardMapper {
@@ -12,6 +13,8 @@ public interface BoardMapper {
 	List<Board> findAll();
 	List<Board> findByName(String userName);
 	List<Board> findByTitle(String title);
+	
+	int lastBoardId();
 	
 	void insertNotice(Board board);
 	void insertQuestion(Board board);
@@ -24,4 +27,11 @@ public interface BoardMapper {
 	void deleteNotice(int boardId);
 	void deleteQuestion(int boardId);
 	void deleteAnswer(int boardId);
+	
+	//file upload
+	Uploadedfile findOneById(int id);
+	List<Uploadedfile> findAllByboardId(int boardId);
+	void insert(Uploadedfile uploadedFile);
+	void delete(int id);
+	void deleteByBoardId(int boardId);
 }
