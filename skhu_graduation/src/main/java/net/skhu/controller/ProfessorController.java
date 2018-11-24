@@ -189,7 +189,7 @@ public class ProfessorController {
 	
 	
 	//교수 졸업요건 조회
-	@RequestMapping(value = "professor_allSearch", method = RequestMethod.GET)
+	@RequestMapping(value = "/professor_allSearch", method = RequestMethod.GET)
 	public String professor_allSearch(Model model, HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");
