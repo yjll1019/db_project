@@ -1,5 +1,6 @@
 package net.skhu.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.ProfessorMapper;
+import net.skhu.mapper.RequiredSubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
@@ -58,7 +60,8 @@ public class StudentController {
 	@Autowired ExcelService excelService;
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired ProfessorMapper professorMapper;
-
+	@Autowired RequiredSubjectMapper requiredSubjectMapper;
+	
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
@@ -87,13 +90,39 @@ public class StudentController {
 		for(int i=0; i<mySubjectCultural.size(); ++i) {
 			cultural+=Integer.parseInt(mySubjectCultural.get(i).getCredit());
 		}
+		
 		student.setMajor(major);
 		student.setCultural(cultural);
 		student.setPray(pray);
 		student.setService(service);
 		model.addAttribute("user", user);
 		model.addAttribute("student",student);
+		
+		//필수과목 table을 위한 코드
+		String admissionYear = user.getId().substring(0,4);//년도
 
+		List<String> list[] = new ArrayList[9];
+		
+		for(int i=0; i<list.length; ++i) {
+			list[i] = new ArrayList<String>();
+		}
+		int z = 0;
+		for(int i=1; i<=4; ++i) {//학년
+			for(int j=1; j<=2; ++j) {//학기
+				list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
+			}
+		}
+
+		list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
+
+		for(int i=1; i<=list.length; ++i) {
+			model.addAttribute("list"+i, list[i-1]);
+		}
+
+		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());//필수과목 중 수강한 과목 리스트
+		model.addAttribute("requiredMySubject",requiredMySubject);
+		
+		
 		return "student/stu_main";
 	}
 
@@ -141,7 +170,7 @@ public class StudentController {
 
 		return "redirect:/student/stu_goalCredit";
 	}
-
+	
 	@RequestMapping("stu_noData")
 	public String stu_noData() {
 		return "student/stu_noData";
@@ -567,44 +596,6 @@ public class StudentController {
 		
 
 		return "student/stu_allSearch";
-	}
-
-	//필수과목 목록
-	@RequestMapping(value="reTest", method=RequestMethod.GET)
-	public String reTest(Model model, HttpSession session) {
-		User user = new User();
-
-		user.setId("201632021"); //수정 필요
-		user.setDepartmentId("12");
-
-		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());
-		List<String> requiredSubject = mySubjectMapper.requiredSubject(user.getDepartmentId(), user.getId().substring(0, 4));
-		List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
-		if(noSubject.contains("AC00001")) //채플제거
-			noSubject.remove("AC00001");
-		if(noSubject.contains("AC00003")) //사회봉사제거
-			noSubject.remove("AC00003");
-
-
-		Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
-		Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
-
-		for(int i=0; i<requiredSubject.size(); ++i) {
-			String subjectCode = requiredSubject.get(i);
-			String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
-			requiredSubjectMap.put(subjectCode, subjectName);
-		}
-
-		for(int i=0; i<noSubject.size(); ++i) {
-			String subjectCode = noSubject.get(i);
-			String subjectName = mySubjectMapper.getSubjectName(subjectCode, user.getId().substring(0, 4));
-			noSubjectMap.put(subjectCode, subjectName);
-		}
-
-		model.addAttribute("requiredSubjectMap", requiredSubjectMap);
-		model.addAttribute("noSubjectMap", noSubjectMap);
-
-		return "student/reTest";
 	}
 	
 	//대체과목 초수강 get

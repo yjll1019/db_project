@@ -74,7 +74,7 @@
 	</delete>
 
 	<select id="requiredMySubject" resultType="String">
-		select DISTINCT requiredSubject.subjectCode from mySubject
+		select DISTINCT mySubject.subjectName from mySubject
 		right outer join requiredSubject on
 		mySubject.subjectCode=requiredSubject.subjectCode
 		where mySubject.userId like #{userId};

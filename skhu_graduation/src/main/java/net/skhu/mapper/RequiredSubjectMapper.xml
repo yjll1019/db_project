@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.RequiredSubjectMapper">
+
+	<select id="findByConditions" resultType="String"><!-- 학과, 년도, 학년, 학기로 필수과목 select -->
+		select distinct subject.subjectName from
+		requiredSubject left join subject
+		on requiredSubject.subjectCode = subject.code where
+		requiredSubject.departmentId like '12' and
+		requiredSubject.admissionYear like #{admissionYear}
+		and requiredSubject.grade like #{grade} and requiredSubject.semester like #{semester}
+		and subject.year like #{admissionYear};
+	</select>
+
+</mapper>

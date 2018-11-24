@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.util.List"%>
+
 <c:url var="R" value="/" />    
 <!DOCTYPE html>
 <html>
@@ -91,7 +93,7 @@
 				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
 				<!-- default -->
 				<div class="clearfix">
-					<div class="c100 p50">
+					<div class="c100 p<%= 90%>">
 						<span>50%</span>
 						<div class="slice">
 							<div class="bar"></div>
@@ -116,17 +118,15 @@
 		</div>
 	</form:form>
 		<div id="jb-content">
-			<a id="top" href="#jb-header"><img src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
-		
+			<a id="top" href="#jb-header"><img
+				src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
+
 			<h3>필수 과목</h3>
-			<br />
-<a href="reTest">필수과목</a> 
-			<br/>
 			<div>
 				<table id="table3">
 					<tr>
 						<td
-							style="background-color:#4582EC; color:#fff; border-top: 1px solid gray; border-right: 1px solid silver; border-bottom: 1px solid silver; font-size: 20px; font-weight: bold;">
+							style="background-color: #4582EC; color: #fff; border-top: 1px solid gray; border-right: 1px solid silver; border-bottom: 1px solid silver; font-size: 20px; font-weight: bold;">
 							채플</td>
 						<td
 							style="border-top: 1px solid gray; font-size: 20px; font-weight: bold;">
@@ -134,7 +134,7 @@
 					</tr>
 					<tr>
 						<td
-							style="background-color:#4582EC; color:#fff; border-bottom: 1px solid gray; border-right: 1px solid silver; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
+							style="background-color: #4582EC; color: #fff; border-bottom: 1px solid gray; border-right: 1px solid silver; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
 							사회봉사</td>
 						<td
 							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
@@ -142,7 +142,21 @@
 					</tr>
 				</table>
 			</div>
-			<br/>
+			<br />
+			<%
+				
+				List<String> list1 = (List) request.getAttribute("list1");
+				List<String> list2 = (List) request.getAttribute("list2");
+				List<String> list3 = (List) request.getAttribute("list3");
+				List<String> list4 = (List) request.getAttribute("list4");
+				List<String> list5 = (List) request.getAttribute("list5");
+				List<String> list6 = (List) request.getAttribute("list6");
+				List<String> list7 = (List) request.getAttribute("list7");
+				List<String> list8 = (List) request.getAttribute("list8");
+				
+				List<String> requiredMySubject = (List) request.getAttribute("requiredMySubject");
+				
+			%>
 			<table id="table1">
 				<thead>
 					<tr>
@@ -151,6 +165,7 @@
 						<th scope="col" colspan="2" id="th1">2학년</th>
 					</tr>
 				</thead>
+				<tbody>
 				<tr>
 					<td id="td1" style="border-right: 1px solid silver"><strong>
 							1학기 </strong></td>
@@ -161,24 +176,71 @@
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-					<td id="td2" style="border-right: 1px solid silver"><span>C프로그래밍
-							Ⅰ</span><br /> <span>과정지도 1</span><br /> <span>정보사회론</span><br /> <span>이산수학</span><br />
-						<span>말과글</span><br /> <span>대학생활세미나 Ⅰ</span></td>
-					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍
-							Ⅱ</span><br /> <span>과정지도 2</span><br /> <span>웹페이지 구축 Ⅰ</span><br />
-						<span>대학수학</span><br /> <span style="color: #d9534f;">컴퓨터
-							활용</span><br /> <span>대학생활세미나 Ⅱ</span></td>
-					<td id="td2" style="border-right: 1px solid silver"><span>자바프로그래밍</span><br />
-						<span>과정지도 3</span><br /> <span style="color: #d9534f;">컴퓨터구조</span><br />
-						<span>데이터베이스개론</span></td>
-					<td id="td2"><span>자료구조론</span><br /> <span>과정지도 4</span></td>
+					<!-- 1-1 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list1.size(); ++i){
+								if(!requiredMySubject.contains(list1.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list1.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list1.get(i) %></span><br /> 
+						<%} }%>
+					</td>
+					<!-- 1-2 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list2.size(); ++i){
+								if(!requiredMySubject.contains(list2.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list2.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list2.get(i) %></span><br /> 
+						<%} }%>
+					</td>
+					<!-- 2-1 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list3.size(); ++i){
+								if(!requiredMySubject.contains(list3.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list3.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list3.get(i) %></span><br /> 
+						<%} }%>
+					</td>					
+					<!-- 2-2 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list4.size(); ++i){
+								if(!requiredMySubject.contains(list4.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list4.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list4.get(i) %></span><br /> 
+						<%} }%>
+					</td>
 				</tr>
+				</tbody>
 				<thead>
 					<tr>
 						<th scope="col" colspan="2" id="th1">3학년</th>
 						<th scope="col" colspan="2" id="th1">4학년</th>
 					</tr>
 				</thead>
+				<tbody>
 				<tr>
 					<td id="td1" style="border-right: 1px solid silver"><strong>
 							1학기 </strong></td>
@@ -189,55 +251,84 @@
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-					<td id="td2" style="border-right: 1px solid silver"><span>알고리즘</span><br />
-						<span>과정지도 5</span></td>
-					<td id="td2" style="border-right: 1px solid black"><span
-						style="color: #d9534f;">과정지도 6</span></td>
-					<td id="td2" style="border-right: 1px solid silver"><span>졸업지도</span></td>
-					<td></td>
+				<!-- 3-1 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list5.size(); ++i){
+								if(!requiredMySubject.contains(list5.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list5.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list5.get(i) %></span><br /> 
+						<%} }%>
+					</td>
+				<!-- 3-2 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list6.size(); ++i){
+								if(!requiredMySubject.contains(list6.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list6.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list6.get(i) %></span><br /> 
+						<%} }%>
+					</td>
+				<!-- 4-1 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list7.size(); ++i){
+								if(!requiredMySubject.contains(list7.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list7.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list7.get(i) %></span><br /> 
+						<%} }%>
+					</td>
+				<!-- 4-2 -->
+					<td id="td2" style="border-right: 1px solid silver">
+						<%
+							for(int i=0; i<list8.size(); ++i){
+								if(!requiredMySubject.contains(list8.get(i))){
+						%>	
+							 <span style="color: #d9534f;"><%=list8.get(i) %></span><br /> 
+						<% 
+								}else{
+									
+						%>
+								<span><%=list8.get(i) %></span><br /> 
+						<%} }%>
+					</td>
 				</tr>
+				</tbody>
 			</table>
-			<br />
-			<h3>필수 역량</h3>
-			<br />
-			<table id="table4">
-				<tr>
-					<td id="th1" style="font-weight: bold; height: 200px">교양필수</td>
-					<td colspan="2" style="border-top: 1px solid gray"><span>대학생활세미나Ⅰ</span><br />
-						<span>대학생활세미나Ⅱ</span><br /> <span style="color: #d9534f;">인권과
-							평화</span><br /> <span>말과글</span><br /> <span>과학기술과 에콜로지</span><br />
-						<span>데이터활용 및 분석</span><br /> <span style="color: #d9534f;">비아메디아채플(1/2)</span><br />
-						<span>사회봉사</span></td>
-				</tr>
-				<tr>
-					<td rowspan="3" id="th3" style="font-weight: bold">영역필수</td>
-					<td id="th2" style="border-top: 1px solid gray">가치역량</td>
-					<td style="border-top: 1px solid gray"><span>민주시민</span><br />
-						<span>인간인권</span><br /> <span style="color: #d9534f;">생명평화</span></td>
-				</tr>
-				<tr>
-					<td id="th2"
-						style="border-top: 1px solid white; border-bottom: 1px solid white">대안역량</td>
-					<td style="border-top: 1px solid silver"><span
-						style="color: #d9534f;">융 복합적사고</span><br /> <span
-						style="color: #d9534f;">조사 분석 정보활용</span><br /> <span>대안제시
-							문제해결</span></td>
-				</tr>
-				<tr>
-					<td id="th2" style="border-bottom: 1px solid gray">실천역량</td>
-					<td style="border-top: 1px solid silver"><span
-						style="color: #d9534f;">민주적 소통</span><br /> <span>연대와 공동체적
-							실천</span></td>
-				</tr>
-				<tr>
-					<td id="th1"
-						style="font-weight: bold; height: 120px; border-bottom: 1px solid #4582EC">전공탐색</td>
-					<td colspan="2" style="border-bottom: 1px solid gray"><span>소속학부
-							1과목 이상</span><br /> <span style="color: #d9534f;">타학부 1과목 이상</span><br />
-						<span>전공탐색세미나 1과목</span><br /> <span style="color: #d9534f;">총
-							7개 과목(10/19)</span></td>
-				</tr>
-			</table>
+			<br/>
+			<label style="font-size: 12pt;">
+			<strong>
+			교양 필수(2과목 이상 필수) :
+			
+			<%
+				List<String> list9 = (List) request.getAttribute("list9");
+				for(int i=0; i<list9.size(); ++i)
+					if(!requiredMySubject.contains(list9.get(i))){
+			%>
+				<span style="color: #d9534f;"><%=list9.get(i) %></span> &nbsp;
+			<%
+				}else{
+			%>
+				<%=list9.get(i) %> &nbsp;
+			<%} %>
+			</strong>
+			</label>
+			
 			<br />
 		</div>
 		<div id="jb-sidebar">
