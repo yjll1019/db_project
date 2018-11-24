@@ -67,7 +67,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; ${student.major}/130<br/> &nbsp; 전공필수</div>
+					&nbsp;&nbsp; ${student.major}/ ${graduation.credit }<br/> &nbsp; 전공</div>
 	
 			</div>
 			
@@ -85,7 +85,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; ${student.cultural}/130<br/> &nbsp; 교양필수</div>
+					&nbsp;&nbsp; ${student.cultural}/15<br/> &nbsp; 교양필수</div>
 				<!-- /default -->
 			</div>
 			
@@ -103,7 +103,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; 65/130<br/> &nbsp; 부전공</div>
+					&nbsp;&nbsp; ${student.value}/${secredit }<br/> &nbsp; ${graduation.division }</div>
 				<!-- /default -->
 			</div>
 		</div>

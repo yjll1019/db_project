@@ -52,4 +52,19 @@
 	<delete id="deleteById">
 		delete from secondMajor where userId = #{userId}
 	</delete>
+	<select id="findYear" resultType="String">
+		select substring(userId,1,4) AS Year 
+		from secondMajor 
+		where userId=#{userId}
+	</select>
+	<select id="findGraduation" resultType="GraduationInput">
+		select userId, division SeDivision, departmentId SeDepartmentId
+		from secondMajor 
+		where userId = #{userId}
+	</select>
+	<select id="findAllCount" resultType="int">
+		select count(*)
+		from secondMajor 
+		where userId = #{userId}
+	</select>
 </mapper>
