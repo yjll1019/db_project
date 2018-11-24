@@ -89,6 +89,7 @@
 				<!-- /default -->
 			</div>
 			
+			<c:if test="${graduation.division=='부전공'||graduation.division=='복수전공'}">
 			<div class="circleGraph1"
 				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
 				<!-- default -->
@@ -106,6 +107,7 @@
 					&nbsp;&nbsp; ${student.value}/${secredit }<br/> &nbsp; ${graduation.division }</div>
 				<!-- /default -->
 			</div>
+			</c:if>
 		</div>
 		<form:form method="post">
 		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
