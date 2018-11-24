@@ -64,9 +64,10 @@ public class ExcelService {
 			if (row.getCell(0) == null) break;		// 데이터가 없으면 읽기를 종료
 			String subjectCode = formatter.formatCellValue(row.getCell(0));
 			String replaceSubject = formatter.formatCellValue(row.getCell(1));
-
+			String completionDivision = formatter.formatCellValue(row.getCell(2));
+			
 			// 읽은 데이터로 객체를 생성하여 목록에 추가
-			replaceSubjects.add(new ReplaceSubject(subjectCode, replaceSubject));
+			replaceSubjects.add(new ReplaceSubject(subjectCode, replaceSubject, completionDivision));
 		}
 		return replaceSubjects;
 	}
