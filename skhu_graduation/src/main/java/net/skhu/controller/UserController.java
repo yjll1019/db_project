@@ -1,7 +1,9 @@
 package net.skhu.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.Department;
+import net.skhu.dto.MySubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
 import net.skhu.mapper.DepartmentMapper;
+import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
@@ -29,6 +34,7 @@ public class UserController {
 	@Autowired StudentMapper studentMapper;
 	@Autowired DepartmentMapper departmentMapper;
 	@Autowired SecondMajorMapper secondMajorMapper;
+	@Autowired MySubjectMapper mySubjectMapper;
 
 	//회원가입창
 	@RequestMapping(value="join", method=RequestMethod.GET)
@@ -143,7 +149,7 @@ public class UserController {
 				else if(role.equals("교수"))
 					url = "redirect:/professor/professor_stu_search";
 				else if(role.equals("관리자"))
-					url = "redirect:/admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st=";
+					url = "redirect:/admin/admin_stu_search";
 				else
 					url = "redirect:/admin/superAdmin";
 			}
@@ -176,6 +182,7 @@ public class UserController {
 		model.addAttribute("user",user);
 		return "user/check_password";
 	}
+
 	// 개인정보 수정 전 비밀번호 확인 페이지 POST
 	@RequestMapping(value="/check_password",method=RequestMethod.POST)
 	public String checkPassword(Model model, User user, HttpSession session) {
@@ -207,6 +214,114 @@ public class UserController {
 		}
 		model.addAttribute("alert",alert);
 		return url;
+	}
+
+	// 관리자/교수 학생 상세 조회
+	@RequestMapping(value="detail_stu_info", method=RequestMethod.GET)
+	public String admin_stu_info(Model model, HttpSession session, @RequestParam("id") String id) {
+		User role = (User) session.getAttribute("user");
+		User user = userMapper.findById(id);
+		Student student = studentMapper.findOneWithUser(id);
+		SecondMajor nullCheck = secondMajorMapper.findOneById(id);
+		SecondMajor secondMajor = nullCheck == null ? new SecondMajor() : nullCheck;
+
+		model.addAttribute("secondMajor", secondMajor);
+		model.addAttribute("user", user);
+		model.addAttribute("student", student);
+		model.addAttribute("role", role.getRole());
+		model.addAttribute("id", id);
+		
+		return "user/detail_stu_info";
+	}
+
+	// 수강 과목 조회를 위한 메소드
+	@RequestMapping(value = "stu_info_subject", method = RequestMethod.GET)
+	public String stu_info_subject(Model model, HttpSession session, @RequestParam("id") String id) {
+		int enterYear = Integer.parseInt(id.substring(0, 4));
+
+		Calendar c = Calendar.getInstance();
+		int currentYear = c.get(Calendar.YEAR);
+
+		List<MySubject> mySubjectlist = mySubjectMapper.findAll(id);
+		List<String> majorAdmitList = mySubjectMapper.findAllForMajorAdmit(id);
+
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		model.addAttribute("majorAdmitList", majorAdmitList);
+		model.addAttribute("enterYear", enterYear);
+		model.addAttribute("currentYear", currentYear);
+		model.addAttribute("id", id);
+
+		return "user/stu_info_subject";
+	}
+
+	@RequestMapping(value = "stu_info_subject", method = RequestMethod.POST)
+	public String stu_info_subject(Model model, HttpSession session,
+			@RequestParam("id") String id,
+			@RequestParam("subjectListYear") Object subjectListYear,
+			@RequestParam("subjectListSemester") Object subjectListSemester) {
+		int enterYear = Integer.parseInt(id.substring(0, 4));
+		Calendar c = Calendar.getInstance();
+		int currentYear = c.get(Calendar.YEAR);
+
+		List<MySubject> mySubjectlist;
+
+		int year = Integer.parseInt((String) subjectListYear);
+		int semester = Integer.parseInt((String) subjectListSemester);
+		if (year == 0) {// 전체조회
+			mySubjectlist = mySubjectMapper.findAll(id);
+		} else {// 수강년도, 수강학기 조회
+			mySubjectlist = mySubjectMapper.findByYearAndSemester(id, (String) subjectListYear,
+					(String) subjectListSemester + "학기");
+		}
+		List<String> majorAdmitList = mySubjectMapper.findAllForMajorAdmit(id);
+		model.addAttribute("mySubjectlist", mySubjectlist);
+		model.addAttribute("majorAdmitList", majorAdmitList);
+		model.addAttribute("enterYear", enterYear);
+		model.addAttribute("currentYear", currentYear);
+		model.addAttribute("year", year);
+		model.addAttribute("semester", semester);
+
+		return "user/stu_info_subject";
+	}
+
+	@RequestMapping(value = "detail_stu_info", method = RequestMethod.POST)
+	public String stu_subject_list(Model model, HttpSession session, @RequestParam("id") String id
+			/*, @RequestParam("subjectListYear") Object subjectListYear,
+				@RequestParam("subjectListSemester") Object subjectListSemester*/) {
+		User role = (User) session.getAttribute("user");
+		User user = userMapper.findById(id);
+		Student student = studentMapper.findOneWithUser(id);
+		SecondMajor nullCheck = secondMajorMapper.findOneById(id);
+		SecondMajor secondMajor = nullCheck == null ? new SecondMajor() : nullCheck;
+
+		model.addAttribute("role", role.getRole());
+		model.addAttribute("secondMajor", secondMajor);
+		model.addAttribute("user", user);
+		model.addAttribute("student", student);
+		/*
+			int enterYear = Integer.parseInt(id.substring(0, 4));
+			Calendar c = Calendar.getInstance();
+			int currentYear = c.get(Calendar.YEAR);
+
+			List<MySubject> mySubjectlist;
+
+			int year = Integer.parseInt((String) subjectListYear);
+			int semester = Integer.parseInt((String) subjectListSemester);
+			System.out.println(subjectListYear + " " + subjectListSemester);
+			if (year == 0) {// 전체조회
+				mySubjectlist = mySubjectMapper.findAll(id);
+			} else {// 수강년도, 수강학기 조회
+				mySubjectlist = mySubjectMapper.findByYearAndSemester(id, (String) subjectListYear,
+						(String) subjectListSemester + "%");
+			}
+			model.addAttribute("mySubjectlist", mySubjectlist);
+			model.addAttribute("enterYear", enterYear);
+			model.addAttribute("currentYear", currentYear);
+			model.addAttribute("year", year);
+			model.addAttribute("semester", semester);
+			model.addAttribute("id", id);
+		 */
+		return "user/detail_stu_info";
 	}
 
 }

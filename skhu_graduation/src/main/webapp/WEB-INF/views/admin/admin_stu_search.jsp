@@ -40,7 +40,7 @@ $(function() {
 						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
-				<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생 조회</span></a></li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
 						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
@@ -65,7 +65,7 @@ $(function() {
 				<div style="margin-left: 20%; margin-top: 3%;">
 					<h3>학생 목록</h3>
 				</div>
-				<form method="GET">
+				<form method="POST">
 				<div id="search" style="margin-top: 2%; font-size: 13pt;">
 					 <div class="form-group" style="display: inline;">
 					    <select name="sbd" class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
@@ -81,7 +81,7 @@ $(function() {
 							<option value="3" ${sbg == '3' ? 'selected' : ''}>3학년</option>
 							<option value="4" ${sbg == '4' ? 'selected' : ''}>4학년</option>
 						</select>
-							&nbsp; <a href="student/frustrated" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
+							&nbsp;<a href="student/frustrated" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
 			  		</div>
 			  		<div class="form-group" id="class2" style="display:inline;">
 						<select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 8%; height:35px;">
@@ -111,7 +111,7 @@ $(function() {
 						</thead>
 						<tbody>
 							<c:forEach var="user" items="${ users }">
-								<tr data-url="admin_stu_info?id=${user.id }&sbd=${sbd}&sbg=${sbg}&sbi=${sbi}&st=${st}" style="cursor:pointer">
+								<tr data-url="../user/detail_stu_info?" style="cursor:pointer">
 									<td>${ user.id }</td>
 									<td>${ user.userName }</td>
 									<td>${ user.departmentName }</td>
