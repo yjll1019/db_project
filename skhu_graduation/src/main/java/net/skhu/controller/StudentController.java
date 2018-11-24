@@ -137,6 +137,7 @@ public class StudentController {
 		String s;
 		int x = Integer.parseInt(saveCredit);
 		int i = Integer.parseInt(beforeSemester) + 1;
+		int j =1;
 		while(x != 0) {
 			int value = 0;
 			if(x-19 > 0) {
@@ -160,13 +161,18 @@ public class StudentController {
 				s = (i)/2 + "학년2학기";
 			}
 			i++;
+			j++;
 			map.put(s, value);//(학기, 그 학기에 들어야하는 학점)
 		}
-
 		double score = Math.round((((Double.parseDouble(goalCredit)*(map.size()+1))-Double.parseDouble(allCredit))/map.size())*10)/10.0; //소수 첫째짜리까지 출력
-		redirectAttributes.addFlashAttribute("map", map);
-		redirectAttributes.addAttribute("score", score);
-		redirectAttributes.addAttribute("goalCredit", goalCredit);
+		if(score>4.5) { //학기당 취득해야하는 학점이 4.5이상일 때 받을 수 있는 최고학점을 보여주기 위해
+			score = 4.5;
+			String b = String.valueOf(Math.round(((double)((4.5*j)+Double.parseDouble(allCredit)))/(j+1)*10)/10.0);
+			goalCredit = b;
+		}
+		redirectAttributes.addFlashAttribute("map", map);//학년, 학점
+		redirectAttributes.addAttribute("score", score);//취득해야하는 학점
+		redirectAttributes.addAttribute("goalCredit", goalCredit);//목표 학점
 
 		return "redirect:/student/stu_goalCredit";
 	}
