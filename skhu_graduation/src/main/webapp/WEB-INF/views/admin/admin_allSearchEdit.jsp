@@ -22,8 +22,10 @@
 	type="text/javascript"></script>
 <title>allSearchEdit</title>
 </head>
+<%
+String id = request.getParameter("departmentId");
+%>
 <body>
-	<div id="jb-container">
 		<div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
@@ -62,9 +64,9 @@
 				<div class="col-sm-4">
 					<select name="departmentId" class="form-control"
 						value="${departmentList}" style="width: 400px">
-							<option selected>학과를 선택하세요</option>
+							<option >학과를 선택하세요</option>
 						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}">${department.name}</option>
+							<option value="${department.id}"  >${department.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;
 
@@ -75,7 +77,7 @@
 	 <br/>
       <div class="table-responsive">
  			<div class="table-responsive">
-				<table class="table">
+				<table class="table" width="1100">
 					<thead>
 						<tr>
 							<th>대상</th>
@@ -86,34 +88,34 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td rowspan="4">${department.name} 학생</td>
+							<td rowspan="4" >${department.name} 학생</td>
 							<td>${department.name}<br> 주전공</td>
 							<td>
-								<textarea cols="55" rows="6" name="content0" id="content0">${list0.graduationContent}</textarea>
+								<textarea cols="55" rows="6" name="content0" id="content0"><c:out value="${list0.graduationContent}"/></textarea>
 							</td>
-							<td><textarea cols="55" rows="6" name="etc0" id="etc0">${list0.graduationEtc}</textarea></td>
+							<td><textarea cols="55" rows="6" name="etc0" id="etc0"><c:out value="${list0.graduationEtc}"/></textarea></td>
 							</tr>
 						<tr>
-							<td>${department.name}<br>(타과)복수전공</td>
+							<td width="130">${department.name}<br>(타과)복수전공</td>
 							<td>
-								<textarea cols="55" rows="3" name="content1" id="content1">${list1.graduationContent}</textarea>
+								<textarea cols="55" rows="3" name="content1" id="content1"><c:out value="${list1.graduationContent}"/></textarea>
 							</td>
-							<td width=230><textarea cols="40" rows="3" name="etc1" id="etc1">${list1.graduationEtc}</textarea></td>
+							<td width=230><textarea cols="40" rows="3" name="etc1" id="etc1"><c:out value="${list1.graduationEtc}"/></textarea></td>
 						</tr>
 						<tr>
 							<td>${department.name}<br>(타과)부전공</td>
 							<td>
-								<textarea cols="55" rows="3" name="content2" id="content2">${list2.graduationContent}</textarea>
+								<textarea cols="55" rows="3" name="content2" id="content2"><c:out value="${list2.graduationContent}"/></textarea>
 							</td>
-							<td><textarea cols="40" rows="3" name="etc2" id="etc2">${list2.graduationEtc}</textarea></td>
+							<td><textarea cols="40" rows="3" name="etc2" id="etc2"><c:out value="${list2.graduationEtc}"/></textarea></td>
 						</tr>
 						<tr>
 							<td>${department.name}<br>편입
 							</td>
 							<td>
-								<textarea cols="55" rows="3" name="content3" id="content3">${list3.graduationContent}</textarea>
+								<textarea cols="55" rows="3" name="content3" id="content3"><c:out value="${list3.graduationContent}"/></textarea>
 							</td>
-							<td><textarea cols="40" rows="3" name="etc3" id="etc3">${list3.graduationEtc}</textarea></td>
+							<td><textarea cols="40" rows="3" name="etc3" id="etc3"><c:out value="${list3.graduationEtc}"/></textarea></td>
 						</tr>
 						<tr>
 							<td rowspan="3">타과학생</td>
@@ -125,16 +127,16 @@
 						<tr>
 							<td>${department.name}<br>복수전공</td>
 							<td>
-								<textarea cols="55" rows="3" name="content4" id="content4">${list4.graduationContent}</textarea>
+								<textarea cols="55" rows="3" name="content4" id="content4"><c:out value="${list4.graduationContent}"/></textarea>
 							</td>
-						<td><textarea cols="40" rows="3" name="etc4" id="etc4">${list4.graduationEtc}</textarea></td>
+						<td><textarea cols="40" rows="3" name="etc4" id="etc4"><c:out value="${list4.graduationEtc}"/></textarea></td>
 						</tr>
 						<tr>
 							<td>${department.name}<br>부전공</td>
 							<td>
-								<textarea cols="55" rows="3" name="content5" id="content5">${list5.graduationContent}</textarea>
+								<textarea cols="55" rows="3" name="content5" id="content5"><c:out value="${list5.graduationContent}"/></textarea>
 							</td>
-							<td><textarea cols="40" rows="3" name="etc5" id="etc5">${list5.graduationEtc}</textarea></td>
+							<td><textarea cols="40" rows="3" name="etc5" id="etc5"><c:out value="${list5.graduationEtc}"/></textarea></td>
 						</tr>
 					</tbody>
 				</table>
