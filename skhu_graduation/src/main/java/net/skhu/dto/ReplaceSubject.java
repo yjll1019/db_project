@@ -16,10 +16,13 @@ public class ReplaceSubject {
 
 	}
 
-	public ReplaceSubject(String subjectCode, String replaceSubject) {
+	
+	public ReplaceSubject(String subjectCode, String replaceSubject, String completionDivision) {
 		this.subjectCode = subjectCode;
 		this.replaceSubject = replaceSubject;
+		this.completionDivision = completionDivision;
 	}
+
 
 	public int getId() {
 		return id;
