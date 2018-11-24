@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
@@ -438,7 +439,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("select")
-	public String select(Model model , @RequestParam("departmentId") String departmentId) {
+	public String select(Model model , @RequestParam("departmentId") String departmentId,
+			RedirectAttributes redirectAttributes) {
 
 		
 		List<Department> departments = departmentMapper.findAll();
@@ -465,6 +467,8 @@ public class AdminController {
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
 		
+		
+		redirectAttributes.addAttribute("departmentId", departmentId);
 		
 		return "admin/admin_allSearchEdit";
 	}
@@ -475,40 +479,11 @@ public class AdminController {
 		
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		
-		Department department = departmentMapper.findOne(departmentId);
-		model.addAttribute("department", department);
 
-		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
-		model.addAttribute("list0", list0);
-		
-		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
-		model.addAttribute("list1", list1);
-		
-		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
-		model.addAttribute("list2", list2);
-		
-		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
-		model.addAttribute("list3", list3);
-		
-		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
-		model.addAttribute("list4", list4);
-		
-		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
-		model.addAttribute("list5", list5);
 		
 		
-		return "admin/admin_allSearchEdit";
+		return "redirect:admin_allSearchEdit";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
 }

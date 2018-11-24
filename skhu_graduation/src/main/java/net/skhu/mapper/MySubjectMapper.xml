@@ -119,15 +119,14 @@
 		or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
 	</select>
 
-	<select id="findByOneRequiredSubject"
-		resultType="RequiredSubject">
+	<select id="findByOneRequiredSubject" resultType="RequiredSubject">
 		select r.subjectCode, s.subjectName name from requiredSubject r
 		left join subject s
 		on r.subjectCode=s.code
-		where r.subjectCode like subjectCode and
+		where r.subjectCode like #{subjectCode} and
 		r.admissionYear like left(#{userId}, 4) and
 		s.year like left(#{userId}, 4) and
-		s.divisionClass like concat(01, '%');
+		s.divisionClass like '01';
 	</select>
 
 	<update id="changeSubject">
