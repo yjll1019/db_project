@@ -11,7 +11,8 @@ public class MySubject {
 	int id;
 	String userId;
 	String changeComplete;
-
+	String departmentId;
+	
 	public MySubject() {
 
 	}
@@ -25,6 +26,19 @@ public class MySubject {
 		this.credit = credit;
 		this.score = score;
 		this.userId = userId;
+	}
+	
+	public MySubject(String takeYear, String takeSemester, String subjectCode, String subjectName,
+			String completionDivision, String credit, String score, String userId, String departmentId) {
+		this.takeYear = takeYear;
+		this.takeSemester = takeSemester;
+		this.subjectCode = subjectCode;
+		this.subjectName = subjectName;
+		this.completionDivision = completionDivision;
+		this.credit = credit;
+		this.score = score;
+		this.userId = userId;
+		this.departmentId = departmentId;
 	}
 
 	public String getTakeYear() {
@@ -87,5 +101,12 @@ public class MySubject {
 	public void setChangeComplete(String changeComplete) {
 		this.changeComplete = changeComplete;
 	}
+	public String getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+	
 
 }

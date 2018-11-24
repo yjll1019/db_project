@@ -3,6 +3,7 @@ package net.skhu.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.skhu.dto.Department;
+import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
 import net.skhu.dto.ReplaceSubject;
 import net.skhu.dto.SecondMajor;
@@ -158,17 +162,16 @@ public class AdminController {
 		return "redirect:admin_stu_search";
 	}
 
-	/*
 	@RequestMapping(value="admin_stu_search")
 	public String admin_stu_search(Model model) {
 		List<User> users = userMapper.findByUser("");
 		model.addAttribute("users", users);
 		return "admin/admin_stu_search";
 	}
-	 */
+	
 	//관리자 학생 조회 페이지
-	@RequestMapping(value="admin_stu_search", method=RequestMethod.GET)
-	public String main(Model model, HttpSession session, @RequestParam("sbd") String sbd, @RequestParam("sbg") String sbg,
+	@RequestMapping(value="admin_stu_search", method=RequestMethod.POST)
+	public String main(Model model, HttpSession session, HttpServletRequest request, @RequestParam("sbd") String sbd, @RequestParam("sbg") String sbg,
 			@RequestParam("sbi") String sbi, @RequestParam("st") String st) {
 		List<User> users;
 		String where = "";
@@ -230,79 +233,14 @@ public class AdminController {
 		} else {
 			users = userMapper.findByUser(where);
 		}
+		
 		model.addAttribute("users", users);
-		model.addAttribute("sbd", sbd);
-		model.addAttribute("sbg", sbg);
-		model.addAttribute("sbi", sbi);
-		model.addAttribute("st", st);
+		request.setAttribute("sbd", sbd);
+		request.setAttribute("sbg", sbg);
+		request.setAttribute("sbi", sbi);
+		request.setAttribute("st", st);
 
 		return "admin/admin_stu_search";
-	}
-
-	// 관리자 학생 상세 조회
-	@RequestMapping(value="admin_stu_info", method=RequestMethod.GET)
-	public String admin_stu_info(Model model, @RequestParam("id") String id,
-			@RequestParam("sbd") String sbd, @RequestParam("sbg") String sbg, @RequestParam("sbi") String sbi, @RequestParam("st") String st) {
-		User user = userMapper.findById(id);
-		Student student = studentMapper.findOneWithUser(id);
-		SecondMajor nullCheck = secondMajorMapper.findOneById(id);
-		SecondMajor secondMajor = nullCheck == null ? new SecondMajor() : nullCheck;
-		model.addAttribute("secondMajor", secondMajor);
-		model.addAttribute("user", user);
-		model.addAttribute("student", student);
-		model.addAttribute("sbd", sbd);
-		model.addAttribute("sbg", sbg);
-		model.addAttribute("sbi", sbi);
-		model.addAttribute("st", st);
-		return "admin/admin_stu_info";
-	}
-
-	//관리자 학생 수강목록 조회 페이지
-	@RequestMapping(value="admin_stu_subject", method=RequestMethod.GET)
-	public String admin_stu_subject(Model model, @RequestParam("id") String id, HttpSession session) {
-
-		int enterYear = Integer.parseInt(id.substring(0, 4));
-
-		Calendar c = Calendar.getInstance();
-		int currentYear = c.get(Calendar.YEAR);
-
-		List<MySubject> mySubjectlist = mySubjectMapper.findAll(id);
-
-		model.addAttribute("mySubjectlist", mySubjectlist);
-		model.addAttribute("enterYear", enterYear);
-		model.addAttribute("currentYear", currentYear);
-		model.addAttribute("id", id);
-		return "admin/admin_stu_subject";
-	}
-
-	@RequestMapping(value = "admin_stu_subject", method = RequestMethod.POST)
-	public String stu_subject_list(Model model, HttpSession session,
-			@RequestParam("subjectListYear") Object subjectListYear,
-			@RequestParam("subjectListSemester") Object subjectListSemester,
-			@RequestParam("id") String id) {
-		int enterYear = Integer.parseInt(id.substring(0, 4));
-		Calendar c = Calendar.getInstance();
-		int currentYear = c.get(Calendar.YEAR);
-
-		List<MySubject> mySubjectlist;
-
-		int year = Integer.parseInt((String) subjectListYear);
-		int semester = Integer.parseInt((String) subjectListSemester);
-		System.out.println(subjectListYear + " " + subjectListSemester);
-		if (year == 0) {// 전체조회
-			mySubjectlist = mySubjectMapper.findAll(id);
-		} else {// 수강년도, 수강학기 조회
-			mySubjectlist = mySubjectMapper.findByYearAndSemester(id, (String) subjectListYear,
-					(String) subjectListSemester + "%");
-		}
-		model.addAttribute("mySubjectlist", mySubjectlist);
-		model.addAttribute("enterYear", enterYear);
-		model.addAttribute("currentYear", currentYear);
-		model.addAttribute("year", year);
-		model.addAttribute("semester", semester);
-		model.addAttribute("id", id);
-
-		return "admin/admin_stu_subject";
 	}
 
 	//관리자 전체과목 조회 페이지
@@ -490,9 +428,61 @@ public class AdminController {
 	}
 
 
-	@RequestMapping(value="admin_graduation_text", method=RequestMethod.GET)
+	@RequestMapping(value="admin_allSearchEdit", method=RequestMethod.GET)
 	public String admin_graduation_text(Model model) {
-		return "admin/admin_graduation_text";
+		
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		
+		return "admin/admin_allSearchEdit";
+	}
+	
+	@RequestMapping("select")
+	public String select(Model model , @RequestParam("departmentId") String departmentId,
+			RedirectAttributes redirectAttributes) {
+
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		
+		Department department = departmentMapper.findOne(departmentId);
+		model.addAttribute("department", department);
+
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+		
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+		
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+		
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+		
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+		
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+		
+		
+		redirectAttributes.addAttribute("departmentId", departmentId);
+		
+		return "admin/admin_allSearchEdit";
+	}
+	
+	@RequestMapping("edit")
+	public String edit(Model model , @RequestParam("departmentId") String departmentId) {
+
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+
+		
+		
+		return "redirect:admin_allSearchEdit";
 	}
 
 

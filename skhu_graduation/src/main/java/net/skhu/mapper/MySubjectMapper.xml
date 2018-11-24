@@ -2,118 +2,149 @@
 <mapper namespace="net.skhu.mapper.MySubjectMapper">
 
 	<select id="findAll" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId}
-	
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject where userId like #{userId}
+
 	</select>
 
 	<select id="findAllCount" resultType="int">
-		select count(*) from mySubject where userId = #{userId}
+		select count(*) from
+		mySubject where userId = #{userId}
 	</select>
 
 	<select id="findByYearAndSemester" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject
-	 where userId like #{userId} and takeYear like #{takeYear} and takeSemester like #{takeSemester}
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject
+		where userId like #{userId} and takeYear like #{takeYear} and takeSemester
+		like #{takeSemester}
 	</select>
-	
+
 	<select id="findByYearAndSemesterCount"><!-- 페이지네이션 미완성 -->
-	select * from mySubject where userId like #{userId} and takeSemester like #{takeYear} and takeYear like #{takeSemester}
+		select * from mySubject where userId like #{userId} and takeSemester
+		like #{takeYear} and takeYear like #{takeSemester}
 	</select>
-	
+
 	<select id="findByOneSubject" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision from mySubject where userId like #{userId} and subjectCode like #{subjectCode}; 
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision from mySubject where userId like #{userId}
+		and subjectCode like #{subjectCode};
 	</select>
-	
+
 	<select id="findBySubjectType" resultType="MySubject">
-	select userId, takeYear, takeSemester, subjectCode, subjectName, credit, score, completionDivision 
-	from mySubject where userId like #{userId} and completionDivision like #{completionDivision}; 
+		select userId, takeYear, takeSemester, subjectCode, subjectName, credit,
+		score, completionDivision
+		from mySubject where userId like #{userId} and completionDivision like
+		#{completionDivision};
 	</select>
-	
+
 	<update id="majorAdmit">
-		update mySubject set changeComplete=#{changeComplete}, completionDivision=#{completionDivision} where userId like #{userId} and subjectCode=#{subjectCode};
+		update mySubject set
+		changeComplete=#{changeComplete},
+		completionDivision=#{completionDivision} where userId like #{userId}
+		and subjectCode=#{subjectCode};
 	</update>
-	
-	<insert id="insert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-		INSERT into mySubject(takeYear, takeSemester, subjectCode, subjectName, completionDivision, credit, score, userId) 
-		VALUES 
+
+	<insert id="insert" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT into mySubject(takeYear, takeSemester, subjectCode,
+		subjectName, completionDivision, credit, score, userId)
+		VALUES
 		<foreach collection="list" item="mySubject" separator=" , ">
-			('${mySubject.takeYear}', '${mySubject.takeSemester}', '${mySubject.subjectCode}', '${mySubject.subjectName}',
-			 '${mySubject.completionDivision}', '${mySubject.credit}', '${mySubject.score}', '${mySubject.userId}')
+			('${mySubject.takeYear}', '${mySubject.takeSemester}',
+			'${mySubject.subjectCode}', '${mySubject.subjectName}',
+			'${mySubject.completionDivision}', '${mySubject.credit}',
+			'${mySubject.score}', '${mySubject.userId}')
 		</foreach>
 	</insert>
-	
+
 	<update id="changeScore">
-	update mySubject
-	set score=#{score}
-	where userId like #{userId} and subjectCode=#{subjectCode};
+		update mySubject
+		set score=#{score}
+		where userId like #{userId} and subjectCode=#{subjectCode};
 	</update>
-	
+
 	<delete id="deleteSubject">
-	delete from mySubject 
-	where userId like #{userId} and subjectCode like #{subjectCode}; 
+		delete from mySubject
+		where userId like #{userId} and subjectCode like #{subjectCode};
 	</delete>
-	
+
 	<delete id="deleteById">
 		delete from mySubject
 		where userId = #{userId};
 	</delete>
-	
+
 	<select id="requiredMySubject" resultType="String">
-	select DISTINCT requiredSubject.subjectCode from mySubject
- 	right outer join requiredSubject on mySubject.subjectCode=requiredSubject.subjectCode
-	where mySubject.userId like #{userId};
+		select DISTINCT mySubject.subjectName from mySubject
+		right outer join requiredSubject on
+		mySubject.subjectCode=requiredSubject.subjectCode
+		where mySubject.userId like #{userId};
 	</select>
 
 	<select id="requiredSubject" resultType="String">
-	select DISTINCT requiredSubject.subjectCode, subject.subjectName 
-	from requiredSubject left join subject 
-	on requiredSubject.subjectCode = subject.code
-	where requiredSubject.admissionYear like #{admissionYear} and 
-	requiredSubject.departmentId like #{departmentId} and subject.year like #{admissionYear}
-	and subject.departmentId like #{departmentId};	
-	</select>	
-	
-	<select id="getSubjectName" resultType="String">
-		select DISTINCT subjectName from subject where code like #{subjectCode} and year like #{year};
+		select DISTINCT requiredSubject.subjectCode, subject.subjectName
+		from requiredSubject left join subject
+		on requiredSubject.subjectCode = subject.code
+		where requiredSubject.admissionYear like #{admissionYear} and
+		requiredSubject.departmentId like #{departmentId} and subject.year
+		like #{admissionYear}
+		and subject.departmentId like #{departmentId};
 	</select>
-	
+
+	<select id="getSubjectName" resultType="String">
+		select DISTINCT
+		subjectName from subject where code like #{subjectCode} and year like
+		#{year};
+	</select>
+
 	<select id="findMajor" resultType="MySubject">
-		select * from mySubject 
+		select * from mySubject
 		where userId=#{userId} and completionDivision='전필';
 	</select>
-	
+
 	<select id="findCultural" resultType="MySubject">
-		select * from mySubject 
+		select * from mySubject
 		where userId=#{userId} and completionDivision='교필';
 	</select>
-	
+
 	<select id="findPray" resultType="int">
-		select count(*) from mySubject 
-		where userId=#{userId} and (subjectCode LIKE CONCAT('%','AA','%') or subjectCode ='AC00001') and score='P';
+		select count(*) from mySubject
+		where userId=#{userId} and (subjectCode LIKE CONCAT('%','AA','%') or
+		subjectCode ='AC00001') and score='P';
 	</select>
-	
+
 	<select id="findService" resultType="int">
-		select count(*) from mySubject 
-		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046' or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
+		select count(*) from
+		mySubject
+		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046'
+		or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
 	</select>
-	
+
 	<select id="findByOneRequiredSubject" resultType="RequiredSubject">
-	select r.subjectCode, s.subjectName name from requiredSubject r
-	left join subject s
-	on r.subjectCode=s.code
-	where r.subjectCode like subjectCode and
-	r.admissionYear like left(#{userId}, 4) and
-	s.year like left(#{userId}, 4) and
-	s.divisionClass like concat(01, '%');
+		select r.subjectCode, s.subjectName name from requiredSubject r
+		left join subject s
+		on r.subjectCode=s.code
+		where r.subjectCode like #{subjectCode} and
+		r.admissionYear like left(#{userId}, 4) and
+		s.year like left(#{userId}, 4) and
+		s.divisionClass like '01';
 	</select>
 
 	<update id="changeSubject">
-	update mySubject
-	set subjectCode=#{changeCode},
-	subjectName=#{changeName}
-	where userId like #{userId} and
-	subjectCode=#{beforeCode};
+		update mySubject
+		set subjectCode=#{changeCode},
+		subjectName=#{changeName}
+		where userId like #{userId} and
+		subjectCode=#{beforeCode};
 	</update>
-	
-	
-	
+
+
+	<select id="findAllForMajorAdmit" resultType="String">
+	select distinct mySubject.subjectCode from subject left join mySubject 
+	on subject.code = mySubject.subjectCode where userId like #{userId} 
+	and (subject.departmentId like '11' or subject.departmentId like '13' or subject.departmentId like '14'
+	or subject.departmentId like '15') and subject.completionDivision like '전공선택' and mySubject.completionDivision like '교선';
+
+	</select>
+
+
 </mapper>

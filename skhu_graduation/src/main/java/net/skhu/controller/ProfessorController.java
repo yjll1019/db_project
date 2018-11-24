@@ -162,19 +162,6 @@ public class ProfessorController {
 		return "redirect:professor_stu_search";
 	}
 
-	//professor_stu_info GET
-	@RequestMapping(value="/professor_stu_info",method=RequestMethod.GET)
-	public String professor_stu_info(Model model,@RequestParam("id") String id,HttpSession session) {
-
-		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-		Student student = studentMapper.findOneWithUser(id);
-		SecondMajor secondMajor = secondMajorMapper.findOneById(id);
-		model.addAttribute("user",user);
-		model.addAttribute("student",student);
-		model.addAttribute("secondMajor",secondMajor);
-		return "professor/professor_stu_info";
-	}
 	//professor_momo GET
 	@RequestMapping(value="/professor_memo",method=RequestMethod.GET)
 	public String professor_memo(Model model,@RequestParam("id") String id,HttpSession session) {
@@ -189,7 +176,7 @@ public class ProfessorController {
 	
 	
 	//교수 졸업요건 조회
-	@RequestMapping(value = "professor_allSearch", method = RequestMethod.GET)
+	@RequestMapping(value = "/professor_allSearch", method = RequestMethod.GET)
 	public String professor_allSearch(Model model, HttpSession session)
 	{
 		User user = (User) session.getAttribute("user");
