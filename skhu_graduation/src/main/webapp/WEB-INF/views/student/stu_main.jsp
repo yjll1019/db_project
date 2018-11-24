@@ -93,7 +93,7 @@
 				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
 				<!-- default -->
 				<div class="clearfix">
-					<div class="c100 p50">
+					<div class="c100 p<%= 90%>">
 						<span>50%</span>
 						<div class="slice">
 							<div class="bar"></div>
@@ -310,6 +310,25 @@
 				</tr>
 				</tbody>
 			</table>
+			<br/>
+			<label style="font-size: 12pt;">
+			<strong>
+			교양 필수(2과목 이상 필수) :
+			
+			<%
+				List<String> list9 = (List) request.getAttribute("list9");
+				for(int i=0; i<list9.size(); ++i)
+					if(!requiredMySubject.contains(list9.get(i))){
+			%>
+				<span style="color: #d9534f;"><%=list9.get(i) %></span> &nbsp;
+			<%
+				}else{
+			%>
+				<%=list9.get(i) %> &nbsp;
+			<%} %>
+			</strong>
+			</label>
+			
 			<br />
 		</div>
 		<div id="jb-sidebar">

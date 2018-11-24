@@ -101,26 +101,28 @@ public class StudentController {
 		//필수과목 table을 위한 코드
 		String admissionYear = user.getId().substring(0,4);//년도
 
-		List<String> list[] = new ArrayList[8];
+		List<String> list[] = new ArrayList[9];
 		
 		for(int i=0; i<list.length; ++i) {
 			list[i] = new ArrayList<String>();
 		}
-		
 		int z = 0;
 		for(int i=1; i<=4; ++i) {//학년
 			for(int j=1; j<=2; ++j) {//학기
 				list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
 			}
 		}
-		
+
+		list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
+
 		for(int i=1; i<=list.length; ++i) {
 			model.addAttribute("list"+i, list[i-1]);
 		}
-		
+
 		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());//필수과목 중 수강한 과목 리스트
 		model.addAttribute("requiredMySubject",requiredMySubject);
-	
+		
+		
 		return "student/stu_main";
 	}
 
