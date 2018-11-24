@@ -101,7 +101,7 @@ $(function() {
 						</thead>
 						<tbody>
 						<c:forEach var="student" items="${ students }">
-							<tr data-url="professor_stu_info?id=${student.userId }">
+							<tr data-url="../user/detail_stu_info?id=${student.userId }" style="cursor:pointer">
 								<td>${student.userId}</td>
 								<td>${student.user.userName}</td>
 								<td>${student.department.name}</td>
