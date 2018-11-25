@@ -77,14 +77,14 @@
 					<c:forEach var="replace" items="${replace }">
 						<tr>
 							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
-							<td style="border-right: 1px solid black">${replace.subject.subjectName }</td>
+							<td style="border-right: 1px solid black">${replace.subjectName }</td>
 							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
 							<td style="border-right: 1px solid silver">
                         <c:choose>
-                           <c:when test="${replace.completionDivision eq '전공선택'}"> 
+                           <c:when test="${replace.completionDivision eq '1'}"> 
                               전공 선택 과목으로 대체
                             </c:when>
-                           <c:when test="${replace.completionDivision eq '교양선택'}"> 
+                           <c:when test="${replace.completionDivision eq '2'}"> 
                               교양 선택 과목으로 대체
                             </c:when>
                         </c:choose>
