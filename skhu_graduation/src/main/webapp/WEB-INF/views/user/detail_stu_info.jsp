@@ -73,7 +73,7 @@
 				style="font-size: 10pt; float: right; margin-right: 18%; margin-bottom: 2%">목록으로</a>
 			<c:if test="${ role == '교수' }">
 				<button type="button" class="btn btn-outline-primary" style="font-size: 10pt; float: right; margin-right: 1%; margin-bottom: 1%"
-		 			onclick="window.open('professor_memo?id=${student.userId}','학생메모','width=530,height=650,location=no,status=no,scrollbars=yes');">상담내역</button>
+		 			onclick="window.open('../professor/professor_memo?id=${student.userId}','학생메모','width=530,height=650,location=no,status=no,scrollbars=yes');">상담내역</button>
 			</c:if>
 		</div>
 		<div class="table-responsive" style="margin-left: 18%; font-size:14pt; margin-top: 10%; width: 75%;">

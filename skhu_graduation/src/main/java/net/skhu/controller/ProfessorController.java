@@ -3,7 +3,6 @@ package net.skhu.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.skhu.dto.Counsel;
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.Professor;
-import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
 import net.skhu.mapper.CounselMapper;
+import net.skhu.mapper.DepartmentMapper;
+import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
-import net.skhu.mapper.DepartmentMapper;
-import net.skhu.mapper.GraduationMapper;
 import net.skhu.util.SecurityUtil;
 
 @Controller
@@ -45,7 +44,7 @@ public class ProfessorController {
 
 	@RequestMapping("professor_stu_search")
 	public String list1 (Model model) {
-		
+
 		model.addAttribute("students", studentMapper.findAllWithUser());
 		return "professor/professor_stu_search";
 	}
@@ -60,8 +59,8 @@ public class ProfessorController {
 
 		//Student student = new Student();
 		List<Student> students = null;
-		
-		
+
+
 		if(grade != 0) {
 			switch(grade) {
 			case 1:
@@ -77,13 +76,13 @@ public class ProfessorController {
 				students = studentMapper.findByGrade("7", "8");
 				break;
 		}
-			
+
 		}
 		else {
 			students = studentMapper.findAllWithUser();
-			
+
 		}
-		
+
 		if(searchIndex!=0) {
 		switch(searchIndex) {
 		case 1:
@@ -112,7 +111,7 @@ public class ProfessorController {
 
 		return "professor/professor_info";
 	}
-	
+
 	// professor_info POST
 	@Transactional
 	@RequestMapping(value="/professor_info",method=RequestMethod.POST)
@@ -148,7 +147,7 @@ public class ProfessorController {
 			SecurityUtil su = new SecurityUtil();
 			String enPssword = su.encryptBySHA256(user.getPassword());// 암호화
 			user.setPassword(enPssword);
-			
+
 		} else {
 			user.setPassword(userGetId.getPassword());
 		}
@@ -168,13 +167,33 @@ public class ProfessorController {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-		//Counsel counsel = counselMapper.findAll(id);
-		//model.addAttribute("counsel",counsel);
-		model.addAttribute("user",user);
+		//System.out.println("교수: "+user.getId());
+		//System.out.println("학생: "+id);
+		String counsel = counselMapper.findContent(user.getId(),id);
+		if(counsel==null||counsel.length()==0) {
+			return "professor/professor_memo";
+		}
+		model.addAttribute("counsel",counsel);
+		model.addAttribute("stuId",id);
 		return "professor/professor_memo";
 	}
-	
-	
+
+	//professor_momo POST
+		@RequestMapping(value="/professor_memo",method=RequestMethod.POST)
+		public String professor_memo(Model model,Counsel counsel,@RequestParam("stuId") String stuId,HttpSession session) {
+			System.out.println("포스트");
+			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
+			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+			Counsel co = new Counsel();
+			co.setProfessorId(user.getId());
+			co.setStudentId(stuId);
+			co.setContent(counsel.getContent());
+			counselMapper.update(co);
+			System.out.println("포스트끝");
+			return "user/detail_stu_info";
+		}
+
+
 	//교수 졸업요건 조회
 	@RequestMapping(value = "/professor_allSearch", method = RequestMethod.GET)
 	public String professor_allSearch(Model model, HttpSession session)
@@ -186,31 +205,31 @@ public class ProfessorController {
 
 		Professor professor= professorMapper.findOne(user.getId());
 		model.addAttribute("professor", professor);
-		
+
 
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		String departmentId = professor.getDepartmentId();
-		
-		
+
+
 		Department department = departmentMapper.findOne(professor.getDepartmentId());
 		model.addAttribute("department", department);
 
 		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
 		model.addAttribute("list0", list0);
-		
+
 		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
 		model.addAttribute("list1", list1);
-		
+
 		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
 		model.addAttribute("list2", list2);
-		
+
 		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
 		model.addAttribute("list3", list3);
-		
+
 		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
 		model.addAttribute("list4", list4);
-		
+
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
 
@@ -231,28 +250,28 @@ public class ProfessorController {
 
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		
+
 		Department department = departmentMapper.findOne(departmentId);
 		model.addAttribute("department", department);
 
 		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
 		model.addAttribute("list0", list0);
-		
+
 		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
 		model.addAttribute("list1", list1);
-		
+
 		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
 		model.addAttribute("list2", list2);
-		
+
 		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
 		model.addAttribute("list3", list3);
-		
+
 		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
 		model.addAttribute("list4", list4);
-		
+
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
-		
+
 
 		return "professor/professor_allSearch";
 	}
