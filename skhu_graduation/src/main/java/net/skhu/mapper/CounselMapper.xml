@@ -2,16 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.skhu.mapper.CounselMapper">
 	
-	<insert id="insert">
-		insert into counsel values(#{professorId}, #{studentId}, #{content});
-	</insert>
+	<update id="update">
+		update  counsel set content = #{content} where professorId = #{professorId} and studentId = #{studentId}
+	</update>
 	
-	<select id="findAll" resultMap="resultMap1">
-		select c.*, u.id from counsel c left join user u on u.id = c.studentId;
+	<select id="findContent" resultType="String">
+	 select content from counsel where professorId=#{proId} and studentId = #{stuId};
 	</select>
-	<resultMap id="resultMap1" type="Counsel">
-		<id property="professorId" column="professorId"/>
-		<id property="studentId" column="studentId"/>
-		<result property="content" column="content"/>
-	</resultMap>
 </mapper>
