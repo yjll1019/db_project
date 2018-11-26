@@ -17,5 +17,6 @@
 <a href="professor/professor_stu_search">pro_main</a><br/>
 <a href="admin/admin_all_subject">admin_all_subject</a><br/>
 <a href="user/board">board</a><br/>
+<a href="firstPage">firstPage</a><br/>
 </body>
 </html>

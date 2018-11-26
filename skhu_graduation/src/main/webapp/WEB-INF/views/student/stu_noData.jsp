@@ -26,7 +26,7 @@
 				</li>
 				<li><a href='../student/stu_main'><span>나의졸업요건</span></a></li>
 				<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
-				<li><a href='../student/stu_allSearch'><span>졸업요건 조회</span></a></li>
+				<li><a href='../student/nonmember_page'><span>졸업요건 조회</span></a></li>
 				<li><a href='../student/stu_replace_list'><span>대체과목 조회</span></a></li>
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
