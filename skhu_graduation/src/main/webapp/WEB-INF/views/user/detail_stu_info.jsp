@@ -71,6 +71,10 @@
 		<div style="margin-top: 5%;">
 			<a href="${ role == '관리자' ? '../admin/admin_stu_search' : '../professor/professor_stu_search' }" class="btn btn-primary" 
 				style="font-size: 10pt; float: right; margin-right: 18%; margin-bottom: 2%">목록으로</a>
+			<c:if test="${ role == '관리자' }">
+				<button type="button" class="btn btn-outline-primary" style="font-size: 10pt; float: right; margin-right: 1%; margin-bottom: 1%"
+		 			onclick="window.open('../admin/admin_memo?id=${student.userId}','조치사항','width=530,height=650,location=no,status=no,scrollbars=yes');">조치사항</button>
+			</c:if>	
 			<c:if test="${ role == '교수' }">
 				<button type="button" class="btn btn-outline-primary" style="font-size: 10pt; float: right; margin-right: 1%; margin-bottom: 1%"
 		 			onclick="window.open('../professor/professor_memo?id=${student.userId}','학생메모','width=530,height=650,location=no,status=no,scrollbars=yes');">상담내역</button>

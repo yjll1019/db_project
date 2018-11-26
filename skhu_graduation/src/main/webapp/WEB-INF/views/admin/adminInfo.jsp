@@ -61,7 +61,7 @@
 					</ul>
 				</li>
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
-				<li><a href='../admin/calenderEdit'><span>대학일정 관리</span></a></li>
+				<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='../admin/adminInfo'><span>개인정보변경</span></a></li>
 			</ul>
