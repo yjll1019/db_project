@@ -22,9 +22,6 @@
 	type="text/javascript"></script>
 <title>allSearchEdit</title>
 </head>
-<%
-String id = request.getParameter("departmentId");
-%>
 <body>
 		<div id="jb-header">
 		<div id='cssmenu'>
@@ -90,18 +87,17 @@ String id = request.getParameter("departmentId");
 			<h2>&nbsp;&nbsp;전체학과 졸업요건 수정</h2> 
 		<br/><br/>
          <form class="form-horizontal" action = "select">
- 
-				<div class="col-sm-4">
-					<select name="departmentId" class="form-control"
+
+			  		<div class="form-group" id="class2" style=" display:inline;">
+				<select name="departmentId" class="form-control"
 						value="${departmentList}" style="width: 400px">
 							<option >학과를 선택하세요</option>
 						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}"  >${department.name}</option>
+							<option value="${department.id}" >${department.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;
-
-					<button type="submit" class="btn btn-primary">조회</button>
-		</div>
+						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회"/>
+					</div>
 		</form>
 
 	 <br/>

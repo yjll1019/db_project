@@ -1,5 +1,6 @@
 package net.skhu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.RecordMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
+import net.skhu.mapper.RequiredSubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.SubjectMapper;
@@ -53,6 +55,7 @@ public class AdminController {
 	@Autowired GraduationMapper graduationMapper;
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired RecordMapper recordMapper;
+	@Autowired RequiredSubjectMapper requiredSubjectMapper;
 
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
@@ -488,8 +491,6 @@ public class AdminController {
 		model.addAttribute("list5", list5);
 
 
-		redirectAttributes.addAttribute("departmentId", departmentId);
-
 		return "admin/admin_allSearchEdit";
 	}
 
@@ -578,4 +579,46 @@ public class AdminController {
 		userMapper.insert(u);
 		return "admin/superAdmin_create";
 	}
+	
+	//graduationchange
+	
+	
+	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
+	public String admin_graduation_text1(Model model,HttpSession session) {
+
+		User user = (User) session.getAttribute("user");
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		model.addAttribute("user",user);
+		return "admin/admin_changeGraduation";
+	}
+	
+	@RequestMapping("graduationSelect")
+	public String admin_graduationChange(Model model,HttpSession session, @RequestParam("year") String year) {
+		
+	String admissionYear = year;//년도
+
+	List<String> list[] = new ArrayList[9];
+
+	for(int i=0; i<list.length; ++i) {
+		list[i] = new ArrayList<String>();
+	}
+	int z = 0;
+	for(int i=1; i<=4; ++i) {//학년
+		for(int j=1; j<=2; ++j) {//학기
+			list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
+		}
+	}
+
+	list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
+
+	for(int i=1; i<=list.length; ++i) {
+		model.addAttribute("list"+i, list[i-1]);
+	}
+	
+	return "admin/admin_graduationChange";
+}
+	
+	
+	
 }
