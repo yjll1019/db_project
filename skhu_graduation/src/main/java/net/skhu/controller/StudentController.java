@@ -667,6 +667,50 @@ public class StudentController {
 
 		return "student/stu_allSearch";
 	}
+	
+	//비회원 졸업요건 조회
+	@RequestMapping(value = "nonmember_page", method = RequestMethod.GET)
+	public String nonmember_page(Model model, HttpSession session)
+	{
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+
+		return "student/nonmember_page";
+	}
+
+	@RequestMapping(value = "nonmember_page", method = RequestMethod.POST)
+	public String nonmember_page(Model model, HttpSession session,  @RequestParam("departmentId") String departmentId)
+	{
+
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+
+		Department department = departmentMapper.findOne(departmentId);
+		model.addAttribute("department", department);
+
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+
+
+		return "student/nonmember_page";
+	}
+
 
 	//대체과목 초수강 get
 	@RequestMapping(value = "stu_replace_first", method = RequestMethod.GET)
