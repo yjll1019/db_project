@@ -47,12 +47,11 @@ font-family: 'Jeju Hallasan', serif; position:relative;min-width:1200px;min-heig
 	<br/>
 	졸업요건조회시스템
 	</div>
-	
-	<button type="button" class="btn btn-primary" style="background-color:#4582EC; font-family: 'NanumSquare', sans-serif;
-	 	border-color:#ffffff; width:250px; font-size:30px; font-weight: bold; margin-top:10%;">LOGIN</button>
+		<a href="../user/login"  class="btn btn-primary" style="background-color:#4582EC; font-family: 'NanumSquare', sans-serif;
+	 	border-color:#ffffff; width:250px; font-size:30px; font-weight: bold; margin-top:10%;">LOGIN</a>
 	
 	<div style="font-size: 15pt; color:#fff; margin-top: 1%; font-family: 'NanumSquare', sans-serif;" >
-		<a href="join.html">회원가입</a> & <a href="">비회원조회</a>
+		<a href="../user/join">회원가입</a> & <a href="../student/stu_noData">비회원조회</a>
 	</div>
 </div>
 </body>
