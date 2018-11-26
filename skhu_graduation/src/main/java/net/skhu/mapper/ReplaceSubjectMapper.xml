@@ -93,7 +93,12 @@
    		DELETE FROM replaceSubject
    		WHERE subjectCode = #{deleteCode} and completionDivision = #{completionDivision}
    </delete>
-
+	<delete id="deleteReplace">
+		  delete from replaceSubject where subjectCode=#{subjectCode}
+	</delete>
+	<delete id="deleteReplaceSubject">
+		 delete from replaceSubject where subjectCode=#{subjectCode} and replaceSubject=#{replaceSubject}
+	</delete>
 	<resultMap id="resultMap1" type="ReplaceSubject">
 		<id property="subjectCode" column="subjectCode" />
 		<result property="replaceSubject" column="replaceSubject" />

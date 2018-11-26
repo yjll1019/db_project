@@ -125,6 +125,7 @@
 			</form:form>
 
 			<br />
+			<form method="get">
 			<table class="table table-bordered"
 				style="margin-top: -15px; width: 700; max-height: 300px; text-align: center; table-layout: fixed;">
 				<thead>
@@ -133,6 +134,7 @@
 							style="border-right: 1px solid white; font-size: 15pt">폐지된
 							과목</th>
 						<th scope="col" colspan="2" style="font-size: 15pt">대체 과목</th>
+						<th style="border-right: 1px solid white; font-size: 15pt">삭제</th>
 					</tr>
 				</thead>
 				<tr style="font-size: 18px">
@@ -143,6 +145,7 @@
 					<td style="height: 20px; border-right: 1px solid silver"><strong>
 							과목코드 </strong></td>
 					<td><strong> 과목명 </strong></td>
+					<td><strong> 삭제 </strong></td>
 				</tr>
 				<tbody style="font-size: 12pt;">
 					<c:forEach var="replace" items="${replace }">
@@ -158,13 +161,13 @@
                               	교양 선택 과목으로 대체
                             </c:when>
 								</c:choose> ${replace.replaceSubjectName}</td>
-
+							<td><a href="replaceDelete?subjectCode=${ replace.subjectCode }&replaceSubject=${replace.replaceSubject}"class="btn btn-danger">삭제</a></td>
 						</tr>
 					</c:forEach>
 
 				</tbody>
 			</table>
-
+			</form>
 			<my:pagination pageSize="${pagination.sz }"
 				recordCount="${pagination.recordCount }" />
 
@@ -242,10 +245,6 @@
 					</table>
 					<input type="submit" class="btn btn-outline-primary" value="저장하기"
 						style="margin-left: 45%; margin-top: 3%; font-size: 15px;" /> 
-					<form action="replaceDelete" method="post">
-						<button class="btn btn-danger" style="margin-left:20px;margin-top:3%; font-size:15px;">삭제하기</button>
-					</form>
-					<!-- <a href="replaceDelete" class="btn btn-danger" style="margin-left:20px;margin-top:3%; font-size:15px;">삭제하기</a> -->
 				</form>
 				<form action="replace_upload" method="post"
 					enctype="multipart/form-data">

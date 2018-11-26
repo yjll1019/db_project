@@ -1,6 +1,5 @@
 package net.skhu.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,6 @@ import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.RecordMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
-import net.skhu.mapper.RequiredSubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.SubjectMapper;
@@ -55,7 +53,6 @@ public class AdminController {
 	@Autowired GraduationMapper graduationMapper;
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired RecordMapper recordMapper;
-	@Autowired RequiredSubjectMapper requiredSubjectMapper;
 
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
@@ -361,80 +358,30 @@ public class AdminController {
 	}
 
 	//대체과목 삭제
-	@RequestMapping(value="replaceDelete",method=RequestMethod.POST)
-	public String replaceDelete(Model model,Subject subject,Pagination pagination, HttpSession session) {
+	@RequestMapping(value="replaceDelete")
+	public String replaceDelete(Model model,@RequestParam("subjectCode") String subjectCode, @RequestParam("replaceSubject") String replaceSubject,
+			Pagination pagination, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		System.out.println("삭제페이지");
-		System.out.println(subject.toString());//null 나와서err
+
+		if(replaceSubject.equals("")&& !(subjectCode.equals(""))) {
+			replaceSubjectMapper.deleteReplace(subjectCode);
+			model.addAttribute("user",user);
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+			return "admin/admin_replace_list";
+		}else if(!(replaceSubject.equals("") && subjectCode.equals(""))) {
+			replaceSubjectMapper.deleteReplaceSubject(subjectCode,replaceSubject);
+			model.addAttribute("user",user);
+			model.addAttribute("replace",replaceService.findByType(pagination));
+			model.addAttribute("searchBy",replaceService.getSerachByOptions());
+		}
+
 		String alert="";
-		//폐지 과목 정보 입력은 다 필수다.
-		if((subject.getDeleteDepartmentId().equals("")) && (subject.getDeleteSemester().equals(""))
-				&& (subject.getDeleteYear().equals("")) && (subject.getDeleteCode().equals(""))
-				&& (subject.getDeleteSubjectName().equals(""))) {
-			alert="0";
-			model.addAttribute("alert",alert);
-			model.addAttribute("user",user);
-			model.addAttribute("replace",replaceService.findByType(pagination));
-			model.addAttribute("searchBy",replaceService.getSerachByOptions());
-			return "admin/admin_replace_list";
-		}
-		//대체 과목 학과/학부 정보 입력은 필수다.
-		if((subject.getDepartmentId().equals(""))) {
-			alert="1";
-			model.addAttribute("alert",alert);
-			model.addAttribute("user",user);
-			model.addAttribute("replace",replaceService.findByType(pagination));
-			model.addAttribute("searchBy",replaceService.getSerachByOptions());
-			return "admin/admin_replace_list";
-		}
 
-		//입력한 폐지 과목 정보가 subject 테이블에 없다.
-		if(subjectMapper.findDelete(subject)<=0) {
-			alert="2";
-			model.addAttribute("alert",alert);
-			model.addAttribute("user",user);
-			model.addAttribute("subject",subject);
-			model.addAttribute("replace",replaceService.findByType(pagination));
-			model.addAttribute("searchBy",replaceService.getSerachByOptions());
-			return "admin/admin_replace_list";
-		}
-		//대체과목 - 과목 지정인 경우다. 이때는 과목코드와 과목명이 필수다.
-		if(subject.getCompletionDivision().equals("")) {
-			System.out.println("과목 지정인 경우입니다.");
-			if((subject.getSubjectName().equals(""))&&(subject.getClass().equals(""))) { //과목 코드와 과목명 필수 입력해야 합니다.
-				alert="3";
-				model.addAttribute("alert",alert);
-				model.addAttribute("user",user);
-				model.addAttribute("subject",subject);
-				model.addAttribute("replace",replaceService.findByType(pagination));
-				model.addAttribute("searchBy",replaceService.getSerachByOptions());
-				return "admin/admin_replace_list";
-			}else if((subjectMapper.findReplace(subject)<=0)) {//과목 코드와 과목명 입력이 되었지만, 입력한 정보가 subject 테이블에 존재하지 않을 때
-				alert="4";
-				model.addAttribute("alert",alert);
-				model.addAttribute("user",user);
-				model.addAttribute("subject",subject);
-				model.addAttribute("replace",replaceService.findByType(pagination));
-				model.addAttribute("searchBy",replaceService.getSerachByOptions());
-				return "admin/admin_replace_list";
-			}else if(subjectMapper.findReplace(subject)>0){// 입력한 정보가 subject 테이블에 존재할 때
-				replaceSubjectMapper.deleteSubject(subject.getDeleteCode(),subject.getCode());
-				System.out.println("폐지,대체과목 과목 지정인 경우 삭제 완료");
-				model.addAttribute("user",user);
-				model.addAttribute("replace",replaceService.findByType(pagination));
-				model.addAttribute("searchBy",replaceService.getSerachByOptions());
-				return "admin/admin_replace_list";
-			}
-		}
-		else if(!(subject.getCompletionDivision().equals(""))) {//대체과목 - 과목 지정이 아닌 경우다. 이때는 과목코드와 과목명은 필요 없다.
-			replaceSubjectMapper.deleteWithCompletionDivision(subject.getDeleteCode(),subject.getCompletionDivision());
-			System.out.println("폐지, 대체과목 과목 지정 아닌 경우 삭제 완료");
-			model.addAttribute("user",user);
-			model.addAttribute("replace",replaceService.findByType(pagination));
-			model.addAttribute("searchBy",replaceService.getSerachByOptions());
-			return "admin/admin_replace_list";
-		}
 
+		model.addAttribute("user",user);
+		model.addAttribute("replace",replaceService.findByType(pagination));
+		model.addAttribute("searchBy",replaceService.getSerachByOptions());
 		return "admin/admin_replace_list";
 	}
 
@@ -491,6 +438,8 @@ public class AdminController {
 		model.addAttribute("list5", list5);
 
 
+		redirectAttributes.addAttribute("departmentId", departmentId);
+
 		return "admin/admin_allSearchEdit";
 	}
 
@@ -517,13 +466,13 @@ public class AdminController {
 
 	//admin_memo GET
 	@RequestMapping(value="/admin_memo",method=RequestMethod.GET)
-	public String admin_memo(Model model, @RequestParam("id") String id,HttpSession session) {
+	public String admin_memo(Model model,@RequestParam("id") String id,HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		String record = recordMapper.findContent(id);
-		if(record == null || record.length() == 0) {
+		if(record==null||record.length()==0) {
 			return "admin/admin_memo";
 		}
 		model.addAttribute("user",user);
@@ -534,19 +483,19 @@ public class AdminController {
 
 	//admin_memo POST
 	@RequestMapping(value="/admin_memo",method=RequestMethod.POST)
-	public String admin_memo(Model model, Counsel counsel,
-			@RequestParam("stuId") String stuId, HttpSession session) {
+	public String admin_memo(Model model,Counsel counsel,@RequestParam("stuId") String stuId,HttpSession session) {
+
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		Record re = new Record();
+
 		re.setStudentId(stuId);
 		re.setContent(counsel.getContent());
 		recordMapper.update(re);
-		
-		String record = recordMapper.findContent(stuId);
-		model.addAttribute("record",record);
 
+String record = recordMapper.findContent(stuId);
+		model.addAttribute("record",record);
 		model.addAttribute("user",user);
 		return "admin/admin_memo";
 	}
@@ -581,46 +530,4 @@ public class AdminController {
 		userMapper.insert(u);
 		return "admin/superAdmin_create";
 	}
-	
-	//graduationchange
-	
-	
-	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
-	public String admin_graduation_text1(Model model,HttpSession session) {
-
-		User user = (User) session.getAttribute("user");
-		List<Department> departments = departmentMapper.findAll();
-		model.addAttribute("departments", departments);
-		model.addAttribute("user",user);
-		return "admin/admin_changeGraduation";
-	}
-	
-	@RequestMapping("graduationSelect")
-	public String admin_graduationChange(Model model,HttpSession session, @RequestParam("year") String year) {
-		
-	String admissionYear = year;//년도
-
-	List<String> list[] = new ArrayList[9];
-
-	for(int i=0; i<list.length; ++i) {
-		list[i] = new ArrayList<String>();
-	}
-	int z = 0;
-	for(int i=1; i<=4; ++i) {//학년
-		for(int j=1; j<=2; ++j) {//학기
-			list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
-		}
-	}
-
-	list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
-
-	for(int i=1; i<=list.length; ++i) {
-		model.addAttribute("list"+i, list[i-1]);
-	}
-	
-	return "admin/admin_graduationChange";
-}
-	
-	
-	
 }
