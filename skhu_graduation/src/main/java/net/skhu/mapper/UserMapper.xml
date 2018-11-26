@@ -69,5 +69,9 @@
 			${ value }
 		order by msj.takeYear, u.id DESC;
 	</select>
+	<select id="findByRole" resultType="User">
+		select * from user where role='교수' or role='관리자'
+	</select>
+
 	
 </mapper>
