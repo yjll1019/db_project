@@ -3,7 +3,6 @@ package net.skhu.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,7 +180,7 @@ public class ProfessorController {
 
 	//professor_momo POST
 		@RequestMapping(value="/professor_memo",method=RequestMethod.POST)
-		public String professor_memo(Model model,Counsel counsel,@RequestParam("stuId") String stuId,HttpSession session) {
+		public String professor_memo(Model model, Counsel counsel, @RequestParam("stuId") String stuId,HttpSession session) {
 			System.out.println("포스트");
 			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
@@ -190,8 +189,10 @@ public class ProfessorController {
 			co.setStudentId(stuId);
 			co.setContent(counsel.getContent());
 			counselMapper.update(co);
+			
+			model.addAttribute("counsel", co.getContent());
 			System.out.println("포스트끝");
-			return "user/detail_stu_info";
+			return "professor/professor_memo";
 		}
 
 
