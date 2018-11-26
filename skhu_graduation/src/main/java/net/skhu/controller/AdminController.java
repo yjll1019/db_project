@@ -516,13 +516,13 @@ public class AdminController {
 
 	//admin_memo GET
 	@RequestMapping(value="/admin_memo",method=RequestMethod.GET)
-	public String admin_memo(Model model,@RequestParam("id") String id,HttpSession session) {
+	public String admin_memo(Model model, @RequestParam("id") String id,HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		String record = recordMapper.findContent(id);
-		if(record==null||record.length()==0) {
+		if(record == null || record.length() == 0) {
 			return "admin/admin_memo";
 		}
 		model.addAttribute("user",user);
@@ -533,19 +533,21 @@ public class AdminController {
 
 	//admin_memo POST
 	@RequestMapping(value="/admin_memo",method=RequestMethod.POST)
-	public String admin_memo(Model model,Counsel counsel,@RequestParam("stuId") String stuId,HttpSession session) {
-		System.out.println("포스트");
+	public String admin_memo(Model model, Counsel counsel,
+			@RequestParam("stuId") String stuId, HttpSession session) {
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		Record re = new Record();
-
 		re.setStudentId(stuId);
 		re.setContent(counsel.getContent());
 		recordMapper.update(re);
-		System.out.println("포스트끝");
+		
+		String record = recordMapper.findContent(stuId);
+		model.addAttribute("record",record);
+
 		model.addAttribute("user",user);
-		return "user/detail_stu_info";
+		return "admin/admin_memo";
 	}
 
 	//superAdmin_manage GET
