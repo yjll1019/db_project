@@ -30,7 +30,7 @@
 
 	<div
 		style="position: absolute; width: 500px; height: 600px; top: 0; left: 0; bottom: 0; right: 0; margin: auto;">
-		<form action="professor_memo" method="post" modelAttribute="counsel">
+		<form action="admin_memo" method="post" modelAttribute="counsel">
 			<textarea name="content" cols="60" rows="20" style="margin-top: 10px">
 	  			${record}
 	  		</textarea>

@@ -351,7 +351,7 @@ public class StudentController {
 	      List<MySubject> mySubjectlist;
 
 	      int year = Integer.parseInt((String) subjectListYear);
-	      int semester = Integer.parseInt((String) subjectListSemester);
+	      String semester = ((String) subjectListSemester);
 	      if (year == 0) {// 전체조회
 	         mySubjectlist = mySubjectMapper.findAll(user.getId());
 	      } else {// 수강년도, 수강학기 조회
