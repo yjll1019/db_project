@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:url var="R" value="/" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,15 +15,14 @@
 <link rel="stylesheet" href="${R}res/css/header.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${R}res/js/header.js"></script>
-<script>
-$(function() { 
-	$("[data-url]").click(function() { 
-		var url = $(this).attr("data-url");   
-		location.href = url;   })  
-})
 
+<script language="javascript">
+	function open_page() {
+		window.open("../admin/superAdmin_create", "등록",
+				"width=1170, height=300, left=50, top=50");
+	}
 </script>
-<title>관리자학생리스트</title>
+<title>슈퍼관리자 관리 페이지</title>
 <style>
 	#jb-content {
 		width: 80%;
@@ -91,69 +92,62 @@ $(function() {
 			</c:if>
 		</div>
 	</div>
-			<div id="jb-content" style="margin-left: 3%; margin-top: 5%; padding-left: 8%">
+		<div id="jb-content" style="margin-left: 3%; margin-top: 5%; padding-left: 8%">
 				<div style="margin-left: 20%; margin-top: 3%;">
-					<h3>학생 목록</h3>
+					<h3>관리자,교수 목록</h3>
 				</div>
-				<form method="POST">
-				<div id="search" style="margin-top: 2%; font-size: 13pt;">
-					 <div class="form-group" style="display: inline;">
-					    <select name="sbd" class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
-					      	<option value="0">전체</option>
-					      	<option value="12" ${sbd == '12' ? 'selected' : ''}>소프트웨어 공학과</option>
-                            <option value="14" ${sbd == '14' ? 'selected' : ''}>컴퓨터공학과</option>
-                            <option value="10" ${sbd == '10' ? 'selected' : ''}>IT융합 자율 학부</option>
-						</select> &nbsp; 
-						<select name="sbg" class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:35px;">
-							<option value="0">전체</option>
-							<option value="1" ${sbg == '1' ? 'selected' : ''}>1학년</option>
-							<option value="2" ${sbg == '2' ? 'selected' : ''}>2학년</option>
-							<option value="3" ${sbg == '3' ? 'selected' : ''}>3학년</option>
-							<option value="4" ${sbg == '4' ? 'selected' : ''}>4학년</option>
-						</select>
-							&nbsp;<a href="student/frustrated" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
-			  		</div>
-			  		<div class="form-group" id="class2" style="display:inline;">
-						<select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 8%; height:35px;">
-							<option value="0">검색조건</option>
-							<option value="1" ${sbi == '1' ? 'selected' : ''}>학번</option>
-							<option value="2" ${sbi == '2' ? 'selected' : ''}>이름</option>
-							<option value="3" ${sbi == '3' ? 'selected' : ''}>과목코드</option>
-							<option value="4" ${sbi == '4' ? 'selected' : ''}>과목명</option>
-						</select> 
-						
-						<input type="text" name="st" placeholder="검색" style="margin-left: 5px; width: 100px;">
+				<div class="form-group"
+				style="margin-top: 5px;style="display: inline;">
+				
+				<button type="button" class="btn btn-outline-primary"
+					style="display: inline; width: 100px; margin-left: 30px;  float: left"
+					onclick="open_page()">등록하기
+				</button>
+				
+				<form method="get" action="search">
+				<select name="search" class="form-control"
+					style="display: inline; margin-left:400px;width: 90px; height: 35px; font-size: 15px;">
+					<option value="">전체</option>
+					<option value="교수">교수</option>
+					<option value="관리자">관리자</option>
+				</select> 
+				
+				<input type="text" class="form-control" name="searchText"
+					placeholder="검색"
+					style="display: inline; margin-left: 5px; width: 150px; height: 35px;">
 
-						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회하기"/>
-					</div>
-			  </div>
-			  </form>
-				<div class="table-responsive"
-					style="margin-left: 20%; margin-top: 2%; font-size: 12pt;">
-					<table class="table" style="width: 900px;">
-						<thead>
-							<tr>
-								<th><strong>학번</strong></th>
-								<th><strong>이름</strong></th>
-								<th><strong>학과</strong></th>
-								<th><strong>휴대전화번호</strong></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="user" items="${ users }">
-								<tr data-url="../user/detail_stu_info?id=${user.id }" style="cursor:pointer">
-									<td>${ user.id }</td>
+				<button type="submit" class="btn btn-primary">조회</button>
+				</form>
+
+			</div>
+			<br />
+			<div class="table-responsive"
+				style="margin-top: -35px;padding-left: 40px; padding-right: 40px; font-size: 15pt;">
+				<table class="table" style="width: 800px;">
+					<thead>
+						<tr>
+							<th>직책</th>
+							<th>이름</th>
+							<th>이메일</th>
+							<th>전화번호</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="user" items="${ list }">
+								<tr style="cursor:pointer">
+									<td>${ user.role }</td>
 									<td>${ user.userName }</td>
-									<td>${ user.departmentName }</td>
+									<td>${ user.email }</td>
 									<td>${ user.phone }</td>
 								</tr>
 							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+
+					</tbody>
+				</table>
 			</div>
-		
-		 <div id="page"  style="margin-top: 1%;">
+				
+			</div>
+			<div id="page"  style="margin-top: 1%;">
 			<nav aria-label="Page navigation example"> 
  				 <ul class="pagination justify-content-center">
     				<li class="page-item"><a class="page-link" href="#">1</a></li>

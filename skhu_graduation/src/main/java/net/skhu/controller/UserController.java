@@ -3,7 +3,6 @@ package net.skhu.controller;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,7 +150,7 @@ public class UserController {
 				else if(role.equals("관리자"))
 					url = "redirect:/admin/admin_stu_search";
 				else
-					url = "redirect:/admin/superAdmin";
+					url = "redirect:/admin/admin_stu_search";
 			}
 			else if(!result.getPassword().equals(user.getPassword())){	// 비밀번호가 일치하지 않는 경우
 				alert = "0";
@@ -230,7 +229,7 @@ public class UserController {
 		model.addAttribute("student", student);
 		model.addAttribute("role", role.getRole());
 		model.addAttribute("id", id);
-		
+
 		return "user/detail_stu_info";
 	}
 
