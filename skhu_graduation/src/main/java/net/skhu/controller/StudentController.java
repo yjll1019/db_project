@@ -664,7 +664,8 @@ public class StudentController {
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
 
-
+		model.addAttribute("departmentId", departmentId);
+		
 		return "student/stu_allSearch";
 	}
 	
