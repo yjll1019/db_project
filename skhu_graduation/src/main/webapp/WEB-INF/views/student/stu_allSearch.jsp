@@ -59,7 +59,7 @@
 						value="${departmentList}" style="width: 400px">
 							<option selected>학과를 선택하세요</option>
 						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}">${department.name}</option>
+							<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;
 

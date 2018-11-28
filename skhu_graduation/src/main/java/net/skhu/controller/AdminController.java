@@ -438,7 +438,7 @@ public class AdminController {
 		model.addAttribute("list5", list5);
 
 
-		redirectAttributes.addAttribute("departmentId", departmentId);
+		model.addAttribute("departmentId", departmentId);
 
 		return "admin/admin_allSearchEdit";
 	}
