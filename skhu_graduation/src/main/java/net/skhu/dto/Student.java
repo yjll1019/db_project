@@ -18,6 +18,7 @@ public class Student {
 
 	int major;//전필
 	int cultural;//교필
+	int value;//부/복수전공
 	int pray;//채플
 	int service;//사회봉사
 
@@ -142,6 +143,13 @@ public class Student {
 	}
 	public void setService(int service) {
 		this.service = service;
+	}
+
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
 	}
 	@Override
 	public String toString() {

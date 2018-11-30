@@ -22,19 +22,17 @@
 	type="text/javascript"></script>
 <title>allSearchEdit</title>
 </head>
-<%
-String id = request.getParameter("departmentId");
-%>
 <body>
 		<div id="jb-header">
 		<div id='cssmenu'>
+			<c:if test="${user.role=='관리자' }">
 			<ul>
 				<li>
 					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
 						<img src="${R}res/img/logo.jpg" width="29" height="29">
 					</a>
 				</li>
-				<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생 조회</span></a></li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
 						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
@@ -49,10 +47,39 @@ String id = request.getParameter("departmentId");
 					</ul>
 				</li>
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
-				<li><a href='../admin/calenderEdit'><span>대학일정 관리</span></a></li>
+				<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 			</ul>
+			</c:if>
+			<c:if test="${user.role=='슈퍼관리자'}">
+			<ul>
+				<li>
+					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
+					</a>
+				</li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
+				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
+						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
+					</ul>
+				</li>
+				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_all_subject'><span>전체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
+					</ul>
+				</li>
+				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
+				<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
+				<li><a href='../admin/superAdmin_manage'><span>관리자/교수 관리</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
+			</ul>
+			</c:if>
 		</div>
 	</div>
 		<div class="container">
@@ -60,23 +87,28 @@ String id = request.getParameter("departmentId");
 			<h2>&nbsp;&nbsp;전체학과 졸업요건 수정</h2> 
 		<br/><br/>
          <form class="form-horizontal" action = "select">
- 
-				<div class="col-sm-4">
-					<select name="departmentId" class="form-control"
-						value="${departmentList}" style="width: 400px">
-							<option >학과를 선택하세요</option>
-						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}"  >${department.name}</option>
-						</c:forEach>
-					</select>&nbsp;&nbsp;
 
-					<button type="submit" class="btn btn-primary">조회</button>
-		</div>
+			  		<div class="form-group" id="class2" style=" display:inline;">
+				      <select name="departmentId" class="form-control" value="${departmentList}" style="width: 400px">
+							<option >학과를 선택하세요</option>
+							<c:forEach var="department" items="${departments}">
+								<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+							</c:forEach>
+						
+						</select>&nbsp;&nbsp;
+						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회"/>
+					</div>
+					
+					
 		</form>
 
 	 <br/>
       <div class="table-responsive">
  			<div class="table-responsive">
+ 			<form method="post" action="edit">
+ 			
+ 				<input type="hidden" name="departmentId" value ="${department.id}">
+ 				
 				<table class="table" width="1100">
 					<thead>
 						<tr>
@@ -140,11 +172,12 @@ String id = request.getParameter("departmentId");
 						</tr>
 					</tbody>
 				</table>
-         </div>
-				<form class="form-group" action = "edit"  style="margin-left: 40%; margin-top: 40px">
-					<button type="submit" class="btn btn-primary btn-lg btn-block login-button"
-						style="width:150px; height: 50px; font-size: 16px">수정하기</button>
+				<button type="submit" class="btn btn-primary btn-lg btn-block login-button"
+						style="width:150px; height: 50px; font-size: 16px;margin-left: 40%; margin-top: 40px">수정하기</button>
 				</form>
+         </div>
+         
+         
 			</div>
 		</div>
 	<br/>

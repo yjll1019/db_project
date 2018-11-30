@@ -24,6 +24,8 @@ public interface ReplaceSubjectMapper {
 	void insertWithCompletionDivision(String deleteCode, String completionDivision);
 	void deleteSubject(String deleteCode, String replaceCode);
 	void deleteWithCompletionDivision(String deleteCode, String completionDivision);
+	void deleteReplace(String subjectCode);
+	void deleteReplaceSubject(String subjectCode, String replaceSubject);
 	int count(Pagination pagination);
 	List<ReplaceSubject> findAll();
 	List<AdminReplaceListDTO> findByType(Pagination pagination);

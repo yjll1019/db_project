@@ -56,9 +56,9 @@
 					int year = 0;
 					if(request.getAttribute("year")!=null)
 						year = (Integer)request.getAttribute("year");
-					int semester = 1;
+					String semester = "1학기";
 					if(request.getAttribute("semester")!=null)
-						semester = (Integer)request.getAttribute("semester");
+						semester = (String) request.getAttribute("semester");
 				%>
 					<option value=0>전체</option>
 				<%
@@ -71,8 +71,8 @@
 				</select> &nbsp;	
 						
 				<select class="custom-select" name="subjectListSemester" id="subjectListSemester" style="width: 100px; height:40px; margin-left:1%; margin-top:1%">
-						 <option value=1 <%= (1==semester)? "selected" : "" %>>1학기</option>
-						<option value=2 <%= (2==semester)? "selected" : "" %>>2학기</option>
+						 <option value="1학기" <%= ("1학기".equals(semester))? "selected" : "" %>>1학기</option>
+						<option value="2학기" <%= ("2학기".equals(semester))? "selected" : "" %>>2학기</option>
 					</select> &nbsp;
 					
 					<button type="submit" class="btn btn-primary" style="font-size: 12pt; margin-top:1%">조회</button>

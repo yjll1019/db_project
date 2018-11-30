@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.List"%>
+<%@ page import="net.skhu.dto.*" %>
 
 <c:url var="R" value="/" />    
 <!DOCTYPE html>
@@ -52,12 +53,27 @@
 					<button type="button" class="btn btn-outline-primary">${student.pName }</button> &nbsp; 교수님 입니다.
 				</div>
 			</div>
-			
+			<%
+				GraduationInput g = (GraduationInput) request.getAttribute("graduation");
+				String s = (String) request.getAttribute("secredit");
+				Student student = (Student) request.getAttribute("student");
+				
+				int a = (int)(student.getMajor()/(Double.parseDouble(g.getCredit()))*100);
+				int b = (int)(((double)(student.getCultural()/15.0))*100); 
+				if(b>100)
+					b = 100;
+				int c;
+				if(student.getValue()!=0&&s!=null)
+					 c = (int)((double)student.getValue()/Double.parseDouble(s));
+				else
+					 c = 0;
+
+			%>
 			<div class="circleGraph1"
 				style="position: absolute; width: 250px; height: 60px; left: 25%; margin-top: 120px;">
 			
 				<div class="clearfix">
-					<div class="c100 p50">
+					<div class="c100 p<%= a %>">
 						<span>${student.major}</span>
 						<div class="slice">
 							<div class="bar"></div>
@@ -67,7 +83,7 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; ${student.major}/130<br/> &nbsp; 전공필수</div>
+					&nbsp;&nbsp; ${student.major}/ ${graduation.credit }<br/> &nbsp; 전공</div>
 	
 			</div>
 			
@@ -75,7 +91,7 @@
 				style="position: absolute; width: 250px; height: 60px; left: 38%; margin-top: 120px;">
 				<!-- default -->
 				<div class="clearfix">
-					<div class="c100 p50">
+					<div class="c100 p<%=b%>">
 						<span>${student.cultural}</span>
 						<div class="slice">
 							<div class="bar"></div>
@@ -85,16 +101,18 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; ${student.cultural}/130<br/> &nbsp; 교양필수</div>
+					&nbsp;&nbsp; ${student.cultural}/15<br/> &nbsp; 교양필수</div>
 				<!-- /default -->
 			</div>
 			
+			<% if(s!=null){ %>
+			<c:if test="${graduation.division=='부전공'||graduation.division=='복수전공'}">
 			<div class="circleGraph1"
 				style="position: absolute; width: 250px; height: 60px; left: 50%; margin-top: 120px;">
 				<!-- default -->
 				<div class="clearfix">
-					<div class="c100 p<%= 90%>">
-						<span>50%</span>
+					<div class="c100 p<%= c%>">
+						<span><%= c %></span>
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>
@@ -103,9 +121,11 @@
 				</div>
 				<div
 					style="position: absolute; margin-left: 10px; margin-top: 10px; font-size: 15pt; font-weight: bold">
-					&nbsp;&nbsp; 65/130<br/> &nbsp; 부전공</div>
+					&nbsp;&nbsp; ${student.value}/${secredit }<br/> &nbsp; ${graduation.division }</div>
 				<!-- /default -->
 			</div>
+			</c:if>
+			<%} %>
 		</div>
 		<form:form method="post">
 		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">

@@ -24,6 +24,10 @@ public class Counsel {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	@Override
+	public String toString() {
+		return "Counsel [professorId=" + professorId + ", studentId=" + studentId + ", content=" + content + "]";
+	}
 
 
 }

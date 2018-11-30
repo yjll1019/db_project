@@ -33,15 +33,17 @@
 
 <body>
    <div id="jb-container">
-     <div id="jb-header">
+  <div id="jb-header">
 		<div id='cssmenu'>
 			<ul>
-				<li><a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-					<img src="${R}res/img/logo.jpg" width="29" height="29"></a>
+				<li>
+					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
+					</a>
 				</li>
 				<li><a href='../student/stu_main'><span>나의졸업요건</span></a></li>
 				<li><a href='../student/stu_subject_list'><span>수강목록 조회</span></a></li>
-				<li><a href='../student/stu_allSearch'><span>졸업요건 조회</span></a></li>
+				<li><a href='../student/nonmember_page'><span>졸업요건 조회</span></a></li>
 				<li><a href='../student/stu_replace_list'><span>대체과목 조회</span></a></li>
 				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
@@ -54,12 +56,12 @@
          <br />
          <form class="form-horizontal" method="post" >
  
-				<div class="col-sm-4">
+				<div class="form-group" id="class2" style="display:inline;">
 					<select name="departmentId" class="form-control"
-						value="${departmentList}" style="width: 400px">
+						value="${departmentList}" style="width: 400px; ]display: inline;">
 							<option selected>학과를 선택하세요</option>
 						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+							<option value="${department.id}">${department.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;
 
@@ -81,8 +83,8 @@
 							<tr>
 								<td rowspan="4">${department.name} 학생</td>
 								<td>${department.name}<br> 주전공</td>
-								<td style="word-break:break-all;">${list0.graduationContent}</td>
-								<td  width=230 style="word-break:break-all;">${list0.graduationEtc}</td>
+								<td>${list0.graduationContent}</td>
+								<td  width=230 style=""font-size: 10pt;">${list0.graduationEtc}</td>
 								</tr>
 								<tr>
 								<td>${department.name}<br>(타과)복수전공</td>

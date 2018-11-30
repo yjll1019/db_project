@@ -98,12 +98,12 @@
 
 	<select id="findMajor" resultType="MySubject">
 		select * from mySubject
-		where userId=#{userId} and completionDivision='전필';
+		where userId=#{userId} and (completionDivision='전필' or completionDivision='전선');
 	</select>
 
 	<select id="findCultural" resultType="MySubject">
 		select * from mySubject
-		where userId=#{userId} and completionDivision='교필';
+		where userId=#{userId} and (completionDivision='교필' or completionDivision='교선');
 	</select>
 
 	<select id="findPray" resultType="int">
@@ -117,6 +117,13 @@
 		mySubject
 		where userId=#{userId}and (subjectCode='AC00003' or subjectCode='AE00046'
 		or subjectCode='AE00029' or subjectCode='AE00030' )and score='P'
+	</select>
+	
+	<select id="findSubMajor" resultType="MySubject">
+		select distinct s.code,m.* 
+		from mySubject m 
+		left join subject s on m.subjectCode = s.code 
+		where s.departmentId=#{departmentId} and m.userId=#{userId}
 	</select>
 
 	<select id="findByOneRequiredSubject" resultType="RequiredSubject">

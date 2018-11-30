@@ -52,36 +52,64 @@
 <body>
 	<div id="jb-container">
 		<div id="jb-header">
-			<div id='cssmenu'>
-				<ul>
-					<li><a
-						style="padding: 8px; padding-left: 15px; padding-right: 0px;">
-							<img src="${R}res/img/logo.jpg" width="29" height="29">
-					</a></li>
-					<li><a href='../admin/admin_stu_search?sbd=0&sbg=0&sbi=0&st='><span>학생
-								조회</span></a></li>
-					<li class='active has-sub'><a><span>졸업요건 수정</span></a>
-						<ul>
-							<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표
-										수정</span></a></li>
-							<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
-							<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목
-										수정</span></a></li>
-						</ul></li>
-					<li class='active has-sub'><a><span>과목 목록 수정</span></a>
-						<ul>
-							<li class='last'><a href='../admin/admin_all_subject'><span>전체과목
-										목록</span></a></li>
-							<li class='last'><a href='../admin/admin_replace_list'><span>대체과목
-										목록</span></a></li>
-						</ul></li>
-					<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
-					<li><a href='../admin/calenderEdit'><span>대학일정 관리</span></a></li>
-					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-					<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
-				</ul>
-			</div>
+		<div id='cssmenu'>
+			<c:if test="${user.role=='관리자' }">
+			<ul>
+				<li>
+					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
+					</a>
+				</li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
+				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
+						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
+					</ul>
+				</li>
+				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_all_subject'><span>전체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
+					</ul>
+				</li>
+				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
+				<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
+			</ul>
+			</c:if>
+			<c:if test="${user.role=='슈퍼관리자'}">
+			<ul>
+				<li>
+					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
+						<img src="${R}res/img/logo.jpg" width="29" height="29">
+					</a>
+				</li>
+				<li><a href='../admin/admin_stu_search'><span>학생 조회</span></a></li>
+				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
+						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
+					</ul>
+				</li>
+				<li class='active has-sub' ><a><span>과목 목록 수정</span></a>
+					<ul>
+						<li class='last'><a href='../admin/admin_all_subject'><span>전체과목 목록</span></a></li>
+						<li class='last'><a href='../admin/admin_replace_list'><span>대체과목 목록</span></a></li>
+					</ul>
+				</li>
+				<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
+				<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
+				<li><a href='../admin/superAdmin_manage'><span>관리자/교수 관리</span></a></li>
+				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
+				<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
+			</ul>
+			</c:if>
 		</div>
+	</div>
 		<div
 			style="margin-top: 30px; margin: 0 auto; max-width: 1000px; padding: 40px 40px; font-family: 'NanumSquare', sans-serif;">
 			<h2>대체과목 목록</h2>
@@ -97,6 +125,7 @@
 			</form:form>
 
 			<br />
+			<form method="get">
 			<table class="table table-bordered"
 				style="margin-top: -15px; width: 700; max-height: 300px; text-align: center; table-layout: fixed;">
 				<thead>
@@ -105,6 +134,7 @@
 							style="border-right: 1px solid white; font-size: 15pt">폐지된
 							과목</th>
 						<th scope="col" colspan="2" style="font-size: 15pt">대체 과목</th>
+						<th style="border-right: 1px solid white; font-size: 15pt">삭제</th>
 					</tr>
 				</thead>
 				<tr style="font-size: 18px">
@@ -115,6 +145,7 @@
 					<td style="height: 20px; border-right: 1px solid silver"><strong>
 							과목코드 </strong></td>
 					<td><strong> 과목명 </strong></td>
+					<td><strong> 삭제 </strong></td>
 				</tr>
 				<tbody style="font-size: 12pt;">
 					<c:forEach var="replace" items="${replace }">
@@ -130,19 +161,19 @@
                               	교양 선택 과목으로 대체
                             </c:when>
 								</c:choose> ${replace.replaceSubjectName}</td>
-
+							<td><a href="replaceDelete?subjectCode=${ replace.subjectCode }&replaceSubject=${replace.replaceSubject}"class="btn btn-danger">삭제</a></td>
 						</tr>
 					</c:forEach>
 
 				</tbody>
 			</table>
-
+			</form>
 			<my:pagination pageSize="${pagination.sz }"
 				recordCount="${pagination.recordCount }" />
 
 			<div class="container" style="margin-top: 30px; font-size: 15pt">
 				<form action="admin_replace_list" method="post"
-					modelAttribute="subject" ,modelAttribute="pagination">
+					modelAttribute="subject" modelAttribute="pagination">
 					<table style="width: 900px;">
 						<tr>
 							<td><strong>폐지과목</strong></td>
@@ -214,7 +245,6 @@
 					</table>
 					<input type="submit" class="btn btn-outline-primary" value="저장하기"
 						style="margin-left: 45%; margin-top: 3%; font-size: 15px;" /> 
-					<a href="replaceDelete" class="btn btn-danger" style="margin-left:20px;margin-top:3%; font-size:15px;">삭제하기</a>
 				</form>
 				<form action="replace_upload" method="post"
 					enctype="multipart/form-data">

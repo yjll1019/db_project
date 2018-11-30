@@ -161,7 +161,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/download")
-	public void download(@RequestParam("fileId") int id, HttpServletResponse response) throws Exception {
+	public void download(@RequestParam("id") int id, HttpServletResponse response) throws Exception {
 		Uploadedfile uploadedFile = boardMapper.findOneById(id);
 		if(uploadedFile == null) return;
 		String fileName = URLEncoder.encode(uploadedFile.getFileName(), "UTF-8");

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.skhu.mapper.CounselMapper">
+<mapper namespace="net.skhu.mapper.RecordMapper">
 	
 	<update id="update">
-		update  counsel set content = #{content} where professorId = #{professorId} and studentId = #{studentId}
+		update record set content = #{content} where studentId = #{studentId}
 	</update>
 	
 	<select id="findContent" resultType="String">
-	 select content from counsel where professorId=#{proId} and studentId = #{stuId};
+	 select content from record where studentId = #{stuId};
 	</select>
 </mapper>
