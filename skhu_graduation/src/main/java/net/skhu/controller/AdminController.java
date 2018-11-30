@@ -1,5 +1,6 @@
 package net.skhu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.RecordMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
+import net.skhu.mapper.RequiredSubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.SubjectMapper;
@@ -53,6 +55,7 @@ public class AdminController {
 	@Autowired GraduationMapper graduationMapper;
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired RecordMapper recordMapper;
+	@Autowired RequiredSubjectMapper requiredSubjectMapper;
 
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
@@ -418,6 +421,7 @@ public class AdminController {
 
 		Department department = departmentMapper.findOne(departmentId);
 		model.addAttribute("department", department);
+		
 
 		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
 		model.addAttribute("list0", list0);
@@ -443,14 +447,48 @@ public class AdminController {
 		return "admin/admin_allSearchEdit";
 	}
 
-	@RequestMapping("edit")
-	public String edit(Model model , @RequestParam("departmentId") String departmentId,HttpSession session) {
-
-		User user = (User) session.getAttribute("user");
+	@RequestMapping(value="edit",method=RequestMethod.POST)
+	public String edit(Model model , @RequestParam("departmentId") String departmentId,RedirectAttributes redirectAttributes,
+			@RequestParam("content0") String content0, @RequestParam("content1") String content1,@RequestParam("content2") String content2,
+			@RequestParam("content3") String content3,@RequestParam("content4") String content4,@RequestParam("content5") String content5,
+			@RequestParam("etc0") String etc0,@RequestParam("etc1") String etc1,@RequestParam("etc2") String etc2,
+			@RequestParam("etc3") String etc3,@RequestParam("etc4") String etc4,@RequestParam("etc5") String etc5
+			) {
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		model.addAttribute("user",user);
-		return "redirect:admin_allSearchEdit";
+		Department department = departmentMapper.findOne(departmentId);
+		model.addAttribute("department", department);
+		
+		System.out.println(etc4);
+		
+		graduationMapper.updateText(content0, etc0, departmentId, "0");
+		graduationMapper.updateText(content1, etc1, departmentId, "1");
+		graduationMapper.updateText(content2, etc2, departmentId, "2");
+		graduationMapper.updateText(content3, etc3, departmentId, "3");
+		graduationMapper.updateText(content4, etc4, departmentId, "4");
+		graduationMapper.updateText(content5, etc5, departmentId, "5");
+		
+		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
+		model.addAttribute("list0", list0);
+
+		GraduationText list1 = graduationMapper.findByDepartmentId(departmentId, "1");
+		model.addAttribute("list1", list1);
+
+		GraduationText list2 = graduationMapper.findByDepartmentId(departmentId, "2");
+		model.addAttribute("list2", list2);
+
+		GraduationText list3 = graduationMapper.findByDepartmentId(departmentId, "3");
+		model.addAttribute("list3", list3);
+
+		GraduationText list4 = graduationMapper.findByDepartmentId(departmentId, "4");
+		model.addAttribute("list4", list4);
+
+		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
+		model.addAttribute("list5", list5);
+		
+		model.addAttribute("departmentId", departmentId);
+			
+		return "admin/admin_allSearchEdit";
 	}
 
 	//달력 일정 관리
@@ -530,4 +568,14 @@ String record = recordMapper.findContent(stuId);
 		userMapper.insert(u);
 		return "admin/superAdmin_create";
 	}
+	
+	//필수과목 수정 페이지 
+	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
+	public String admin_changeGraduation (Model model, HttpSession session) {
+		
+		return "admin_changeGraduation";
+	}
+
+	
+	
 }

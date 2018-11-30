@@ -81,8 +81,8 @@
 							<tr>
 								<td rowspan="4">${department.name} 학생</td>
 								<td>${department.name}<br> 주전공</td>
-								<td>${list0.graduationContent}</td>
-								<td  width=230 style=""font-size: 10pt;">${list0.graduationEtc}</td>
+								<td style="word-break:break-all;">${list0.graduationContent}</td>
+								<td  width=230 style="word-break:break-all;">${list0.graduationEtc}</td>
 								</tr>
 								<tr>
 								<td>${department.name}<br>(타과)복수전공</td>

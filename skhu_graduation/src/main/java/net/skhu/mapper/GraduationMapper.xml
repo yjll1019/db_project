@@ -13,4 +13,14 @@
 		where division=#{d} and creditDivision=#{cd} and admissionYear=#{year} and departmentId=#{departmentId}
 	</select>
 	
+	
+	<update id="updateText">
+	update graduationText
+	set 
+	graduationContent = #{content},
+	graduationEtc = #{etc}
+	where departmentId = #{departmentId} and
+	division = #{division}
+	</update>
+	
 </mapper>

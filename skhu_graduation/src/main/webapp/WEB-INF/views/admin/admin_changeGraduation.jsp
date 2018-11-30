@@ -81,7 +81,7 @@
 			String year = request.getParameter("year");
 			%>	
 			<div style="font-size: 20pt;">		
-				${department.name} <%=year %>이수과목
+				${department.name}이수과목
 			</div>
 			
 						<%

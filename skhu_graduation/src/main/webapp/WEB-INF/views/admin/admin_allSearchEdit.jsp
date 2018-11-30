@@ -89,20 +89,26 @@
          <form class="form-horizontal" action = "select">
 
 			  		<div class="form-group" id="class2" style=" display:inline;">
-				<select name="departmentId" class="form-control"
-						value="${departmentList}" style="width: 400px">
+				      <select name="departmentId" class="form-control" value="${departmentList}" style="width: 400px">
 							<option >학과를 선택하세요</option>
-						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
-						</c:forEach>
-					</select>&nbsp;&nbsp;
+							<c:forEach var="department" items="${departments}">
+								<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+							</c:forEach>
+						
+						</select>&nbsp;&nbsp;
 						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회"/>
 					</div>
+					
+					
 		</form>
 
 	 <br/>
       <div class="table-responsive">
  			<div class="table-responsive">
+ 			<form method="post" action="edit">
+ 			
+ 				<input type="hidden" name="departmentId" value ="${department.id}">
+ 				
 				<table class="table" width="1100">
 					<thead>
 						<tr>
@@ -166,11 +172,12 @@
 						</tr>
 					</tbody>
 				</table>
-         </div>
-				<form class="form-group" action = "edit"  style="margin-left: 40%; margin-top: 40px">
-					<button type="submit" class="btn btn-primary btn-lg btn-block login-button"
-						style="width:150px; height: 50px; font-size: 16px">수정하기</button>
+				<button type="submit" class="btn btn-primary btn-lg btn-block login-button"
+						style="width:150px; height: 50px; font-size: 16px;margin-left: 40%; margin-top: 40px">수정하기</button>
 				</form>
+         </div>
+         
+         
 			</div>
 		</div>
 	<br/>
