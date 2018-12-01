@@ -53,6 +53,14 @@
 		</where>
 		LIMIT ${start},${sz}
 	</select>
+	
+	List<String> replaceSubject(String userId);
+	
+	<select id = "replaceSubject" resultType= "String">
+		select DISTINCT s.code, s.subjectName from replaceSubject r
+		left join subject s
+		on r.subjectCode = s.code;
+	</select>
 
 	<select id="count" resultType="int">
 		select count(re.subjectCode)

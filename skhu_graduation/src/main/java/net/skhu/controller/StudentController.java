@@ -33,6 +33,7 @@ import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
 import net.skhu.mapper.ProfessorMapper;
+import net.skhu.mapper.ReplaceSubjectMapper;
 import net.skhu.mapper.RequiredSubjectMapper;
 import net.skhu.mapper.SecondMajorMapper;
 import net.skhu.mapper.StudentMapper;
@@ -62,6 +63,7 @@ public class StudentController {
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired ProfessorMapper professorMapper;
 	@Autowired RequiredSubjectMapper requiredSubjectMapper;
+	@Autowired ReplaceSubjectMapper replaceSubjectMapper;
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
@@ -738,6 +740,8 @@ public class StudentController {
 	         noSubject.remove("AC00001");
 	      if(noSubject.contains("AC00003")) //사회봉사제거
 	         noSubject.remove("AC00003");
+	      
+	      
 
 
 	      Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();

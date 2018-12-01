@@ -89,6 +89,13 @@
 		like #{admissionYear}
 		and subject.departmentId like #{departmentId};
 	</select>
+	
+	<select id ="mySubject" resultType = "String">
+	select DISTINCT m.subjectCode, s.subjectName
+	from mySubject m left join subject s
+	on m.subjectCode = s.code
+	where m.userId like #{userId} and s.year like '2016';
+	</select>
 
 	<select id="getSubjectName" resultType="String">
 		select DISTINCT
