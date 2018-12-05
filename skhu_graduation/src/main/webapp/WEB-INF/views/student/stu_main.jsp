@@ -60,6 +60,8 @@
 				
 				int a = (int)(student.getMajor()/(Double.parseDouble(g.getCredit()))*100);
 				int b = (int)(((double)(student.getCultural()/15.0))*100); 
+				if(a>100)
+					a=100;
 				if(b>100)
 					b = 100;
 				int c;
