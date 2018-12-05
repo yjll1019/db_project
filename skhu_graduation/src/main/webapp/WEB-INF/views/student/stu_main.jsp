@@ -160,6 +160,7 @@
 							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
 							${student.service } / 1 이수</td>
 					</tr>
+			
 				</table>
 			</div>
 			<br />
