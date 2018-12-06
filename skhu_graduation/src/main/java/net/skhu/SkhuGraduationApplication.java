@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
@@ -26,7 +27,7 @@ public class SkhuGraduationApplication extends SpringBootServletInitializer{
 
 	@RequestMapping(value="/")
 	public String index() {
-		return "/index";
+		return "../../index";
 	}
 
 }
