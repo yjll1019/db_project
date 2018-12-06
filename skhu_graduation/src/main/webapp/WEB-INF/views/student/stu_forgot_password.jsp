@@ -75,7 +75,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="text" name="otpNumber"> <span
+						<input class="input100" type="text" name="otp"> <span
 							class="focus-input100" data-placeholder="OTP"></span>
 					</div>
 

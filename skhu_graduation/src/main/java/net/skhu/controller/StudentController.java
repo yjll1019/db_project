@@ -1,7 +1,9 @@
 package net.skhu.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationInput;
@@ -40,6 +47,7 @@ import net.skhu.mapper.StudentMapper;
 import net.skhu.mapper.UserMapper;
 import net.skhu.model.Pagination;
 import net.skhu.service.ExcelService;
+import net.skhu.service.OtpService;
 import net.skhu.service.ReplaceSubjectService;
 import net.skhu.util.SecurityUtil;
 
@@ -64,6 +72,7 @@ public class StudentController {
 	@Autowired ProfessorMapper professorMapper;
 	@Autowired RequiredSubjectMapper requiredSubjectMapper;
 	@Autowired ReplaceSubjectMapper replaceSubjectMapper;
+	@Autowired OtpService otpService;	 
 
 	@RequestMapping(value = "stu_main", method = RequestMethod.GET)
 	public String main(Model model, HttpSession session) {
@@ -187,7 +196,7 @@ public class StudentController {
 
 		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());//필수과목 중 수강한 과목 리스트
 		model.addAttribute("requiredMySubject",requiredMySubject);
-
+		model.addAttribute("admissionYear", admissionYear);
 
 		return "student/stu_main";
 	}
@@ -267,18 +276,31 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "stu_forgot_password", method = RequestMethod.POST)
-	public String stu_forgot_password(Model model, User user, RedirectAttributes redirectAttributes) {
+	public String stu_forgot_password(Model model, User user, @RequestParam("otp")String otp, RedirectAttributes redirectAttributes) throws JsonParseException, JsonMappingException, IOException {
 		boolean result = true;
 
+		String pinCode = otp.substring(0,4);
+		String otpCode = otp.substring(4);
+		
+		String url="http://forest.skhu.ac.kr/Gate/OPEN/OTP/ForestOTPAuth.aspx?P1="+pinCode+"&P2="
+				+otpCode+"&P3="+user.getId();
+		String json = otpService.getHttpResponse(url);
+		json =json.replaceAll("'", "\"");
+		ObjectMapper mapper = new ObjectMapper();
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map = mapper.readValue(json, new TypeReference<Map<String, String>>(){});
+		
 		String id = user.getId();
 
 		int resultId = userMapper.findOne(id);// 아이디가 존재하지않으면 0 존재하면 1
 
 		if (resultId == 1) { // 아이디가 존재하면
-			if (result) { // 학생 인증(OTP) 성공 -> 학생이 직접 비번을 바꿀 수 있도록
+			if (map.containsKey("STS")&&map.get("STS").equals("Y")) {
+				System.out.println("오티피일치!"); // 학생 인증(OTP) 성공 -> 학생이 직접 비번을 바꿀 수 있도록
 				redirectAttributes.addAttribute("id", id);
 				return "redirect:change_password";
 			} else { // 학생 인증(OTP) 실패
+				System.out.println("오티피불일치!");
 				model.addAttribute("result", -1);
 				return "student/stu_forgot_password";
 			}
