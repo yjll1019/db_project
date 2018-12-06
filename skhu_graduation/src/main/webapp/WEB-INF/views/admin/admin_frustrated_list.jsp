@@ -101,25 +101,12 @@ $(function() {
                    <select name="sbd" class="custom-select" style="margin-left: 20%; width: 190px; height:35px;">
                         <option value="0">전체</option>
                         <option value="12" ${sbd == '12' ? 'selected' : ''}>소프트웨어 공학과</option>
-                            <option value="14" ${sbd == '14' ? 'selected' : ''}>컴퓨터공학과</option>
-                            <option value="10" ${sbd == '10' ? 'selected' : ''}>IT융합 자율 학부</option>
                   </select> &nbsp; 
-                  <select name="sbg" class="custom-select" style="width: 100px; display: inline; margin-left: 5px; height:35px;">
-                     <option value="0">전체</option>
-                     <option value="1" ${sbg == '1' ? 'selected' : ''}>1학년</option>
-                     <option value="2" ${sbg == '2' ? 'selected' : ''}>2학년</option>
-                     <option value="3" ${sbg == '3' ? 'selected' : ''}>3학년</option>
-                     <option value="4" ${sbg == '4' ? 'selected' : ''}>4학년</option>
-                  </select>
-                     &nbsp;<a href="admin_frustrated_list" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
                  </div>
                  <div class="form-group" id="class2" style="display:inline;">
-                  <select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 8%; height:35px;">
+                  <select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 19%; height:35px;">
                      <option value="0">검색조건</option>
                      <option value="1" ${sbi == '1' ? 'selected' : ''}>학번</option>
-                     <option value="2" ${sbi == '2' ? 'selected' : ''}>이름</option>
-                     <option value="3" ${sbi == '3' ? 'selected' : ''}>과목코드</option>
-                     <option value="4" ${sbi == '4' ? 'selected' : ''}>과목명</option>
                   </select> 
                   
                   <input type="text" name="st" placeholder="검색" style="margin-left: 5px; width: 100px;">
@@ -140,12 +127,12 @@ $(function() {
                      </tr>
                   </thead>
                   <tbody>
-                     <c:forEach var="user" items="${ users }">
-                        <tr data-url="../user/detail_stu_info?id=${user.id }" style="cursor:pointer">
-                           <td>${ user.id }</td>
-                           <td>${ user.userName }</td>
-                           <td>${ user.departmentName }</td>
-                           <td>${ user.phone }</td>
+                     <c:forEach var="student" items="${ studets }">
+                        <tr data-url="../user/detail_stu_info?id=${ student.userId }" style="cursor:pointer">
+                           <td>${ student.user.id }</td>
+                           <td>${ student.user.userName }</td>
+                           <td>${ student.user.departmentName }</td>
+                           <td>${ student.user.phone }</td>
                         </tr>
                      </c:forEach>
                   </tbody>

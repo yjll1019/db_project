@@ -8,5 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RequiredSubjectMapper {
 	
 	List<String> findByConditions(String admissionYear, String grade, String semester);
-	
+	int requiredCount(String admissionYear);
+	int myRequiredCount(String admissionYear);
 }
