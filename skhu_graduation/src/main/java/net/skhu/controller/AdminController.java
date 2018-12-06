@@ -1,6 +1,7 @@
 package net.skhu.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.Record;
 import net.skhu.dto.ReplaceSubject;
+import net.skhu.dto.Student;
 import net.skhu.dto.Subject;
 import net.skhu.dto.User;
 import net.skhu.mapper.DepartmentMapper;
@@ -249,6 +251,216 @@ public class AdminController {
 		return "admin/admin_stu_search";
 	}
 
+	@RequestMapping(value="admin_frustrated_list", method=RequestMethod.GET)
+	public String frustrated_list(Model model) {
+		List<Student> students = studentMapper.frustratedStudent("");
+		List<Student> list = new ArrayList<Student>();
+		Collections.copy(students, list);
+		for(Student s : list) {
+			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
+			int majorCredit = 0;
+			int myMajorCredit = Integer.parseInt(mySubjectMapper.findMajorCount(s.getUserId()));
+			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
+				if(secondMajor.equals("부전공")) {	// 부전공
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {	// 복수전공
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
+				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} // 전공필수 끝
+			int allMajorCredit = 0;
+			int myAllMajorCredit = mySubjectMapper.findMajor(s.getUserId()).size();
+			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공학점 검사
+				if(secondMajor.equals("부전공")) {	// 부전공
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {	// 복수전공
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
+				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
+					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} // 전공학점 끝
+			int culturalCredit = 0;
+			int myCulturalCredit = mySubjectMapper.findCultural(s.getUserId()).size();
+			if(secondMajor == null && s.getTransferStudent().equals("0")) {
+				if(myCulturalCredit < culturalCredit) {
+					students.remove(s);
+					continue;
+				}
+			}// 교양학점 끝
+			int requiredSubject = requiredSubjectMapper.requiredCount(s.getUserId().substring(0, 4));
+			int myRequiredSubject = requiredSubjectMapper.myRequiredCount(s.getUserId().substring(0, 4));
+			if(myRequiredSubject < requiredSubject) {
+				students.remove(s);
+				continue;
+			} // 전공필수 과목 끝
+			int pray = mySubjectMapper.findPray(s.getUserId());
+			if(pray < 2) {
+				students.remove(s);
+				continue;
+			}	//채플 끝
+			if(s.getVolunteerExemption().equals("0")) {
+				int volunteer = mySubjectMapper.findService(s.getUserId());
+				if(volunteer < 1) {
+					students.remove(s);
+					continue;
+				}
+			} // 사회봉사 끝
+		}
+		model.addAttribute("students", students);
+		return "admin/admin_frustrated_list";
+	}
+
+	@RequestMapping(value="admin_frustrated_list", method=RequestMethod.POST)
+	public String frustrated_list(Model model, HttpServletRequest request, @RequestParam("sbd") String sbd,
+			@RequestParam("sbi") String sbi, @RequestParam("st") String st) {
+		String query = "";
+		if(sbi.equals("1")) {
+			query = " and where student.userId like " + "%" + st + "%";
+		}
+		List<Student> students = studentMapper.frustratedStudent(query);
+		List<Student> list = new ArrayList<Student>();
+		Collections.copy(students, list);
+		for(Student s : list) {
+			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
+			int majorCredit = 0;
+			int myMajorCredit = Integer.parseInt(mySubjectMapper.findMajorCount(s.getUserId()));
+			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
+				if(secondMajor.equals("부전공")) {	// 부전공
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {	// 복수전공
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
+				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {
+					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
+					if(myMajorCredit < majorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} // 전공필수 끝
+			int allMajorCredit = 0;
+			int myAllMajorCredit = mySubjectMapper.findMajor(s.getUserId()).size();
+			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공학점 검사
+				if(secondMajor.equals("부전공")) {	// 부전공
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {	// 복수전공
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
+				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				} else {
+					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
+					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
+					if(myAllMajorCredit < allMajorCredit) {
+						students.remove(s);
+						continue;
+					}
+				}
+			} // 전공학점 끝
+			int culturalCredit = 0;
+			int myCulturalCredit = mySubjectMapper.findCultural(s.getUserId()).size();
+			if(secondMajor == null && s.getTransferStudent().equals("0")) {
+				if(myCulturalCredit < culturalCredit) {
+					students.remove(s);
+					continue;
+				}
+			}// 교양학점 끝
+			int requiredSubject = requiredSubjectMapper.requiredCount(s.getUserId().substring(0, 4));
+			int myRequiredSubject = requiredSubjectMapper.myRequiredCount(s.getUserId().substring(0, 4));
+			if(myRequiredSubject < requiredSubject) {
+				students.remove(s);
+				continue;
+			} // 전공필수 과목 끝
+			int pray = mySubjectMapper.findPray(s.getUserId());
+			if(pray < 2) {
+				students.remove(s);
+				continue;
+			}	//채플 끝
+			if(s.getVolunteerExemption().equals("0")) {
+				int volunteer = mySubjectMapper.findService(s.getUserId());
+				if(volunteer < 1) {
+					students.remove(s);
+					continue;
+				}
+			} // 사회봉사 끝
+		}
+		model.addAttribute("students", students);
+		request.setAttribute("sbd", sbd);
+		request.setAttribute("sbi", sbi);
+		request.setAttribute("st", st);
+		return "admin/admin_frustrated_list";
+	}
+
 	//관리자 전체과목 조회 페이지
 	@RequestMapping(value="admin_all_subject", method=RequestMethod.GET)
 	public String admin_all_search(Model model,HttpSession session) {
@@ -421,7 +633,7 @@ public class AdminController {
 
 		Department department = departmentMapper.findOne(departmentId);
 		model.addAttribute("department", department);
-		
+
 
 		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
 		model.addAttribute("list0", list0);
@@ -458,16 +670,16 @@ public class AdminController {
 		model.addAttribute("departments", departments);
 		Department department = departmentMapper.findOne(departmentId);
 		model.addAttribute("department", department);
-		
+
 		System.out.println(etc4);
-		
+
 		graduationMapper.updateText(content0, etc0, departmentId, "0");
 		graduationMapper.updateText(content1, etc1, departmentId, "1");
 		graduationMapper.updateText(content2, etc2, departmentId, "2");
 		graduationMapper.updateText(content3, etc3, departmentId, "3");
 		graduationMapper.updateText(content4, etc4, departmentId, "4");
 		graduationMapper.updateText(content5, etc5, departmentId, "5");
-		
+
 		GraduationText list0 = graduationMapper.findByDepartmentId(departmentId, "0");
 		model.addAttribute("list0", list0);
 
@@ -485,9 +697,9 @@ public class AdminController {
 
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
-		
+
 		model.addAttribute("departmentId", departmentId);
-			
+
 		return "admin/admin_allSearchEdit";
 	}
 
@@ -532,7 +744,7 @@ public class AdminController {
 		re.setContent(counsel.getContent());
 		recordMapper.update(re);
 
-String record = recordMapper.findContent(stuId);
+		String record = recordMapper.findContent(stuId);
 		model.addAttribute("record",record);
 		model.addAttribute("user",user);
 		return "admin/admin_memo";
@@ -550,11 +762,11 @@ String record = recordMapper.findContent(stuId);
 	}
 
 	//superAdmin_create GET
-		@RequestMapping(value="superAdmin_create", method=RequestMethod.GET)
-		public String superAdmin_create (Model model, HttpSession session) {
+	@RequestMapping(value="superAdmin_create", method=RequestMethod.GET)
+	public String superAdmin_create (Model model, HttpSession session) {
 
-			return "admin/superAdmin_create";
-		}
+		return "admin/superAdmin_create";
+	}
 	//superAdmin_create POST
 	@RequestMapping(value="superAdmin_create", method=RequestMethod.POST)
 	public String superAdmin_create (Model model,User user, HttpSession session) {
@@ -568,14 +780,14 @@ String record = recordMapper.findContent(stuId);
 		userMapper.insert(u);
 		return "admin/superAdmin_create";
 	}
-	
+
 	//필수과목 수정 페이지 
 	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
 	public String admin_changeGraduation (Model model, HttpSession session) {
-		
+
 		return "admin_changeGraduation";
 	}
 
-	
-	
+
+
 }

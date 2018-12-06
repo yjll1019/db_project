@@ -19,6 +19,7 @@ public interface MySubjectMapper {
 	void deleteById(String userId);
 
 	List<MySubject> findMajor(String userId);//전필
+	String findMajorCount(String userId);
 	List<MySubject> findCultural(String userId);//교필
 	List<MySubject> findSubMajor(String userId,String departmentId);//부/복수전공
 	int findPray(String userId);//채플

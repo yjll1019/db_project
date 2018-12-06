@@ -107,6 +107,11 @@
 		select * from mySubject
 		where userId=#{userId} and (completionDivision='전필' or completionDivision='전선');
 	</select>
+	
+	<select id="findMajorCount" resultType="String">
+		select count(*) from mySubject
+		where userId=#{userId} and completionDivision='전필';
+	</select>
 
 	<select id="findCultural" resultType="MySubject">
 		select * from mySubject

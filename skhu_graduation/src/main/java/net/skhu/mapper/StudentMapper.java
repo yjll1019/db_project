@@ -19,4 +19,7 @@ public interface StudentMapper {
 	List<Student> findById(String userId);
 	List<Student> findByName(String userName);
 	List<Student> findByGrade(String semester1, String semester2);
+
+	//미충족학생
+	List<Student> frustratedStudent(String searchBy);
 }
