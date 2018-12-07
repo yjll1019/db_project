@@ -54,14 +54,16 @@
 	</div>
 		<div id="jb-content" style="padding-left: 6%">
 		
-					<form  class ="form-inline mb5" action="graduationSelect">
+					<form  class ="form-inline mb5" action="graduationSelect" form="post">
 				<div style="font-size: 14pt;">
 					<select name="departmentId" class="form-control"
 						value="${departmentList}" style="width: 400px">
 							<option >학과를 선택하세요</option>
 						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}"  >${department.name}</option>
+							<option value="${department.id}"
+								${departmentId == department.id ? "selected" : ""}>${department.name}</option>
 						</c:forEach>
+
 					</select>&nbsp;&nbsp;
 				&nbsp;
 				<select name="year" class="form-control">
@@ -77,28 +79,10 @@
 			</div>
 			</form>
 			<br/>
-			<%
-			String year = request.getParameter("year");
-			%>	
-			<div style="font-size: 20pt;">		
-				${department.name}이수과목
+		<div style="font-size: 20pt;">		
+				소프트웨어공학과 16학번 이수과목
 			</div>
-			
-						<%
-				
-				List<String> list1 = (List) request.getAttribute("list1");
-				List<String> list2 = (List) request.getAttribute("list2");
-				List<String> list3 = (List) request.getAttribute("list3");
-				List<String> list4 = (List) request.getAttribute("list4");
-				List<String> list5 = (List) request.getAttribute("list5");
-				List<String> list6 = (List) request.getAttribute("list6");
-				List<String> list7 = (List) request.getAttribute("list7");
-				List<String> list8 = (List) request.getAttribute("list8");
-				
-				List<String> requiredMySubject = (List) request.getAttribute("requiredMySubject");
-				
-			%>
-			<table id="table1" style="margin-top: 2%; width: 100%;">
+	<table id="table1" style="margin-top: 2%; width: 100%;">
 				<thead>
 					<tr>
 						<th scope="col" colspan="2" id="th1"
@@ -116,49 +100,28 @@
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-				
 					<td id="td2" style="border-right: 1px solid silver">
 						
-						<%
-							for(int i=0; i<list1.size(); ++i){
-								if(!requiredMySubject.contains(list1.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list1.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list1.get(i) %></span><br /> 
-						<%} }%>
-						
-
+						<span>C프로그래밍Ⅰ </span>
+							<br /> 
+						<span>과정지도 1</span>
+							<br /> 
+						<span>정보사회론</span>
+							<br /> 
+						<span>이산수학</span>
+							<br />
+						<span>말과글</span>
+							<br /> 
+						<span>대학생활세미나 Ⅰ</span>
 					</td>
-					<td id="td2" style="border-right: 1px solid black">
-					<%
-							for(int i=0; i<list2.size(); ++i){
-								if(!requiredMySubject.contains(list2.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list2.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list2.get(i) %></span><br /> 
-						<%} }%>
-					<td id="td2" style="border-right: 1px solid silver">	<%
-							for(int i=0; i<list3.size(); ++i){
-								if(!requiredMySubject.contains(list3.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list3.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list3.get(i) %></span><br /> 
-						<%} }%>
-					<td id="td2">
-					
-					</td>
+					<td id="td2" style="border-right: 1px solid black"><span>C프로그래밍
+							Ⅱ</span><br /> <span>과정지도 2</span><br /> <span>웹페이지 구축 Ⅰ</span><br />
+						<span>대학수학</span><br /> <span>컴퓨터
+							활용</span><br /> <span>대학생활세미나 Ⅱ</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>자바프로그래밍</span><br />
+						<span>과정지도 3</span><br /> <span >컴퓨터구조</span><br />
+						<span>데이터베이스개론</span></td>
+					<td id="td2"><span>자료구조론</span><br /> <span>과정지도 4</span></td>
 				</tr>
 				<thead>
 					<tr>
@@ -176,64 +139,14 @@
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-<!-- 3-1 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list5.size(); ++i){
-								if(!requiredMySubject.contains(list5.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list5.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list5.get(i) %></span><br /> 
-						<%} }%>
-					</td>
-				<!-- 3-2 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list6.size(); ++i){
-								if(!requiredMySubject.contains(list6.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list6.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list6.get(i) %></span><br /> 
-						<%} }%>
-					</td>
-				<!-- 4-1 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list7.size(); ++i){
-								if(!requiredMySubject.contains(list7.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list7.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list7.get(i) %></span><br /> 
-						<%} }%>
-					</td>
-				<!-- 4-2 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list8.size(); ++i){
-								if(!requiredMySubject.contains(list8.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list8.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list8.get(i) %></span><br /> 
-						<%} }%>
-					</td>
+					<td id="td2" style="border-right: 1px solid silver"><span>알고리즘</span><br />
+						<span>과정지도 5</span></td>
+					<td id="td2" style="border-right: 1px solid black"><span>과정지도 6</span></td>
+					<td id="td2" style="border-right: 1px solid silver"><span>졸업지도</span></td>
+					<td></td>
 				</tr>
 			</table>
+			
 			<form>		
 			<div class="container" style="margin-top: 5%; font-size: 15pt; margin-left: 15%">
 				<table style="width: 900px;">

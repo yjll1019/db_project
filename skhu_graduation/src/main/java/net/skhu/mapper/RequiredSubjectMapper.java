@@ -9,4 +9,6 @@ public interface RequiredSubjectMapper {
 	
 	List<String> findByConditions(String admissionYear, String grade, String semester);
 	
+
+	
 }
