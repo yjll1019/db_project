@@ -53,22 +53,19 @@
          <h2>&nbsp;&nbsp;전체학과 졸업요건 안내</h2>
          <br />
          <form class="form-horizontal" method="post" >
-         
-         
-         
- 			  	  <div class="form-group" id="class2" style="display:inline;">
-                  <select name="departmentId" class="custom-select" style="width: 300px; ]display: inline;margin-left: 1%; height:35px;">
-     							<option >학과를 선택하세요</option>
-							<c:forEach var="department" items="${departments}">
-								<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
-							</c:forEach>
-                  </select> 
+ 
+				<div class="col-sm-4">
+					<select name="departmentId" class="form-control"
+						value="${departmentList}" style="width: 400px">
+							<option selected>학과를 선택하세요</option>
+						<c:forEach var="department" items="${departments}">
+							<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+						</c:forEach>
+					</select>&nbsp;&nbsp;
 
-					<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회"/>
+					<button type="submit" class="btn btn-primary">조회</button>
 		</div>
-		<br/>
-		<br>
-			
+			<br />
          <div class="table-responsive">
             <table class="table table-bordered"
 				style="margin-top: -15px; width: 1000; max-height: 500px; text-align: center; table-layout: fixed;">
