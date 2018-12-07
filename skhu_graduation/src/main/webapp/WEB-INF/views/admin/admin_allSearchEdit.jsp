@@ -87,18 +87,17 @@
 			<h2>&nbsp;&nbsp;전체학과 졸업요건 수정</h2> 
 		<br/><br/>
          <form class="form-horizontal" action = "select">
-
-			  		<div class="form-group" id="class2" style=" display:inline;">
-				      <select name="departmentId" class="form-control" value="${departmentList}" style="width: 400px">
-							<option >학과를 선택하세요</option>
-							<c:forEach var="department" items="${departments}">
-								<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
-							</c:forEach>
-						
-						</select>&nbsp;&nbsp;
+         
+         
+	  <div class="form-group" id="class2" style="display:inline;">
+                  <select name="departmentId" class="custom-select" style="width: 300px; ]display: inline;margin-left: 1%; height:35px;">
+     							<option >학과를 선택하세요</option>
+						<c:forEach var="department" items="${departments}">
+							<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+						</c:forEach>
+					</select>&nbsp;&nbsp;
 						<input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회"/>
 					</div>
-					
 					
 		</form>
 
