@@ -253,9 +253,8 @@ public class AdminController {
 
 	@RequestMapping(value="admin_frustrated_list", method=RequestMethod.GET)
 	public String frustrated_list(Model model) {
-		List<Student> students = studentMapper.frustratedStudent("");
-		List<Student> list = new ArrayList<Student>();
-		Collections.copy(students, list);
+		List<Student> students = studentMapper.frustratedStudent();
+		List<Student> list = new ArrayList<Student>(students);
 		for(Student s : list) {
 			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
 			int majorCredit = 0;
@@ -264,28 +263,24 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				} else {	// 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				} else {
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} // 전공필수 끝
@@ -295,13 +290,11 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				} else {	// 복수전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				}
@@ -309,15 +302,13 @@ public class AdminController {
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				} else {
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
 					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} // 전공학점 끝
@@ -325,28 +316,29 @@ public class AdminController {
 			int myCulturalCredit = mySubjectMapper.findCultural(s.getUserId()).size();
 			if(secondMajor == null && s.getTransferStudent().equals("0")) {
 				if(myCulturalCredit < culturalCredit) {
-					students.remove(s);
 					continue;
 				}
 			}// 교양학점 끝
 			int requiredSubject = requiredSubjectMapper.requiredCount(s.getUserId().substring(0, 4));
 			int myRequiredSubject = requiredSubjectMapper.myRequiredCount(s.getUserId().substring(0, 4));
 			if(myRequiredSubject < requiredSubject) {
-				students.remove(s);
 				continue;
 			} // 전공필수 과목 끝
 			int pray = mySubjectMapper.findPray(s.getUserId());
 			if(pray < 2) {
-				students.remove(s);
 				continue;
 			}	//채플 끝
 			if(s.getVolunteerExemption().equals("0")) {
 				int volunteer = mySubjectMapper.findService(s.getUserId());
 				if(volunteer < 1) {
-					students.remove(s);
 					continue;
 				}
 			} // 사회봉사 끝
+			int sumCredit = mySubjectMapper.sumCredit(s.getUserId());
+			if(sumCredit < 130) {
+				continue;
+			}
+			students.remove(s);
 		}
 		model.addAttribute("students", students);
 		return "admin/admin_frustrated_list";
@@ -355,13 +347,13 @@ public class AdminController {
 	@RequestMapping(value="admin_frustrated_list", method=RequestMethod.POST)
 	public String frustrated_list(Model model, HttpServletRequest request, @RequestParam("sbd") String sbd,
 			@RequestParam("sbi") String sbi, @RequestParam("st") String st) {
-		String query = "";
+		List<Student> students;
 		if(sbi.equals("1")) {
-			query = " and where student.userId like " + "%" + st + "%";
+			students = studentMapper.frustratedStudentByUserId("%" + st + "%");
+		} else {
+			students = studentMapper.frustratedStudent();
 		}
-		List<Student> students = studentMapper.frustratedStudent(query);
-		List<Student> list = new ArrayList<Student>();
-		Collections.copy(students, list);
+		List<Student> list = new ArrayList<Student>(students);
 		for(Student s : list) {
 			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
 			int majorCredit = 0;
@@ -370,28 +362,24 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				} else {	// 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				} else {
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} // 전공필수 끝
@@ -401,13 +389,11 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				} else {	// 복수전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				}
@@ -415,15 +401,13 @@ public class AdminController {
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
 						continue;
 					}
 				} else {
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
 					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
 					if(myAllMajorCredit < allMajorCredit) {
-						students.remove(s);
-						continue;
+ 						continue;
 					}
 				}
 			} // 전공학점 끝
@@ -431,28 +415,29 @@ public class AdminController {
 			int myCulturalCredit = mySubjectMapper.findCultural(s.getUserId()).size();
 			if(secondMajor == null && s.getTransferStudent().equals("0")) {
 				if(myCulturalCredit < culturalCredit) {
-					students.remove(s);
 					continue;
 				}
 			}// 교양학점 끝
 			int requiredSubject = requiredSubjectMapper.requiredCount(s.getUserId().substring(0, 4));
 			int myRequiredSubject = requiredSubjectMapper.myRequiredCount(s.getUserId().substring(0, 4));
 			if(myRequiredSubject < requiredSubject) {
-				students.remove(s);
 				continue;
 			} // 전공필수 과목 끝
 			int pray = mySubjectMapper.findPray(s.getUserId());
 			if(pray < 2) {
-				students.remove(s);
 				continue;
 			}	//채플 끝
 			if(s.getVolunteerExemption().equals("0")) {
 				int volunteer = mySubjectMapper.findService(s.getUserId());
 				if(volunteer < 1) {
-					students.remove(s);
 					continue;
 				}
 			} // 사회봉사 끝
+			int sumCredit = mySubjectMapper.sumCredit(s.getUserId());
+			if(sumCredit < 130) {
+				continue;
+			}
+			students.remove(s);
 		}
 		model.addAttribute("students", students);
 		request.setAttribute("sbd", sbd);

@@ -102,6 +102,12 @@
 		subjectName from subject where code like #{subjectCode} and year like
 		#{year};
 	</select>
+	
+	<select id="sumCredit" resultType="int">
+		select sum(m.credit)
+		from student s join mySubject m on s.userId = m.userId
+		where s.userId = #{userId}
+	</select>
 
 	<select id="findMajor" resultType="MySubject">
 		select * from mySubject

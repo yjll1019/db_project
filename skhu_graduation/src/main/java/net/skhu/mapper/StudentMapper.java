@@ -21,5 +21,6 @@ public interface StudentMapper {
 	List<Student> findByGrade(String semester1, String semester2);
 
 	//미충족학생
-	List<Student> frustratedStudent(String searchBy);
+	List<Student> frustratedStudent();
+	List<Student> frustratedStudentByUserId(String userId);
 }
