@@ -11,11 +11,5 @@
 		and requiredSubject.grade like #{grade} and requiredSubject.semester like #{semester}
 		and subject.year like #{admissionYear};
 	</select>
-	
-	
-	
-	
-	
-	
 
 </mapper>

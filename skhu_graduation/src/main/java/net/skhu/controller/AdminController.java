@@ -573,46 +573,9 @@ String record = recordMapper.findContent(stuId);
 	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
 	public String admin_changeGraduation (Model model, HttpSession session) {
 		
-		
-		List<Department> departments = departmentMapper.findAll();
-		model.addAttribute("departments", departments);
-		
-		
-
-		
-		return "admin/admin_changeGraduation";
+		return "admin_changeGraduation";
 	}
-	
-	
-	
-	@RequestMapping("graduationSelect")
-	public String graduationSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
-			@RequestParam("year") String year) {
-		
-		
-		List<Department> departments = departmentMapper.findAll();
-		model.addAttribute("departments", departments);
-		
-		
-		
-		return "admin/admin_changeGraduation";
-	}
-	
 
-		
-		//필수학점 수정 페이지 
-		@RequestMapping(value="admin_change_credit", method=RequestMethod.GET)
-		public String admin_change_credit (Model model, HttpSession session) {
-			
-			
-			List<Department> departments = departmentMapper.findAll();
-			model.addAttribute("departments", departments);
-			
-			
-			
-			return "admin/admin_change_credit";
-		}
-		
-
+	
 	
 }
