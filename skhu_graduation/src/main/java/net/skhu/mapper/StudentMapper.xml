@@ -104,12 +104,17 @@
 	</select>
 
 	<select id="frustratedStudent" resultMap="resultMap3">
-		select student.*, u.*
-		from (select s.*, sum(m.credit) 'totalCredit'
-		from student s join mySubject m on s.userId = m.userId
-		where s.stuSemester >= 8 group by m.userId) 
-		student join user u on student.userId = u.id 
-		where totalCredit >= 130 and student.departmentId = '12' #{searchBy}
+		select s.*, u.*, d.* 
+		from student s join user u on s.userId = u.id
+		join department d on s.departmentId = d.id
+		where s.stuSemester >= 8 and s.departmentId = '12'
+	</select>
+	
+	<select id="frustratedStudentByUserId" resultMap="resultMap3">
+		select s.*, u.*, d.* 
+		from student s join user u on s.userId = u.id
+		join department d on s.departmentId = d.id
+		where s.stuSemester >= 8 and s.departmentId = '12' and s.userId like #{userId}
 	</select>
 
 	<resultMap id="resultMap3" type="Student">
@@ -126,6 +131,10 @@
 			<result property="userName" column="userName" />
 			<result property="phone" column="phone" />
 			<result property="email" column="email" />
+		</association>
+		<association property="department" javaType="Department">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
 		</association>
 	</resultMap>
 

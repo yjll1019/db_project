@@ -127,11 +127,11 @@ $(function() {
                      </tr>
                   </thead>
                   <tbody>
-                     <c:forEach var="student" items="${ studets }">
+                     <c:forEach var="student" items="${ students }">
                         <tr data-url="../user/detail_stu_info?id=${ student.userId }" style="cursor:pointer">
                            <td>${ student.user.id }</td>
                            <td>${ student.user.userName }</td>
-                           <td>${ student.user.departmentName }</td>
+                           <td>${ student.department.name }</td>
                            <td>${ student.user.phone }</td>
                         </tr>
                      </c:forEach>

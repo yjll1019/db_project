@@ -18,6 +18,7 @@ public interface MySubjectMapper {
 	List<MySubject> findBySubjectType(String userId,String completionDivision);
 	void deleteById(String userId);
 
+	int sumCredit(String userId); // 총 학점계산
 	List<MySubject> findMajor(String userId);//전필
 	String findMajorCount(String userId);
 	List<MySubject> findCultural(String userId);//교필
