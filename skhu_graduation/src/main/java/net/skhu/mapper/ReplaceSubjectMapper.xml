@@ -90,6 +90,13 @@
 		where d.id=#{id}
 	</select>
 	
+	<select id ="findReplaceSub" resultMap = "resultMap1">
+
+	select distinct r.*, s.subjectName
+	from replaceSubject r left join
+	subject s on r.subjectCode = s.code;
+	</select>
+	
 	  <delete id="deleteSubject">
    		DELETE FROM replaceSubject
    		WHERE subjectCode = #{deleteCode} and replaceSubject=#{replaceCode}

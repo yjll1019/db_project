@@ -32,6 +32,7 @@ import net.skhu.dto.Department;
 import net.skhu.dto.GraduationInput;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
+import net.skhu.dto.ReplaceSubject;
 import net.skhu.dto.RequiredSubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
@@ -622,21 +623,14 @@ public class StudentController {
 	@RequestMapping(value = "stu_replace_repeat", method = RequestMethod.GET)
 	public String stu_replace_repeat(Model model, HttpSession session, @RequestParam("subjectCode") String subjectCode) {
 		User user = (User) session.getAttribute("user");
+
+
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
 		model.addAttribute("mySubject", mySubject);
-		String completionDivision;
-		List<MySubject> subjectList;
 
+		List<ReplaceSubject> list = replaceSubjectMapper.findReplaceSub();
 
-		if (mySubject.getCompletionDivision().contains("교")) {
-			completionDivision = "교선";
-			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);
-			model.addAttribute("subjectList", subjectList);
-		} else {
-			completionDivision = "전선";
-			subjectList=mySubjectMapper.findBySubjectType(user.getId(),completionDivision);
-			model.addAttribute("subjectList", subjectList);
-		}
+		model.addAttribute("list", list);
 		return "student/stu_replace_repeat";
 	}
 
@@ -810,45 +804,16 @@ public class StudentController {
 		User oneUser= new User();
 
 
-		oneUser.setId("2016320255"); //수정 필요
-		oneUser.setDepartmentId("12");
 
 
 
 
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
 		model.addAttribute("mySubject", mySubject);
-		String completionDivision;
-		List<MySubject> subjectList;
 
-		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(oneUser.getId());
-		List<String> requiredSubject = mySubjectMapper.requiredSubject(oneUser.getDepartmentId(), oneUser.getId().substring(0, 4));
-		List<String> noSubject = (List) CollectionUtils.subtract(requiredSubject, requiredMySubject);
-		if(noSubject.contains("AC00001")) //채플제거
-			noSubject.remove("AC00001");
-		if(noSubject.contains("AC00003")) //사회봉사제거
-			noSubject.remove("AC00003");
+		List<ReplaceSubject> list = replaceSubjectMapper.findReplaceSub();
 
-
-
-
-		Map<String, String> noSubjectMap = new LinkedHashMap<String, String>();
-		Map<String, String> requiredSubjectMap = new LinkedHashMap<String, String>();
-
-		for(int i=0; i<requiredSubject.size(); ++i) {
-			String code = requiredSubject.get(i);
-			String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
-			requiredSubjectMap.put(code, subjectName);
-		}
-
-		for(int i=0; i<noSubject.size(); ++i) {
-			String code = noSubject.get(i);
-			String subjectName = mySubjectMapper.getSubjectName(code, oneUser.getId().substring(0, 4));
-			noSubjectMap.put(code, subjectName);
-		}
-
-		model.addAttribute("requiredSubjectMap", requiredSubjectMap);
-		model.addAttribute("noSubjectMap", noSubjectMap);
+		model.addAttribute("list", list);
 
 
 		return "student/stu_replace_first";

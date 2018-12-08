@@ -47,10 +47,10 @@
 					</table>
 					<div class="form-group">
 						<select class="custom-select" name="changeSubjectCode" style="width: 30%; margin-top: 30px; margin-bottom: 20px">
-							<option selected>대체 가능한 과목</option>
-						<c:forEach var="list" items="${subjectList}">
-							<option value="${list.subjectCode}">${list.subjectName}</option>
-						</c:forEach>
+							<option selected>대체 할 과목</option>
+							<c:forEach var="map" items="${list}">
+								<option value="${map.subjectCode }">${map.subject.subjectName }</option>
+							</c:forEach>
 						</select>
 					</div>
 					
