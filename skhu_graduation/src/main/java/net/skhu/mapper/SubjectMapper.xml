@@ -28,5 +28,45 @@
 		code=#{code} and departmentId=#{departmentId}
 		and subjectName=#{subjectName}
 	</select>
-
+	
+	<select id="findByType" resultType="Subject" resultMap="resultMap1">
+		<bind name="start" value="(pg-1) * sz" />
+		select *
+		from subject s 
+		left join department d 
+		on s.departmentId = d.id
+		<where>
+			<if test="sb==1">s.code LIKE '%' #{st} '%'</if>
+			<if test="sb==2">s.subjectName LIKE '%' #{st} '%'</if>
+		</where>
+		LIMIT ${start},${sz}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(s.code)
+		from subject s 
+		left join department d 
+		on s.departmentId = d.id
+		<where>
+			<if test="sb==1">s.code LIKE '%' #{st} '%'</if>
+			<if test="sb==2">s.subjectName LIKE '%' #{st} '%'</if>
+		</where>
+	</select>
+	
+	<resultMap id="resultMap1" type="Subject">
+		<id property="code" column="code" />
+		<result property="departmentId" column="departmentId" />
+		<result property="year" column="year" />
+		<result property="semester" column="semester" />
+		<result property="divisionClass" column="divisionClass" />
+		<result property="subjectName" column="subjectName" />
+		<result property="completionDivision"
+			column="completionDivision" />
+		<result property="credit" column="credit" />
+		
+		<association property="department" javaType="Department"> 
+			<id property="id" column="id"/> 
+			<id property="name" column="name"/> 
+		</association>
+	</resultMap>
 </mapper>
