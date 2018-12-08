@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,6 +22,7 @@ import net.skhu.dto.Board;
 import net.skhu.dto.Uploadedfile;
 import net.skhu.dto.User;
 import net.skhu.mapper.BoardMapper;
+import net.skhu.model.Pagination;
 
 @Controller
 @RequestMapping("/user")
@@ -32,24 +32,11 @@ public class BoardController {
 	//@Autowired UploadedFileMapper fileMapper;
 
 	@RequestMapping(value="/board", method=RequestMethod.GET)
-	public String board(Model model) {
-		List<Board> boards = boardMapper.findAll();
-		model.addAttribute("boards", boards);
-		return "user/board";
-	}
+	public String board(Model model,Pagination pagination) {
+		int count = boardMapper.count(pagination);
+		pagination.setRecordCount(count);
+		model.addAttribute("boards", boardMapper.findByType(pagination));
 
-	@RequestMapping(value="/board", method=RequestMethod.POST)
-	public String board_search(Model model, 
-			@RequestParam("searchSelect") int st1, @RequestParam("searchText") String st2) {
-		List<Board> boards;
-		if(st1 == 1) {		// 작성자 이름 검색
-			boards = boardMapper.findByName('%' + st2 + '%');
-		} else if (st1 == 2) {	// 제목 검색
-			boards = boardMapper.findByTitle('%' + st2 + '%');
-		} else {
-			boards = boardMapper.findAll();
-		}
-		model.addAttribute("boards", boards);
 		return "user/board";
 	}
 
@@ -60,7 +47,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "user/board_notice";
 	}
-	
+
 	@RequestMapping(value="/board_notice_create", method=RequestMethod.GET)
 	public String board_notice_create(Model model) {
 		Board board = new Board();
@@ -76,9 +63,9 @@ public class BoardController {
 		board.setUserId(user.getId());
 		boardMapper.insertNotice(board);
 		int boardId = boardMapper.lastBoardId();
-		
+
 		System.out.println("id=" + boardId);
-		
+
 		for(MultipartFile uploadFile : files) {
 			if(uploadFile.getSize() <= 0) continue;
 			String fileName = Paths.get(uploadFile.getOriginalFilename()).getFileName().toString();
@@ -105,7 +92,7 @@ public class BoardController {
 	@RequestMapping(value="/board_notice_edit", method=RequestMethod.POST)
 	public String board_notice_update(Model model, Board board, @RequestParam("fileUpload") MultipartFile[] files) throws IOException {
 		boardMapper.updateNotice(board);
-		
+
 		for(MultipartFile uploadFile : files) {
 			if(uploadFile.getSize() <= 0) continue;
 			String fileName = Paths.get(uploadFile.getOriginalFilename()).getFileName().toString();
@@ -126,7 +113,7 @@ public class BoardController {
 		boardMapper.deleteNotice(id);
 		return "redirect:board";
 	}
-	
+
 	@RequestMapping(value="/board_fileList")
 	public String board_fileList(Model model, HttpSession session, @RequestParam("boardId") int boardId) {
 		User user = (User) session.getAttribute("user");
@@ -138,7 +125,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public String upload(@RequestParam("fileUpload") MultipartFile[] files, 
+	public String upload(@RequestParam("fileUpload") MultipartFile[] files,
 			@RequestParam("boardId") int boardId) throws IOException {
 		for(MultipartFile uploadFile : files) {
 			if(uploadFile.getSize() <= 0) continue;
@@ -233,7 +220,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/board_question_unlocked", method=RequestMethod.GET)
-	public String board_question_locked(Model model, HttpSession session, 
+	public String board_question_locked(Model model, HttpSession session,
 			@RequestParam("boardId") int boardId) {
 		Board board = boardMapper.findOne(boardId);
 		User user = (User) session.getAttribute("user");
@@ -250,7 +237,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/board_question_unlocked", method=RequestMethod.POST)
-	public String board_question_unlocked(Model model, @RequestParam("boardId") int boardId, 
+	public String board_question_unlocked(Model model, @RequestParam("boardId") int boardId,
 			@RequestParam("password") String password) {
 		Board board = boardMapper.findOne(boardId);
 		if(board.getPassword().equals(password)) {
