@@ -812,13 +812,23 @@ public class AdminController {
 	@RequestMapping(value="updateSubject", method=RequestMethod.POST)
 	public String updateSubject (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year, @RequestParam("grade") String grade, @RequestParam("semester") String semester,
-			@RequestParam("subjectCode") String subjectCode) {
+			@RequestParam("subjectCode") String subjectCode, @RequestParam("button") int button) {
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		model.addAttribute("departmentId", departmentId);
 		model.addAttribute("year", year);
 		
+		if(button == 0) {
+		
 		requiredSubjectMapper.insert(departmentId, year, grade, semester, subjectCode);
+		
+		
+		}
+		
+		else if(button == 1) {
+			requiredSubjectMapper.delete(departmentId, year, grade, semester, subjectCode);
+			
+		}
 		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
 		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
 		List<RequiredSubject> list3 = requiredSubjectMapper.findByReSub(departmentId, year, "3");

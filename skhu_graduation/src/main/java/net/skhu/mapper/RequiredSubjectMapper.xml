@@ -37,6 +37,15 @@
 
 </select>
 
+<delete id="delete">
+	delete from requiredSubject
+	where departmentId like #{departmentId} and
+	admissionYear like #{year} and
+	grade like #{grade} and
+	semester like #{semester} and
+	subjectCode like #{subjectCode};
+</delete>
+
 
 
 <insert id="insert">

@@ -227,14 +227,16 @@
 						<td><input type="text" class="form-control"
 							name="subjectCode" placeholder="과목코드"
 							style="margin-left: 30px; margin-right:20px;width: 150px; border: 1px solid gray"></td>
-						<td><input type="text" class="form-control"
-							name="subjectName" placeholder="과목명"
-							style="margin-right:250px;width: 150px; border: 1px solid gray"></td>
+
 					</tr>
 				</table>
 			</div>
-				<input type="submit" class="btn btn-outline-primary" value="추가하기"
-					style="margin-left: 42%; margin-top: 5%; font-size: 15px;"/>
+									<button class="btn btn-primary" type="submit" name="button" value="0" style="margin-left: 37%; margin-top: 5%; font-size: 15px;">
+							과목 추가 <i class="fa fa-check spaceLeft"></i>
+						</button>
+						&nbsp;&nbsp; <button class="btn btn-danger" type="submit" name="button" value="1" style=" margin-top: 5%; font-size: 15px;">
+							과목 삭제<i class="fa fa-times spaceLeft"></i>
+						</button>
 			</form>
 		</div>
 

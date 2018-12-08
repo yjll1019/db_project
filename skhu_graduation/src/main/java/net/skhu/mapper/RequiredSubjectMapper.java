@@ -14,4 +14,5 @@ public interface RequiredSubjectMapper {
 	int myRequiredCount(String admissionYear);
 	List<RequiredSubject> findByReSub(String departmentId, String year, String grade);
 	void insert(String departmentId, String year, String grade, String semester, String subjectCode);
+	void delete(String departmentId, String year, String grade, String semester, String subjectCode);
 }
