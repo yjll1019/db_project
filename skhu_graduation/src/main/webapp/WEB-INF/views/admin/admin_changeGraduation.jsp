@@ -54,188 +54,160 @@
 	</div>
 		<div id="jb-content" style="padding-left: 6%">
 		
-					<form  class ="form-inline mb5" action="graduationSelect">
+					<form method="post" class ="form-inline mb5" action= "subjectSelect">
 				<div style="font-size: 14pt;">
-					<select name="departmentId" class="form-control"
-						value="${departmentList}" style="width: 400px">
-							<option >학과를 선택하세요</option>
-						<c:forEach var="department" items="${departments}">
-							<option value="${department.id}"  >${department.name}</option>
-						</c:forEach>
-					</select>&nbsp;&nbsp;
+				<select name="departmentId" class="form-control">
+    							<option >학과를 선택하세요</option>
+							<c:forEach var="department" items="${departments}">
+								<option value="${department.id}" ${departmentId == department.id ? "selected" : ""}>${department.name}</option>
+							</c:forEach>
+                  </select> 
 				&nbsp;
 				<select name="year" class="form-control">
-					<option value="2018">2018</option>
-					<option value="2017" >2017</option>
-					<option value="2016" >2016</option>
-					<option value="2015" >2015</option>
-					<option value="2014">2014</option>
-					<option value="2013">2013</option>
+				<option value="0">년도선택</option>
+					<option value="2018" <c:if test="${year == 2018}">selected</c:if>>2018</option>
+					<option value="2017" <c:if test="${year == 2017}">selected</c:if>>2017</option>
+					<option value="2016" <c:if test="${year == 2016}">selected</c:if>>2016</option>
+					<option value="2015" <c:if test="${year == 2015}">selected</c:if>>2015</option>
+					<option value="2014"<c:if test="${year == 2014}">selected</c:if>>2014</option>
+					<option value="2013"<c:if test="${year == 2013}">selected</c:if>>2013</option>
 				</select>	
 				&nbsp;
 				<button type="submit" class="btn btn-outline-primary" style="font-size: 13px;">조회하기</button>	
 			</div>
 			</form>
-			<br/>
-			<%
-			String year = request.getParameter("year");
-			%>	
+			<br/>	
 			<div style="font-size: 20pt;">		
-				${department.name}이수과목
 			</div>
 			
-						<%
-				
-				List<String> list1 = (List) request.getAttribute("list1");
-				List<String> list2 = (List) request.getAttribute("list2");
-				List<String> list3 = (List) request.getAttribute("list3");
-				List<String> list4 = (List) request.getAttribute("list4");
-				List<String> list5 = (List) request.getAttribute("list5");
-				List<String> list6 = (List) request.getAttribute("list6");
-				List<String> list7 = (List) request.getAttribute("list7");
-				List<String> list8 = (List) request.getAttribute("list8");
-				
-				List<String> requiredMySubject = (List) request.getAttribute("requiredMySubject");
-				
-			%>
 			<table id="table1" style="margin-top: 2%; width: 100%;">
 				<thead>
 					<tr>
-						<th scope="col" colspan="2" id="th1"
-							style="border-right: 1px solid white">1학년</th>
-						<th scope="col" colspan="2" id="th1">2학년</th>
+						<th scope="col" colspan="1" id="th1"
+							style="border-right: 1px solid white; font-size:15pt;">1학년</th>
+						<th scope="col" colspan="1" id="th1" style="font-size:15pt;">2학년</th>
+						<th scope="col" colspan="1" id="th1" style="font-size:15pt;">3학년</th>
+						<th scope="col" colspan="1" id="th1" style="font-size:15pt;">4학년</th>
 					</tr>
 				</thead>
 				<tr>
 					<td id="td1" style="border-right: 1px solid silver"><strong>
 							1학기 </strong></td>
 					<td id="td1" style="border-right: 1px solid black"><strong>
-							2학기 </strong></td>
+							1학기 </strong></td>
 					<td id="td1" style="border-right: 1px solid silver"><strong>
 							1학기 </strong></td>
+					<td id="td1"><strong> 1학기 </strong></td>
+				</tr>
+				
+				<tr>
+				<td id="td2" style="border-right: 1px solid silver">
+				<c:forEach var="requiredSubject" items="${list1}">
+				   <c:if test="${ requiredSubject.semester == 1}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
+						</td>
+					<td id="td2" style="border-right: 1px solid black">
+					<c:forEach var="requiredSubject" items="${list2}">
+				   <c:if test="${ requiredSubject.semester == 1}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
+					</td>
+					<td id="td2" style="border-right: 1px solid silver">
+					<c:forEach var="requiredSubject" items="${list3}">
+				   <c:if test="${ requiredSubject.semester == 1}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
+					
+					<td id="td2" style="border-right: 1px solid silver">
+					
+					<c:forEach var="requiredSubject" items="${list4}">
+				   <c:if test="${ requiredSubject.semester == 1}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
+					</td>
+				</tr>
+			
+				<tr>
+					<td id="td1" style="border-right: 1px solid silver;"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid black"><strong>
+							2학기 </strong></td>
+					<td id="td1" style="border-right: 1px solid silver"><strong>
+							2학기 </strong></td>
 					<td id="td1"><strong> 2학기 </strong></td>
 				</tr>
 				<tr>
-				
 					<td id="td2" style="border-right: 1px solid silver">
+					<c:forEach var="requiredSubject" items="${list1}">
+				   <c:if test="${ requiredSubject.semester == 2}">
+					
 						
-						<%
-							for(int i=0; i<list1.size(); ++i){
-								if(!requiredMySubject.contains(list1.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list1.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list1.get(i) %></span><br /> 
-						<%} }%>
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
 						
-
+				
+					</c:if>
+					</c:forEach>
 					</td>
 					<td id="td2" style="border-right: 1px solid black">
-					<%
-							for(int i=0; i<list2.size(); ++i){
-								if(!requiredMySubject.contains(list2.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list2.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list2.get(i) %></span><br /> 
-						<%} }%>
-					<td id="td2" style="border-right: 1px solid silver">	<%
-							for(int i=0; i<list3.size(); ++i){
-								if(!requiredMySubject.contains(list3.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list3.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list3.get(i) %></span><br /> 
-						<%} }%>
-					<td id="td2">
+						<c:forEach var="requiredSubject" items="${list2}">
+				        <c:if test="${ requiredSubject.semester == 2}">
 					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
 					</td>
-				</tr>
-				<thead>
-					<tr>
-						<th scope="col" colspan="2" id="th1">3학년</th>
-						<th scope="col" colspan="2" id="th1">4학년</th>
-					</tr>
-				</thead>
-				<tr>
-					<td id="td1" style="border-right: 1px solid silver"><strong>
-							1학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid black"><strong>
-							2학기 </strong></td>
-					<td id="td1" style="border-right: 1px solid silver"><strong>
-							1학기 </strong></td>
-					<td id="td1"><strong> 2학기 </strong></td>
-				</tr>
-				<tr>
-<!-- 3-1 -->
 					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list5.size(); ++i){
-								if(!requiredMySubject.contains(list5.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list5.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list5.get(i) %></span><br /> 
-						<%} }%>
+							<c:forEach var="requiredSubject" items="${list3}">
+				        <c:if test="${ requiredSubject.semester == 2}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
 					</td>
-				<!-- 3-2 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list6.size(); ++i){
-								if(!requiredMySubject.contains(list6.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list6.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list6.get(i) %></span><br /> 
-						<%} }%>
-					</td>
-				<!-- 4-1 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list7.size(); ++i){
-								if(!requiredMySubject.contains(list7.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list7.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list7.get(i) %></span><br /> 
-						<%} }%>
-					</td>
-				<!-- 4-2 -->
-					<td id="td2" style="border-right: 1px solid silver">
-						<%
-							for(int i=0; i<list8.size(); ++i){
-								if(!requiredMySubject.contains(list8.get(i))){
-						%>	
-							 <span style="color: #d9534f;"><%=list8.get(i) %></span><br /> 
-						<% 
-								}else{
-									
-						%>
-								<span><%=list8.get(i) %></span><br /> 
-						<%} }%>
+					<td id="td2">
+							<c:forEach var="requiredSubject" items="${list4}">
+				        <c:if test="${ requiredSubject.semester == 2}">
+					
+						
+						<span>${requiredSubject.subjectCode}&nbsp;&nbsp;${requiredSubject.name}</span><br>
+						
+				
+					</c:if>
+					</c:forEach>
 					</td>
 				</tr>
 			</table>
-			<form>		
-			<div class="container" style="margin-top: 5%; font-size: 15pt; margin-left: 15%">
+			<form method = "post" action = "updateSubject">		
+			 				<input type="hidden" name="departmentId" value ="${departmentId}">
+ 				<input type="hidden" name="year" value = "${year}">
+			<div class="container" style="margin-top: 5%; font-size: 15pt; margin-left: 20%">
 				<table style="width: 900px;">
 					<tr>	
 						<td><select name="grade" class="form-control"
@@ -246,7 +218,7 @@
 								<option value="4">4학년</option>
 						</select></td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><select name="term" class="form-control"
+						<td><select name="semester" class="form-control"
 							style="margin-left: 30px; border: 1px solid gray">
 								<option value="1">1학기</option>
 								<option value="2">2학기</option>
@@ -261,8 +233,8 @@
 					</tr>
 				</table>
 			</div>
-				<input type="submit" class="btn btn-outline-primary" value="저장하기"
-					style="margin-left: 45%; margin-top: 5%; font-size: 15px;"/>
+				<input type="submit" class="btn btn-outline-primary" value="추가하기"
+					style="margin-left: 42%; margin-top: 5%; font-size: 15px;"/>
 			</form>
 		</div>
 

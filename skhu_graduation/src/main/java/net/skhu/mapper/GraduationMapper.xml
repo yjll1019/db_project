@@ -20,7 +20,27 @@
 	graduationContent = #{content},
 	graduationEtc = #{etc}
 	where departmentId = #{departmentId} and
-	division = #{division}
+	creditDivision = #{creditDivision}
 	</update>
+
+	<update id="updateInput">
+		update graduationInput
+		set
+		credit = #{credit}
+		where departmentId like #{departmentId} and
+		admissionYear like #{year} and
+		creditDivision like  #{creditDivision} and
+		division like #{division}; 
+	</update>
+	
+	
+	<select id = "findByInput" resultType="GraduationInput">
+
+	select * from graduationInput
+	where departmentId like  #{departmentId} and
+	admissionYear like  #{year} and
+	creditDivision like  #{creditDivision}
+	
+	</select>
 	
 </mapper>

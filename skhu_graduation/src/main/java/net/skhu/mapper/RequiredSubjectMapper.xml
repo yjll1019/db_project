@@ -26,4 +26,24 @@
         and subject.year like #{admissionYear}
 		and subject.departmentId like '12';
 	</select>
+	<select id = "findByReSub" resultType="RequiredSubject">
+	select distinct r.*, s.subjectName name
+	from subject s left join
+	requiredSubject r
+	on r.subjectCode = s.code and r.admissionYear = s.year
+	where r.admissionYear like #{year} and
+	r.departmentId like #{departmentId} and
+	r.grade like #{grade};
+
+</select>
+
+
+
+<insert id="insert">
+insert into requiredSubject 
+values ( #{subjectCode}, #{departmentId}, #{year}, #{grade},
+#{semester});
+</insert>
+
+
 </mapper>
