@@ -32,7 +32,7 @@
 				<li class='active has-sub' ><a><span>졸업요건 수정</span></a>
 					<ul>
 						<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
-						<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+						<li class='last'><a href='../admin/admin_change_credit'><span>필수학점 수정</span></a></li>
 						<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
 					</ul>
 				</li>

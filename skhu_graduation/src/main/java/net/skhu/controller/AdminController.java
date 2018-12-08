@@ -23,6 +23,7 @@ import net.skhu.dto.GraduationText;
 import net.skhu.dto.GraduationInput;
 import net.skhu.dto.Record;
 import net.skhu.dto.ReplaceSubject;
+import net.skhu.dto.RequiredSubject;
 import net.skhu.dto.Student;
 import net.skhu.dto.Subject;
 import net.skhu.dto.User;
@@ -771,20 +772,58 @@ public class AdminController {
 	//필수과목 수정 페이지 
 	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
 	public String admin_changeGraduation (Model model, HttpSession session) {
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
 
-		return "admin_changeGraduation";
+		return "admin/admin_changeGraduation";
 	}
 	
-	@RequestMapping("graduationSelect")
+	
+	
+	@RequestMapping(value="subjectSelect", method=RequestMethod.POST)//학과, 년도 셀렉트
 	public String graduationSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year) {
 		
 		
+		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
+		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
+		List<RequiredSubject> list3 = requiredSubjectMapper.findByReSub(departmentId, year, "3");
+		List<RequiredSubject> list4 = requiredSubjectMapper.findByReSub(departmentId, year, "4");
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);	
+		model.addAttribute("list3", list3);	
+		model.addAttribute("list4", list4);	
+		model.addAttribute("departmentId", departmentId);
+		model.addAttribute("year", year);
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		
 		
 		
+		return "admin/admin_changeGraduation";
+	}
+	
+	//필수과목 수정 페이지 
+	@RequestMapping(value="updateSubject", method=RequestMethod.POST)
+	public String updateSubject (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
+			@RequestParam("year") String year, @RequestParam("grade") String grade, @RequestParam("semester") String semester,
+			@RequestParam("subjectCode") String subjectCode) {
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		model.addAttribute("departmentId", departmentId);
+		model.addAttribute("year", year);
+		
+		requiredSubjectMapper.insert(departmentId, year, grade, semester, subjectCode);
+		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
+		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
+		List<RequiredSubject> list3 = requiredSubjectMapper.findByReSub(departmentId, year, "3");
+		List<RequiredSubject> list4 = requiredSubjectMapper.findByReSub(departmentId, year, "4");
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);	
+		model.addAttribute("list3", list3);	
+		model.addAttribute("list4", list4);	
+
+
 		return "admin/admin_changeGraduation";
 	}
 	
