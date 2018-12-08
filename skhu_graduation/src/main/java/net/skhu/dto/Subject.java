@@ -9,6 +9,8 @@ public class Subject {
 	String subjectName;
 	String completionDivision;
 	String credit;
+	String departmentName;
+
 	Department department;
 
 	//폐지 과목 위함
@@ -144,6 +146,15 @@ public class Subject {
 
 	public void setDeleteSubjectName(String deleteSubjectName) {
 		DeleteSubjectName = deleteSubjectName;
+	}
+
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	@Override
