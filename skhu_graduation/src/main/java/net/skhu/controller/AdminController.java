@@ -1,6 +1,7 @@
 package net.skhu.controller;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.skhu.dto.Counsel;
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationText;
+import net.skhu.dto.GraduationInput;
 import net.skhu.dto.Record;
 import net.skhu.dto.ReplaceSubject;
 import net.skhu.dto.Student;
@@ -772,6 +774,98 @@ public class AdminController {
 
 		return "admin_changeGraduation";
 	}
+	
+	@RequestMapping("graduationSelect")
+	public String graduationSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
+			@RequestParam("year") String year) {
+		
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		
+		
+		
+		return "admin/admin_changeGraduation";
+	}
+	
+
+		
+	//필수학점 수정 페이지 
+	@RequestMapping(value="admin_change_credit", method=RequestMethod.GET)
+	public String admin_change_credit (Model model, HttpSession session) {
+		
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		
+		
+		
+		return "admin/admin_change_credit";
+	}
+	
+	@RequestMapping("creditSelect")
+	public String creditSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
+			@RequestParam("year") String year) {
+		
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		List<GraduationInput> list =  graduationMapper.findByInput(departmentId, year, "0");
+		model.addAttribute("list", list);//전공 총 학점
+		
+		List<GraduationInput> list1 =  graduationMapper.findByInput(departmentId, year, "1");
+		model.addAttribute("list1", list1);//전필 총 학점 
+		
+		model.addAttribute("departmentId", departmentId);
+		model.addAttribute("year", year);
+		
+		
+		return "admin/admin_change_credit";
+	}
+	
+	@RequestMapping(value="creditEdit",method=RequestMethod.POST)
+	public String creditEdit (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
+			@RequestParam("year") String year, @RequestParam("credit1") String credit1, @RequestParam("credit2") String credit2,
+			@RequestParam("credit3") String credit3,@RequestParam("credit4") String credit4,@RequestParam("credit5") String credit5,
+			@RequestParam("credit6") String credit6,@RequestParam("credit1_1") String credit1_1,@RequestParam("credit2_2") String credit2_2,
+			@RequestParam("credit3_3") String credit3_3,@RequestParam("credit5_5") String credit5_5,
+			@RequestParam("credit4_4") String credit4_4,@RequestParam("credit6_6") String credit6_6
+			) {
+		
+
+		
+		graduationMapper.updateInput(departmentId, year, "0", "0", credit1);
+		graduationMapper.updateInput(departmentId, year, "0", "1", credit2);
+		graduationMapper.updateInput(departmentId, year, "0", "2", credit3);
+		graduationMapper.updateInput(departmentId, year, "0", "3", credit4);
+		graduationMapper.updateInput(departmentId, year, "0", "4", credit5);
+		graduationMapper.updateInput(departmentId, year, "0", "5", credit6);
+		graduationMapper.updateInput(departmentId, year, "1", "0", credit1_1);
+		graduationMapper.updateInput(departmentId, year, "1", "1", credit2_2);
+		graduationMapper.updateInput(departmentId, year, "1", "2", credit3_3);
+		graduationMapper.updateInput(departmentId, year, "1", "3", credit4_4);
+		graduationMapper.updateInput(departmentId, year, "1", "4", credit5_5);
+		graduationMapper.updateInput(departmentId, year, "1", "5", credit6_6);
+		
+		
+		List<Department> departments = departmentMapper.findAll();
+		model.addAttribute("departments", departments);
+		List<GraduationInput> list =  graduationMapper.findByInput(departmentId, year, "0");
+		model.addAttribute("list", list);//전공 총 학점
+		
+		List<GraduationInput> list1 =  graduationMapper.findByInput(departmentId, year, "1");
+		model.addAttribute("list1", list1);//전필 총 학점 
+
+		model.addAttribute("departmentId", departmentId);
+		model.addAttribute("year", year);
+		
+		
+		
+		return "admin/admin_change_credit";
+	}
+	
+	
+		
 
 
 
