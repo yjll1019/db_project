@@ -2,6 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.skhu.mapper.BoardMapper">
 	
+	<select id="findByType" resultType="Board">
+		<bind name="start" value="(pg-1) * sz" />
+		select *
+		from board b 
+		left join user u 
+		on b.userId = u.id
+		<where>
+			<if test="sb==1">u.userName LIKE '%' #{st} '%'</if>
+			<if test="sb==2">b.title LIKE '%' #{st} '%'</if>
+		</where>
+		order by postType, groupNumber DESC, groupOrder ASC
+		LIMIT ${start},${sz}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(b.boardId)
+		from board b 
+		left join user u 
+		on b.userId = u.id
+		<where>
+			<if test="sb==1">u.userName LIKE '%' #{st} '%'</if>
+			<if test="sb==2">b.title LIKE '%' #{st} '%'</if>
+		</where>
+	</select>
+	
 	<select id="findOne" resultType="Board">
 		select b.*, u.userName 
 		from board b join user u on b.userId = u.id

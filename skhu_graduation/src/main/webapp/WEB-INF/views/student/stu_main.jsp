@@ -71,7 +71,6 @@
 				
 					c = student.getValue();
 	
-					System.out.println("결과값: "+c);
 				}else
 					 c = 0;
 

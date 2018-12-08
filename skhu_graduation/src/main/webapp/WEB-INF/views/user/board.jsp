@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <c:url var="R" value="/" />
 <!DOCTYPE html>
 <html>
@@ -116,24 +117,25 @@ $(function() {
 			<h2>공지사항 및 문의</h2>
 			<hr>
 			<div class="container">
-				<form method="post">
+				<form:form method="get" modelAttribute="pagination">
+				<form:hidden path="pg" value="1" />
 	 				<div class="input-group" style="width: 500px; float: right; margin-bottom: 15px">
-						<select name="searchSelect" class="form-control" id="searchSelect">
+						<select name="sb" class="form-control" id="sb">
 							<option value="0">전체</option>
 							<option value="1">이름</option>
 							<option value="2">제목</option>
 						</select> 
 						&nbsp;&nbsp;
-						<input type="text" class="form-control" name="searchText" style="width:200px;" placeholder="입력하세요">&nbsp;&nbsp; 
+						<input type="text" class="form-control" name="st" style="width:200px;" placeholder="입력하세요">&nbsp;&nbsp; 
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<input class="btn btn-default" type="submit">
 								<span class="input-group-addon">
 									<i class="fa fa-search fa" aria-hidden="true"></i>
 								</span>
-							</button>
+							</>
 						</span>
 					</div>
-				</form>
+				</form:form>
 			</div>
 			<br />
 			<table class="table table-hover">
@@ -178,21 +180,8 @@ $(function() {
 				<i class="glyphicon glyphicon-plus"></i> 글쓰기
 			</a>
 			
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">Previous</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-							class="sr-only">Next</span>
-					</a></li>
-				</ul>
-			</nav>
+				<my:pagination pageSize="${pagination.sz }"
+			recordCount="${pagination.recordCount }" />
 
 		</div>	
 	</div>

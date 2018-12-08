@@ -159,7 +159,7 @@
 									<td>${subjectlist.semester }</td>
 									<td>${subjectlist.code }</td>
 									<td>${subjectlist.divisionClass }</td>
-									<td>${subjectlist.department.name}</td>
+									<td>${subjectlist.name}</td>
 									<td>${subjectlist.subjectName }</td>
 									<td>${subjectlist.completionDivision }</td>
 									<td>${subjectlist.credit }</td>

@@ -11,6 +11,7 @@ public class Subject {
 	String credit;
 	String departmentName;
 
+	String name;//departmentName
 	Department department;
 
 	//폐지 과목 위함
@@ -157,40 +158,26 @@ public class Subject {
 		this.departmentName = departmentName;
 	}
 
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Subject [year=");
-		builder.append(year);
-		builder.append(", semester=");
-		builder.append(semester);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", divisionClass=");
-		builder.append(divisionClass);
-		builder.append(", departmentId=");
-		builder.append(departmentId);
-		builder.append(", subjectName=");
-		builder.append(subjectName);
-		builder.append(", completionDivision=");
-		builder.append(completionDivision);
-		builder.append(", credit=");
-		builder.append(credit);
-		builder.append(", department=");
-		builder.append(department);
-		builder.append(", DeleteYear=");
-		builder.append(DeleteYear);
-		builder.append(", DeleteSemester=");
-		builder.append(DeleteSemester);
-		builder.append(", DeleteCode=");
-		builder.append(DeleteCode);
-		builder.append(", DeleteDepartmentId=");
-		builder.append(DeleteDepartmentId);
-		builder.append(", DeleteSubjectName=");
-		builder.append(DeleteSubjectName);
-		builder.append("]");
-		return builder.toString();
+		return "Subject [year=" + year + ", semester=" + semester + ", code=" + code + ", divisionClass="
+				+ divisionClass + ", departmentId=" + departmentId + ", subjectName=" + subjectName
+				+ ", completionDivision=" + completionDivision + ", credit=" + credit + ", departmentName="
+				+ departmentName + ", name=" + name + ", department=" + department + ", DeleteYear=" + DeleteYear
+				+ ", DeleteSemester=" + DeleteSemester + ", DeleteCode=" + DeleteCode + ", DeleteDepartmentId="
+				+ DeleteDepartmentId + ", DeleteSubjectName=" + DeleteSubjectName + "]";
 	}
+
+
 
 
 }
