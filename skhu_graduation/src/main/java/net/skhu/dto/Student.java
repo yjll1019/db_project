@@ -156,7 +156,10 @@ public class Student {
 		return "Student [userId=" + userId + ", stuSemester=" + stuSemester + ", stuClass=" + stuClass
 				+ ", transferStudent=" + transferStudent + ", volunteerExemption=" + volunteerExemption
 				+ ", departmentId=" + departmentId + ", howToGraduate=" + howToGraduate + ", subMajor=" + subMajor
-				+ ", user=" + user + ", secondMajor=" + secondMajor + "]";
+				+ ", pId=" + pId + ", pName=" + pName + ", secondMajorName=" + secondMajorName + ", major=" + major
+				+ ", cultural=" + cultural + ", value=" + value + ", pray=" + pray + ", service=" + service + ", user="
+				+ user + ", department=" + department + ", secondMajor=" + secondMajor + "]";
 	}
+
 
 }

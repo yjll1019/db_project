@@ -1,7 +1,6 @@
 package net.skhu.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -263,24 +262,24 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				} else {	// 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				} else {
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} // 전공필수 끝
@@ -308,7 +307,7 @@ public class AdminController {
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
 					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
 					if(myAllMajorCredit < allMajorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} // 전공학점 끝
@@ -362,24 +361,24 @@ public class AdminController {
 				if(secondMajor.equals("부전공")) {	// 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				} else {	// 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
 				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				} else {
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("0", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} // 전공필수 끝
@@ -407,7 +406,7 @@ public class AdminController {
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("0", "0", s.getUserId().substring(0, 4), "12"));
 					if(s.getHowToGraduate().equals("전공심화")) allMajorCredit += 15; // 전공심화 졸업예정일경우
 					if(myAllMajorCredit < allMajorCredit) {
- 						continue;
+						continue;
 					}
 				}
 			} // 전공학점 끝
@@ -448,9 +447,13 @@ public class AdminController {
 
 	//관리자 전체과목 조회 페이지
 	@RequestMapping(value="admin_all_subject", method=RequestMethod.GET)
-	public String admin_all_search(Model model,HttpSession session) {
+	public String admin_all_search(Model model,Pagination pagination,HttpSession session) {
 		User user = (User) session.getAttribute("user");
+		int count = subjectMapper.count(pagination);
+		pagination.setRecordCount(count);
 		model.addAttribute("user",user);
+		model.addAttribute("subjectlist",subjectMapper.findByType(pagination));
+		model.addAttribute("searchBy",subjectMapper.searchBy);
 		return "admin/admin_all_subject";
 	}
 
@@ -766,7 +769,7 @@ public class AdminController {
 		return "admin/superAdmin_create";
 	}
 
-	//필수과목 수정 페이지 
+	//필수과목 수정 페이지
 	@RequestMapping(value="admin_changeGraduation", method=RequestMethod.GET)
 	public String admin_changeGraduation (Model model, HttpSession session) {
 

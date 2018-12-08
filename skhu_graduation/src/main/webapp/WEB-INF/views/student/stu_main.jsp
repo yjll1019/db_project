@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -65,9 +67,12 @@
 				if(b>100)
 					b = 100;
 				int c;
-				if(student.getValue()!=0&&s!=null)
-					 c = (int)((double)student.getValue()/Double.parseDouble(s));
-				else
+				if(student.getValue()!=0&&s!=null){ 
+				
+					c = student.getValue();
+	
+					System.out.println("결과값: "+c);
+				}else
 					 c = 0;
 
 			%>
