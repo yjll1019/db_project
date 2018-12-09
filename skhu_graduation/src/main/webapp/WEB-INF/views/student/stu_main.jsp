@@ -136,13 +136,14 @@
 		<form:form method="post">
 		<div id="goal-container" style="margin-top: 320px; margin-left: 22%;">
 			<label style="font-size: 15pt;"><strong>목표 졸업학점</strong></label> &nbsp;&nbsp;
-			직전학기 &nbsp;<input type="text" id="beforeSemester" name="beforeSemester" style="width: 40px;"/> 
+			이수학기 &nbsp;<input type="text" id="beforeSemester" name="beforeSemester" style="width: 40px;"/> 
 			남은학점 &nbsp; <input type="text" name="saveCredit" style="width: 40px;"/> 
-			전체학점 &nbsp; <input type="text" name="allCredit" style="width: 40px;"/> 
+			전체평점 &nbsp; <input type="text" name="allCredit" style="width: 40px;"/> 
 			목표학점 &nbsp; <input type="text" name="goalCredit" style="width: 30px;"/>
 		<button type="submit" class="btn btn-primary">조회</button>
 		</div>
 	</form:form>
+
 		<div id="jb-content">
 			<a id="top" href="#jb-header"><img
 				src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
@@ -170,6 +171,11 @@
 				</table>
 			</div>
 			<br />
+				<!-- 시작 -->
+			<%
+			List<String> requiredMySubject = (List) request.getAttribute("requiredMySubject");
+			%>
+			<c:if test="${admissionYear ne '2018' }">
 			<%
 				
 				List<String> list1 = (List) request.getAttribute("list1");
@@ -180,9 +186,7 @@
 				List<String> list6 = (List) request.getAttribute("list6");
 				List<String> list7 = (List) request.getAttribute("list7");
 				List<String> list8 = (List) request.getAttribute("list8");
-				
-				List<String> requiredMySubject = (List) request.getAttribute("requiredMySubject");
-				
+								
 			%>
 			<table id="table1">
 				<thead>
@@ -337,11 +341,13 @@
 				</tr>
 				</tbody>
 			</table>
+			</c:if>
+			<!-- 끝  -->
 			<br/>
 			<label style="font-size: 12pt;">
 			<strong>
 			교양 필수(2과목 이상 필수) :
-			
+			<br/>
 			<%
 				List<String> list9 = (List) request.getAttribute("list9");
 				for(int i=0; i<list9.size(); ++i)

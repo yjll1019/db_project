@@ -254,15 +254,23 @@ public class StudentController {
 				list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
 			}
 		}
-
-		list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
-
+		
+		if(user.getId().substring(0,4).equals("2018")) {
+			List<String> freshManList = requiredSubjectMapper.findByConditionsForFreshman("2018", String.valueOf(5), String.valueOf(1)); //교양 필수 과목
+			List<String> subjectNameList = new ArrayList<String>();
+			for(int i=0; i<freshManList.size(); ++i) {
+				subjectNameList.add(requiredSubjectMapper.findBySubjectName(freshManList.get(i)));
+			}
+			list[z++] = subjectNameList;
+		}else {
+			list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(5), String.valueOf(1)); //교양 필수 과목
+		}
 		for(int i=1; i<=list.length; ++i) {
 			model.addAttribute("list"+i, list[i-1]);
 		}
 
 		List<String> requiredMySubject = mySubjectMapper.requiredMySubject(user.getId());//필수과목 중 수강한 과목 리스트
-		model.addAttribute("requiredMySubject",requiredMySubject);
+		model.addAttribute("requiredMySubject", requiredMySubject);
 		model.addAttribute("admissionYear", admissionYear);
 
 		return "student/stu_main";

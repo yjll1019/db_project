@@ -12,6 +12,20 @@
 		and subject.year like #{admissionYear};
 	</select>
 
+	<select id="findByConditionsForFreshman" resultType="String"><!-- 학과, 년도, 학년, 학기로 필수과목 select -->
+		select distinct subject.code from
+		requiredSubject left join subject
+		on requiredSubject.subjectCode = subject.code where
+		requiredSubject.departmentId like '10' and
+		requiredSubject.admissionYear like #{admissionYear}
+		and requiredSubject.grade like #{grade} and requiredSubject.semester like #{semester}
+		and subject.year like #{admissionYear};
+	</select>
+
+	<select id="findBySubjectName" resultType="String">
+	select distinct subjectName from subject where code like #{subjectCode} limit 1;
+	</select>	
+
 	<select id="requiredCount" resultType="int">
 		select count(*) from requiredSubject 
 		where admissionYear like #{admissionYear} and departmentId like '12';
