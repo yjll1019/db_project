@@ -114,7 +114,7 @@ $(function() {
                      &nbsp;<a href="admin_frustrated_list" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>
                  </div>
                  <div class="form-group" id="class2" style="display:inline;">
-                  <select name="sbi" class="custom-select" style="width: 110px; ]display: inline; margin-left: 5%; height:35px;">
+                  <select name="sbi" class="custom-select" style="width: 120px; ]display: inline; margin-left: 8%; height:35px;">
                      <option value="0">검색조건</option>
                      <option value="1" ${sbi == '1' ? 'selected' : ''}>학번</option>
                      <option value="2" ${sbi == '2' ? 'selected' : ''}>이름</option>
@@ -122,7 +122,7 @@ $(function() {
                      <option value="4" ${sbi == '4' ? 'selected' : ''}>과목명</option>
                   </select> 
                   
-                  <input type="text" name="st" placeholder="검색" style="margin-left: 5px; width: 90px;">
+                  <input type="text" name="st" placeholder="검색" style="margin-left: 5px; width: 100px;">
 
                   <input type="submit" class="btn btn-primary" style="font-size: 10pt;" value="조회하기"/>
                </div>
