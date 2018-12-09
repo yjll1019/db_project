@@ -20,8 +20,10 @@
 	graduationContent = #{content},
 	graduationEtc = #{etc}
 	where departmentId = #{departmentId} and
-	creditDivision = #{creditDivision}
+	division like #{division};
 	</update>
+	
+	
 
 	<update id="updateInput">
 		update graduationInput

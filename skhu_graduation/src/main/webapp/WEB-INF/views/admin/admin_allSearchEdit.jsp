@@ -171,7 +171,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class="btn btn-primary btn-lg btn-block login-button"
+				<button type="submit" class="btn btn-primary btn-lg btn-block login-button" 
 						style="width:150px; height: 50px; font-size: 16px;margin-left: 40%; margin-top: 40px">수정하기</button>
 				</form>
          </div>
