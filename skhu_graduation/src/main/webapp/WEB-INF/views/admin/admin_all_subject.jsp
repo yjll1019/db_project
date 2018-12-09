@@ -116,26 +116,25 @@
 			<div style="margin-left: 20%; margin-top: 3%; margin-bottom: 2%;">
 				<h3>과목 목록</h3>
 			</div>
-
-			<form:form method="get" modelAttribute="pagination">
+		<div style="display: inline">
+			<form action="subject_upload" method="post" enctype="multipart/form-data"style="display: inline">
+				<div class="form-group" style="margin-left: 20%; margin-top: 10px; display: inline">
+					<input type="file" name="file" style="width: 250px;">
+					<button type="submit" class="btn btn-primary"
+						style="font-size: 13px;">업로드</button> 
+				</div> 
+			</form>
+			
+			<form:form method="get" modelAttribute="pagination" style="display: inline">
 				<form:hidden path="pg" value="1" />
 				<form:select path="sb" class="form-control"
-					style="display: inline; max-width:150px; margin-left:450px;"
+					style="display: inline; max-width:150px; margin-left: 8%;" 
 					itemValue="value" itemLabel="label" items="${searchBy }" />
 				<form:input path="st" class="form-control"
 					style="display: inline; max-width:200px;" placeholder="검색하세요" />
 				<input type="submit" class="btn btn-outline-primary" value="조회하기" />
 			</form:form>
-
-			<form action="subject_upload" method="post"
-				enctype="multipart/form-data">
-				<div class="form-group" style="margin-left: 20%; margin-top: 10px">
-					<input type="file" name="file" style="width: 250px;">
-					<button type="submit" class="btn btn-primary"
-						style="font-size: 13px;">업로드</button>
-				</div>
-			</form>
-
+			</div>
 			<form method="get">
 				<div class="table-responsive"
 					style="margin-left: 20%; margin-top: 20px; font-size: 12pt;">
@@ -171,8 +170,10 @@
 				</div>
 				</form>
 		</div>
-		<my:pagination pageSize="${pagination.sz }"
+		<div style="margin-left: 24%">  
+			<my:pagination pageSize="${pagination.sz }"
 			recordCount="${pagination.recordCount }" />
+		</div>
 	</div>
 </body>
 </html>
