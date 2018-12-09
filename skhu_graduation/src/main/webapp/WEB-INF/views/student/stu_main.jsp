@@ -68,11 +68,11 @@
 					b = 100;
 				int c;
 				if(student.getValue()!=0&&s!=null){ 
-				
-					c = student.getValue();
-	
+					c = (int)(((double)(student.getValue()/40.0))*100);
 				}else
 					 c = 0;
+				
+				System.out.println("c의값"+c);
 
 			%>
 			<div class="circleGraph1"
@@ -118,7 +118,7 @@
 				<!-- default -->
 				<div class="clearfix">
 					<div class="c100 p<%= c%>">
-						<span><%= c %></span>
+						<span>${student.value}</span>
 						<div class="slice">
 							<div class="bar"></div>
 							<div class="fill"></div>
