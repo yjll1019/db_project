@@ -35,7 +35,7 @@
 	<div id="jb-container">
 		<div id="jb-header">
 		<div id='cssmenu'>
-			<c:if test="${user.role=='관리자' }">
+			<c:if test="${ user.role == '관리자' }">
 			<ul>
 				<li>
 					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
@@ -92,21 +92,21 @@
 			</c:if>
 		</div>
 	</div>
-		<div id="jb-content" style="margin-left: 3%; margin-top: 5%; padding-left: 8%">
-				<div style="margin-left: 20%; margin-top: 3%;">
-					<h3>관리자,교수 목록</h3>
+		<div id="jb-content" style="margin-left: 18%; margin-top: 5%; padding-left: 8%">
+				<div style="margin-left: 3%; margin-top: 3%; margin-bottom: 2%"> 
+					<h3>관리자/교수 목록</h3>
 				</div>
 				<div class="form-group"
-				style="margin-top: 5px;style="display: inline;">
+				style="margin-top: 5px; display: inline"> 
 				
-				<button type="button" class="btn btn-outline-primary"
-					style="display: inline; width: 100px; margin-left: 30px;  float: left"
+				<button type="button" class="btn btn-outline-primary" 
+					style="display: inline; width: 100px; margin-left: 3%; float: left; margin-bottom: 1%"  
 					onclick="open_page()">등록하기
 				</button>
 				
 				<form method="get" action="search">
-				<select name="search" class="form-control"
-					style="display: inline; margin-left:400px;width: 90px; height: 35px; font-size: 15px;">
+				<select name="search" class="form-control" 
+					style="display: inline; margin-left: 27%; width: 90px; height: 35px; font-size: 15px;">  
 					<option value="">전체</option>
 					<option value="교수">교수</option>
 					<option value="관리자">관리자</option>
@@ -145,17 +145,7 @@
 					</tbody>
 				</table>
 			</div>
-				
 			</div>
-			<div id="page"  style="margin-top: 1%;">
-			<nav aria-label="Page navigation example"> 
- 				 <ul class="pagination justify-content-center">
-    				<li class="page-item"><a class="page-link" href="#">1</a></li>
-    				<li class="page-item"><a class="page-link" href="#">2</a></li>
-    				<li class="page-item"><a class="page-link" href="#">3</a></li>
- 				 </ul>
-			</nav>		
-		</div>
 	</div>
 </body>
 </html>

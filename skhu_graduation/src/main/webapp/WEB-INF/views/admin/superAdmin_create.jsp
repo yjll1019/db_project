@@ -26,8 +26,7 @@
 </head>
 <body>
 	<div class="container" style="margin-top: 50px; font-size: 15pt; margin-left: 40px">
-		<form action="superAdmin_create" method="post"
-					modelAttribute="user">
+		<form action="superAdmin_create" method="post" modelAttribute="user">
 		<table>
 			<tr>
 				<td>
@@ -67,7 +66,7 @@
 
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td>
-				<input type="text" class="form-control" name="password"
+				<input type="password" class="form-control" name="password"
 					placeholder="비밀번호"
 					style="margin-left: 10px; width: 150px; border: 1px solid gray">
 				</td>
@@ -76,7 +75,7 @@
 		</table>
 	</div>
 	<div class="form-group" style="margin-top: 60px; margin-left: 500px;">
-		<button type="submit" value="등록하기" class="btn btn-outline-primary"></button>
+		<button type="submit" value="등록하기" class="btn btn-outline-primary">등록하기</button>
 	</div>
 	</form>
 </body>
