@@ -20,4 +20,7 @@ public interface UserMapper {
 	List<User> findByRole();
 	List<User> findByUser(String where);
 	List<User> findBySubject(String where);
+	
+	List<User> findByAdminByUserName(String st);
+	List<User> findByProfessorByUserName(String st);
 }
