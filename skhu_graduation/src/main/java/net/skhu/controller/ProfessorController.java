@@ -238,17 +238,14 @@ public class ProfessorController {
 		return "professor/professor_allSearch";
 	}
 
-	@RequestMapping(value = "professor_allSearch", method = RequestMethod.POST)
-	public String professor_allSearchh(Model model, HttpSession session,  @RequestParam("departmentId") String departmentId)
+	@RequestMapping(value = "professor_allSearch",  method = RequestMethod.POST)
+	public String stu_allSearch(Model model, HttpSession session,  @RequestParam("departmentId") String departmentId)
 	{
 		User user = (User) session.getAttribute("user");
 
 		User users = userMapper.findById(user.getId());
 		model.addAttribute("users", users);
 
-		Student student = studentMapper.findOneWithUser(user.getId());
-		student.setDepartmentId(departmentId);
-		model.addAttribute("student", student);
 
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
@@ -273,6 +270,8 @@ public class ProfessorController {
 
 		GraduationText list5 = graduationMapper.findByDepartmentId(departmentId, "5");
 		model.addAttribute("list5", list5);
+
+		model.addAttribute("departmentId", departmentId);
 
 
 		return "professor/professor_allSearch";
