@@ -87,7 +87,7 @@
 					</div>
 					<br/><br/>
 					<div class="text-center p-t-20">
-						 <a class="txt2" href="admin_professor_forgot_password.jsp"> 관리자/교수 비밀번호찾기 </a>
+						 <a class="txt2" href="../admin/admin_professor_forgot_password"> 관리자/교수 비밀번호찾기 </a>
 					</div>
 				</form:form>
 			</div>
