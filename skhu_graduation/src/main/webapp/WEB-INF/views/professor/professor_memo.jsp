@@ -12,20 +12,7 @@
 <%
 	String stuId = String.valueOf(request.getAttribute("stuId"));
 %>
-<!-- 
-<script type="text/javascript">
-	function back() {
-		$.ajax({
-			type:"POST",
-			url:"/professor_memo",
-			data:form,
-			success:function(data){
-				self.close();
-			}
-		})
-	}
-</script>
- -->
+
 <body>
 
 	<div

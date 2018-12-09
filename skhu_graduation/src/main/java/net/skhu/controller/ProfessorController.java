@@ -167,11 +167,11 @@ public class ProfessorController {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
-		//System.out.println("교수: "+user.getId());
-		//System.out.println("학생: "+id);
+
 		String counsel = counselMapper.findContent(user.getId(),id);
+
 		if(counsel==null||counsel.length()==0) {
-			return "professor/professor_memo";
+			counsel="";
 		}
 		model.addAttribute("counsel",counsel);
 		model.addAttribute("stuId",id);
@@ -181,17 +181,24 @@ public class ProfessorController {
 	//professor_momo POST
 		@RequestMapping(value="/professor_memo",method=RequestMethod.POST)
 		public String professor_memo(Model model, Counsel counsel, @RequestParam("stuId") String stuId,HttpSession session) {
-			System.out.println("포스트");
+
 			User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 			if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 			Counsel co = new Counsel();
 			co.setProfessorId(user.getId());
 			co.setStudentId(stuId);
 			co.setContent(counsel.getContent());
-			counselMapper.update(co);
-			
-			model.addAttribute("counsel", co.getContent());
-			System.out.println("포스트끝");
+
+			if(counselMapper.findContent(user.getId(), stuId)==null) {
+				counselMapper.insert(co);
+				model.addAttribute("counsel", co.getContent());
+				model.addAttribute("stuId",stuId);
+
+			}else {
+				counselMapper.update(co);
+				model.addAttribute("counsel", co.getContent());
+				model.addAttribute("stuId",stuId);
+			}
 			return "professor/professor_memo";
 		}
 
