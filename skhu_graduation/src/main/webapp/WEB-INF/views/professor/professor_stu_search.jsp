@@ -61,10 +61,10 @@ $(function() {
 				<form method="post">
 		<div id="search" style="margin-top: 2%; font-size: 13pt;">
          <div id="class1" style="display: inline; margin-left: 20%; ">
-			<button type="button" class="btn btn-outline-primary" style="font-size: 10pt">미충족학생조회</button>
+           &nbsp;<a href="../admin/admin_frustrated_list" class="btn btn-outline-primary" style="font-size: 14px">미충족학생조회</a>	
          </div>
          
-         <div id="class2" style="display: inline; margin-left:23%;">
+         <div id="class2" style="display: inline; margin-left:20%;">
          <select name="grade" style="width: 100px; display: inline; margin-left: 3px; height:40px;">
 				<option value="0">학년선택 </option>
 				<option value="1">1학년</option>
@@ -77,7 +77,6 @@ $(function() {
             	<option value="0" >검색조건</option>
                <option value="1" >학번</option>
                <option value="2" >이름</option>
-                 <option value="3" >과목</option>
             </select>
             
             <input type="text" name="searchText" placeholder="검색"  style="margin-left: 7px; width: 150px;">
