@@ -180,7 +180,7 @@ public class UserController {
 				else if(role.equals("관리자"))
 					url = "redirect:/admin/admin_stu_search";
 				else
-					url = "redirect:/admin/admin_stu_search";
+					url = "redirect:/admin/superAdmin_manage";
 			}
 			else if(!result.getPassword().equals(user.getPassword())){	// 비밀번호가 일치하지 않는 경우
 				alert = "0";

@@ -99,11 +99,11 @@ $(function() {
 						&nbsp;&nbsp;
 						<input type="text" class="form-control" name="st" style="width:200px;" placeholder="입력하세요">&nbsp;&nbsp; 
 						<span class="input-group-btn">
-							<input class="btn btn-default" type="submit">
-								<span class="input-group-addon">
-									<i class="fa fa-search fa" aria-hidden="true"></i>
-								</span>
-							</>
+							<button class="btn btn-default" type="submit">
+                        <span class="input-group-addon">
+                           <i class="fa fa-search fa" aria-hidden="true"></i>
+                        </span>
+                     </button>
 						</span>
 					</div>
 				</form:form>

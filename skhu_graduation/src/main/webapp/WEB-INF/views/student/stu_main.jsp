@@ -126,7 +126,7 @@
 						&nbsp;&nbsp; ${student.cultural}/16<br /> &nbsp; 교양필수
 					</div>
 					<!-- /default -->
-				</div>v
+				</div>
 			</c:if>
 			<c:if test="${year ne '2018'}">
 				<div class="circleGraph1"
@@ -192,9 +192,7 @@
 		</form:form>
 
 		<div id="jb-content">
-			<a id="top" href="#jb-header"><img
-				src="${R}res/img/rounded-triangle.png" width="40px" height="40px"></a>
-
+		
 			<h3>필수 과목</h3>
 			<div>
 				<table id="table3">
@@ -207,9 +205,6 @@
 							${student.pray} / 2 이수</td>
 					</tr>
 					<c:if test="${ student.getVolunteerExemption() eq '0'}">
-						<td
-							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
-							${student.service } / 1 이수</td>
 
 						<tr>
 							<td

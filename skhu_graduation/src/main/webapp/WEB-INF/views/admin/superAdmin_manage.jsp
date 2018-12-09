@@ -35,7 +35,6 @@
 	<div id="jb-container">
 		<div id="jb-header">
 		<div id='cssmenu'>
-			<c:if test="${user.role=='슈퍼관리자'}">
 			<ul>
 				<li>
 					<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
@@ -45,7 +44,6 @@
 				<li><a href='../admin/superAdmin_manage'><span>관리자/교수 관리</span></a></li>
 				<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
 			</ul>
-			</c:if>
 		</div>
 	</div>
 		<div id="jb-content" style="margin-left: 18%; margin-top: 5%; padding-left: 8%">
