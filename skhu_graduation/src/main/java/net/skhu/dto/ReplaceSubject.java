@@ -7,6 +7,16 @@ public class ReplaceSubject {
 	String replaceSubjectName;//대체과목 이름 join
 	Subject subject;
 	Department department;
+	String name;
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	String completionDivision;
 	/* 과목코드가 아닌 경우

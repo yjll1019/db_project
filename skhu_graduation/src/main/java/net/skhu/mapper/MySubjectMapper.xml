@@ -161,6 +161,13 @@
 		where userId like #{userId} and
 		subjectCode=#{beforeCode};
 	</update>
+	
+		<update id="changeDivision">
+		update mySubject
+		set completionDivision = #{division}
+		where userId like #{userId} and
+		subjectCode like #{code};
+	</update>
 
 	
 	<select id="findAllForMajorAdmit" resultType="String">

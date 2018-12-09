@@ -32,6 +32,7 @@ public interface ReplaceSubjectMapper {
 	List<ReplaceSubject> findByDepartment(int id);
 	List<String> replaceSubject();
 	List<ReplaceSubject> findReplaceSub();
+	ReplaceSubject findOneSubject(String code);
 
 	Option[] searchBy = { new Option(0,"검색 조건"), new Option(1,"과목코드"),
 							new Option(2,"과목명")};

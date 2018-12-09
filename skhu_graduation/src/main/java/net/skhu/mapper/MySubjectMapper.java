@@ -38,6 +38,7 @@ public interface MySubjectMapper {
 	void deleteSubject(String userId, String subjectCode); //재수강 대체과목 삭제하기
 	void changeScore(String subjectCode, String score, String userId); //대체과목 재수강 성적 바꾸기
 	List<String> mySubject(String userId);
+	void changeDivision(String userId, String code, String division);
 
 	//전공인정
 	List<String> findAllForMajorAdmit(String userId);

@@ -653,13 +653,9 @@ public class StudentController {
 		mySubject.setUserId(user.getId());
 		mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
 		MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
-		String score=changeSubject.getScore();
-
-		mySubjectMapper.changeScore(mySubject.getSubjectCode(), score, user.getId());
-		mySubjectMapper.deleteSubject(user.getId(), changeSubjectCode);
-
-
-
+		
+		mySubjectMapper.deleteSubject(user.getId(),changeSubject.getSubjectCode());
+		mySubjectMapper.changeSubject(mySubject.getSubjectCode(),changeSubject.getSubjectCode(), changeSubject.getSubjectName(),user.getId()); //이름, 과목코드만 바뀌면 됌
 
 		redirectAttributes.addAttribute("result", "0");
 		return "redirect:/student/stu_subject_list";
@@ -812,10 +808,6 @@ public class StudentController {
 		User oneUser= new User();
 
 
-
-
-
-
 		MySubject mySubject = mySubjectMapper.findByOneSubject(user.getId(), subjectCode); //바꿀 과목 정보를 가져옴
 		model.addAttribute("mySubject", mySubject);
 
@@ -836,8 +828,7 @@ public class StudentController {
 
 		mySubject.setUserId(user.getId());
 		mySubject = mySubjectMapper.findByOneSubject(mySubject.getUserId(), mySubject.getSubjectCode()); //바꾸기 전 과목
-		RequiredSubject changeSubject = mySubjectMapper.findByOneRequiredSubject(user.getId(), changeSubjectCode); //바꿀 과목
-
+		ReplaceSubject changeSubject= replaceSubjectMapper.findOneSubject(changeSubjectCode);
 		String selectResult = null;
 
 		if (mySubject.getCompletionDivision().contains("필")) {

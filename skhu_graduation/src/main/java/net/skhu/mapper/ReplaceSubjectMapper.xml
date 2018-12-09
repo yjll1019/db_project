@@ -92,9 +92,17 @@
 	
 	<select id ="findReplaceSub" resultMap = "resultMap1">
 
-	select distinct r.*, s.subjectName
+	select distinct r.*, s.subjectName 
 	from replaceSubject r left join
 	subject s on r.subjectCode = s.code;
+	</select>
+	
+	<select id ="findOneSubject" resultType = "ReplaceSubject">
+
+	select distinct r.*, s.subjectName name
+	from replaceSubject r left join
+	subject s on r.subjectCode = s.code
+	where r.subjectCode like #{code};
 	</select>
 	
 	  <delete id="deleteSubject">
