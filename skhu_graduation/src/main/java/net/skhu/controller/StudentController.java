@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +32,6 @@ import net.skhu.dto.GraduationInput;
 import net.skhu.dto.GraduationText;
 import net.skhu.dto.MySubject;
 import net.skhu.dto.ReplaceSubject;
-import net.skhu.dto.RequiredSubject;
 import net.skhu.dto.SecondMajor;
 import net.skhu.dto.Student;
 import net.skhu.dto.User;
@@ -120,9 +118,6 @@ public class StudentController {
 
 			String howToGraduate =(studentMapper.stuInfo(user.getId())).getHowToGraduate();//전공기초 or 전공심화
 
-			if(year.equals("2018")) {
-				year="2017";
-			}
 			if(transferStudent.equals("0")) {//편입생 아님.
 				GraduationInput graduation = new GraduationInput();
 				graduation.setCredit(graduationMapper.findCredit("0","0", year, (studentMapper.stuInfo(user.getId())).getDepartmentId()));
@@ -254,7 +249,7 @@ public class StudentController {
 				list[z++] = requiredSubjectMapper.findByConditions(admissionYear, String.valueOf(i), String.valueOf(j));
 			}
 		}
-		
+
 		if(user.getId().substring(0,4).equals("2018")) {
 			List<String> freshManList = requiredSubjectMapper.findByConditionsForFreshman("2018", String.valueOf(5), String.valueOf(1)); //교양 필수 과목
 			List<String> subjectNameList = new ArrayList<String>();
@@ -653,7 +648,7 @@ public class StudentController {
 		mySubject.setUserId(user.getId());
 		mySubject = mySubjectMapper.findByOneSubject(user.getId(), mySubject.getSubjectCode()); //바꾸기 전 과목
 		MySubject changeSubject = mySubjectMapper.findByOneSubject(user.getId(), changeSubjectCode); //바꿀 과목
-		
+
 		mySubjectMapper.deleteSubject(user.getId(),changeSubject.getSubjectCode());
 		mySubjectMapper.changeSubject(mySubject.getSubjectCode(),changeSubject.getSubjectCode(), changeSubject.getSubjectName(),user.getId()); //이름, 과목코드만 바뀌면 됌
 
