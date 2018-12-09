@@ -37,7 +37,7 @@
 	
 	<div id="jb-content-nodata" style="margin-left: 20%; padding-left: 140px">
 		<span id="nodata">
-			<img src="${R}res/img/noData.jpg" style="margin-top:1%; width: 80%;"/>
+			<img src="${R}res/img/noData.jpg" style="margin-top:1%; width: 55%;"/>
 		</span>
 	</div>
 </body>

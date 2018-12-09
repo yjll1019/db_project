@@ -51,7 +51,7 @@ font-family: 'Jeju Hallasan', serif; position:relative;min-width:1200px;min-heig
 	 	border-color:#ffffff; width:250px; font-size:30px; font-weight: bold; margin-top:10%;">LOGIN</a>
 	
 	<div style="font-size: 15pt; color:#fff; margin-top: 1%; font-family: 'NanumSquare', sans-serif;" >
-		<a href="../user/join">회원가입</a> & <a href="../student/stu_noData">비회원조회</a>
+		<a href="../user/join">회원가입</a> & <a href="../student/nonmember_page">비회원조회</a>
 	</div>
 </div>
 </body>
