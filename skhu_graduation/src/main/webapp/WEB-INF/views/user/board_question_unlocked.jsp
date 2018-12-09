@@ -50,7 +50,7 @@
 			<div class="wrap-login100">
 				<form method="post" class="login100-form validate-form">
 					<div class="text-center" style="font-size: 30px; padding-bottom: 30px; font-weight: 800; font-family: 'NanumSquare', sans-serif;">
-						<span>게시글 비밀번호 확인 </span>
+						<span>게시글 <br/>비밀번호 확인 </span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<input class="input100" type="password" name="password"> <span
