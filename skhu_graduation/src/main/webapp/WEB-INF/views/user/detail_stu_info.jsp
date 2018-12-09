@@ -18,16 +18,13 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
 <script src="${R}js/header.js"></script>
-
-
-
 <title>학생 상세페이지</title>
 </head>
 <body>
 	<div id="jb-container">
 	<div id="jb-header">
 		<div id='cssmenu'>
-			<c:if test="${ role == '관리자' }">
+			<c:if test="${ user.role == '관리자' }">
 				<ul>
 					<li>
 						<a style="padding: 8px; padding-left: 15px; padding-right: 0px;">
@@ -38,7 +35,7 @@
 					<li class='active has-sub'><a><span>졸업요건 수정</span></a>
 						<ul>
 							<li class='last'><a href='../admin/admin_allSearchEdit'><span>졸업요건표 수정</span></a></li>
-							<li class='last'><a href='#'><span>필수학점 수정</span></a></li>
+							<li class='last'><a href='../admin/admin_change_credit'><span>필수학점 수정</span></a></li>
 							<li class='last'><a href='../admin/admin_changeGraduation'><span>필수과목 수정</span></a></li>
 						</ul>
 					</li>
@@ -49,9 +46,8 @@
 						</ul>
 					</li>
 					<li><a href='../user/board'><span>공지사항 및 문의</span></a></li>
-					<li><a href='../admin/admin_calenderEdit'><span>대학일정 관리</span></a></li>
 					<li style="float: right"><a href='../user/logout'><span>LOGOUT</span></a></li>
-					<li style="float: right"><a href='../admin/adminInfo'><span>개인정보변경</span></a></li>
+					<li style="float: right"><a href='../user/check_password'><span>개인정보변경</span></a></li>
 				</ul>
 			</c:if>
 			<c:if test="${ role == '교수' }">
