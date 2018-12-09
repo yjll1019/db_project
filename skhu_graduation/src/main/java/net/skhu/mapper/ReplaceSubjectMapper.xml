@@ -94,7 +94,8 @@
 
 	select distinct r.*, s.subjectName 
 	from replaceSubject r left join
-	subject s on r.subjectCode = s.code;
+	subject s on r.subjectCode = s.code
+	where s.departmentId like '12';
 	</select>
 	
 	<select id ="findOneSubject" resultType = "ReplaceSubject">
