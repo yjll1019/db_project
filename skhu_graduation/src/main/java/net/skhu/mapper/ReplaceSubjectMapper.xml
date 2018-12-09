@@ -9,7 +9,7 @@
 			separator=" , ">
 			('${replaceSubject.subjectCode}',
 			'${replaceSubject.replaceSubject}',
-			 '${completionDivision}')
+			 '${replaceSubject.completionDivision}')
 		</foreach>
 	</insert>
 	

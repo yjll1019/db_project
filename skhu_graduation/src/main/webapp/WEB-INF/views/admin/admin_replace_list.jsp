@@ -149,20 +149,43 @@
 				</tr>
 				<tbody style="font-size: 12pt;">
 					<c:forEach var="replace" items="${replace }">
+						<c:if test="${replace.subjectName ne null }">
 						<tr>
 							<td style="border-right: 1px solid silver">${replace.subjectCode }</td>
 							<td style="border-right: 1px solid black">${replace.subjectName }</td>
 							<td style="border-right: 1px solid silver">${replace.replaceSubject }</td>
 							<td style="border-right: 1px solid silver"><c:choose>
 									<c:when test="${replace.completionDivision eq '1'}"> 
-                              	전공 선택 과목으로 대체
-                            </c:when>
-									<c:when test="${replace.completionDivision eq '2'}"> 
-                              	교양 선택 과목으로 대체
-                            </c:when>
+                                    전공 선택 과목으로 대체
+                               </c:when>
+                        <c:when test="${replace.completionDivision eq '2'}"> 
+                                    경제학전공 과목에서 선택
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '3'}"> 
+                                    교양사회영역 선택과목으로 대체
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '4'}"> 
+                                    교양선택과목으로 대체
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '5'}"> 
+                                    교양인문영역 선택과목으로 대체
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '6'}"> 
+                                    교양자연영역 선택과목으로 대체
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '7'}"> 
+                                    사회진출실 개설 교과목으로 대체
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '8'}"> 
+                                    사회학전공 과목에서 선택
+                               </c:when>
+                               <c:when test="${replace.completionDivision eq '9'}"> 
+                                    정치학전공 과목에서 선택
+                               </c:when>
 								</c:choose> ${replace.replaceSubjectName}</td>
 							<td><a href="replaceDelete?subjectCode=${ replace.subjectCode }&replaceSubject=${replace.replaceSubject}"class="btn btn-danger">삭제</a></td>
 						</tr>
+						</c:if>
 					</c:forEach>
 
 				</tbody>
