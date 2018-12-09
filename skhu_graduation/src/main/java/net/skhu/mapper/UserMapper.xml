@@ -69,9 +69,17 @@
 			${ value }
 		order by msj.takeYear, u.id DESC;
 	</select>
+	
 	<select id="findByRole" resultType="User">
 		select * from user where role='교수' or role='관리자'
 	</select>
 
+	<select id="findByAdminByUserName" resultType="User">
+		select * from user where role like '관리자' and userName like #{st}
+	</select>
+	
+	<select id="findByProfessorByUserName" resultType="User">
+		select * from user where role like '교수' and userName like #{st}
+	</select>
 	
 </mapper>

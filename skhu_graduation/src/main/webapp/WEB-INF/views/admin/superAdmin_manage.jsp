@@ -104,19 +104,19 @@
 					onclick="open_page()">등록하기
 				</button>
 				
-				<form method="get" action="search">
-				<select name="search" class="form-control" 
+				<form method="post">
+				
+				<select name="sb" class="form-control" 
 					style="display: inline; margin-left: 27%; width: 90px; height: 35px; font-size: 15px;">  
-					<option value="">전체</option>
-					<option value="교수">교수</option>
-					<option value="관리자">관리자</option>
+					<option value="0">전체</option>
+					<option value="1">교수명</option>
+					<option value="2">관리자명</option>
 				</select> 
 				
-				<input type="text" class="form-control" name="searchText"
-					placeholder="검색"
+				<input type="text" class="form-control" name="st" placeholder="검색"
 					style="display: inline; margin-left: 5px; width: 150px; height: 35px;">
-
 				<button type="submit" class="btn btn-primary">조회</button>
+				
 				</form>
 
 			</div>
@@ -133,7 +133,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="user" items="${ list }">
+						<c:forEach var="user" items="${ users }">
 								<tr style="cursor:pointer">
 									<td>${ user.role }</td>
 									<td>${ user.userName }</td>

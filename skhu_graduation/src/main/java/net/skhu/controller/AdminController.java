@@ -726,15 +726,16 @@ public class AdminController {
 
 	//admin_memo POST
 	@RequestMapping(value="/admin_memo",method=RequestMethod.POST)
-	public String admin_memo(Model model,Counsel counsel,@RequestParam("stuId") String stuId,HttpSession session) {
+	public String admin_memo(Model model, Counsel counsel, @RequestParam("stuId") String stuId, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
+		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		Record re = new Record();
 
 		re.setStudentId(stuId);
 		re.setContent(counsel.getContent());
+		System.out.println(stuId);
 		recordMapper.update(re);
 
 		String record = recordMapper.findContent(stuId);
@@ -747,10 +748,30 @@ public class AdminController {
 	@RequestMapping("superAdmin_manage")
 	public String superAdmin_manage (Model model,HttpSession session) {
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
-
-		model.addAttribute("list",userMapper.findByRole());
+		List<User> users = userMapper.findByRole();
+		model.addAttribute("users", users);
 		model.addAttribute("user",user);
 
+		return "admin/superAdmin_manage";
+	}
+	
+	@RequestMapping(value="superAdmin_manage", method=RequestMethod.POST)
+	public String superAdmin_manage(Model model, HttpServletRequest request, 
+			@RequestParam("sb") String sb, @RequestParam("st") String st) {
+		List<User> users;
+		System.out.println(sb + " " +st);
+		if(sb.equals("1")) { //교수명
+			users = userMapper.findByProfessorByUserName("%" + st + "%");
+			System.out.println(sb + " " +st);
+		}
+		else if(sb.equals("2")) { // 관리자명
+			users = userMapper.findByAdminByUserName("%" + st + "%");
+			System.out.println(sb + " " +st);
+		} else {
+			users = userMapper.findByRole();
+		}
+		model.addAttribute("users", users);
+		request.setAttribute("sb", sb);
 		return "admin/superAdmin_manage";
 	}
 
@@ -783,12 +804,9 @@ public class AdminController {
 		return "admin/admin_changeGraduation";
 	}
 	
-	
-	
 	@RequestMapping(value="subjectSelect", method=RequestMethod.POST)//학과, 년도 셀렉트
 	public String graduationSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year) {
-		
 		
 		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
 		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
@@ -802,8 +820,6 @@ public class AdminController {
 		model.addAttribute("year", year);
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		
-		
 		
 		return "admin/admin_changeGraduation";
 	}
@@ -822,12 +838,10 @@ public class AdminController {
 		
 		requiredSubjectMapper.insert(departmentId, year, grade, semester, subjectCode);
 		
-		
 		}
 		
 		else if(button == 1) {
 			requiredSubjectMapper.delete(departmentId, year, grade, semester, subjectCode);
-			
 		}
 		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
 		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
@@ -917,10 +931,5 @@ public class AdminController {
 		
 		return "admin/admin_change_credit";
 	}
-	
-	
-		
-
-
 
 }
