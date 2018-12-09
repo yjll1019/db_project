@@ -6,7 +6,7 @@ import net.skhu.dto.Record;
 
 @Mapper
 public interface RecordMapper {
-
+	void insert(Record r);
 	void update(Record r);
 	String findContent(String stuId);
 }

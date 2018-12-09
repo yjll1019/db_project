@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.skhu.mapper.CounselMapper">
 	
+	<insert id="insert">
+		insert into counsel (professorId,studentId,content) values(#{professorId},#{studentId},#{content})
+	</insert>
 	<update id="update">
 		update  counsel set content = #{content} where professorId = #{professorId} and studentId = #{studentId}
 	</update>

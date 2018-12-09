@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import net.skhu.dto.Counsel;
 import net.skhu.dto.Department;
 import net.skhu.dto.GraduationInput;
 import net.skhu.dto.GraduationText;
@@ -263,20 +262,21 @@ public class AdminController {
 			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
 			int majorCredit = 0;
 			int myMajorCredit = Integer.parseInt(mySubjectMapper.findMajorCount(s.getUserId()));
-			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
-				if(secondMajor.equals("부전공")) {	// 부전공
+			if(secondMajor != null) {   // 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
+				if(secondMajor.equals("부전공")) {   // 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
 					}
-				} else {	// 복수전공
+				} else {   // 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
 					}
 				}
-			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
-				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+			} else {   // 부전공 또는 복수전공에 해당하지 않는 학생
+				String transfer = s.getTransferStudent() == null? "0" : s.getTransferStudent();
+				if(transfer.equals("1")) { // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
@@ -290,20 +290,21 @@ public class AdminController {
 			} // 전공필수 끝
 			int allMajorCredit = 0;
 			int myAllMajorCredit = mySubjectMapper.findMajor(s.getUserId()).size();
-			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공학점 검사
-				if(secondMajor.equals("부전공")) {	// 부전공
+			if(secondMajor != null) {   // 부전공 혹은 복수전공 해당학생의 전공학점 검사
+				if(secondMajor.equals("부전공")) {   // 부전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
 					}
-				} else {	// 복수전공
+				} else {   // 복수전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
 					}
 				}
-			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
-				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+			} else {   // 부전공 또는 복수전공에 해당하지 않는 학생
+				String transfer = s.getTransferStudent() == null? "0" : s.getTransferStudent();
+				if(transfer.equals("1")) { // 편입생인 경우
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
@@ -331,8 +332,9 @@ public class AdminController {
 			int pray = mySubjectMapper.findPray(s.getUserId());
 			if(pray < 2) {
 				continue;
-			}	//채플 끝
-			if(s.getVolunteerExemption().equals("0")) {
+			}   //채플 끝
+			String volunt = s.getVolunteerExemption() == null? "0" : s.getVolunteerExemption();
+			if(volunt.equals("0")) {
 				int volunteer = mySubjectMapper.findService(s.getUserId());
 				if(volunteer < 1) {
 					continue;
@@ -362,20 +364,21 @@ public class AdminController {
 			String secondMajor = secondMajorMapper.findSecondMajor(s.getUserId());
 			int majorCredit = 0;
 			int myMajorCredit = Integer.parseInt(mySubjectMapper.findMajorCount(s.getUserId()));
-			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
-				if(secondMajor.equals("부전공")) {	// 부전공
+			if(secondMajor != null) {   // 부전공 혹은 복수전공 해당학생의 전공필수 학점 검사
+				if(secondMajor.equals("부전공")) {   // 부전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("2", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
 					}
-				} else {	// 복수전공
+				} else {   // 복수전공
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("1", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
 					}
 				}
-			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
-				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+			} else {   // 부전공 또는 복수전공에 해당하지 않는 학생
+				String transfer = s.getTransferStudent() == null? "0" : s.getTransferStudent();
+				if(transfer.equals("1")) {  // 편입생인 경우
 					majorCredit = Integer.parseInt(graduationMapper.findCredit("3", "1", s.getUserId().substring(0, 4), "12"));
 					if(myMajorCredit < majorCredit) {
 						continue;
@@ -389,20 +392,21 @@ public class AdminController {
 			} // 전공필수 끝
 			int allMajorCredit = 0;
 			int myAllMajorCredit = mySubjectMapper.findMajor(s.getUserId()).size();
-			if(secondMajor != null) {	// 부전공 혹은 복수전공 해당학생의 전공학점 검사
-				if(secondMajor.equals("부전공")) {	// 부전공
+			if(secondMajor != null) {   // 부전공 혹은 복수전공 해당학생의 전공학점 검사
+				if(secondMajor.equals("부전공")) {   // 부전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("2", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
 					}
-				} else {	// 복수전공
+				} else {   // 복수전공
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("1", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
 					}
 				}
-			} else {	// 부전공 또는 복수전공에 해당하지 않는 학생
-				if(s.getTransferStudent().equals("1")) { // 편입생인 경우
+			} else {   // 부전공 또는 복수전공에 해당하지 않는 학생
+				String transfer = s.getTransferStudent() == null? "0" : s.getTransferStudent();
+				if(transfer.equals("1")) {  // 편입생인 경우
 					allMajorCredit = Integer.parseInt(graduationMapper.findCredit("3", "0", s.getUserId().substring(0, 4), "12"));
 					if(myAllMajorCredit < allMajorCredit) {
 						continue;
@@ -430,8 +434,9 @@ public class AdminController {
 			int pray = mySubjectMapper.findPray(s.getUserId());
 			if(pray < 2) {
 				continue;
-			}	//채플 끝
-			if(s.getVolunteerExemption().equals("0")) {
+			}   //채플 끝
+			String volunt = s.getVolunteerExemption() == null? "0" : s.getVolunteerExemption();
+			if(volunt.equals("0")) {
 				int volunteer = mySubjectMapper.findService(s.getUserId());
 				if(volunteer < 1) {
 					continue;
@@ -715,8 +720,9 @@ public class AdminController {
 		if(user.getId()==null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
 
 		String record = recordMapper.findContent(id);
+
 		if(record==null||record.length()==0) {
-			return "admin/admin_memo";
+			record="";
 		}
 		model.addAttribute("user",user);
 		model.addAttribute("record",record);
@@ -726,7 +732,7 @@ public class AdminController {
 
 	//admin_memo POST
 	@RequestMapping(value="/admin_memo",method=RequestMethod.POST)
-	public String admin_memo(Model model, Counsel counsel, @RequestParam("stuId") String stuId, HttpSession session) {
+	public String admin_memo(Model model, Record record, @RequestParam("stuId") String stuId, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");//user라는 객체를 가져옴.세션값을 가져와야 현재 접속한 아이디값을 얻을 수 있다.
 		if(user.getId() == null) return "redirect:/user/login"; // 세션값에 아이디 없으면 로그인창으로
@@ -734,13 +740,21 @@ public class AdminController {
 		Record re = new Record();
 
 		re.setStudentId(stuId);
-		re.setContent(counsel.getContent());
-		System.out.println(stuId);
-		recordMapper.update(re);
 
-		String record = recordMapper.findContent(stuId);
-		model.addAttribute("record",record);
-		model.addAttribute("user",user);
+		re.setContent(record.getContent());
+
+		if(recordMapper.findContent(stuId)==null) {
+			recordMapper.insert(re);
+			model.addAttribute("record",re.getContent());
+			model.addAttribute("user",user);
+			model.addAttribute("stuId",stuId);
+		}else {
+
+			recordMapper.update(re);
+			model.addAttribute("record",re.getContent());
+			model.addAttribute("user",user);
+			model.addAttribute("stuId",stuId);
+		}
 		return "admin/admin_memo";
 	}
 
@@ -754,9 +768,9 @@ public class AdminController {
 
 		return "admin/superAdmin_manage";
 	}
-	
+
 	@RequestMapping(value="superAdmin_manage", method=RequestMethod.POST)
-	public String superAdmin_manage(Model model, HttpServletRequest request, 
+	public String superAdmin_manage(Model model, HttpServletRequest request,
 			@RequestParam("sb") String sb, @RequestParam("st") String st) {
 		List<User> users;
 		System.out.println(sb + " " +st);
@@ -782,7 +796,7 @@ public class AdminController {
 		return "admin/superAdmin_create";
 	}
 	//superAdmin_create POST
-	@Transactional	
+	@Transactional
 	@RequestMapping(value="superAdmin_create", method=RequestMethod.POST)
 	public String superAdmin_create (Model model,User user, HttpSession session, @RequestParam("role") String role) {
 		User u = new User();
@@ -795,10 +809,10 @@ public class AdminController {
 		userMapper.insert(u);
 		System.out.println("롤"+role);
 		if(role.equals("교수")) {
-		Professor p = new Professor();
-		p.setUserId(user.getId());
-		p.setDepartmentId("12");
-		professorMapper.insert(p);
+			Professor p = new Professor();
+			p.setUserId(user.getId());
+			p.setDepartmentId("12");
+			professorMapper.insert(p);
 		}
 		return "admin/superAdmin_create";
 	}
@@ -811,28 +825,28 @@ public class AdminController {
 
 		return "admin/admin_changeGraduation";
 	}
-	
+
 	@RequestMapping(value="subjectSelect", method=RequestMethod.POST)//학과, 년도 셀렉트
 	public String graduationSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year) {
-		
+
 		List<RequiredSubject> list1 = requiredSubjectMapper.findByReSub(departmentId, year, "1");
 		List<RequiredSubject> list2 = requiredSubjectMapper.findByReSub(departmentId, year, "2");
 		List<RequiredSubject> list3 = requiredSubjectMapper.findByReSub(departmentId, year, "3");
 		List<RequiredSubject> list4 = requiredSubjectMapper.findByReSub(departmentId, year, "4");
 		model.addAttribute("list1", list1);
-		model.addAttribute("list2", list2);	
-		model.addAttribute("list3", list3);	
-		model.addAttribute("list4", list4);	
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
+		model.addAttribute("list4", list4);
 		model.addAttribute("departmentId", departmentId);
 		model.addAttribute("year", year);
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		
+
 		return "admin/admin_changeGraduation";
 	}
-	
-	//필수과목 수정 페이지 
+
+	//필수과목 수정 페이지
 	@RequestMapping(value="updateSubject", method=RequestMethod.POST)
 	public String updateSubject (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year, @RequestParam("grade") String grade, @RequestParam("semester") String semester,
@@ -841,13 +855,13 @@ public class AdminController {
 		model.addAttribute("departments", departments);
 		model.addAttribute("departmentId", departmentId);
 		model.addAttribute("year", year);
-		
+
 		if(button == 0) {
-		
-		requiredSubjectMapper.insert(departmentId, year, grade, semester, subjectCode);
-		
+
+			requiredSubjectMapper.insert(departmentId, year, grade, semester, subjectCode);
+
 		}
-		
+
 		else if(button == 1) {
 			requiredSubjectMapper.delete(departmentId, year, grade, semester, subjectCode);
 		}
@@ -856,49 +870,49 @@ public class AdminController {
 		List<RequiredSubject> list3 = requiredSubjectMapper.findByReSub(departmentId, year, "3");
 		List<RequiredSubject> list4 = requiredSubjectMapper.findByReSub(departmentId, year, "4");
 		model.addAttribute("list1", list1);
-		model.addAttribute("list2", list2);	
-		model.addAttribute("list3", list3);	
-		model.addAttribute("list4", list4);	
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
+		model.addAttribute("list4", list4);
 
 
 		return "admin/admin_changeGraduation";
 	}
-	
 
-		
-	//필수학점 수정 페이지 
+
+
+	//필수학점 수정 페이지
 	@RequestMapping(value="admin_change_credit", method=RequestMethod.GET)
 	public String admin_change_credit (Model model, HttpSession session) {
-		
-		
+
+
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
-		
-		
-		
+
+
+
 		return "admin/admin_change_credit";
 	}
-	
+
 	@RequestMapping("creditSelect")
 	public String creditSelect (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year) {
-		
-		
+
+
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		List<GraduationInput> list =  graduationMapper.findByInput(departmentId, year, "0");
 		model.addAttribute("list", list);//전공 총 학점
-		
+
 		List<GraduationInput> list1 =  graduationMapper.findByInput(departmentId, year, "1");
-		model.addAttribute("list1", list1);//전필 총 학점 
-		
+		model.addAttribute("list1", list1);//전필 총 학점
+
 		model.addAttribute("departmentId", departmentId);
 		model.addAttribute("year", year);
-		
-		
+
+
 		return "admin/admin_change_credit";
 	}
-	
+
 	@RequestMapping(value="creditEdit",method=RequestMethod.POST)
 	public String creditEdit (Model model, HttpSession session, @RequestParam("departmentId") String departmentId,
 			@RequestParam("year") String year, @RequestParam("credit1") String credit1, @RequestParam("credit2") String credit2,
@@ -907,9 +921,9 @@ public class AdminController {
 			@RequestParam("credit3_3") String credit3_3,@RequestParam("credit5_5") String credit5_5,
 			@RequestParam("credit4_4") String credit4_4,@RequestParam("credit6_6") String credit6_6
 			) {
-		
 
-		
+
+
 		graduationMapper.updateInput(departmentId, year, "0", "0", credit1);
 		graduationMapper.updateInput(departmentId, year, "0", "1", credit2);
 		graduationMapper.updateInput(departmentId, year, "0", "2", credit3);
@@ -922,21 +936,21 @@ public class AdminController {
 		graduationMapper.updateInput(departmentId, year, "1", "3", credit4_4);
 		graduationMapper.updateInput(departmentId, year, "1", "4", credit5_5);
 		graduationMapper.updateInput(departmentId, year, "1", "5", credit6_6);
-		
-		
+
+
 		List<Department> departments = departmentMapper.findAll();
 		model.addAttribute("departments", departments);
 		List<GraduationInput> list =  graduationMapper.findByInput(departmentId, year, "0");
 		model.addAttribute("list", list);//전공 총 학점
-		
+
 		List<GraduationInput> list1 =  graduationMapper.findByInput(departmentId, year, "1");
-		model.addAttribute("list1", list1);//전필 총 학점 
+		model.addAttribute("list1", list1);//전필 총 학점
 
 		model.addAttribute("departmentId", departmentId);
 		model.addAttribute("year", year);
-		
-		
-		
+
+
+
 		return "admin/admin_change_credit";
 	}
 
