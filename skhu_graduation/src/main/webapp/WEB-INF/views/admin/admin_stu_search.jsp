@@ -123,16 +123,6 @@ $(function() {
                </table>
             </div>
          </div>
-      
-       <div id="page"  style="margin-top: 1%;">
-         <nav aria-label="Page navigation example"> 
-              <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-              </ul>
-         </nav>      
-      </div>
    </div>
 </body>
 </html>
