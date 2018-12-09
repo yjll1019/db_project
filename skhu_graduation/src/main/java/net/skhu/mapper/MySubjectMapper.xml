@@ -168,7 +168,6 @@
 	on subject.code = mySubject.subjectCode where userId like #{userId} 
 	and (subject.departmentId like '13' or subject.departmentId like '14' or subject.departmentId like '15') 
 	and subject.completionDivision like '전공선택' and mySubject.completionDivision like '교선';
-
 	</select>
 
 

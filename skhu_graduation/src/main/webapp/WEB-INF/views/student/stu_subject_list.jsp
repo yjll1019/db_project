@@ -103,8 +103,9 @@
 					%>
 					<tbody>
 						<%
-							int result = 0;
+						
 							for(int i=0; i<mySubjectlist.size(); ++i){
+								int result = 0;		
 								if(majorAdmitList.contains(mySubjectlist.get(i).getSubjectCode())){
 									result = 1;
 								}

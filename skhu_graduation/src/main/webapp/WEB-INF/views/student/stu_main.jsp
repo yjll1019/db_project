@@ -72,8 +72,6 @@
 				}else
 					 c = 0;
 				
-				System.out.println("c의값"+c);
-
 			%>
 			<div class="circleGraph1"
 				style="position: absolute; width: 250px; height: 60px; left: 25%; margin-top: 120px;">
@@ -159,6 +157,11 @@
 							style="border-top: 1px solid gray; font-size: 20px; font-weight: bold;">
 							${student.pray} / 2 이수</td>
 					</tr>
+					<c:if test="${ student.getVolunteerExemption() eq '0'}">
+                  <td
+                     style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
+                     ${student.service } / 1 이수</td>
+ 
 					<tr>
 						<td
 							style="background-color: #4582EC; color: #fff; border-bottom: 1px solid gray; border-right: 1px solid silver; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
@@ -167,7 +170,7 @@
 							style="border-bottom: 1px solid gray; border-top: 1px solid silver; font-size: 20px; font-weight: bold;">
 							${student.service } / 1 이수</td>
 					</tr>
-			
+			   </c:if>
 				</table>
 			</div>
 			<br />
