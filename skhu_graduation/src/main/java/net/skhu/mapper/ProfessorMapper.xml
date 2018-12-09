@@ -8,7 +8,7 @@
 		left join department d on p.departmentId = d.id
 		where userId = #{userId}
 	</select>
-	
+
 		<select id="findOne" resultType="Professor">
 		select * from professor
 		where userId= #{userId};
@@ -37,4 +37,8 @@
 		class= #{group}
 		where userId = #{userId}
 	</update>
+
+	<insert id="insert">
+		insert into professor(userId, departmentId) values (#{userId}, #{departmentId});
+	</insert>
 </mapper>

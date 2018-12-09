@@ -10,6 +10,7 @@ import net.skhu.dto.Professor;
 public interface ProfessorMapper {
 	List<Professor> findOneWithUser(String userId);
 	String findName(String userId);
+	void insert(Professor p);
 	void updateProfessor(Professor p);
 	Professor findOne(String userId);
 }

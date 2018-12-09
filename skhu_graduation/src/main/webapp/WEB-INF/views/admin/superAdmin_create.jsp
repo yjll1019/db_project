@@ -30,7 +30,7 @@
 		<table>
 			<tr>
 				<td>
-				<select name="role" class="form-control" style="width: 100px; border: 1px solid gray">
+				<select name="role" class="form-control" style="width: 120px; border: 1px solid gray">
 						<option value="교수">교수</option>
 						<option value="관리자">관리자</option>
 				</select>

@@ -1,9 +1,6 @@
 package net.skhu.controller;
 
 import java.util.ArrayList;
-
-import java.util.Collections;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.skhu.dto.Counsel;
 import net.skhu.dto.Department;
-import net.skhu.dto.GraduationText;
 import net.skhu.dto.GraduationInput;
+import net.skhu.dto.GraduationText;
+import net.skhu.dto.Professor;
 import net.skhu.dto.Record;
 import net.skhu.dto.ReplaceSubject;
 import net.skhu.dto.RequiredSubject;
@@ -31,6 +30,7 @@ import net.skhu.dto.User;
 import net.skhu.mapper.DepartmentMapper;
 import net.skhu.mapper.GraduationMapper;
 import net.skhu.mapper.MySubjectMapper;
+import net.skhu.mapper.ProfessorMapper;
 import net.skhu.mapper.RecordMapper;
 import net.skhu.mapper.ReplaceSubjectMapper;
 import net.skhu.mapper.RequiredSubjectMapper;
@@ -62,7 +62,7 @@ public class AdminController {
 	@Autowired ReplaceSubjectService replaceService;
 	@Autowired RecordMapper recordMapper;
 	@Autowired RequiredSubjectMapper requiredSubjectMapper;
-
+	@Autowired ProfessorMapper professorMapper;
 	//admin,professor 비밀번호 찾기 GET
 	@RequestMapping(value="/admin_professor_forgot_password", method=RequestMethod.GET)
 	public String sendPw(Model model) {
@@ -782,8 +782,9 @@ public class AdminController {
 		return "admin/superAdmin_create";
 	}
 	//superAdmin_create POST
+	@Transactional	
 	@RequestMapping(value="superAdmin_create", method=RequestMethod.POST)
-	public String superAdmin_create (Model model,User user, HttpSession session) {
+	public String superAdmin_create (Model model,User user, HttpSession session, @RequestParam("role") String role) {
 		User u = new User();
 		u.setId(user.getId());
 		u.setUserName(user.getUserName());
@@ -792,6 +793,13 @@ public class AdminController {
 		u.setEmail(user.getEmail());
 		u.setRole(user.getRole());
 		userMapper.insert(u);
+		System.out.println("롤"+role);
+		if(role.equals("교수")) {
+		Professor p = new Professor();
+		p.setUserId(user.getId());
+		p.setDepartmentId("12");
+		professorMapper.insert(p);
+		}
 		return "admin/superAdmin_create";
 	}
 
