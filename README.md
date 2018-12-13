@@ -1,8 +1,9 @@
 # 성공회대학교 졸업요건 시스템
 
 
+<div>
+ </div>
 
-![firstPage](C:\Users\jihye\Desktop\firstPage.PNG)
 
 ------------------------------------------------
 
@@ -14,7 +15,7 @@
 
 **Skill stack** : Spring-boot, Jsp,  AWS, MyBatis, Mysql, Html, Css, JavaScript
 
-**Sql Model** :  [URL](https://github.com/KimJye/algorithm/blob/master/2018_algorithm/src/baekjoon/sort/%EC%A2%8C%ED%91%9C%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0_p11650.java) 
+**Sql Model** :  [URL](https://github.com/yjll1019/db_project/blob/master/dbmodel.pdf) 
 
 ----------------------------------------------------
 
